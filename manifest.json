@@ -1,0 +1,38 @@
+{
+    "manifest_version": 2,
+    "name": "test",
+    "description": "a collection of granbluefantasy",
+    "version": "0.1",
+    "permissions": [
+        "clipboardRead",
+        "clipboardWrite",
+        "notifications",
+        "webRequest",
+        "webRequestBlocking",
+        "alarms",
+        "activeTab",
+        "declarativeContent",
+        "storage",
+        "unlimitedStorage"
+    ],
+    "content_scripts": [
+        {
+            "matches": [
+                "*://game.granbluefantasy.jp/*",
+                "*://gbf.game.mbga.jp/*"
+            ],
+            "run_at": "document_end",
+            "js": [
+                "main.js"
+            ]
+        }
+    ],
+    "background": {
+        "page": "./src/background/index.html",
+        "persistent": true
+    },
+    "browser_action": {
+        "default_title": "test helper",
+        "default_popup": "./src/popup/index.html"
+    }
+}
