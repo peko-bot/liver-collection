@@ -13,7 +13,8 @@
         "activeTab",
         "declarativeContent",
         "storage",
-        "unlimitedStorage"
+        "unlimitedStorage",
+        "http://localhost:8023/"
     ],
     "content_scripts": [
         {
@@ -23,6 +24,7 @@
             ],
             "run_at": "document_end",
             "js": [
+                "./third/jquery/jquery-2.0.0.min.js",
                 "main.js"
             ]
         }
