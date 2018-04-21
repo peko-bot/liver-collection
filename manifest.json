@@ -24,7 +24,6 @@
             ],
             "run_at": "document_end",
             "js": [
-                "./third/jquery/jquery-2.0.0.min.js",
                 "main.js"
             ]
         }
