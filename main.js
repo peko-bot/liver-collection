@@ -8,38 +8,34 @@
 // 接收popup发来的消息
 chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
     load_item_datas('http://game.granbluefantasy.jp/item/article_list_by_filter_mode', function(result) {
-        upload_item_datas(result, function(result) {
-            console.log(result)
-            sendResponse({ result: result });
+        load_item_datas('http://game.granbluefantasy.jp/item/recovery_and_evolution_list_by_filter_mode', function(recovery) {
+            // 数组扁平化
+            recovery = steam_roller(recovery);
+
+            result = [...result, ...recovery];
+
+            upload_item_datas(result, function(result) {
+                sendResponse({ result: result });
+            });
         });
     });
 });
 
-// function load_item_datas(url, callback) {
-//     $.ajax({
-//         url: url,
-//         xhrFields: { withCredentials: true },
-//         crossDomain: true,
-//         dataType: 'json',
-//         success: function(result) {
-//             callback(result);
-//         }
-//     });
-// }
+function steam_roller(arr) {
+    var newArr = [];
 
-// function upload_item_datas(data, callback) {
-//     $.ajax({
-//         url: 'http://localhost:8023/Memo/gbf/i_item.do',
-//         type: 'POST',
-//         data: {
-//             user_id: '6964955',
-//             data: JSON.stringify(data),
-//         },
-//         success: function(result) {
-//             callback(result);
-//         }
-//     });
-// }
+    for (var i = 0; i < arr.length; i++) {
+        if (Array.isArray(arr[i])) {
+            // 如果是数组，调用(递归)steamroller 将其扁平化
+            // 然后再 push 到 newArr 中
+            newArr.push.apply(newArr, steam_roller(arr[i]));
+        }else {
+            // 不是数组直接 push 到 newArr 中
+            newArr.push(arr[i]);
+        }
+    }
+    return newArr;
+}
 
 function load_item_datas(url, callback) {
     fetch(url, {
