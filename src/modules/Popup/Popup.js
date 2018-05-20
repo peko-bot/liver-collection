@@ -2,11 +2,12 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-05-20 14:46:14 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-05-20 17:42:45
+ * @Last Modified time: 2018-05-20 19:16:11
  */
 import React, { Component } from 'react'
 
-import { Button } from 'antd'
+import { Button,Input, Select, Tooltip } from 'antd'
+const Option = Select.Option;
 
 import './css/Popup.css'
 
@@ -15,6 +16,8 @@ export default class Popup extends Component {
         super(props);
         this.state = {
             btn_loading: false,
+            address: 'localhost:8023',
+            head_address: 'http://',
         }
     }
 
@@ -57,12 +60,13 @@ export default class Popup extends Component {
     load_item_datas = (url, callback) => {
         fetch(url, {
             credentials: 'include', // 加入cookie
-        }).then(result => result.json())
-        .then(result => callback(result));
+        }).then(result => result.json()).then(result => callback(result));
     }
 
     upload_item_datas = (data, callback) => {
-        fetch('http://localhost:8023/Memo/gbf/i_item.do', {
+        const { head_address, address } = this.state;
+
+        fetch(`${head_address}${address}/Memo/gbf/i_item.do`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
@@ -71,12 +75,34 @@ export default class Popup extends Component {
         }).then(result => result.text()).then(result => callback(result));
     }
 
+    handle_address = event => {
+        this.setState({ address: event.target.value });
+    }
+
+    handle_head_address = value => {
+        this.setState({ head_address: value });
+    }
+
     render = () => {
-        const { btn_loading } = this.state;
+        const { btn_loading, address } = this.state;
+
+        const selectBefore = (
+            <Select defaultValue='http://' style={{ width: 90 }} onChange={ this.handle_head_address }>
+                <Option value='http://'>http://</Option>
+                <Option value='https://'>https://</Option>
+                <Option value='ftp://'>ftp://</Option>
+            </Select>
+        );
 
         return (
             <div className='Popup'>
-                <Button type='primary' loading={ btn_loading } onClick={ this.handle_upload } style={{ width: '90%' }}>上传素材</Button>
+                <Tooltip title='服务器地址'>
+                    <Input addonBefore={ selectBefore } style={{ width: '90%' }} onChange={ this.handle_address } value={ address } />
+                </Tooltip>
+                <div className='white-space' />
+                <Tooltip title='会上传item中素材和回复'>
+                    <Button type='primary' loading={ btn_loading } onClick={ this.handle_upload } style={{ width: '90%' }}>上传素材</Button>
+                </Tooltip>
             </div>
         )
     }

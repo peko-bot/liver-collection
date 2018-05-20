@@ -3,4 +3,9 @@
     height: 400px;
     text-align: center;
     padding: 8px;
+    background: #B0E0E6;
+}
+
+.Popup .white-space{
+    margin-top: 8px;
 }
