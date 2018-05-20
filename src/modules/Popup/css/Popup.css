@@ -1,3 +1,6 @@
-.Popup{
-    
+.Popup {
+    width: 300px;
+    height: 400px;
+    text-align: center;
+    padding: 8px;
 }

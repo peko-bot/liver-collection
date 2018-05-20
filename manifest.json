@@ -29,11 +29,11 @@
         }
     ],
     "background": {
-        "page": "./dist/index.html",
+        "page": "./index.html",
         "persistent": true
     },
     "browser_action": {
         "default_title": "test helper",
-        "default_popup": "./dist/index.html"
+        "default_popup": "./index.html"
     }
 }
