@@ -1,8 +1,8 @@
 {
     "manifest_version": 2,
-    "name": "test",
-    "description": "a collection of granbluefantasy",
-    "version": "0.1",
+    "name": "Liver Collection",
+    "description": "肝脑涂地",
+    "version": "1.0.0",
     "permissions": [
         "clipboardRead",
         "clipboardWrite",
@@ -29,11 +29,11 @@
         }
     ],
     "background": {
-        "page": "./src/background/index.html",
+        "page": "./dist/index.html",
         "persistent": true
     },
     "browser_action": {
         "default_title": "test helper",
-        "default_popup": "./src/popup/index.html"
+        "default_popup": "./dist/index.html"
     }
 }

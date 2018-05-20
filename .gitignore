@@ -1,0 +1,4 @@
+*.zip
+/dist/
+/node_modules/
+/release/
