@@ -5,7 +5,7 @@
   "main": "main.js",
   "scripts": {
     "start": "webpack-dev-server --mode development",
-    "build": "webpack -p"
+    "build": "webpack -p --mode production"
   },
   "dependencies": {
     "antd": "^3.5.2",

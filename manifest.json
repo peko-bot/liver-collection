@@ -13,8 +13,7 @@
         "activeTab",
         "declarativeContent",
         "storage",
-        "unlimitedStorage",
-        "http://localhost:8023/"
+        "unlimitedStorage"
     ],
     "content_scripts": [
         {

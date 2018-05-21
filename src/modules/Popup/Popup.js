@@ -2,22 +2,29 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-05-20 14:46:14 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-05-20 19:16:11
+ * @Last Modified time: 2018-05-21 16:59:18
  */
 import React, { Component } from 'react'
 
-import { Button,Input, Select, Tooltip } from 'antd'
+import { Button,Input, Select, Tooltip, notification } from 'antd'
 const Option = Select.Option;
 
 import './css/Popup.css'
+
+const host = 'localhost:8024';
+const head = 'http://';
+const article = 'http://game.granbluefantasy.jp/item/article_list_by_filter_mode'; // item第二页，红跟豆那页
+const recovery = 'http://game.granbluefantasy.jp/item/recovery_and_evolution_list_by_filter_mode'; // item第一页，日常素材
 
 export default class Popup extends Component {
     constructor(props) {
         super(props);
         this.state = {
             btn_loading: false,
-            address: 'localhost:8023',
-            head_address: 'http://',
+            btn_type: 'primary',
+            address: host,
+            head_address: head,
+            tooltip_text: '',
         }
     }
 
@@ -33,8 +40,8 @@ export default class Popup extends Component {
     handle_upload = () => {
         this.setState({ btn_loading: true });
         
-        this.load_item_datas('http://game.granbluefantasy.jp/item/article_list_by_filter_mode', result => {
-            this.load_item_datas('http://game.granbluefantasy.jp/item/recovery_and_evolution_list_by_filter_mode', recovery => {
+        this.load_item_datas(article, result => {
+            this.load_item_datas(recovery, recovery => {
                 recovery = this.steam_roller(recovery);
     
                 result = [...result, ...recovery];
@@ -44,6 +51,16 @@ export default class Popup extends Component {
                 });
             });
         });
+    }
+
+    // 处理异常
+    handle_fetch_error = error => {
+        notification.open({
+            message: '上传失败',
+            description: '先看看网，再看看是不是地址错了',
+            duration: 3
+        });
+        this.setState({ btn_loading: false });
     }
 
     // 数组扁平化
@@ -60,7 +77,8 @@ export default class Popup extends Component {
     load_item_datas = (url, callback) => {
         fetch(url, {
             credentials: 'include', // 加入cookie
-        }).then(result => result.json()).then(result => callback(result));
+        }).then(result => result.json()).then(result => callback(result))
+        .catch(this.handle_fetch_error);
     }
 
     upload_item_datas = (data, callback) => {
@@ -72,7 +90,8 @@ export default class Popup extends Component {
                 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
             },
             body: 'user_id=6964955&data=' + JSON.stringify(data),
-        }).then(result => result.text()).then(result => callback(result));
+        }).then(result => result.text()).then(result => callback(result))
+        .catch(this.handle_fetch_error);
     }
 
     handle_address = event => {
@@ -96,11 +115,11 @@ export default class Popup extends Component {
 
         return (
             <div className='Popup'>
-                <Tooltip title='服务器地址'>
+                <Tooltip title='地址可别输错了..'>
                     <Input addonBefore={ selectBefore } style={{ width: '90%' }} onChange={ this.handle_address } value={ address } />
                 </Tooltip>
                 <div className='white-space' />
-                <Tooltip title='会上传item中素材和回复'>
+                <Tooltip title=''>
                     <Button type='primary' loading={ btn_loading } onClick={ this.handle_upload } style={{ width: '90%' }}>上传素材</Button>
                 </Tooltip>
             </div>
