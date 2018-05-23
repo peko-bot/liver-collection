@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-05-20 14:46:14 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-05-21 16:59:18
+ * @Last Modified time: 2018-05-23 15:54:59
  */
 import React, { Component } from 'react'
 
@@ -11,7 +11,7 @@ const Option = Select.Option;
 
 import './css/Popup.css'
 
-const host = 'localhost:8024';
+const host = 'localhost:8023';
 const head = 'http://';
 const article = 'http://game.granbluefantasy.jp/item/article_list_by_filter_mode'; // item第二页，红跟豆那页
 const recovery = 'http://game.granbluefantasy.jp/item/recovery_and_evolution_list_by_filter_mode'; // item第一页，日常素材
@@ -47,6 +47,13 @@ export default class Popup extends Component {
                 result = [...result, ...recovery];
     
                 this.upload_item_datas(result, result => {
+                    if(result == 'success') {
+                        notification.open({
+                            message: '上传成功',
+                            description: '',
+                            duration: 3
+                        });
+                    }
                     this.setState({ btn_loading: false });
                 });
             });
