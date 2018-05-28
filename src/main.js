@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-05-28 15:20:13 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-05-28 17:18:58
+ * @Last Modified time: 2018-05-28 17:27:19
  */
 import React from 'react'
 import ReactDOM from 'react-dom'
@@ -20,15 +20,15 @@ try {
     ReactDOM.render(
         <HashRouter>
             <div>
-                <ul className='header'>
+                {/* <ul className='header'>
                     <li>
                         <NavLink to='/main'>main</NavLink>
                     </li>
                     <li>
                         <NavLink to='/charts'>charts</NavLink>
                     </li>
-                </ul>
-                <Route path='/main' component={ Popup } />
+                </ul> */}
+                <Route path='/' exact  component={ Popup } />
                 <Route path='/charts' component={ Charts } />
             </div>
         </HashRouter>
