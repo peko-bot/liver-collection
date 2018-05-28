@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-05-20 14:46:14 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-05-23 15:54:59
+ * @Last Modified time: 2018-05-28 15:11:45
  */
 import React, { Component } from 'react'
 
@@ -11,8 +11,8 @@ const Option = Select.Option;
 
 import './css/Popup.css'
 
-const host = 'localhost:8023';
 const head = 'http://';
+const host = 'localhost:8023';
 const article = 'http://game.granbluefantasy.jp/item/article_list_by_filter_mode'; // item第二页，红跟豆那页
 const recovery = 'http://game.granbluefantasy.jp/item/recovery_and_evolution_list_by_filter_mode'; // item第一页，日常素材
 
