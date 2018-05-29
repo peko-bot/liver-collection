@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-05-20 13:48:08 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-05-28 20:54:14
+ * @Last Modified time: 2018-05-29 22:09:17
  */
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -21,11 +21,12 @@ module.exports = {
     },
     devtool: dev ? 'source-map' : '',
     entry: {
-        Trunk: './src/main.js'
+        Trunk: __dirname + '/src/main.js'
     },
     output: {
         path: __dirname + '/dist',
-        filename: dev ? '[name].[chunkHash:8].js' : '[name].js'
+        filename: dev ? '[name].[chunkHash:8].js' : '[name].js',
+        chunkFilename: dev ? 'vendor/[name].[chunkHash:8].js' : 'vendor/[name].js'
     },
     plugins: [
         new HtmlWebpackPlugin({ // 生成html
@@ -49,10 +50,6 @@ module.exports = {
             },
             {
                 from: __dirname + '/manifest.json',
-                to: __dirname + '/dist'
-            },
-            {
-                from: __dirname + '/main.js',
                 to: __dirname + '/dist'
             }
         ]),

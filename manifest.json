@@ -15,18 +15,6 @@
         "storage",
         "unlimitedStorage"
     ],
-    "content_scripts": [
-        {
-            "matches": [
-                "*://game.granbluefantasy.jp/*",
-                "*://gbf.game.mbga.jp/*"
-            ],
-            "run_at": "document_end",
-            "js": [
-                "main.js"
-            ]
-        }
-    ],
     "background": {
         "page": "index.html",
         "persistent": true

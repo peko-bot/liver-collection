@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-05-28 15:20:13 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-05-29 21:24:07
+ * @Last Modified time: 2018-05-29 22:06:33
  */
 import React from 'react'
 import ReactDOM from 'react-dom'
@@ -12,9 +12,6 @@ import { Route, NavLink, HashRouter } from 'react-router-dom'
 import RedBox from 'redbox-react'
 
 import Bundle from './util/Bundle'
-
-// import Popup from './modules/Popup/Popup'
-// import Charts from './modules/Charts/Charts'
 
 const Popup = props => (
     <Bundle load={ () => import('./modules/Popup/Popup') }>
@@ -34,14 +31,14 @@ try {
     ReactDOM.render(
         <HashRouter>
             <div>
-                <ul className='header'>
+                {/* <ul className='header'>
                     <li>
                         <NavLink to='/'>main</NavLink>
                     </li>
                     <li>
                         <NavLink to='/charts'>charts</NavLink>
                     </li>
-                </ul>
+                </ul> */}
                 <Route path='/' exact component={ Popup } />
                 <Route path='/charts' component={ Charts } />
             </div>

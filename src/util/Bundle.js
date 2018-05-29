@@ -13,16 +13,14 @@ export default class Bundle extends Component {
     }
 
     componentWillReceiveProps = nextProps => {
-        if (nextProps.load !== this.props.load) {
-            this.load(nextProps)
-        }
+        nextProps.load !== this.props.load && this.load(nextProps);
     }
 
     load = props => {
         this.setState({
             mod: null
         });
-        props.load().then((mod) => {
+        props.load().then(mod => {
             this.setState({
                 mod: mod.default ? mod.default : mod
             });
