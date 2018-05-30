@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-05-20 14:46:14 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-05-28 15:11:45
+ * @Last Modified time: 2018-05-30 22:00:36
  */
 import React, { Component } from 'react'
 
@@ -28,13 +28,12 @@ export default class Popup extends Component {
         }
     }
 
-    componentDidMount = () => {
-        // 获得当前选中标签
-        // chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
-        //     chrome.tabs.sendMessage(tabs[0].id, { message: 'test' }, function(response) { // popup => contentscript
-        //         console.log(response)
-        //     });
-        // });
+    componentWillMount = () => {
+        chrome.extension.onMessage.addListener((request, sender, sendResponse) => {
+                console.log(request, sender, sendResponse)
+                sendResponse('test');
+            }
+        );
     }
 
     handle_upload = () => {
