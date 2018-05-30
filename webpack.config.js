@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-05-20 13:48:08 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-05-30 21:59:04
+ * @Last Modified time: 2018-05-30 22:48:01
  */
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -13,8 +13,7 @@ const path = require('path');
 // const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const buildPath = './dist/';
-// const dev = process.argv.includes('development') ? true : false;
-const dev = true;
+const dev = process.argv.includes('development') ? true : false;
 
 module.exports = {
     devServer: {

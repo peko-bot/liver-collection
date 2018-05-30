@@ -16,10 +16,6 @@
         "unlimitedStorage",
         "http://*/*"
     ],
-    "background": {
-        "page": "index.html",
-        "persistent": true
-    },
     "content_scripts": [
         {
             "matches": [
