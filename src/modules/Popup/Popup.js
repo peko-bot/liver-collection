@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-05-20 14:46:14 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-05-30 22:35:46
+ * @Last Modified time: 2018-05-31 22:26:03
  */
 import React, { Component } from 'react'
 
@@ -28,7 +28,7 @@ export default class Popup extends Component {
         }
     }
 
-    componentWillMount = () => {
+    componentDidMount = () => {
         chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
                 console.log(request)
                 sendResponse('test');
