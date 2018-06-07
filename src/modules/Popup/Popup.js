@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-05-20 14:46:14 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-07 15:31:51
+ * @Last Modified time: 2018-06-07 21:49:40
  */
 import React, { Component } from 'react'
 
@@ -29,12 +29,12 @@ export default class Popup extends Component {
     }
 
     componentDidMount = () => {
-        this.sendTo_content_script();
+        this.send_content_script();
     }
 
-    sendTo_content_script = () => {
+    send_content_script = () => {
         chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
-            chrome.tabs.sendMessage(tabs[0].id, { message: 'popup' }, response => {
+            chrome.tabs.sendMessage(tabs[0].id, { message: 'init_room_listener' }, response => {
                 console.log(response);
             });
         });
