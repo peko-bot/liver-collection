@@ -2,11 +2,11 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-05-20 14:46:14 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-05-31 22:26:03
+ * @Last Modified time: 2018-06-07 14:41:14
  */
 import React, { Component } from 'react'
 
-import { Button,Input, Select, Tooltip, notification } from 'antd'
+import { Button, Input, Select, Tooltip, notification } from 'antd'
 const Option = Select.Option;
 
 import './css/Popup.css'
@@ -29,11 +29,15 @@ export default class Popup extends Component {
     }
 
     componentDidMount = () => {
-        chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-                console.log(request)
-                sendResponse('test');
-            }
-        );
+        
+    }
+
+    get_dom = () => {
+        chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
+            chrome.tabs.sendMessage(tabs[0].id, { message: 'popup' }, response => {
+                console.log(response);
+            });
+        });
     }
 
     handle_upload = () => {
@@ -125,9 +129,13 @@ export default class Popup extends Component {
                     <Input addonBefore={ selectBefore } style={{ width: '90%' }} onChange={ this.handle_address } value={ address } />
                 </Tooltip>
                 <div className='white-space' />
+
                 <Tooltip title=''>
                     <Button type='primary' loading={ btn_loading } onClick={ this.handle_upload } style={{ width: '90%' }}>上传素材</Button>
                 </Tooltip>
+                <div className='white-space' />
+                
+                <Button loading={ btn_loading } onClick={ this.get_dom } style={{ width: '90%' }}>test</Button>
             </div>
         )
     }

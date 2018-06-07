@@ -14,8 +14,7 @@
         "declarativeContent",
         "storage",
         "unlimitedStorage",
-        "tabs",
-        "http://*/*"
+        "tabs"
     ],
     "content_scripts": [
         {
