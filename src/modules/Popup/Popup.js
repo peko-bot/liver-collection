@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-05-20 14:46:14 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-07 14:41:14
+ * @Last Modified time: 2018-06-07 15:31:51
  */
 import React, { Component } from 'react'
 
@@ -29,10 +29,10 @@ export default class Popup extends Component {
     }
 
     componentDidMount = () => {
-        
+        this.sendTo_content_script();
     }
 
-    get_dom = () => {
+    sendTo_content_script = () => {
         chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
             chrome.tabs.sendMessage(tabs[0].id, { message: 'popup' }, response => {
                 console.log(response);
@@ -70,6 +70,7 @@ export default class Popup extends Component {
             description: '先看看网，再看看是不是地址错了',
             duration: 3
         });
+        
         this.setState({ btn_loading: false });
     }
 
@@ -104,13 +105,9 @@ export default class Popup extends Component {
         .catch(this.handle_fetch_error);
     }
 
-    handle_address = event => {
-        this.setState({ address: event.target.value });
-    }
+    handle_address = event => this.setState({ address: event.target.value });
 
-    handle_head_address = value => {
-        this.setState({ head_address: value });
-    }
+    handle_head_address = value => this.setState({ head_address: value });
 
     render = () => {
         const { btn_loading, address } = this.state;
@@ -130,12 +127,9 @@ export default class Popup extends Component {
                 </Tooltip>
                 <div className='white-space' />
 
-                <Tooltip title=''>
-                    <Button type='primary' loading={ btn_loading } onClick={ this.handle_upload } style={{ width: '90%' }}>上传素材</Button>
-                </Tooltip>
+                <Button type='primary' loading={ btn_loading } onClick={ this.handle_upload } style={{ width: '90%' }}>上传素材</Button>
                 <div className='white-space' />
                 
-                <Button loading={ btn_loading } onClick={ this.get_dom } style={{ width: '90%' }}>test</Button>
             </div>
         )
     }
