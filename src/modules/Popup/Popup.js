@@ -2,11 +2,11 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-05-20 14:46:14 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-08 16:37:03
+ * @Last Modified time: 2018-06-08 17:09:58
  */
 import React, { Component } from 'react'
 
-import { Button, Input, Select, notification, Switch } from 'antd'
+import { Button, Input, Select, notification, Switch, Tooltip } from 'antd'
 const Option = Select.Option;
 
 import * as Request from '../../util/Request'
@@ -27,6 +27,7 @@ export default class Popup extends Component {
             address: host,
             head_address: head,
             tooltip_text: '',
+            coopraid_search_value: '',
         }
     }
 
@@ -73,9 +74,11 @@ export default class Popup extends Component {
 
     handle_address = event => this.setState({ address: event.target.value });
 
-    handle_head_address = value => this.setState({ head_address: value });
+    handle_head_address = head_address => this.setState({ head_address });
 
-    handle_switch_checked = checked => {
+    handle_coopraid_search = event => this.setState({ coopraid_search_value: event.target.value });
+
+    handle_coopraid_switch = checked => {
         checked && Request.extensions_to_content({ message: 'init_coopraid_listener' }, response => {
             const { tasks } = response;
     
@@ -102,7 +105,7 @@ export default class Popup extends Component {
     }
 
     render = () => {
-        const { btn_loading, address } = this.state;
+        const { btn_loading, address, coopraid_search_value } = this.state;
 
         const selectBefore = (
             <Select defaultValue='http://' style={{ width: 90 }} onChange={ this.handle_head_address }>
@@ -111,6 +114,7 @@ export default class Popup extends Component {
                 <Option value='ftp://'>ftp://</Option>
             </Select>
         );
+        console.log(!!coopraid_search_value)
 
         return (
             <div className='Popup'>
@@ -120,9 +124,14 @@ export default class Popup extends Component {
                 <Button type='primary' loading={ btn_loading } onClick={ this.handle_upload } style={{ width: '90%' }}>上传素材</Button>
                 <div className='white-space' />
 
+                <Input style={{ width: '90%' }} onChange={ this.handle_coopraid_search } value={ coopraid_search_value } placeholder='这里填房间描述，也就是搜索项' />
+                <div className='white-space' />
+                
                 <div style={{ marginLeft: '6%' }}>
-                    <span style={{ float: 'left', color: '#666' }}>是否开启共斗搜索</span>
-                    <Switch onChange={ this.handle_switch_checked } style={{ float: 'right', marginRight: '6%' }} />
+                    <Tooltip title='看见上面的文本框了么，填了这个你才能开启搜索'>
+                        <span style={{ float: 'left', color: '#666' }}>是否开启共斗搜索</span>
+                        <Switch disabled={ !coopraid_search_value } onChange={ this.handle_coopraid_switch } style={{ float: 'right', marginRight: '6%' }} />
+                    </Tooltip>
                 </div>
                 
             </div>
