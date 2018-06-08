@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-05-20 14:46:14 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-08 17:09:58
+ * @Last Modified time: 2018-06-08 17:15:59
  */
 import React, { Component } from 'react'
 
@@ -79,7 +79,9 @@ export default class Popup extends Component {
     handle_coopraid_search = event => this.setState({ coopraid_search_value: event.target.value });
 
     handle_coopraid_switch = checked => {
-        checked && Request.extensions_to_content({ message: 'init_coopraid_listener' }, response => {
+        const { coopraid_search_value } = this.state;
+
+        checked && Request.extensions_to_content({ message: 'init_coopraid_listener', search: coopraid_search_value }, response => {
             const { tasks } = response;
     
             switch(tasks.message) {
@@ -114,7 +116,6 @@ export default class Popup extends Component {
                 <Option value='ftp://'>ftp://</Option>
             </Select>
         );
-        console.log(!!coopraid_search_value)
 
         return (
             <div className='Popup'>

@@ -2,14 +2,14 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-05-30 21:58:12 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-08 16:42:33
+ * @Last Modified time: 2018-06-08 17:17:59
  * @Description 共斗时的设置
  */
 let observer = null;
 
 chrome.runtime.onMessage.addListener((response, sender, sendResponse) => {
     let tasks = [];
-    const { message } = response;
+    const { message, search } = response;
 
     switch(message) {
         case 'init_coopraid_listener': // 开启共斗搜索
@@ -20,7 +20,11 @@ chrome.runtime.onMessage.addListener((response, sender, sendResponse) => {
                     const rooms = document.getElementsByClassName('txt-room-comment');
 
                     for(let room of rooms) {
-                        console.log(room.innerText);
+                        const text = room.innerText
+
+                        if(text.includes(search)) {
+                            console.log(text);
+                        }
                     }
                 });
 
