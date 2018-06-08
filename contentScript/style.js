@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-08 11:13:09 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-08 11:51:33
+ * @Last Modified time: 2018-06-08 12:37:02
  * @Description 全局样式设置
  */
 /* 修改滚动条样式
@@ -11,3 +11,12 @@
 */
 let scroll = document.getElementById('mobage-game-container').parentNode;
 scroll.id = 'liver-collection-container';
+
+// 隐藏左侧侧边栏
+let leftPanel = document.getElementById('mobage-game-container').parentNode.parentNode.firstChild;
+leftPanel.style.display = 'none';
+scroll.style.marginLeft = '';
+
+// 隐藏右侧侧边栏
+let rightPanel = document.getElementById('submenu');
+rightPanel.style.display = 'none';
