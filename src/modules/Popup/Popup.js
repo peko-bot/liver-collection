@@ -2,12 +2,14 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-05-20 14:46:14 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-07 21:49:40
+ * @Last Modified time: 2018-06-08 10:06:33
  */
 import React, { Component } from 'react'
 
-import { Button, Input, Select, Tooltip, notification } from 'antd'
+import { Button, Input, Select, Tooltip, notification, Switch } from 'antd'
 const Option = Select.Option;
+
+import * as Request from '../../util/Request'
 
 import './css/Popup.css'
 
@@ -29,27 +31,21 @@ export default class Popup extends Component {
     }
 
     componentDidMount = () => {
-        this.send_content_script();
-    }
-
-    send_content_script = () => {
-        chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
-            chrome.tabs.sendMessage(tabs[0].id, { message: 'init_room_listener' }, response => {
-                console.log(response);
-            });
-        });
+        
     }
 
     handle_upload = () => {
+        const { head_address, address } = this.state;
+
         this.setState({ btn_loading: true });
         
-        this.load_item_datas(article, result => {
-            this.load_item_datas(recovery, recovery => {
+        Request.get_by_cookie(article, {}, result => {
+            Request.get_by_cookie(recovery, {}, recovery => {
                 recovery = this.steam_roller(recovery);
     
                 result = [...result, ...recovery];
     
-                this.upload_item_datas(result, result => {
+                Request.upload_to_server(`${head_address}${address}/Memo/gbf/i_item.do`, { body: 'user_id=6964955&data=' + JSON.stringify(result) }, result => {
                     if(result == 'success') {
                         notification.open({
                             message: '上传成功',
@@ -57,21 +53,11 @@ export default class Popup extends Component {
                             duration: 3
                         });
                     }
+                    
                     this.setState({ btn_loading: false });
                 });
             });
         });
-    }
-
-    // 处理异常
-    handle_fetch_error = error => {
-        notification.open({
-            message: '上传失败',
-            description: '先看看网，再看看是不是地址错了',
-            duration: 3
-        });
-        
-        this.setState({ btn_loading: false });
     }
 
     // 数组扁平化
@@ -85,29 +71,15 @@ export default class Popup extends Component {
         return newArr;
     }
 
-    load_item_datas = (url, callback) => {
-        fetch(url, {
-            credentials: 'include', // 加入cookie
-        }).then(result => result.json()).then(result => callback(result))
-        .catch(this.handle_fetch_error);
-    }
-
-    upload_item_datas = (data, callback) => {
-        const { head_address, address } = this.state;
-
-        fetch(`${head_address}${address}/Memo/gbf/i_item.do`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-            },
-            body: 'user_id=6964955&data=' + JSON.stringify(data),
-        }).then(result => result.text()).then(result => callback(result))
-        .catch(this.handle_fetch_error);
-    }
-
     handle_address = event => this.setState({ address: event.target.value });
 
     handle_head_address = value => this.setState({ head_address: value });
+
+    handle_switch_checked = checked => {
+        checked && Request.extensions_to_content({ message: 'init_room_listener' }, response => {
+            console.log(response)
+        });
+    }
 
     render = () => {
         const { btn_loading, address } = this.state;
@@ -129,6 +101,11 @@ export default class Popup extends Component {
 
                 <Button type='primary' loading={ btn_loading } onClick={ this.handle_upload } style={{ width: '90%' }}>上传素材</Button>
                 <div className='white-space' />
+
+                <div style={{ marginLeft: '6%' }}>
+                    <span style={{ float: 'left', color: '#666' }}>是否开启共斗搜索</span>
+                    <Switch onChange={ this.handle_switch_checked } style={{ float: 'right', marginRight: '6%' }} />
+                </div>
                 
             </div>
         )
