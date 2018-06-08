@@ -2,11 +2,11 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-05-20 14:46:14 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-08 11:49:27
+ * @Last Modified time: 2018-06-08 16:37:03
  */
 import React, { Component } from 'react'
 
-import { Button, Input, Select, Tooltip, notification, Switch } from 'antd'
+import { Button, Input, Select, notification, Switch } from 'antd'
 const Option = Select.Option;
 
 import * as Request from '../../util/Request'
@@ -76,9 +76,29 @@ export default class Popup extends Component {
     handle_head_address = value => this.setState({ head_address: value });
 
     handle_switch_checked = checked => {
-        // checked && Request.extensions_to_content({ message: 'init_room_listener' }, response => {
-        //     console.log(response)
-        // });
+        checked && Request.extensions_to_content({ message: 'init_coopraid_listener' }, response => {
+            const { tasks } = response;
+    
+            switch(tasks.message) {
+                case 'success':
+    
+                break;
+    
+                case 'failed':
+                    notification.open({
+                        message: '开启失败',
+                        description: '',
+                        duration: 3
+                    });
+
+                    console.log(tasks.error);
+                break;
+    
+                default:
+    
+                break;
+            }
+        });
     }
 
     render = () => {
@@ -94,9 +114,7 @@ export default class Popup extends Component {
 
         return (
             <div className='Popup'>
-                <Tooltip title='地址可别输错了..'>
-                    <Input addonBefore={ selectBefore } style={{ width: '90%' }} onChange={ this.handle_address } value={ address } />
-                </Tooltip>
+                <Input addonBefore={ selectBefore } style={{ width: '90%' }} onChange={ this.handle_address } value={ address } />
                 <div className='white-space' />
 
                 <Button type='primary' loading={ btn_loading } onClick={ this.handle_upload } style={{ width: '90%' }}>上传素材</Button>

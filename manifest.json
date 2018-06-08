@@ -12,7 +12,8 @@
         "declarativeContent",
         "storage",
         "unlimitedStorage",
-        "tabs"
+        "tabs",
+        "background"
     ],
     "background": {
         "scripts": [
