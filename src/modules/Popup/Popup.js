@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-05-20 14:46:14 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-08 10:06:33
+ * @Last Modified time: 2018-06-08 11:49:27
  */
 import React, { Component } from 'react'
 
@@ -76,9 +76,9 @@ export default class Popup extends Component {
     handle_head_address = value => this.setState({ head_address: value });
 
     handle_switch_checked = checked => {
-        checked && Request.extensions_to_content({ message: 'init_room_listener' }, response => {
-            console.log(response)
-        });
+        // checked && Request.extensions_to_content({ message: 'init_room_listener' }, response => {
+        //     console.log(response)
+        // });
     }
 
     render = () => {
