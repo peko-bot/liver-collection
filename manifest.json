@@ -17,7 +17,7 @@
     ],
     "background": {
         "scripts": [
-            "background/background.js"
+            "background.js"
         ],
         "persistent": false
     },
@@ -30,8 +30,7 @@
                 "assets/contentScript/main.css"
             ],
             "js": [
-                "style.js",
-                "coopraid.js"
+                "contentScript.js"
             ],
             "run_at": "document_end"
         }

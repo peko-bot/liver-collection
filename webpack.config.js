@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-05-20 13:48:08 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-09 11:36:06
+ * @Last Modified time: 2018-06-09 21:59:42
  */
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -40,10 +40,6 @@ let plugins = [
         {
             from: __dirname + '/contentScript/css',
             to: __dirname + '/dist/assets/contentScript'
-        },
-        {
-            from: __dirname + '/background',
-            to: __dirname + '/dist/background'
         }
     ]),
     // new MiniCssExtractPlugin({
@@ -70,12 +66,11 @@ module.exports = {
     devServer: {
         port: 9099
     },
-    // devtool: dev ? 'source-map' : '',
-    devtool: 'source-map',
+    devtool: dev ? 'source-map' : '',
     entry: {
         popup: __dirname + '/src/main.js',
-        coopraid: __dirname + '/contentScript/coopraid.js',
-        style: __dirname + '/contentScript/style.js',
+        contentScript: __dirname + '/contentScript',
+        background: __dirname + '/background'
     },
     output: {
         path: __dirname + '/dist',
