@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-05-20 13:48:08 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-08 15:28:55
+ * @Last Modified time: 2018-06-09 11:36:06
  */
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -18,7 +18,15 @@ const dev = process.argv.includes('development') ? true : false;
 
 let plugins = [
     new HtmlWebpackPlugin({ // 生成html
-        template: './src/index.html'
+        template: './src/index.html',
+        chunks: ['popup'],
+        hash: true,
+        minify: {
+            minifyJS: true,
+            minifyCSS: true,
+            removeComments: true,
+            collapseWhitespace: true,
+        }
     }),
     new CopyWebpackPlugin([
         {
@@ -30,8 +38,8 @@ let plugins = [
             to: __dirname + '/dist'
         },
         {
-            from: __dirname + '/contentScript',
-            to: __dirname + '/dist/contentScript'
+            from: __dirname + '/contentScript/css',
+            to: __dirname + '/dist/assets/contentScript'
         },
         {
             from: __dirname + '/background',
@@ -62,9 +70,12 @@ module.exports = {
     devServer: {
         port: 9099
     },
-    devtool: dev ? 'source-map' : '',
+    // devtool: dev ? 'source-map' : '',
+    devtool: 'source-map',
     entry: {
-        popup: __dirname + '/src/main.js'
+        popup: __dirname + '/src/main.js',
+        coopraid: __dirname + '/contentScript/coopraid.js',
+        style: __dirname + '/contentScript/style.js',
     },
     output: {
         path: __dirname + '/dist',

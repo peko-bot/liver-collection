@@ -2,13 +2,13 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-05-30 21:58:12 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-08 17:17:59
+ * @Last Modified time: 2018-06-09 11:40:00
  * @Description 共斗时的设置
  */
 let observer = null;
 
 chrome.runtime.onMessage.addListener((response, sender, sendResponse) => {
-    let tasks = [];
+    let tasks = { error: '', tasks: '' };
     const { message, search } = response;
 
     switch(message) {
@@ -17,13 +17,16 @@ chrome.runtime.onMessage.addListener((response, sender, sendResponse) => {
 
             if(!observer) {
                 observer = new MutationObserver(mutations => {
-                    const rooms = document.getElementsByClassName('txt-room-comment');
+                    let rooms = document.getElementsByClassName('txt-room-comment');
 
                     for(let room of rooms) {
-                        const text = room.innerText
+                        let text = room.innerText;
 
-                        if(text.includes(search)) {
-                            console.log(text);
+                        // 匹配房名含有文本框内容项
+                        for(let item of search.split(';')) {
+                            if(text.includes(item)) {
+                                console.log(text)
+                            }
                         }
                     }
                 });
@@ -33,6 +36,7 @@ chrome.runtime.onMessage.addListener((response, sender, sendResponse) => {
                     childList: true,
                     characterData: true
                 });
+                console.log('observer start')
             }
 
             // chrome.runtime.connect
@@ -40,6 +44,7 @@ chrome.runtime.onMessage.addListener((response, sender, sendResponse) => {
 
         case 'close_coopraid_listener':
             observer.disconnect();
+            console.log('observer end')
         break;
 
         default:

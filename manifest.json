@@ -17,7 +17,7 @@
     ],
     "background": {
         "scripts": [
-            "background/coopraid.js"
+            "background/background.js"
         ],
         "persistent": false
     },
@@ -27,11 +27,11 @@
                 "http://game.granbluefantasy.jp/*"
             ],
             "css": [
-                "contentScript/css/main.css"
+                "assets/contentScript/main.css"
             ],
             "js": [
-                "contentScript/style.js",
-                "contentScript/coopraid.js"
+                "style.js",
+                "coopraid.js"
             ],
             "run_at": "document_end"
         }
