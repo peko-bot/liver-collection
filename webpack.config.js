@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-05-20 13:48:08 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-10 11:25:56
+ * @Last Modified time: 2018-06-10 11:51:50
  */
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -62,67 +62,10 @@ dev && plugins.push(new WebpackOnBuildPlugin(stats => { // 删除dist下原有�
     })
 }));
 
-// module.exports = {
-//     devServer: {
-//         port: 9099
-//     },
-//     stats: {
-//         assets: false,
-//         entrypoints: false,
-//         modules: false,
-//         warnings: dev
-//     },
-//     devtool: dev ? 'source-map' : '',
-//     entry: {
-//         popup: __dirname + '/src/index.js',
-//         contentScript: __dirname + '/contentScript',
-//         background: __dirname + '/background'
-//     },
-//     output: {
-//         path: __dirname + '/dist',
-//         filename: '[name].js',
-//         chunkFilename: dev ? 'vendor/[name].[chunkHash:8].js' : 'vendor/[name].js'
-//     },
-//     plugins,
-//     module: {
-//         rules: [
-//             {
-//                 test: /\.js?$/,
-//                 exclude: /node_modules/,
-//                 use: {
-//                     loader: 'babel-loader',
-//                 }
-//             },
-//             {
-//                 test: /\.(png|jpg)$/,
-//                 use: [
-//                     {
-//                         loader: 'url-loader',
-//                         options: {
-//                             limit: 8192
-//                         }
-//                     }
-//                 ]
-//             },
-//             {
-//                 test: /\.css$/,
-//                 use: ['style-loader', 'css-loader'] // MiniCssExtractPlugin.loader,
-//             }
-//         ]
-//     }
-// };
-
-let options = {
+module.exports = {
     devServer: {
         port: 9099
     },
-    // resolve: {
-    //     extensions: ['.js', '.json', '.css'],
-    //     modules: [
-    //         'node_modules',
-    //         path.resolve(__dirname, 'src')
-    //     ]
-    // },
     stats: {
         assets: false,
         entrypoints: false,
@@ -131,7 +74,7 @@ let options = {
     },
     devtool: dev ? 'source-map' : '',
     entry: {
-        popup: __dirname + '/src',
+        popup: __dirname + '/src/index.js',
         contentScript: __dirname + '/contentScript',
         background: __dirname + '/background'
     },
@@ -144,10 +87,10 @@ let options = {
     module: {
         rules: [
             {
-                test: /\.jsx?$/,
+                test: /\.js?$/,
                 exclude: /node_modules/,
                 use: {
-                    loader: 'babel-loader'
+                    loader: 'babel-loader',
                 }
             },
             {
@@ -164,13 +107,69 @@ let options = {
             {
                 test: /\.css$/,
                 use: ['style-loader', 'css-loader'] // MiniCssExtractPlugin.loader,
-            },
+            }
         ]
     }
-}
+};
 
-webpack(options, (err, stats) => {
-    if (err || stats.hasErrors()) {
+// let options = {
+//     devServer: {
+//         port: 9099
+//     },
+//     resolve: {
+//         extensions: ['.js', '.json', '.css', '.jsx']
+//     },
+//     stats: {
+//         assets: false,
+//         entrypoints: false,
+//         modules: false,
+//         warnings: dev
+//     },
+//     devtool: dev ? 'source-map' : '',
+//     entry: {
+//         popup: __dirname + '/src',
+//         contentScript: __dirname + '/contentScript',
+//         background: __dirname + '/background'
+//     },
+//     output: {
+//         path: __dirname + '/dist',
+//         filename: '[name].js',
+//         chunkFilename: dev ? 'vendor/[name].[chunkHash:8].js' : 'vendor/[name].js'
+//     },
+//     plugins,
+//     module: {
+//         rules: [
+//             {
+//                 test: /\.js?$/,
+//                 exclude: /node_modules/,
+//                 loader: 'babel-loader',
+//             },
+//             {
+//                 test: /\.jsx?$/,
+//                 exclude: /node_modules/,
+//                 loader: 'babel-loader',
+//             },
+//             {
+//                 test: /\.(png|jpg)$/,
+//                 use: [
+//                     {
+//                         loader: 'url-loader',
+//                         options: {
+//                             limit: 8192
+//                         }
+//                     }
+//                 ]
+//             },
+//             {
+//                 test: /\.css$/,
+//                 use: ['style-loader', 'css-loader'] // MiniCssExtractPlugin.loader,
+//             },
+//         ]
+//     }
+// }
+
+// webpack(options, (err, stats) => {
+//     if (err || stats.hasErrors()) {
         
-    }
-});
+//     }
+// });
