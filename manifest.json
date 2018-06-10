@@ -4,16 +4,8 @@
     "description": "肝脑涂地",
     "version": "1.0.0",
     "permissions": [
-        "clipboardRead",
-        "clipboardWrite",
-        "notifications",
-        "webRequestBlocking",
-        "alarms",
-        "declarativeContent",
-        "storage",
-        "unlimitedStorage",
-        "tabs",
-        "background"
+        "background",
+        "contextMenus"
     ],
     "background": {
         "scripts": [

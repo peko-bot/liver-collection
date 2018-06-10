@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-05-20 13:48:08 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-09 22:28:47
+ * @Last Modified time: 2018-06-10 11:25:56
  */
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -13,12 +13,12 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const path = require('path');
 // const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-const buildPath = './dist/';
+const buildPath = __dirname + '/dist/';
 const dev = process.argv.includes('development') ? true : false;
 
 let plugins = [
     new HtmlWebpackPlugin({ // 生成html
-        template: './src/index.html',
+        template: 'src/index.html',
         chunks: ['popup'],
         hash: true,
         minify: {
@@ -62,10 +62,67 @@ dev && plugins.push(new WebpackOnBuildPlugin(stats => { // 删除dist下原有�
     })
 }));
 
-module.exports = {
+// module.exports = {
+//     devServer: {
+//         port: 9099
+//     },
+//     stats: {
+//         assets: false,
+//         entrypoints: false,
+//         modules: false,
+//         warnings: dev
+//     },
+//     devtool: dev ? 'source-map' : '',
+//     entry: {
+//         popup: __dirname + '/src/index.js',
+//         contentScript: __dirname + '/contentScript',
+//         background: __dirname + '/background'
+//     },
+//     output: {
+//         path: __dirname + '/dist',
+//         filename: '[name].js',
+//         chunkFilename: dev ? 'vendor/[name].[chunkHash:8].js' : 'vendor/[name].js'
+//     },
+//     plugins,
+//     module: {
+//         rules: [
+//             {
+//                 test: /\.js?$/,
+//                 exclude: /node_modules/,
+//                 use: {
+//                     loader: 'babel-loader',
+//                 }
+//             },
+//             {
+//                 test: /\.(png|jpg)$/,
+//                 use: [
+//                     {
+//                         loader: 'url-loader',
+//                         options: {
+//                             limit: 8192
+//                         }
+//                     }
+//                 ]
+//             },
+//             {
+//                 test: /\.css$/,
+//                 use: ['style-loader', 'css-loader'] // MiniCssExtractPlugin.loader,
+//             }
+//         ]
+//     }
+// };
+
+let options = {
     devServer: {
         port: 9099
     },
+    // resolve: {
+    //     extensions: ['.js', '.json', '.css'],
+    //     modules: [
+    //         'node_modules',
+    //         path.resolve(__dirname, 'src')
+    //     ]
+    // },
     stats: {
         assets: false,
         entrypoints: false,
@@ -74,23 +131,23 @@ module.exports = {
     },
     devtool: dev ? 'source-map' : '',
     entry: {
-        popup: __dirname + '/src/main.js',
+        popup: __dirname + '/src',
         contentScript: __dirname + '/contentScript',
         background: __dirname + '/background'
     },
     output: {
         path: __dirname + '/dist',
-        filename: dev ? '[name].[chunkHash:8].js' : '[name].js',
+        filename: '[name].js',
         chunkFilename: dev ? 'vendor/[name].[chunkHash:8].js' : 'vendor/[name].js'
     },
     plugins,
     module: {
         rules: [
             {
-                test: /\.js?$/,
+                test: /\.jsx?$/,
                 exclude: /node_modules/,
                 use: {
-                    loader: 'babel-loader',
+                    loader: 'babel-loader'
                 }
             },
             {
@@ -107,7 +164,13 @@ module.exports = {
             {
                 test: /\.css$/,
                 use: ['style-loader', 'css-loader'] // MiniCssExtractPlugin.loader,
-            }
+            },
         ]
     }
-};
+}
+
+webpack(options, (err, stats) => {
+    if (err || stats.hasErrors()) {
+        
+    }
+});
