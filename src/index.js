@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-05-28 15:20:13 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-10 11:50:16
+ * @Last Modified time: 2018-06-11 21:24:32
  */
 import React from 'react'
 import ReactDOM from 'react-dom'
@@ -22,7 +22,7 @@ const Charts = props => (
         { Charts => <Charts {...props}/> }
     </Bundle>
 )
-
+ 
 const MOUNT_NODE = document.getElementById('root');
 
 try {
