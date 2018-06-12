@@ -5,8 +5,8 @@
   "main": "main.js",
   "scripts": {
     "start": "webpack-dev-server --mode development",
-    "build": "webpack -p --mode production",
-    "dev": "webpack -p --mode development --watch"
+    "build": "node build --mode production -p",
+    "dev": "node build --mode development --watch"
   },
   "dependencies": {
     "antd": "^3.5.2"
@@ -15,7 +15,6 @@
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.4",
     "babel-plugin-import": "^1.7.0",
-    "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
@@ -26,9 +25,9 @@
     "mini-css-extract-plugin": "^0.4.0",
     "on-build-webpack": "^0.1.0",
     "postcss-loader": "^2.1.4",
-    "react": "^16.3.2",
-    "react-dom": "^16.3.2",
-    "react-router-dom": "^4.2.2",
+    "react": "^16.4.0",
+    "react-dom": "^16.4.0",
+    "react-router-dom": "^4.3.1",
     "redbox-react": "^1.6.0",
     "style-loader": "^0.21.0",
     "url-loader": "^1.0.1",

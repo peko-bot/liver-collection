@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-12 09:43:22 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-12 09:47:56
+ * @Last Modified time: 2018-06-12 11:30:48
  */
 import React, { Component } from 'react'
 import { Route, NavLink, HashRouter } from 'react-router-dom'
@@ -25,16 +25,18 @@ export default class Router extends Component {
     render = () => {
         return (
             <HashRouter>
-                {/* <ul className='header'>
-                    <li>
-                        <NavLink to='/'>main</NavLink>
-                    </li>
-                    <li>
-                        <NavLink to='/charts'>charts</NavLink>
-                    </li>
-                </ul> */}
-                <Route path='/' exact component={ Popup } />
-                <Route path='/charts' component={ Charts } />
+                <div>
+                    {/* <ul className='header'>
+                        <li>
+                            <NavLink to='/'>main</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to='/charts'>charts</NavLink>
+                        </li>
+                    </ul> */}
+                    <Route path='/' exact component={ Popup } />
+                    <Route path='/charts' component={ Charts } />
+                </div>
             </HashRouter>
         )
     }

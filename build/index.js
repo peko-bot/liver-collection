@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-05-20 13:48:08 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-12 11:37:26
+ * @Last Modified time: 2018-06-12 11:41:02
  */
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -11,8 +11,10 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const WebpackOnBuildPlugin = require('on-build-webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const path = require('path');
+// const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const buildPath = __dirname + '/dist/';
+const dev = process.argv.includes('development') ? true : false;
 
 let plugins = [
     new HtmlWebpackPlugin({ // 生成html
@@ -40,39 +42,53 @@ let plugins = [
             to: __dirname + '/dist/assets/contentScript'
         }
     ]),
+    // new MiniCssExtractPlugin({
+    //     filename: dev ? '[name].[chunkHash:8].css' : '[name].css',
+    //     chunkFilename: '[id].[chunkHash:8].css'
+    // })
 ];
 
-module.exports = {
+!dev && plugins.push(new CleanWebpackPlugin(['dist']));
+
+dev && plugins.push(new WebpackOnBuildPlugin(stats => { // 删除dist下原有文件
+    const newlyCreatedAssets = stats.compilation.assets;
+
+    fs.readdir(path.resolve(buildPath), (err, files) => {
+        files && files.forEach(file => {
+            if (!newlyCreatedAssets[file]) {
+                fs.unlink(path.resolve(buildPath + file), () => { });
+            }
+        });
+    })
+}));
+
+let options = {
     devServer: {
         port: 9099
     },
-    stats: {
-        // assets: false,
-        // entrypoints: false,
-        // modules: false,
-        // warnings: false
+    resolve: {
+        extensions: ['.js', '.jsx'],
     },
-    devtool: 'source-map',
+    stats: {
+        assets: false,
+        entrypoints: false,
+        modules: false,
+        warnings: dev
+    },
+    devtool: dev ? 'source-map' : '',
     entry: {
         popup: __dirname + '/src',
-        // contentScript: __dirname + '/contentScript',
-        // background: __dirname + '/background'
+        contentScript: __dirname + '/contentScript',
+        background: __dirname + '/background'
     },
     output: {
         path: __dirname + '/dist',
-        filename: '[name].[chunkHash:8].js',
-        chunkFilename: 'vendor/[name].[chunkHash:8].js'
+        filename: '[name].js',
+        chunkFilename: dev ? 'vendor/[name].[chunkHash:8].js' : 'vendor/[name].js'
     },
     plugins,
     module: {
         rules: [
-            {
-                test: /\.js?$/,
-                exclude: /node_modules/,
-                use: {
-                    loader: 'babel-loader',
-                }
-            },
             {
                 test: /\.(png|jpg)$/,
                 use: [
@@ -87,7 +103,18 @@ module.exports = {
             {
                 test: /\.css$/,
                 use: ['style-loader', 'css-loader'] // MiniCssExtractPlugin.loader,
-            }
+            },
+            {
+                test: /\.js[x]?$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader'
+                },
+            },
         ]
     }
-};
+}
+
+webpack(options, (a, b) => {
+    
+});
