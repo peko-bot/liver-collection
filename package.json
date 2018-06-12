@@ -5,8 +5,8 @@
   "main": "main.js",
   "scripts": {
     "start": "webpack-dev-server --mode development",
-    "build": "node build --mode production -p",
-    "dev": "node build --mode development --watch"
+    "build": "node webpack.custom.js production",
+    "dev": "node webpack.custom.js development"
   },
   "dependencies": {
     "antd": "^3.5.2"

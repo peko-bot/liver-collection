@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-05-20 13:48:08 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-12 22:34:16
+ * @Last Modified time: 2018-06-12 22:39:55
  */
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -131,12 +131,15 @@ webpack(options, (error, stats) => {
 
     if (stats.hasErrors()) {
         for(let item of info.errors) {
-            console.error(item)
+            console.error(item);
         }
         console.log(info.errors.length)
     }
 
     if (stats.hasWarnings()) {
-        console.warn(info.warnings);
+        for(let item of info.warnings) {
+            console.error(item);
+        }
+        console.warn(info.warnings.length);
     }
 });
