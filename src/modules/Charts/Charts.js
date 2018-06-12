@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-07 13:41:02 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-11 21:25:05
+ * @Last Modified time: 2018-06-12 09:44:55
  */
 import React, { Component } from 'react'
 
@@ -20,7 +20,7 @@ export default class Charts extends Component {
     }
 
     render = () => {
-        return(
+        return (
             <div className='Charts'>Charts</div>
         )
     }
