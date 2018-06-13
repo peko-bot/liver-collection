@@ -12,6 +12,9 @@
                 "libraryDirectory": "es",
                 "style": "css"
             }
+        ],
+        [
+            "react-hot-loader/babel"
         ]
     ]
 }

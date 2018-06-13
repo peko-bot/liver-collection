@@ -2,15 +2,11 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-05-20 13:48:08 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-13 12:43:43
+ * @Last Modified time: 2018-06-13 16:03:42
  */
 const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const fs = require('fs');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-const WebpackOnBuildPlugin = require('on-build-webpack');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 const path = require('path');
 const chalk = require('chalk');
 
@@ -18,12 +14,9 @@ const log = text => console.log(chalk.greenBright(text));
 const error = text => console.log(chalk.red(text));
 const warn = text => console.log(chalk.yellowBright(text)); 
 
-const buildPath = __dirname + '/dist/';
-
 let plugins = [
     new HtmlWebpackPlugin({ // 生成html
         template: './src/index.html',
-        chunks: ['popup'],
         hash: true,
         minify: {
             minifyJS: true,
@@ -32,32 +25,28 @@ let plugins = [
             collapseWhitespace: true,
         }
     }),
-    new CopyWebpackPlugin([
-        {
-            from: __dirname + '/src/assets',
-            to: __dirname + '/dist/assets'
-        },
-        {
-            from: __dirname + '/manifest.json',
-            to: __dirname + '/dist'
-        },
-        {
-            from: __dirname + '/contentScript/css',
-            to: __dirname + '/dist/assets/contentScript'
-        }
-    ]),
+    new webpack.HotModuleReplacementPlugin(),
 ];
+
+const devServerOptions = {
+    port: 9099,
+    hot: true,
+    host: 'localhost',
+    // watchContentBase: true,
+};
 
 const webpackConfig = {
     mode: 'development',
     devtool: 'source-map',
-    entry: {
-        popup: __dirname + '/src'
-    },
+    entry: [
+        'react-hot-loader/patch',
+        'webpack-dev-server/client?http://' + devServerOptions.host + ':' + devServerOptions.port,
+        'webpack/hot/only-dev-server',
+        __dirname + '/src',
+    ],
     output: {
-        path: __dirname + '/dist',
-        filename: '[name].[chunkHash:8].js',
-        chunkFilename: 'vendor/[name].[chunkHash:8].js',
+        filename: '[name].[hash].js',
+        chunkFilename: 'vendor/[name].[hash].js',
     },
     plugins,
     module: {
@@ -89,19 +78,6 @@ const webpackConfig = {
 };
 
 const compiler = webpack(webpackConfig);
-
-const devServerOptions = {
-    port: 9099,
-    stats: {
-      colors: true
-    },
-    hot: true,
-    inline: true,
-    host: 'localhost',
-    watchOptions: {
-        poll: true
-    }
-};
 
 const server = new WebpackDevServer(compiler, devServerOptions);
 
