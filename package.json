@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node webpack.dev.js",
     "build": "node webpack.prod.js",
-    "dev": "node webpack.prod.js development"
+    "dev": "node webpack.prod.js development",
+    "push": "git add .&& git commit -m \"update\" && git push"
   },
   "dependencies": {
     "antd": "^3.5.2"
