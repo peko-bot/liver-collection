@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-05-20 13:48:08 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-12 22:39:55
+ * @Last Modified time: 2018-06-13 11:03:10
  */
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -12,6 +12,11 @@ const WebpackOnBuildPlugin = require('on-build-webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const path = require('path');
 // const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const chalk = require('chalk');
+
+const log = text => console.log(chalk.greenBright(text));
+const error = text => console.log(chalk.red(text));
+const warn = text => console.log(chalk.yellowBright(text)); 
 
 const buildPath = __dirname + '/dist/';
 const dev = process.argv.includes('development') ? true : false;
@@ -70,12 +75,6 @@ let options = {
     resolve: {
         extensions: ['.js', '.jsx'],
     },
-    // stats: {
-    //     assets: false,
-    //     entrypoints: false,
-    //     modules: false,
-    //     warnings: dev
-    // },
     devtool: dev ? 'source-map' : '',
     entry: {
         popup: __dirname + '/src',
@@ -116,12 +115,12 @@ let options = {
     }
 }
 
-webpack(options, (error, stats) => {
-    if (error) {
-        console.error(error.stack || error);
+webpack(options, (err, stats) => {
+    if (err) {
+        error(err.stack || err);
 
-        if (error.details) {
-            console.error(error.details);
+        if (err.details) {
+            error(err.details);
         }
         
         return;
@@ -131,15 +130,13 @@ webpack(options, (error, stats) => {
 
     if (stats.hasErrors()) {
         for(let item of info.errors) {
-            console.error(item);
+            error(item);
         }
-        console.log(info.errors.length)
     }
 
     if (stats.hasWarnings()) {
         for(let item of info.warnings) {
-            console.error(item);
+            warn(item);
         }
-        console.warn(info.warnings.length);
     }
 });
