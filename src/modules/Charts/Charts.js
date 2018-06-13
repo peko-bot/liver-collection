@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-07 13:41:02 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-13 16:17:35
+ * @Last Modified time: 2018-06-13 16:35:20
  */
 import React, { Component } from 'react'
 
@@ -29,7 +29,7 @@ export default class Charts extends Component {
             <div className='Charts'>
                 <input value={ input_value_1 } onChange={ e => this.onChange(e, 'input_value_1') } />
                 <input value={ input_value_2 } onChange={ e => this.onChange(e, 'input_value_2') } />
-                <div>test</div>
+                <div>test1</div>
             </div>
         )
     }

@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-05-28 15:20:13 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-13 16:17:26
+ * @Last Modified time: 2018-06-13 16:35:14
  */
 import React from 'react'
 import ReactDOM from 'react-dom'
@@ -27,8 +27,5 @@ try {
 }
 
 if (module.hot) {
-    module.hot.accept('./router', () => {
-        // render(Router);
-        render(require('./router'));
-    });
+    module.hot.accept('./router', () => render(Router));
 }
