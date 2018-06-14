@@ -13,8 +13,6 @@
                 "style": "css"
             }
         ],
-        [
-            "react-hot-loader/babel"
-        ]
+        "react-hot-loader/babel"
     ]
 }
