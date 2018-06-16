@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-05-20 13:48:08 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-14 17:06:50
+ * @Last Modified time: 2018-06-16 12:11:23
  */
 const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
@@ -26,13 +26,16 @@ let plugins = [
         }
     }),
     new webpack.HotModuleReplacementPlugin(),
+    new webpack.NamedModulesPlugin(),
 ];
 
 const devServerOptions = {
     port: 9099,
     hot: true,
     host: 'localhost',
-    // watchContentBase: true,
+    // noInfo: true,
+    stats: 'errors-only',
+    clientLogLevel: 'error'
 };
 
 const webpackConfig = {
@@ -77,7 +80,31 @@ const webpackConfig = {
     }
 };
 
-const compiler = webpack(webpackConfig);
+const compiler = webpack(webpackConfig, (err, stats) => {
+    if (err) {
+        error(err.stack || err);
+
+        if (err.details) {
+            error(err.details);
+        }
+        
+        return;
+    }
+    
+    const info = stats.toJson();
+
+    if (stats.hasErrors()) {
+        for(let item of info.errors) {
+            error(item);
+        }
+    } else if (stats.hasWarnings()) {
+        for(let item of info.warnings) {
+            warn(item);
+        }
+    } else {
+        log('Compiled successfully.');
+    }
+});
 
 const server = new WebpackDevServer(compiler, devServerOptions);
 
