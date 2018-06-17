@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-05-20 13:48:08 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-17 22:07:05
+ * @Last Modified time: 2018-06-17 22:46:53
  */
 const webpack = require('webpack');
 const webpackDevServer = require('webpack-dev-server');
@@ -19,8 +19,8 @@ const devServerOptions = {
     port: 9099,
     hot: true,
     host: 'localhost',
-    noInfo: true,
-    // stats: 'errors-only',
+    // noInfo: true,
+    stats: 'errors-only',
     clientLogLevel: 'error'
 };
 
@@ -45,13 +45,13 @@ const webpackConfig = {
 // const compiler = webpack(webpackConfig, (err, stats) => logInfo(err, stats, true));
 const compiler = webpack(webpackConfig);
 
-compiler.plugin('thisCompilation', compilation => {
-    info('  少女祈祷中...');
-});
+// compiler.plugin('thisCompilation', compilation => {
+//     info('  少女祈祷中...');
+// });
 
-compiler.plugin('done', compilation => {
-    log(`♪(^∇^*)♪(^∇^*)♪(^∇^*) 少女捡到钱了 ♪(^∇^*)♪(^∇^*)♪(^∇^*)`);
-});
+// compiler.plugin('done', compilation => {
+//     log(`♪(^∇^*)♪(^∇^*)♪(^∇^*) 少女捡到钱了 ♪(^∇^*)♪(^∇^*)♪(^∇^*)`);
+// });
 
 const server = new webpackDevServer(compiler, devServerOptions);
 

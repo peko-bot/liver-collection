@@ -2,12 +2,12 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-17 17:23:54 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-17 21:47:13
+ * @Last Modified time: 2018-06-17 22:15:14
  */
 const chalk = require('chalk');
 // const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const htmlWebpackPlugin = require('html-webpack-plugin');
-// const tohoLogPlugin = require('./plugins/toho-log-plugin');
+const tohoLogPlugin = require('./plugins/toho-log-plugin');
 
 const log = text => console.log(chalk.greenBright(text));
 const error = text => console.log(chalk.red(text));
@@ -98,6 +98,6 @@ module.exports = {
                 collapseWhitespace: true,
             }
         }),
-        // new tohoLogPlugin(),
+        new tohoLogPlugin({ test: 'test1' }),
     ]
 }
