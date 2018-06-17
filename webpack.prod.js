@@ -2,21 +2,17 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-05-20 13:48:08 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-13 11:03:10
+ * @Last Modified time: 2018-06-17 17:31:38
  */
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const fs = require('fs');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const WebpackOnBuildPlugin = require('on-build-webpack');
+// const WebpackOnBuildPlugin = require('on-build-webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const path = require('path');
 // const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const chalk = require('chalk');
-
-const log = text => console.log(chalk.greenBright(text));
-const error = text => console.log(chalk.red(text));
-const warn = text => console.log(chalk.yellowBright(text)); 
+const { logInfo } = require('./webpack.common');
 
 const buildPath = __dirname + '/dist/';
 const dev = process.argv.includes('development') ? true : false;
@@ -40,7 +36,8 @@ let plugins = [
         },
         {
             from: __dirname + '/manifest.json',
-            to: __dirname + '/dist'
+            to: __dirname + '/dist',
+            force: true
         },
         {
             from: __dirname + '/contentScript/css',
@@ -53,22 +50,18 @@ let plugins = [
     // })
 ];
 
-!dev && plugins.push(new CleanWebpackPlugin(['dist']));
-
-dev && plugins.push(new WebpackOnBuildPlugin(stats => { // 删除dist下原有文件
-    const newlyCreatedAssets = stats.compilation.assets;
-
-    fs.readdir(path.resolve(buildPath), (err, files) => {
-        files && files.forEach(file => {
-            if (!newlyCreatedAssets[file]) {
-                fs.unlink(path.resolve(buildPath + file), () => { });
-            }
-        });
-    })
+dev && plugins.push(new CleanWebpackPlugin(['dist'], {
+    exclude: ['mainifest.json'],
+    verbose: false
 }));
 
-let options = {
+!dev && plugins.push(new CleanWebpackPlugin(['dist'], {
+    verbose: false
+}));
+
+const options = {
     mode: dev ? 'development' : 'production',
+    watch: dev,
     devServer: {
         port: 9099
     },
@@ -115,28 +108,4 @@ let options = {
     }
 }
 
-webpack(options, (err, stats) => {
-    if (err) {
-        error(err.stack || err);
-
-        if (err.details) {
-            error(err.details);
-        }
-        
-        return;
-    }
-    
-    const info = stats.toJson();
-
-    if (stats.hasErrors()) {
-        for(let item of info.errors) {
-            error(item);
-        }
-    }
-
-    if (stats.hasWarnings()) {
-        for(let item of info.warnings) {
-            warn(item);
-        }
-    }
-});
+webpack(options, (err, stats) => logInfo(err, stats, dev));

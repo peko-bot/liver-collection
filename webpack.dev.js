@@ -2,17 +2,13 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-05-20 13:48:08 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-16 12:11:23
+ * @Last Modified time: 2018-06-17 17:36:00
  */
 const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
-const chalk = require('chalk');
-
-const log = text => console.log(chalk.greenBright(text));
-const error = text => console.log(chalk.red(text));
-const warn = text => console.log(chalk.yellowBright(text)); 
+const { logInfo } = require('./webpack.common');
 
 let plugins = [
     new HtmlWebpackPlugin({ // 生成html
@@ -80,34 +76,11 @@ const webpackConfig = {
     }
 };
 
-const compiler = webpack(webpackConfig, (err, stats) => {
-    if (err) {
-        error(err.stack || err);
-
-        if (err.details) {
-            error(err.details);
-        }
-        
-        return;
-    }
-    
-    const info = stats.toJson();
-
-    if (stats.hasErrors()) {
-        for(let item of info.errors) {
-            error(item);
-        }
-    } else if (stats.hasWarnings()) {
-        for(let item of info.warnings) {
-            warn(item);
-        }
-    } else {
-        log('Compiled successfully.');
-    }
-});
+// const compiler = webpack(webpackConfig, (err, stats) => logInfo(err, stats, true));
+const compiler = webpack(webpackConfig);
 
 const server = new WebpackDevServer(compiler, devServerOptions);
 
 server.listen(devServerOptions.port, devServerOptions.host, () => {
-    log('Starting server on http://' + devServerOptions.host + ':' + devServerOptions.port);
+    // log('Starting server on http://' + devServerOptions.host + ':' + devServerOptions.port);
 });
