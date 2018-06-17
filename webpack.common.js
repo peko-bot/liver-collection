@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-17 17:23:54 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-17 17:51:55
+ * @Last Modified time: 2018-06-17 19:17:57
  */
 const chalk = require('chalk');
 // const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -15,6 +15,7 @@ const warn = text => console.log(chalk.yellowBright(text));
 let successCount = 0;
 
 module.exports = {
+    log, error, warn,
     logInfo: (err, stats, dev) => {
         if (err) {
             error(err.stack || err);

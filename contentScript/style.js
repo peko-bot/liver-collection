@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-08 11:13:09 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-09 22:30:43
+ * @Last Modified time: 2018-06-17 18:55:47
  * @Description 全局样式设置
  */
 /* 修改滚动条样式
@@ -10,6 +10,10 @@
     又因为它的子节点名称固定，于是从子节点给容器加上个id，再用css修改容器滚动条属性
 */
 module.exports = () => {
+    if(!document.getElementById('mobage-game-container')) {
+        return;
+    }
+
     let scroll = document.getElementById('mobage-game-container').parentNode;
     scroll.id = 'liver-collection-container';
     

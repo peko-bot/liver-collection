@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-05-20 13:48:08 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-17 17:51:10
+ * @Last Modified time: 2018-06-17 19:32:42
  */
 const webpack = require('webpack');
 const fs = require('fs');
@@ -10,7 +10,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 // const WebpackOnBuildPlugin = require('on-build-webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const path = require('path');
-const { logInfo, commonModule, commonPlugin } = require('./webpack.common');
+const { logInfo, commonModule, commonPlugin, log } = require('./webpack.common');
 
 const buildPath = __dirname + '/dist/';
 const dev = process.argv.includes('development') ? true : false;
@@ -46,7 +46,7 @@ dev && plugins.push(new CleanWebpackPlugin(['dist'], {
 
 const options = {
     mode: dev ? 'development' : 'production',
-    watch: dev,
+    // watch: dev,
     devServer: {
         port: 9099
     },
@@ -68,4 +68,14 @@ const options = {
     module: commonModule
 }
 
-webpack(options, (err, stats) => logInfo(err, stats, dev));
+// webpack(options, (err, stats) => logInfo(err, stats, dev));
+const compiler = webpack(options);
+
+const watcher = compiler.watch({}, (err, stats) => {
+    // console.log('  少女祈祷中...');
+    logInfo(err, stats, dev);
+
+    !dev && watcher.close(() => { log('  铁血的热血的冷血的可笑的可悲的可爱的可敬的少女死去了，但好像又活了过来') });
+});
+
+// compiler.run((err, stats) => logInfo(err, stats, dev));
