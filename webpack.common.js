@@ -2,20 +2,22 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-17 17:23:54 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-17 19:17:57
+ * @Last Modified time: 2018-06-17 21:47:13
  */
 const chalk = require('chalk');
 // const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const htmlWebpackPlugin = require('html-webpack-plugin');
+// const tohoLogPlugin = require('./plugins/toho-log-plugin');
 
 const log = text => console.log(chalk.greenBright(text));
 const error = text => console.log(chalk.red(text));
-const warn = text => console.log(chalk.yellowBright(text)); 
+const warn = text => console.log(chalk.yellowBright(text));
+const info = text => console.log(chalk.cyanBright(text));
 
 let successCount = 0;
 
 module.exports = {
-    log, error, warn,
+    log, error, warn, info,
     logInfo: (err, stats, dev) => {
         if (err) {
             error(err.stack || err);
@@ -47,7 +49,7 @@ module.exports = {
             if(!dev) {
                 warn('\n  虽然有些烦恼，但少女还是去和风车战斗了 ╮(╯_╰)╭\n');
     
-                return
+                return;
             }
         }
     
@@ -96,5 +98,6 @@ module.exports = {
                 collapseWhitespace: true,
             }
         }),
+        // new tohoLogPlugin(),
     ]
 }
