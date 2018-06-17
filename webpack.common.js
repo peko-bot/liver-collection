@@ -2,9 +2,11 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-17 17:23:54 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-17 17:33:16
+ * @Last Modified time: 2018-06-17 17:51:55
  */
 const chalk = require('chalk');
+// const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const htmlWebpackPlugin = require('html-webpack-plugin');
 
 const log = text => console.log(chalk.greenBright(text));
 const error = text => console.log(chalk.red(text));
@@ -55,5 +57,43 @@ module.exports = {
         }
     
         log(`♪(^∇^*)♪(^∇^*)♪(^∇^*) 少女第${ ++successCount }次捡到钱了 ♪(^∇^*)♪(^∇^*)♪(^∇^*)`);
-    }
+    },
+    commonModule: {
+        rules: [
+            {
+                test: /\.(png|jpg)$/,
+                use: [
+                    {
+                        loader: 'url-loader',
+                        options: {
+                            limit: 8192
+                        }
+                    }
+                ]
+            },
+            {
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader']
+            },
+            {
+                test: /\.js[x]?$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader'
+                },
+            },
+        ]
+    },
+    commonPlugin: [
+        new htmlWebpackPlugin({ // 生成html
+            template: './src/index.html',
+            hash: true,
+            minify: {
+                minifyJS: true,
+                minifyCSS: true,
+                removeComments: true,
+                collapseWhitespace: true,
+            }
+        }),
+    ]
 }

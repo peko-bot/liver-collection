@@ -2,28 +2,18 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-05-20 13:48:08 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-17 17:36:00
+ * @Last Modified time: 2018-06-17 17:53:52
  */
 const webpack = require('webpack');
-const WebpackDevServer = require('webpack-dev-server');
+const webpackDevServer = require('webpack-dev-server');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
-const { logInfo } = require('./webpack.common');
+const { logInfo, commonModule, commonPlugin } = require('./webpack.common');
 
-let plugins = [
-    new HtmlWebpackPlugin({ // 生成html
-        template: './src/index.html',
-        hash: true,
-        minify: {
-            minifyJS: true,
-            minifyCSS: true,
-            removeComments: true,
-            collapseWhitespace: true,
-        }
-    }),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NamedModulesPlugin(),
-];
+let plugins = commonPlugin;
+
+plugins.push(new webpack.HotModuleReplacementPlugin());
+plugins.push(new webpack.NamedModulesPlugin());
 
 const devServerOptions = {
     port: 9099,
@@ -36,6 +26,7 @@ const devServerOptions = {
 
 const webpackConfig = {
     mode: 'development',
+    watch: false,
     devtool: 'source-map',
     entry: [
         'react-hot-loader/patch',
@@ -48,38 +39,13 @@ const webpackConfig = {
         chunkFilename: 'vendor/[name].[hash].js',
     },
     plugins,
-    module: {
-        rules: [
-            {
-                test: /\.js?$/,
-                exclude: /node_modules/,
-                use: {
-                    loader: 'babel-loader',
-                }
-            },
-            {
-                test: /\.(png|jpg)$/,
-                use: [
-                    {
-                        loader: 'url-loader',
-                        options: {
-                            limit: 8192
-                        }
-                    }
-                ]
-            },
-            {
-                test: /\.css$/,
-                use: ['style-loader', 'css-loader'] // MiniCssExtractPlugin.loader,
-            }
-        ]
-    }
+    module: commonModule
 };
 
 // const compiler = webpack(webpackConfig, (err, stats) => logInfo(err, stats, true));
 const compiler = webpack(webpackConfig);
 
-const server = new WebpackDevServer(compiler, devServerOptions);
+const server = new webpackDevServer(compiler, devServerOptions);
 
 server.listen(devServerOptions.port, devServerOptions.host, () => {
     // log('Starting server on http://' + devServerOptions.host + ':' + devServerOptions.port);
