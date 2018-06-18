@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-05-20 13:48:08 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-17 21:49:47
+ * @Last Modified time: 2018-06-18 12:35:16
  */
 const webpack = require('webpack');
 const fs = require('fs');
@@ -10,7 +10,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 // const WebpackOnBuildPlugin = require('on-build-webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const path = require('path');
-const { logInfo, commonModule, commonPlugin, log, info } = require('./webpack.common');
+const { logInfo, commonModule, commonPlugin, log, onCompile } = require('./webpack.common');
 
 const buildPath = __dirname + '/dist/';
 const dev = process.argv.includes('development') ? true : false;
@@ -68,12 +68,9 @@ const options = {
     module: commonModule
 }
 
-// webpack(options, (err, stats) => logInfo(err, stats, dev));
 const compiler = webpack(options);
 
-compiler.plugin('thisCompilation', compilation => {
-    info('  少女祈祷中...');
-});
+onCompile(compiler);
 
 dev && compiler.watch({}, (err, stats) => logInfo(err, stats, dev));
 

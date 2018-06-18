@@ -2,12 +2,11 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-17 17:23:54 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-17 22:15:14
+ * @Last Modified time: 2018-06-18 12:34:16
  */
 const chalk = require('chalk');
 // const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const htmlWebpackPlugin = require('html-webpack-plugin');
-const tohoLogPlugin = require('./plugins/toho-log-plugin');
 
 const log = text => console.log(chalk.greenBright(text));
 const error = text => console.log(chalk.red(text));
@@ -18,6 +17,11 @@ let successCount = 0;
 
 module.exports = {
     log, error, warn, info,
+    onCompile: compiler => {
+        compiler.hooks.compile.tap('tohoLog', () => {
+            info('  少女祈祷中...');
+        });
+    },
     logInfo: (err, stats, dev) => {
         if (err) {
             error(err.stack || err);
@@ -98,6 +102,5 @@ module.exports = {
                 collapseWhitespace: true,
             }
         }),
-        new tohoLogPlugin({ test: 'test1' }),
     ]
 }
