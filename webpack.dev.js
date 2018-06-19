@@ -2,25 +2,26 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-05-20 13:48:08 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-18 12:36:46
+ * @Last Modified time: 2018-06-19 21:33:38
  */
 const webpack = require('webpack');
 const webpackDevServer = require('webpack-dev-server');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
+const TohoLogPlugin = require('./plugins/toho-log-plugin');
 const { logInfo, commonModule, commonPlugin, onCompile } = require('./webpack.common');
 
 let plugins = commonPlugin;
 
 plugins.push(new webpack.HotModuleReplacementPlugin());
 plugins.push(new webpack.NamedModulesPlugin());
+plugins.push(new TohoLogPlugin({ dev: false }));
 
 const devServerOptions = {
     port: 9099,
     hot: true,
     host: 'localhost',
     noInfo: true,
-    // stats: 'errors-only',
     clientLogLevel: 'error'
 };
 
@@ -44,14 +45,12 @@ const webpackConfig = {
 
 const compiler = webpack(webpackConfig);
 
-onCompile(compiler);
+// onCompile(compiler);
 
-compiler.hooks.done.tap('tohoLog', stats => {
-    logInfo(null, stats, true);
-});
+// compiler.hooks.done.tap('tohoLog', stats => {
+//     logInfo(null, stats, true);
+// });
 
 const server = new webpackDevServer(compiler, devServerOptions);
 
-server.listen(devServerOptions.port, devServerOptions.host, () => {
-    // log('Starting server on http://' + devServerOptions.host + ':' + devServerOptions.port);
-});
+server.listen(devServerOptions.port, devServerOptions.host);

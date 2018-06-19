@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-18 13:43:52 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-19 21:05:18
+ * @Last Modified time: 2018-06-19 21:31:41
  */
 const chalk = require('chalk');
 
@@ -24,10 +24,10 @@ const logInfo = (err, stats, dev) => {
         return;
     }
     
-    const info = stats.toJson();
+    const statsInfo = stats.toJson();
 
-    if (stats.hasErrors()) {
-        for(let item of info.errors) {
+    if(stats.hasErrors()) {
+        for(let item of statsInfo.errors) {
             error(item);
         }
 
@@ -36,22 +36,20 @@ const logInfo = (err, stats, dev) => {
         return;
     }
 
-    if (stats.hasWarnings()) {
-        for(let item of info.warnings) {
+    if(stats.hasWarnings()) {
+        for(let item of statsInfo.warnings) {
             warn(item);
         }
 
         if(!dev) {
             warn('\n  虽然有些烦恼，但少女还是去和风车战斗了 ╮(╯_╰)╭\n');
 
+            log('  铁血的热血的冷血的可笑的可悲的可爱的可敬的少女死去了，但好像又活了过来\n');
+            
+            info('  然后少女去寻找自己的诗和苟且了 ╮(╯_╰)╭\n');
+
             return;
         }
-    }
-
-    if(!dev) {
-        log('  少女去寻找自己的诗和远方了 ╮(╯_╰)╭');
-
-        return;
     }
 
     log(`♪(^∇^*)♪(^∇^*)♪(^∇^*) 少女第${ ++successCount }次捡到钱了 ♪(^∇^*)♪(^∇^*)♪(^∇^*)`);
