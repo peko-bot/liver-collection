@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-18 13:43:52 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-18 13:44:35
+ * @Last Modified time: 2018-06-19 21:05:18
  */
 const chalk = require('chalk');
 
@@ -10,6 +10,8 @@ const log = text => console.log(chalk.greenBright(text));
 const error = text => console.log(chalk.red(text));
 const warn = text => console.log(chalk.yellowBright(text));
 const info = text => console.log(chalk.cyanBright(text));
+
+let successCount = 0;
 
 const logInfo = (err, stats, dev) => {
     if (err) {

@@ -2,14 +2,14 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-05-20 13:48:08 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-18 20:47:52
+ * @Last Modified time: 2018-06-19 20:53:55
  */
 const webpack = require('webpack');
 const fs = require('fs');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 // const WebpackOnBuildPlugin = require('on-build-webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-// const TohoLogPlugin = require('./plugins/toho-log-plugin');
+const TohoLogPlugin = require('./plugins/toho-log-plugin');
 const path = require('path');
 const { logInfo, commonModule, commonPlugin, log, onCompile } = require('./webpack.common');
 
@@ -36,7 +36,7 @@ plugins.push(
     ])
 );
 
-// plugins.push(new TohoLogPlugin());
+plugins.push(new TohoLogPlugin({ dev }));
 
 dev && plugins.push(new CleanWebpackPlugin(['dist'], {
     exclude: ['mainifest.json'], // 如果不加这个，在rebuild时，不会再复制json到dist中
@@ -71,15 +71,17 @@ const options = {
     module: commonModule
 }
 
-// webpack(options)
-const compiler = webpack(options);
+dev && webpack(options).watch({}, () => {});
 
-onCompile(compiler);
+!dev && webpack(options).run(() => {});
+// const compiler = webpack(options);
 
-dev && compiler.watch({}, (err, stats) => logInfo(err, stats, dev));
+// onCompile(compiler);
 
-!dev && compiler.run((err, stats) => {
-    logInfo(err, stats, dev);
+// dev && compiler.watch({}, (err, stats) => logInfo(err, stats, dev));
 
-    log('  铁血的热血的冷血的可笑的可悲的可爱的可敬的少女死去了，但好像又活了过来');
-});
+// !dev && compiler.run((err, stats) => {
+//     logInfo(err, stats, dev);
+
+//     log('  铁血的热血的冷血的可笑的可悲的可爱的可敬的少女死去了，但好像又活了过来');
+// });
