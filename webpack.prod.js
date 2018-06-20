@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-05-20 13:48:08 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-19 20:53:55
+ * @Last Modified time: 2018-06-20 15:21:27
  */
 const webpack = require('webpack');
 const fs = require('fs');
@@ -73,15 +73,4 @@ const options = {
 
 dev && webpack(options).watch({}, () => {});
 
-!dev && webpack(options).run(() => {});
-// const compiler = webpack(options);
-
-// onCompile(compiler);
-
-// dev && compiler.watch({}, (err, stats) => logInfo(err, stats, dev));
-
-// !dev && compiler.run((err, stats) => {
-//     logInfo(err, stats, dev);
-
-//     log('  铁血的热血的冷血的可笑的可悲的可爱的可敬的少女死去了，但好像又活了过来');
-// });
+!dev && webpack(options).run();

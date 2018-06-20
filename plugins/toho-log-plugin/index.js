@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-17 21:44:44 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-19 21:35:16
+ * @Last Modified time: 2018-06-20 15:22:36
  */
 const { log, error, warn, info, logInfo } = require('./log');
 
@@ -20,6 +20,10 @@ class TohoLogPlugin {
         });
 
         compiler.hooks.watchRun.tap('log', () => {
+            info('  少女祈祷中...');
+        });
+
+        compiler.hooks.run.tap('log', () => {
             info('  少女祈祷中...');
         });
 

@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-05-20 13:48:08 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-19 21:33:38
+ * @Last Modified time: 2018-06-20 15:23:21
  */
 const webpack = require('webpack');
 const webpackDevServer = require('webpack-dev-server');
@@ -44,12 +44,6 @@ const webpackConfig = {
 };
 
 const compiler = webpack(webpackConfig);
-
-// onCompile(compiler);
-
-// compiler.hooks.done.tap('tohoLog', stats => {
-//     logInfo(null, stats, true);
-// });
 
 const server = new webpackDevServer(compiler, devServerOptions);
 
