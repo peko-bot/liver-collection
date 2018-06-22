@@ -43,7 +43,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "vendor/" + ({}[chunkId]||chunkId) + "." + {"0":"92c928e9","1":"38396296","2":"90900539","3":"685a2973"}[chunkId] + ".js"
+/******/ 		return __webpack_require__.p + "vendor/" + ({}[chunkId]||chunkId) + "." + {"0":"393a29a4","1":"7805455e","2":"90900539","3":"8b1a3b7d"}[chunkId] + ".js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -20906,36 +20906,6 @@ if (false) {} else {
 
 /***/ }),
 
-/***/ "./node_modules/_react-hot-loader@4.3.3@react-hot-loader/dist/react-hot-loader.production.min.js":
-/*!*******************************************************************************************************!*\
-  !*** ./node_modules/_react-hot-loader@4.3.3@react-hot-loader/dist/react-hot-loader.production.min.js ***!
-  \*******************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-function _interopDefault(t){return t&&"object"==typeof t&&"default"in t?t.default:t}Object.defineProperty(exports,"__esModule",{value:!0});var React=_interopDefault(__webpack_require__(/*! react */ "./node_modules/_react@16.4.1@react/index.js")),classCallCheck=function(t,e){if(!(t instanceof e))throw new TypeError("Cannot call a class as a function")},inherits=function(t,e){if("function"!=typeof e&&null!==e)throw new TypeError("Super expression must either be null or a function, not "+typeof e);t.prototype=Object.create(e&&e.prototype,{constructor:{value:t,enumerable:!1,writable:!0,configurable:!0}}),e&&(Object.setPrototypeOf?Object.setPrototypeOf(t,e):t.__proto__=e)},possibleConstructorReturn=function(t,e){if(!t)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!e||"object"!=typeof e&&"function"!=typeof e?t:e},AppContainer=function(t){function e(){return classCallCheck(this,e),possibleConstructorReturn(this,t.apply(this,arguments))}return inherits(e,t),e.prototype.render=function(){return React.Children.only(this.props.children)},e}(React.Component),hot_prod=function(){return function(t){return t}},areComponentsEqual=function(t,e){return t===e},setConfig=function(){},cold=function(t){return t};exports.AppContainer=AppContainer,exports.hot=hot_prod,exports.areComponentsEqual=areComponentsEqual,exports.setConfig=setConfig,exports.cold=cold;
-
-
-/***/ }),
-
-/***/ "./node_modules/_react-hot-loader@4.3.3@react-hot-loader/index.js":
-/*!************************************************************************!*\
-  !*** ./node_modules/_react-hot-loader@4.3.3@react-hot-loader/index.js ***!
-  \************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-if (true) {
-  module.exports = __webpack_require__(/*! ./dist/react-hot-loader.production.min.js */ "./node_modules/_react-hot-loader@4.3.3@react-hot-loader/dist/react-hot-loader.production.min.js");
-} else {}
-
-
-/***/ }),
-
 /***/ "./node_modules/_react-router-dom@4.3.1@react-router-dom/es/BrowserRouter.js":
 /*!***********************************************************************************!*\
   !*** ./node_modules/_react-router-dom@4.3.1@react-router-dom/es/BrowserRouter.js ***!
@@ -24392,39 +24362,6 @@ module.exports = warning;
 
 /***/ }),
 
-/***/ "./node_modules/_webpack@4.12.0@webpack/buildin/module.js":
-/*!***********************************!*\
-  !*** (webpack)/buildin/module.js ***!
-  \***********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = function(module) {
-	if (!module.webpackPolyfill) {
-		module.deprecate = function() {};
-		module.paths = [];
-		// module.parent = undefined by default
-		if (!module.children) module.children = [];
-		Object.defineProperty(module, "loaded", {
-			enumerable: true,
-			get: function() {
-				return module.l;
-			}
-		});
-		Object.defineProperty(module, "id", {
-			enumerable: true,
-			get: function() {
-				return module.i;
-			}
-		});
-		module.webpackPolyfill = 1;
-	}
-	return module;
-};
-
-
-/***/ }),
-
 /***/ "./src/index.js":
 /*!**********************!*\
   !*** ./src/index.js ***!
@@ -24433,7 +24370,7 @@ module.exports = function(module) {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(module) {
+
 
 var _react = __webpack_require__(/*! react */ "./node_modules/_react@16.4.1@react/index.js");
 
@@ -24443,58 +24380,32 @@ var _reactDom = __webpack_require__(/*! react-dom */ "./node_modules/_react-dom@
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _reactHotLoader = __webpack_require__(/*! react-hot-loader */ "./node_modules/_react-hot-loader@4.3.3@react-hot-loader/index.js");
-
 var _router = __webpack_require__(/*! ./router */ "./src/router/index.js");
 
 var _router2 = _interopRequireDefault(_router);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-(function () {
-    var enterModule = __webpack_require__(/*! react-hot-loader */ "./node_modules/_react-hot-loader@4.3.3@react-hot-loader/index.js").enterModule;
-
-    enterModule && enterModule(module);
-})(); /*
-       * @Author: zy9@github.com/zy410419243 
-       * @Date: 2018-05-28 15:20:13 
-       * @Last Modified by: zy9
-       * @Last Modified time: 2018-06-17 21:51:22
-       */
-
-
 var MOUNT_NODE = document.getElementById('root');
 
-var render = function render(Component) {
-    return _reactDom2.default.render(_react2.default.createElement(
-        _reactHotLoader.AppContainer,
-        null,
-        _react2.default.createElement(Component, null)
-    ), MOUNT_NODE);
-};
+// const render = Component => ReactDOM.render(
+//     <AppContainer>
+//         <Component />
+//     </AppContainer>, MOUNT_NODE
+// )
 
-// ReactDOM.render(<Router />, MOUNT_NODE);
-render(_router2.default);
+// import { AppContainer } from 'react-hot-loader'
+
+/*
+ * @Author: zy9@github.com/zy410419243 
+ * @Date: 2018-05-28 15:20:13 
+ * @Last Modified by: zy9
+ * @Last Modified time: 2018-06-22 21:59:27
+ */
+_reactDom2.default.render(_react2.default.createElement(_router2.default, null), MOUNT_NODE);
+// render(Router);
 
 if (false) {}
-;
-
-(function () {
-    var reactHotLoader = __webpack_require__(/*! react-hot-loader */ "./node_modules/_react-hot-loader@4.3.3@react-hot-loader/index.js").default;
-
-    var leaveModule = __webpack_require__(/*! react-hot-loader */ "./node_modules/_react-hot-loader@4.3.3@react-hot-loader/index.js").leaveModule;
-
-    if (!reactHotLoader) {
-        return;
-    }
-
-    reactHotLoader.register(MOUNT_NODE, 'MOUNT_NODE', 'E:/Github/Liver-collection/src/index.js');
-    reactHotLoader.register(render, 'render', 'E:/Github/Liver-collection/src/index.js');
-    leaveModule(module);
-})();
-
-;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../node_modules/_webpack@4.12.0@webpack/buildin/module.js */ "./node_modules/_webpack@4.12.0@webpack/buildin/module.js")(module)))
 
 /***/ }),
 
@@ -24506,13 +24417,11 @@ if (false) {}
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(module) {
+
 
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(/*! react */ "./node_modules/_react@16.4.1@react/index.js");
 
@@ -24525,12 +24434,6 @@ var _Bundle = __webpack_require__(/*! ../util/Bundle */ "./src/util/Bundle.js");
 var _Bundle2 = _interopRequireDefault(_Bundle);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-(function () {
-    var enterModule = __webpack_require__(/*! react-hot-loader */ "./node_modules/_react-hot-loader@4.3.3@react-hot-loader/index.js").enterModule;
-
-    enterModule && enterModule(module);
-})();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -24596,40 +24499,10 @@ var Router = function (_Component) {
         }, _temp), _possibleConstructorReturn(_this, _ret);
     }
 
-    _createClass(Router, [{
-        key: '__reactstandin__regenerateByEval',
-        // @ts-ignore
-        value: function __reactstandin__regenerateByEval(key, code) {
-            // @ts-ignore
-            this[key] = eval(code);
-        }
-    }]);
-
     return Router;
 }(_react.Component);
 
-var _default = Router;
-exports.default = _default;
-;
-
-(function () {
-    var reactHotLoader = __webpack_require__(/*! react-hot-loader */ "./node_modules/_react-hot-loader@4.3.3@react-hot-loader/index.js").default;
-
-    var leaveModule = __webpack_require__(/*! react-hot-loader */ "./node_modules/_react-hot-loader@4.3.3@react-hot-loader/index.js").leaveModule;
-
-    if (!reactHotLoader) {
-        return;
-    }
-
-    reactHotLoader.register(Popup, 'Popup', 'E:/Github/Liver-collection/src/router/index.js');
-    reactHotLoader.register(Charts, 'Charts', 'E:/Github/Liver-collection/src/router/index.js');
-    reactHotLoader.register(Router, 'Router', 'E:/Github/Liver-collection/src/router/index.js');
-    reactHotLoader.register(_default, 'default', 'E:/Github/Liver-collection/src/router/index.js');
-    leaveModule(module);
-})();
-
-;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../node_modules/_webpack@4.12.0@webpack/buildin/module.js */ "./node_modules/_webpack@4.12.0@webpack/buildin/module.js")(module)))
+exports.default = Router;
 
 /***/ }),
 
@@ -24641,25 +24514,17 @@ exports.default = _default;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(module) {
+
 
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(/*! react */ "./node_modules/_react@16.4.1@react/index.js");
 
 var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-(function () {
-    var enterModule = __webpack_require__(/*! react-hot-loader */ "./node_modules/_react-hot-loader@4.3.3@react-hot-loader/index.js").enterModule;
-
-    enterModule && enterModule(module);
-})();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -24682,15 +24547,6 @@ var Bundle = function (_Component) {
         };
         return _this;
     }
-
-    _createClass(Bundle, [{
-        key: '__reactstandin__regenerateByEval',
-        // @ts-ignore
-        value: function __reactstandin__regenerateByEval(key, code) {
-            // @ts-ignore
-            this[key] = eval(code);
-        }
-    }]);
 
     return Bundle;
 }(_react.Component);
@@ -24721,26 +24577,7 @@ var _initialiseProps = function _initialiseProps() {
     };
 };
 
-var _default = Bundle;
-exports.default = _default;
-;
-
-(function () {
-    var reactHotLoader = __webpack_require__(/*! react-hot-loader */ "./node_modules/_react-hot-loader@4.3.3@react-hot-loader/index.js").default;
-
-    var leaveModule = __webpack_require__(/*! react-hot-loader */ "./node_modules/_react-hot-loader@4.3.3@react-hot-loader/index.js").leaveModule;
-
-    if (!reactHotLoader) {
-        return;
-    }
-
-    reactHotLoader.register(Bundle, 'Bundle', 'E:/Github/Liver-collection/src/util/Bundle.js');
-    reactHotLoader.register(_default, 'default', 'E:/Github/Liver-collection/src/util/Bundle.js');
-    leaveModule(module);
-})();
-
-;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../node_modules/_webpack@4.12.0@webpack/buildin/module.js */ "./node_modules/_webpack@4.12.0@webpack/buildin/module.js")(module)))
+exports.default = Bundle;
 
 /***/ })
 

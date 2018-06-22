@@ -27,7 +27,7 @@ exports.push([module.i, ".Charts {}", ""]);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(module) {
+
 
 Object.defineProperty(exports, "__esModule", {
     value: true
@@ -43,12 +43,6 @@ __webpack_require__(/*! ./css/Charts.css */ "./src/modules/Charts/css/Charts.css
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-(function () {
-    var enterModule = __webpack_require__(/*! react-hot-loader */ "./node_modules/_react-hot-loader@4.3.3@react-hot-loader/index.js").enterModule;
-
-    enterModule && enterModule(module);
-})();
-
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -59,7 +53,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 * @Author: zy9@github.com/zy410419243 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 * @Date: 2018-06-07 13:41:02 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 * @Last Modified by: zy9
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @Last Modified time: 2018-06-21 20:47:28
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @Last Modified time: 2018-06-21 21:59:43
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 */
 
 
@@ -104,42 +98,16 @@ var Charts = function (_Component) {
                 _react2.default.createElement(
                     'div',
                     null,
-                    'test1'
+                    'test'
                 )
             );
-        }
-    }, {
-        key: '__reactstandin__regenerateByEval',
-        // @ts-ignore
-        value: function __reactstandin__regenerateByEval(key, code) {
-            // @ts-ignore
-            this[key] = eval(code);
         }
     }]);
 
     return Charts;
 }(_react.Component);
 
-var _default = Charts;
-exports.default = _default;
-;
-
-(function () {
-    var reactHotLoader = __webpack_require__(/*! react-hot-loader */ "./node_modules/_react-hot-loader@4.3.3@react-hot-loader/index.js").default;
-
-    var leaveModule = __webpack_require__(/*! react-hot-loader */ "./node_modules/_react-hot-loader@4.3.3@react-hot-loader/index.js").leaveModule;
-
-    if (!reactHotLoader) {
-        return;
-    }
-
-    reactHotLoader.register(Charts, 'Charts', 'E:/Github/Liver-collection/src/modules/Charts/Charts.js');
-    reactHotLoader.register(_default, 'default', 'E:/Github/Liver-collection/src/modules/Charts/Charts.js');
-    leaveModule(module);
-})();
-
-;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../node_modules/_webpack@4.12.0@webpack/buildin/module.js */ "./node_modules/_webpack@4.12.0@webpack/buildin/module.js")(module)))
+exports.default = Charts;
 
 /***/ }),
 
@@ -174,4 +142,4 @@ if(false) {}
 /***/ })
 
 }]);
-//# sourceMappingURL=1.dd0ca3e0.js.map
+//# sourceMappingURL=1.7805455e.js.map

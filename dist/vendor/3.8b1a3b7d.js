@@ -2434,6 +2434,210 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/_antd@3.6.2@antd/lib/slider/index.js":
+/*!***********************************************************!*\
+  !*** ./node_modules/_antd@3.6.2@antd/lib/slider/index.js ***!
+  \***********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _defineProperty2 = __webpack_require__(/*! babel-runtime/helpers/defineProperty */ "./node_modules/_babel-runtime@6.26.0@babel-runtime/helpers/defineProperty.js");
+
+var _defineProperty3 = _interopRequireDefault(_defineProperty2);
+
+var _extends3 = __webpack_require__(/*! babel-runtime/helpers/extends */ "./node_modules/_babel-runtime@6.26.0@babel-runtime/helpers/extends.js");
+
+var _extends4 = _interopRequireDefault(_extends3);
+
+var _classCallCheck2 = __webpack_require__(/*! babel-runtime/helpers/classCallCheck */ "./node_modules/_babel-runtime@6.26.0@babel-runtime/helpers/classCallCheck.js");
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = __webpack_require__(/*! babel-runtime/helpers/createClass */ "./node_modules/_babel-runtime@6.26.0@babel-runtime/helpers/createClass.js");
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
+var _possibleConstructorReturn2 = __webpack_require__(/*! babel-runtime/helpers/possibleConstructorReturn */ "./node_modules/_babel-runtime@6.26.0@babel-runtime/helpers/possibleConstructorReturn.js");
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = __webpack_require__(/*! babel-runtime/helpers/inherits */ "./node_modules/_babel-runtime@6.26.0@babel-runtime/helpers/inherits.js");
+
+var _inherits3 = _interopRequireDefault(_inherits2);
+
+var _react = __webpack_require__(/*! react */ "./node_modules/_react@16.4.1@react/index.js");
+
+var React = _interopRequireWildcard(_react);
+
+var _Slider = __webpack_require__(/*! rc-slider/lib/Slider */ "./node_modules/_rc-slider@8.6.1@rc-slider/lib/Slider.js");
+
+var _Slider2 = _interopRequireDefault(_Slider);
+
+var _Range = __webpack_require__(/*! rc-slider/lib/Range */ "./node_modules/_rc-slider@8.6.1@rc-slider/lib/Range.js");
+
+var _Range2 = _interopRequireDefault(_Range);
+
+var _Handle = __webpack_require__(/*! rc-slider/lib/Handle */ "./node_modules/_rc-slider@8.6.1@rc-slider/lib/Handle.js");
+
+var _Handle2 = _interopRequireDefault(_Handle);
+
+var _tooltip = __webpack_require__(/*! ../tooltip */ "./node_modules/_antd@3.6.2@antd/lib/tooltip/index.js");
+
+var _tooltip2 = _interopRequireDefault(_tooltip);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var __rest = undefined && undefined.__rest || function (s, e) {
+    var t = {};
+    for (var p in s) {
+        if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
+    }if (s != null && typeof Object.getOwnPropertySymbols === "function") for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+        if (e.indexOf(p[i]) < 0) t[p[i]] = s[p[i]];
+    }return t;
+};
+
+var Slider = function (_React$Component) {
+    (0, _inherits3['default'])(Slider, _React$Component);
+
+    function Slider(props) {
+        (0, _classCallCheck3['default'])(this, Slider);
+
+        var _this = (0, _possibleConstructorReturn3['default'])(this, (Slider.__proto__ || Object.getPrototypeOf(Slider)).call(this, props));
+
+        _this.toggleTooltipVisible = function (index, visible) {
+            _this.setState(function (_ref) {
+                var visibles = _ref.visibles;
+                return {
+                    visibles: (0, _extends4['default'])({}, visibles, (0, _defineProperty3['default'])({}, index, visible))
+                };
+            });
+        };
+        _this.handleWithTooltip = function (_a) {
+            var value = _a.value,
+                dragging = _a.dragging,
+                index = _a.index,
+                restProps = __rest(_a, ["value", "dragging", "index"]);
+
+            var _this$props = _this.props,
+                tooltipPrefixCls = _this$props.tooltipPrefixCls,
+                tipFormatter = _this$props.tipFormatter;
+            var visibles = _this.state.visibles;
+
+            var visible = tipFormatter ? visibles[index] || dragging : false;
+            return React.createElement(
+                _tooltip2['default'],
+                { prefixCls: tooltipPrefixCls, title: tipFormatter ? tipFormatter(value) : '', visible: visible, placement: 'top', transitionName: 'zoom-down', key: index },
+                React.createElement(_Handle2['default'], (0, _extends4['default'])({}, restProps, { value: value, onMouseEnter: function onMouseEnter() {
+                        return _this.toggleTooltipVisible(index, true);
+                    }, onMouseLeave: function onMouseLeave() {
+                        return _this.toggleTooltipVisible(index, false);
+                    } }))
+            );
+        };
+        _this.saveSlider = function (node) {
+            _this.rcSlider = node;
+        };
+        _this.state = {
+            visibles: {}
+        };
+        return _this;
+    }
+
+    (0, _createClass3['default'])(Slider, [{
+        key: 'focus',
+        value: function focus() {
+            this.rcSlider.focus();
+        }
+    }, {
+        key: 'blur',
+        value: function blur() {
+            this.rcSlider.focus();
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var _a = this.props,
+                range = _a.range,
+                restProps = __rest(_a, ["range"]);
+            if (range) {
+                return React.createElement(_Range2['default'], (0, _extends4['default'])({}, restProps, { ref: this.saveSlider, handle: this.handleWithTooltip }));
+            }
+            return React.createElement(_Slider2['default'], (0, _extends4['default'])({}, restProps, { ref: this.saveSlider, handle: this.handleWithTooltip }));
+        }
+    }]);
+    return Slider;
+}(React.Component);
+
+exports['default'] = Slider;
+
+Slider.defaultProps = {
+    prefixCls: 'ant-slider',
+    tooltipPrefixCls: 'ant-tooltip',
+    tipFormatter: function tipFormatter(value) {
+        return value.toString();
+    }
+};
+module.exports = exports['default'];
+
+/***/ }),
+
+/***/ "./node_modules/_antd@3.6.2@antd/lib/slider/style/css.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/_antd@3.6.2@antd/lib/slider/style/css.js ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+__webpack_require__(/*! ../../style/index.css */ "./node_modules/_antd@3.6.2@antd/lib/style/index.css");
+
+__webpack_require__(/*! ./index.css */ "./node_modules/_antd@3.6.2@antd/lib/slider/style/index.css");
+
+__webpack_require__(/*! ../../tooltip/style/css */ "./node_modules/_antd@3.6.2@antd/lib/tooltip/style/css.js");
+
+/***/ }),
+
+/***/ "./node_modules/_antd@3.6.2@antd/lib/slider/style/index.css":
+/*!******************************************************************!*\
+  !*** ./node_modules/_antd@3.6.2@antd/lib/slider/style/index.css ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../_css-loader@0.28.11@css-loader!./index.css */ "./node_modules/_css-loader@0.28.11@css-loader/index.js!./node_modules/_antd@3.6.2@antd/lib/slider/style/index.css");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../_style-loader@0.21.0@style-loader/lib/addStyles.js */ "./node_modules/_style-loader@0.21.0@style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/_antd@3.6.2@antd/lib/style/index.css":
 /*!***********************************************************!*\
   !*** ./node_modules/_antd@3.6.2@antd/lib/style/index.css ***!
@@ -5849,6 +6053,25 @@ exports = module.exports = __webpack_require__(/*! ../../../../_css-loader@0.28.
 
 // module
 exports.push([module.i, "/* stylelint-disable at-rule-empty-line-before,at-rule-name-space-after,at-rule-no-unknown */\n/* stylelint-disable no-duplicate-selectors */\n/* stylelint-disable declaration-bang-space-before,no-duplicate-selectors */\n/* stylelint-disable declaration-bang-space-before,no-duplicate-selectors,string-no-newline */\n.ant-select {\n  font-family: \"Monospaced Number\", \"Chinese Quote\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n  font-size: 14px;\n  line-height: 1.5;\n  color: rgba(0, 0, 0, 0.65);\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n  margin: 0;\n  padding: 0;\n  list-style: none;\n  display: inline-block;\n  position: relative;\n}\n.ant-select ul,\n.ant-select ol {\n  margin: 0;\n  padding: 0;\n  list-style: none;\n}\n.ant-select > ul > li > a {\n  padding: 0;\n  background-color: #fff;\n}\n.ant-select-arrow {\n  display: inline-block;\n  font-style: normal;\n  vertical-align: baseline;\n  text-align: center;\n  text-transform: none;\n  text-rendering: optimizeLegibility;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  position: absolute;\n  top: 50%;\n  right: 11px;\n  line-height: 1;\n  margin-top: -6px;\n  -webkit-transform-origin: 50% 50%;\n      -ms-transform-origin: 50% 50%;\n          transform-origin: 50% 50%;\n  color: rgba(0, 0, 0, 0.25);\n  font-size: 12px;\n}\n.ant-select-arrow:before {\n  display: block;\n  font-family: \"anticon\" !important;\n}\n.ant-select-arrow * {\n  display: none;\n}\n.ant-select-arrow:before {\n  content: '\\E61D';\n  -webkit-transition: -webkit-transform .3s;\n  transition: -webkit-transform .3s;\n  transition: transform .3s;\n  transition: transform .3s, -webkit-transform .3s;\n}\n.ant-select-selection {\n  outline: none;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n  display: block;\n  background-color: #fff;\n  border-radius: 4px;\n  border: 1px solid #d9d9d9;\n  border-top-width: 1.02px;\n  -webkit-transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);\n  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);\n}\n.ant-select-selection:hover {\n  border-color: #40a9ff;\n  border-right-width: 1px !important;\n}\n.ant-select-focused .ant-select-selection,\n.ant-select-selection:focus,\n.ant-select-selection:active {\n  border-color: #40a9ff;\n  outline: 0;\n  -webkit-box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);\n          box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);\n  border-right-width: 1px !important;\n}\n.ant-select-selection__clear {\n  display: inline-block;\n  font-style: normal;\n  vertical-align: baseline;\n  text-align: center;\n  text-transform: none;\n  text-rendering: auto;\n  opacity: 0;\n  position: absolute;\n  right: 11px;\n  z-index: 1;\n  background: #fff;\n  top: 50%;\n  font-size: 12px;\n  color: rgba(0, 0, 0, 0.25);\n  width: 12px;\n  height: 12px;\n  margin-top: -6px;\n  line-height: 12px;\n  cursor: pointer;\n  -webkit-transition: color 0.3s ease, opacity 0.15s ease;\n  transition: color 0.3s ease, opacity 0.15s ease;\n}\n.ant-select-selection__clear:before {\n  display: block;\n  font-family: 'anticon';\n  text-rendering: optimizeLegibility;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  content: \"\\E62E\";\n}\n.ant-select-selection__clear:hover {\n  color: rgba(0, 0, 0, 0.45);\n}\n.ant-select-selection:hover .ant-select-selection__clear {\n  opacity: 1;\n}\n.ant-select-selection-selected-value {\n  float: left;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  max-width: 100%;\n  padding-right: 20px;\n}\n.ant-select-no-arrow .ant-select-selection-selected-value {\n  padding-right: 0;\n}\n.ant-select-disabled {\n  color: rgba(0, 0, 0, 0.25);\n}\n.ant-select-disabled .ant-select-selection {\n  background: #f5f5f5;\n  cursor: not-allowed;\n}\n.ant-select-disabled .ant-select-selection:hover,\n.ant-select-disabled .ant-select-selection:focus,\n.ant-select-disabled .ant-select-selection:active {\n  border-color: #d9d9d9;\n  -webkit-box-shadow: none;\n          box-shadow: none;\n}\n.ant-select-disabled .ant-select-selection__clear {\n  display: none;\n  visibility: hidden;\n  pointer-events: none;\n}\n.ant-select-disabled .ant-select-selection--multiple .ant-select-selection__choice {\n  background: #f5f5f5;\n  color: #aaa;\n  padding-right: 10px;\n}\n.ant-select-disabled .ant-select-selection--multiple .ant-select-selection__choice__remove {\n  display: none;\n}\n.ant-select-selection--single {\n  height: 32px;\n  position: relative;\n  cursor: pointer;\n}\n.ant-select-selection__rendered {\n  display: block;\n  margin-left: 11px;\n  margin-right: 11px;\n  position: relative;\n  line-height: 30px;\n}\n.ant-select-selection__rendered:after {\n  content: '.';\n  visibility: hidden;\n  pointer-events: none;\n  display: inline-block;\n  width: 0;\n}\n.ant-select-lg {\n  font-size: 16px;\n}\n.ant-select-lg .ant-select-selection--single {\n  height: 40px;\n}\n.ant-select-lg .ant-select-selection__rendered {\n  line-height: 38px;\n}\n.ant-select-lg .ant-select-selection--multiple {\n  min-height: 40px;\n}\n.ant-select-lg .ant-select-selection--multiple .ant-select-selection__rendered li {\n  height: 32px;\n  line-height: 32px;\n}\n.ant-select-lg .ant-select-selection--multiple .ant-select-selection__clear {\n  top: 20px;\n}\n.ant-select-sm .ant-select-selection--single {\n  height: 24px;\n}\n.ant-select-sm .ant-select-selection__rendered {\n  line-height: 22px;\n  margin: 0 7px;\n}\n.ant-select-sm .ant-select-selection--multiple {\n  min-height: 24px;\n}\n.ant-select-sm .ant-select-selection--multiple .ant-select-selection__rendered li {\n  height: 16px;\n  line-height: 14px;\n}\n.ant-select-sm .ant-select-selection--multiple .ant-select-selection__clear {\n  top: 12px;\n}\n.ant-select-sm .ant-select-selection__clear,\n.ant-select-sm .ant-select-arrow {\n  right: 8px;\n}\n.ant-select-disabled .ant-select-selection__choice__remove {\n  color: rgba(0, 0, 0, 0.25);\n  cursor: default;\n}\n.ant-select-disabled .ant-select-selection__choice__remove:hover {\n  color: rgba(0, 0, 0, 0.25);\n}\n.ant-select-search__field__wrap {\n  display: inline-block;\n  position: relative;\n}\n.ant-select-selection__placeholder,\n.ant-select-search__field__placeholder {\n  position: absolute;\n  top: 50%;\n  left: 0;\n  right: 9px;\n  color: #bfbfbf;\n  line-height: 20px;\n  height: 20px;\n  max-width: 100%;\n  margin-top: -10px;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  text-align: left;\n}\n.ant-select-search__field__placeholder {\n  left: 12px;\n}\n.ant-select-search__field__mirror {\n  position: absolute;\n  top: 0;\n  left: -9999px;\n  white-space: pre;\n  pointer-events: none;\n}\n.ant-select-search--inline {\n  position: absolute;\n  height: 100%;\n  width: 100%;\n}\n.ant-select-search--inline .ant-select-search__field__wrap {\n  width: 100%;\n  height: 100%;\n}\n.ant-select-search--inline .ant-select-search__field {\n  border-width: 0;\n  font-size: 100%;\n  height: 100%;\n  width: 100%;\n  background: transparent;\n  outline: 0;\n  border-radius: 4px;\n  line-height: 1;\n}\n.ant-select-search--inline > i {\n  float: right;\n}\n.ant-select-selection--multiple {\n  min-height: 32px;\n  cursor: text;\n  padding-bottom: 3px;\n  zoom: 1;\n}\n.ant-select-selection--multiple:before,\n.ant-select-selection--multiple:after {\n  content: \"\";\n  display: table;\n}\n.ant-select-selection--multiple:after {\n  clear: both;\n}\n.ant-select-selection--multiple .ant-select-search--inline {\n  float: left;\n  position: static;\n  width: auto;\n  padding: 0;\n  max-width: 100%;\n}\n.ant-select-selection--multiple .ant-select-search--inline .ant-select-search__field {\n  max-width: 100%;\n  width: 0.75em;\n}\n.ant-select-selection--multiple .ant-select-selection__rendered {\n  margin-left: 5px;\n  margin-bottom: -3px;\n  height: auto;\n}\n.ant-select-selection--multiple .ant-select-selection__placeholder {\n  margin-left: 6px;\n}\n.ant-select-selection--multiple > ul > li,\n.ant-select-selection--multiple .ant-select-selection__rendered > ul > li {\n  margin-top: 3px;\n  height: 24px;\n  line-height: 22px;\n}\n.ant-select-selection--multiple .ant-select-selection__choice {\n  color: rgba(0, 0, 0, 0.65);\n  background-color: #fafafa;\n  border: 1px solid #e8e8e8;\n  border-radius: 2px;\n  cursor: default;\n  float: left;\n  margin-right: 4px;\n  max-width: 99%;\n  position: relative;\n  overflow: hidden;\n  -webkit-transition: padding 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);\n  transition: padding 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);\n  padding: 0 20px 0 10px;\n}\n.ant-select-selection--multiple .ant-select-selection__choice__disabled {\n  padding: 0 10px;\n}\n.ant-select-selection--multiple .ant-select-selection__choice__content {\n  display: inline-block;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  max-width: 100%;\n  -webkit-transition: margin 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);\n  transition: margin 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);\n}\n.ant-select-selection--multiple .ant-select-selection__choice__remove {\n  font-style: normal;\n  vertical-align: baseline;\n  text-align: center;\n  text-transform: none;\n  line-height: 1;\n  text-rendering: optimizeLegibility;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  color: rgba(0, 0, 0, 0.45);\n  line-height: inherit;\n  cursor: pointer;\n  font-weight: bold;\n  -webkit-transition: all .3s;\n  transition: all .3s;\n  display: inline-block;\n  font-size: 12px;\n  font-size: 10px \\9;\n  -webkit-transform: scale(0.83333333) rotate(0deg);\n      -ms-transform: scale(0.83333333) rotate(0deg);\n          transform: scale(0.83333333) rotate(0deg);\n  position: absolute;\n  right: 4px;\n}\n.ant-select-selection--multiple .ant-select-selection__choice__remove:before {\n  display: block;\n  font-family: \"anticon\" !important;\n}\n:root .ant-select-selection--multiple .ant-select-selection__choice__remove {\n  font-size: 12px;\n}\n.ant-select-selection--multiple .ant-select-selection__choice__remove:hover {\n  color: #404040;\n}\n.ant-select-selection--multiple .ant-select-selection__choice__remove:before {\n  content: \"\\E633\";\n}\n.ant-select-selection--multiple .ant-select-selection__clear {\n  top: 16px;\n}\n.ant-select-allow-clear .ant-select-selection--single .ant-select-selection-selected-value {\n  padding-right: 16px;\n}\n.ant-select-allow-clear .ant-select-selection--multiple .ant-select-selection__rendered {\n  margin-right: 20px;\n}\n.ant-select-open .ant-select-arrow:before {\n  -webkit-transform: rotate(180deg);\n      -ms-transform: rotate(180deg);\n          transform: rotate(180deg);\n}\n.ant-select-open .ant-select-selection {\n  border-color: #40a9ff;\n  outline: 0;\n  -webkit-box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);\n          box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);\n  border-right-width: 1px !important;\n}\n.ant-select-combobox .ant-select-arrow {\n  display: none;\n}\n.ant-select-combobox .ant-select-search--inline {\n  height: 100%;\n  width: 100%;\n  float: none;\n}\n.ant-select-combobox .ant-select-search__field__wrap {\n  width: 100%;\n  height: 100%;\n}\n.ant-select-combobox .ant-select-search__field {\n  width: 100%;\n  height: 100%;\n  position: relative;\n  z-index: 1;\n  -webkit-transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);\n  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);\n  -webkit-box-shadow: none;\n          box-shadow: none;\n}\n.ant-select-combobox.ant-select-allow-clear .ant-select-selection:hover .ant-select-selection__rendered {\n  margin-right: 20px;\n}\n.ant-select-dropdown {\n  font-family: \"Monospaced Number\", \"Chinese Quote\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n  line-height: 1.5;\n  color: rgba(0, 0, 0, 0.65);\n  margin: 0;\n  padding: 0;\n  list-style: none;\n  background-color: #fff;\n  -webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);\n          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);\n  border-radius: 4px;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n  z-index: 1050;\n  left: -9999px;\n  top: -9999px;\n  position: absolute;\n  outline: none;\n  font-size: 14px;\n}\n.ant-select-dropdown.slide-up-enter.slide-up-enter-active.ant-select-dropdown-placement-bottomLeft,\n.ant-select-dropdown.slide-up-appear.slide-up-appear-active.ant-select-dropdown-placement-bottomLeft {\n  -webkit-animation-name: antSlideUpIn;\n          animation-name: antSlideUpIn;\n}\n.ant-select-dropdown.slide-up-enter.slide-up-enter-active.ant-select-dropdown-placement-topLeft,\n.ant-select-dropdown.slide-up-appear.slide-up-appear-active.ant-select-dropdown-placement-topLeft {\n  -webkit-animation-name: antSlideDownIn;\n          animation-name: antSlideDownIn;\n}\n.ant-select-dropdown.slide-up-leave.slide-up-leave-active.ant-select-dropdown-placement-bottomLeft {\n  -webkit-animation-name: antSlideUpOut;\n          animation-name: antSlideUpOut;\n}\n.ant-select-dropdown.slide-up-leave.slide-up-leave-active.ant-select-dropdown-placement-topLeft {\n  -webkit-animation-name: antSlideDownOut;\n          animation-name: antSlideDownOut;\n}\n.ant-select-dropdown-hidden {\n  display: none;\n}\n.ant-select-dropdown-menu {\n  outline: none;\n  margin-bottom: 0;\n  padding-left: 0;\n  list-style: none;\n  max-height: 250px;\n  overflow: auto;\n}\n.ant-select-dropdown-menu-item-group-list {\n  margin: 0;\n  padding: 0;\n}\n.ant-select-dropdown-menu-item-group-list > .ant-select-dropdown-menu-item {\n  padding-left: 20px;\n}\n.ant-select-dropdown-menu-item-group-title {\n  color: rgba(0, 0, 0, 0.45);\n  padding: 0 12px;\n  height: 32px;\n  line-height: 32px;\n  font-size: 12px;\n}\n.ant-select-dropdown-menu-item {\n  position: relative;\n  display: block;\n  padding: 5px 12px;\n  line-height: 22px;\n  font-weight: normal;\n  color: rgba(0, 0, 0, 0.65);\n  white-space: nowrap;\n  cursor: pointer;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  -webkit-transition: background 0.3s ease;\n  transition: background 0.3s ease;\n}\n.ant-select-dropdown-menu-item:hover {\n  background-color: #e6f7ff;\n}\n.ant-select-dropdown-menu-item:first-child {\n  border-radius: 4px 4px 0 0;\n}\n.ant-select-dropdown-menu-item:last-child {\n  border-radius: 0 0 4px 4px;\n}\n.ant-select-dropdown-menu-item-disabled {\n  color: rgba(0, 0, 0, 0.25);\n  cursor: not-allowed;\n}\n.ant-select-dropdown-menu-item-disabled:hover {\n  color: rgba(0, 0, 0, 0.25);\n  background-color: #fff;\n  cursor: not-allowed;\n}\n.ant-select-dropdown-menu-item-selected,\n.ant-select-dropdown-menu-item-selected:hover {\n  background-color: #fafafa;\n  font-weight: 600;\n  color: rgba(0, 0, 0, 0.65);\n}\n.ant-select-dropdown-menu-item-active {\n  background-color: #e6f7ff;\n}\n.ant-select-dropdown-menu-item-divider {\n  height: 1px;\n  margin: 1px 0;\n  overflow: hidden;\n  background-color: #e8e8e8;\n  line-height: 0;\n}\n.ant-select-dropdown.ant-select-dropdown--multiple .ant-select-dropdown-menu-item:after {\n  font-family: 'anticon';\n  text-rendering: optimizeLegibility;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  content: \"\\E632\";\n  color: transparent;\n  display: inline-block;\n  font-size: 12px;\n  font-size: 10px \\9;\n  -webkit-transform: scale(0.83333333) rotate(0deg);\n      -ms-transform: scale(0.83333333) rotate(0deg);\n          transform: scale(0.83333333) rotate(0deg);\n  -webkit-transition: all 0.2s ease;\n  transition: all 0.2s ease;\n  position: absolute;\n  top: 50%;\n  -webkit-transform: translateY(-50%);\n      -ms-transform: translateY(-50%);\n          transform: translateY(-50%);\n  right: 12px;\n  font-weight: bold;\n  text-shadow: 0 0.1px 0, 0.1px 0 0, 0 -0.1px 0, -0.1px 0;\n}\n:root .ant-select-dropdown.ant-select-dropdown--multiple .ant-select-dropdown-menu-item:after {\n  font-size: 12px;\n}\n.ant-select-dropdown.ant-select-dropdown--multiple .ant-select-dropdown-menu-item:hover:after {\n  color: #ddd;\n}\n.ant-select-dropdown.ant-select-dropdown--multiple .ant-select-dropdown-menu-item-disabled:after {\n  display: none;\n}\n.ant-select-dropdown.ant-select-dropdown--multiple .ant-select-dropdown-menu-item-selected:after,\n.ant-select-dropdown.ant-select-dropdown--multiple .ant-select-dropdown-menu-item-selected:hover:after {\n  color: #1890ff;\n  display: inline-block;\n}\n.ant-select-dropdown-container-open .ant-select-dropdown,\n.ant-select-dropdown-open .ant-select-dropdown {\n  display: block;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/_css-loader@0.28.11@css-loader/index.js!./node_modules/_antd@3.6.2@antd/lib/slider/style/index.css":
+/*!****************************************************************************************************************!*\
+  !*** ./node_modules/_css-loader@0.28.11@css-loader!./node_modules/_antd@3.6.2@antd/lib/slider/style/index.css ***!
+  \****************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../_css-loader@0.28.11@css-loader/lib/css-base.js */ "./node_modules/_css-loader@0.28.11@css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "/* stylelint-disable at-rule-empty-line-before,at-rule-name-space-after,at-rule-no-unknown */\n/* stylelint-disable no-duplicate-selectors */\n/* stylelint-disable declaration-bang-space-before,no-duplicate-selectors */\n/* stylelint-disable declaration-bang-space-before,no-duplicate-selectors,string-no-newline */\n.ant-slider {\n  font-family: \"Monospaced Number\", \"Chinese Quote\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n  font-size: 14px;\n  line-height: 1.5;\n  color: rgba(0, 0, 0, 0.65);\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n  margin: 0;\n  padding: 0;\n  list-style: none;\n  position: relative;\n  margin: 14px 6px 10px;\n  padding: 4px 0;\n  height: 12px;\n  cursor: pointer;\n}\n.ant-slider-vertical {\n  width: 12px;\n  height: 100%;\n  margin: 6px 10px;\n  padding: 0 4px;\n}\n.ant-slider-vertical .ant-slider-rail {\n  height: 100%;\n  width: 4px;\n}\n.ant-slider-vertical .ant-slider-track {\n  width: 4px;\n}\n.ant-slider-vertical .ant-slider-handle {\n  margin-left: -5px;\n  margin-bottom: -7px;\n}\n.ant-slider-vertical .ant-slider-mark {\n  top: 0;\n  left: 12px;\n  width: 18px;\n  height: 100%;\n}\n.ant-slider-vertical .ant-slider-mark-text {\n  left: 4px;\n  white-space: nowrap;\n}\n.ant-slider-vertical .ant-slider-step {\n  width: 4px;\n  height: 100%;\n}\n.ant-slider-vertical .ant-slider-dot {\n  top: auto;\n  left: 2px;\n  margin-bottom: -4px;\n}\n.ant-slider-with-marks {\n  margin-bottom: 28px;\n}\n.ant-slider-rail {\n  position: absolute;\n  width: 100%;\n  height: 4px;\n  border-radius: 2px;\n  background-color: #f5f5f5;\n  -webkit-transition: background-color 0.3s;\n  transition: background-color 0.3s;\n}\n.ant-slider-track {\n  position: absolute;\n  height: 4px;\n  border-radius: 4px;\n  background-color: #91d5ff;\n  -webkit-transition: background-color 0.3s ease;\n  transition: background-color 0.3s ease;\n}\n.ant-slider-handle {\n  position: absolute;\n  margin-left: -7px;\n  margin-top: -5px;\n  width: 14px;\n  height: 14px;\n  cursor: pointer;\n  border-radius: 50%;\n  border: solid 2px #91d5ff;\n  background-color: #fff;\n  -webkit-transition: border-color 0.3s, -webkit-transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);\n  transition: border-color 0.3s, -webkit-transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);\n  transition: border-color 0.3s, transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);\n  transition: border-color 0.3s, transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28), -webkit-transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);\n}\n.ant-slider-handle:focus {\n  border-color: #46a6ff;\n  -webkit-box-shadow: 0 0 0 5px #8cc8ff;\n          box-shadow: 0 0 0 5px #8cc8ff;\n  outline: none;\n}\n.ant-slider-handle.ant-tooltip-open {\n  border-color: #1890ff;\n}\n.ant-slider:hover .ant-slider-rail {\n  background-color: #e1e1e1;\n}\n.ant-slider:hover .ant-slider-track {\n  background-color: #69c0ff;\n}\n.ant-slider:hover .ant-slider-handle:not(.ant-tooltip-open) {\n  border-color: #69c0ff;\n}\n.ant-slider-mark {\n  position: absolute;\n  top: 14px;\n  left: 0;\n  width: 100%;\n  font-size: 14px;\n}\n.ant-slider-mark-text {\n  position: absolute;\n  display: inline-block;\n  vertical-align: middle;\n  text-align: center;\n  cursor: pointer;\n  color: rgba(0, 0, 0, 0.45);\n}\n.ant-slider-mark-text-active {\n  color: rgba(0, 0, 0, 0.65);\n}\n.ant-slider-step {\n  position: absolute;\n  width: 100%;\n  height: 4px;\n  background: transparent;\n}\n.ant-slider-dot {\n  position: absolute;\n  top: -2px;\n  margin-left: -4px;\n  width: 8px;\n  height: 8px;\n  border: 2px solid #e8e8e8;\n  background-color: #fff;\n  cursor: pointer;\n  border-radius: 50%;\n  vertical-align: middle;\n}\n.ant-slider-dot:first-child {\n  margin-left: -4px;\n}\n.ant-slider-dot:last-child {\n  margin-left: -4px;\n}\n.ant-slider-dot-active {\n  border-color: #8cc8ff;\n}\n.ant-slider-disabled {\n  cursor: not-allowed;\n}\n.ant-slider-disabled .ant-slider-track {\n  background-color: rgba(0, 0, 0, 0.25) !important;\n}\n.ant-slider-disabled .ant-slider-handle,\n.ant-slider-disabled .ant-slider-dot {\n  border-color: rgba(0, 0, 0, 0.25) !important;\n  background-color: #fff;\n  cursor: not-allowed;\n  -webkit-box-shadow: none;\n          box-shadow: none;\n}\n.ant-slider-disabled .ant-slider-mark-text,\n.ant-slider-disabled .ant-slider-dot {\n  cursor: not-allowed !important;\n}\n", ""]);
 
 // exports
 
@@ -13863,6 +14086,1613 @@ function saveRef(instance, name) {
 
 /***/ }),
 
+/***/ "./node_modules/_rc-slider@8.6.1@rc-slider/lib/Handle.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/_rc-slider@8.6.1@rc-slider/lib/Handle.js ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.__esModule = true;
+
+var _extends2 = __webpack_require__(/*! babel-runtime/helpers/extends */ "./node_modules/_babel-runtime@6.26.0@babel-runtime/helpers/extends.js");
+
+var _extends3 = _interopRequireDefault(_extends2);
+
+var _objectWithoutProperties2 = __webpack_require__(/*! babel-runtime/helpers/objectWithoutProperties */ "./node_modules/_babel-runtime@6.26.0@babel-runtime/helpers/objectWithoutProperties.js");
+
+var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
+
+var _classCallCheck2 = __webpack_require__(/*! babel-runtime/helpers/classCallCheck */ "./node_modules/_babel-runtime@6.26.0@babel-runtime/helpers/classCallCheck.js");
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _possibleConstructorReturn2 = __webpack_require__(/*! babel-runtime/helpers/possibleConstructorReturn */ "./node_modules/_babel-runtime@6.26.0@babel-runtime/helpers/possibleConstructorReturn.js");
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = __webpack_require__(/*! babel-runtime/helpers/inherits */ "./node_modules/_babel-runtime@6.26.0@babel-runtime/helpers/inherits.js");
+
+var _inherits3 = _interopRequireDefault(_inherits2);
+
+var _react = __webpack_require__(/*! react */ "./node_modules/_react@16.4.1@react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(/*! prop-types */ "./node_modules/_prop-types@15.6.1@prop-types/index.js");
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var Handle = function (_React$Component) {
+  (0, _inherits3['default'])(Handle, _React$Component);
+
+  function Handle() {
+    (0, _classCallCheck3['default'])(this, Handle);
+    return (0, _possibleConstructorReturn3['default'])(this, _React$Component.apply(this, arguments));
+  }
+
+  Handle.prototype.focus = function focus() {
+    this.handle.focus();
+  };
+
+  Handle.prototype.blur = function blur() {
+    this.handle.blur();
+  };
+
+  Handle.prototype.render = function render() {
+    var _this2 = this;
+
+    var _props = this.props,
+        className = _props.className,
+        vertical = _props.vertical,
+        offset = _props.offset,
+        style = _props.style,
+        disabled = _props.disabled,
+        min = _props.min,
+        max = _props.max,
+        value = _props.value,
+        tabIndex = _props.tabIndex,
+        restProps = (0, _objectWithoutProperties3['default'])(_props, ['className', 'vertical', 'offset', 'style', 'disabled', 'min', 'max', 'value', 'tabIndex']);
+
+
+    var postionStyle = vertical ? { bottom: offset + '%' } : { left: offset + '%' };
+    var elStyle = (0, _extends3['default'])({}, style, postionStyle);
+    var ariaProps = {};
+    if (value !== undefined) {
+      ariaProps = (0, _extends3['default'])({}, ariaProps, {
+        'aria-valuemin': min,
+        'aria-valuemax': max,
+        'aria-valuenow': value,
+        'aria-disabled': !!disabled
+      });
+    }
+    return _react2['default'].createElement('div', (0, _extends3['default'])({
+      ref: function ref(node) {
+        return _this2.handle = node;
+      },
+      role: 'slider',
+      tabIndex: tabIndex || 0
+    }, ariaProps, restProps, {
+      className: className,
+      style: elStyle
+    }));
+  };
+
+  return Handle;
+}(_react2['default'].Component);
+
+exports['default'] = Handle;
+
+
+Handle.propTypes = {
+  className: _propTypes2['default'].string,
+  vertical: _propTypes2['default'].bool,
+  offset: _propTypes2['default'].number,
+  style: _propTypes2['default'].object,
+  disabled: _propTypes2['default'].bool,
+  min: _propTypes2['default'].number,
+  max: _propTypes2['default'].number,
+  value: _propTypes2['default'].number,
+  tabIndex: _propTypes2['default'].number
+};
+module.exports = exports['default'];
+
+/***/ }),
+
+/***/ "./node_modules/_rc-slider@8.6.1@rc-slider/lib/Range.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/_rc-slider@8.6.1@rc-slider/lib/Range.js ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.__esModule = true;
+
+var _extends2 = __webpack_require__(/*! babel-runtime/helpers/extends */ "./node_modules/_babel-runtime@6.26.0@babel-runtime/helpers/extends.js");
+
+var _extends3 = _interopRequireDefault(_extends2);
+
+var _classCallCheck2 = __webpack_require__(/*! babel-runtime/helpers/classCallCheck */ "./node_modules/_babel-runtime@6.26.0@babel-runtime/helpers/classCallCheck.js");
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _possibleConstructorReturn2 = __webpack_require__(/*! babel-runtime/helpers/possibleConstructorReturn */ "./node_modules/_babel-runtime@6.26.0@babel-runtime/helpers/possibleConstructorReturn.js");
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = __webpack_require__(/*! babel-runtime/helpers/inherits */ "./node_modules/_babel-runtime@6.26.0@babel-runtime/helpers/inherits.js");
+
+var _inherits3 = _interopRequireDefault(_inherits2);
+
+var _react = __webpack_require__(/*! react */ "./node_modules/_react@16.4.1@react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(/*! prop-types */ "./node_modules/_prop-types@15.6.1@prop-types/index.js");
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _classnames = __webpack_require__(/*! classnames */ "./node_modules/_classnames@2.2.6@classnames/index.js");
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _shallowequal = __webpack_require__(/*! shallowequal */ "./node_modules/_shallowequal@1.0.2@shallowequal/index.js");
+
+var _shallowequal2 = _interopRequireDefault(_shallowequal);
+
+var _warning = __webpack_require__(/*! warning */ "./node_modules/_warning@3.0.0@warning/browser.js");
+
+var _warning2 = _interopRequireDefault(_warning);
+
+var _Track = __webpack_require__(/*! ./common/Track */ "./node_modules/_rc-slider@8.6.1@rc-slider/lib/common/Track.js");
+
+var _Track2 = _interopRequireDefault(_Track);
+
+var _createSlider = __webpack_require__(/*! ./common/createSlider */ "./node_modules/_rc-slider@8.6.1@rc-slider/lib/common/createSlider.js");
+
+var _createSlider2 = _interopRequireDefault(_createSlider);
+
+var _utils = __webpack_require__(/*! ./utils */ "./node_modules/_rc-slider@8.6.1@rc-slider/lib/utils.js");
+
+var utils = _interopRequireWildcard(_utils);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+/* eslint-disable react/prop-types */
+var Range = function (_React$Component) {
+  (0, _inherits3['default'])(Range, _React$Component);
+
+  function Range(props) {
+    (0, _classCallCheck3['default'])(this, Range);
+
+    var _this = (0, _possibleConstructorReturn3['default'])(this, _React$Component.call(this, props));
+
+    _this.onEnd = function () {
+      _this.setState({ handle: null });
+      _this.removeDocumentEvents();
+      _this.props.onAfterChange(_this.getValue());
+    };
+
+    var count = props.count,
+        min = props.min,
+        max = props.max;
+
+    var initialValue = Array.apply(null, Array(count + 1)).map(function () {
+      return min;
+    });
+    var defaultValue = 'defaultValue' in props ? props.defaultValue : initialValue;
+    var value = props.value !== undefined ? props.value : defaultValue;
+    var bounds = value.map(function (v, i) {
+      return _this.trimAlignValue(v, i);
+    });
+    var recent = bounds[0] === max ? 0 : bounds.length - 1;
+
+    _this.state = {
+      handle: null,
+      recent: recent,
+      bounds: bounds
+    };
+    return _this;
+  }
+
+  Range.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
+    var _this2 = this;
+
+    if (!('value' in nextProps || 'min' in nextProps || 'max' in nextProps)) return;
+    if (this.props.min === nextProps.min && this.props.max === nextProps.max && (0, _shallowequal2['default'])(this.props.value, nextProps.value)) {
+      return;
+    }
+
+    var bounds = this.state.bounds;
+
+    var value = nextProps.value || bounds;
+    var nextBounds = value.map(function (v, i) {
+      return _this2.trimAlignValue(v, i, nextProps);
+    });
+    if (nextBounds.length === bounds.length && nextBounds.every(function (v, i) {
+      return v === bounds[i];
+    })) return;
+
+    this.setState({ bounds: nextBounds });
+    if (bounds.some(function (v) {
+      return utils.isValueOutOfRange(v, nextProps);
+    })) {
+      this.props.onChange(nextBounds);
+    }
+  };
+
+  Range.prototype.onChange = function onChange(state) {
+    var props = this.props;
+    var isNotControlled = !('value' in props);
+    if (isNotControlled) {
+      this.setState(state);
+    } else if (state.handle !== undefined) {
+      this.setState({ handle: state.handle });
+    }
+
+    var data = (0, _extends3['default'])({}, this.state, state);
+    var changedValue = data.bounds;
+    props.onChange(changedValue);
+  };
+
+  Range.prototype.onStart = function onStart(position) {
+    var props = this.props;
+    var state = this.state;
+    var bounds = this.getValue();
+    props.onBeforeChange(bounds);
+
+    var value = this.calcValueByPos(position);
+    this.startValue = value;
+    this.startPosition = position;
+
+    var closestBound = this.getClosestBound(value);
+    var boundNeedMoving = this.getBoundNeedMoving(value, closestBound);
+
+    this.setState({
+      handle: boundNeedMoving,
+      recent: boundNeedMoving
+    });
+
+    var prevValue = bounds[boundNeedMoving];
+    if (value === prevValue) return;
+
+    var nextBounds = [].concat(state.bounds);
+    nextBounds[boundNeedMoving] = value;
+    this.onChange({ bounds: nextBounds });
+  };
+
+  Range.prototype.onMove = function onMove(e, position) {
+    utils.pauseEvent(e);
+    var props = this.props;
+    var state = this.state;
+
+    var value = this.calcValueByPos(position);
+    var oldValue = state.bounds[state.handle];
+    if (value === oldValue) return;
+
+    var nextBounds = [].concat(state.bounds);
+    nextBounds[state.handle] = value;
+    var nextHandle = state.handle;
+    if (props.pushable !== false) {
+      this.pushSurroundingHandles(nextBounds, nextHandle);
+    } else if (props.allowCross) {
+      nextBounds.sort(function (a, b) {
+        return a - b;
+      });
+      nextHandle = nextBounds.indexOf(value);
+    }
+    this.onChange({
+      handle: nextHandle,
+      bounds: nextBounds
+    });
+  };
+
+  Range.prototype.onKeyboard = function onKeyboard() {
+    (0, _warning2['default'])(true, 'Keyboard support is not yet supported for ranges.');
+  };
+
+  Range.prototype.getValue = function getValue() {
+    return this.state.bounds;
+  };
+
+  Range.prototype.getClosestBound = function getClosestBound(value) {
+    var bounds = this.state.bounds;
+
+    var closestBound = 0;
+    for (var i = 1; i < bounds.length - 1; ++i) {
+      if (value > bounds[i]) {
+        closestBound = i;
+      }
+    }
+    if (Math.abs(bounds[closestBound + 1] - value) < Math.abs(bounds[closestBound] - value)) {
+      closestBound = closestBound + 1;
+    }
+    return closestBound;
+  };
+
+  Range.prototype.getBoundNeedMoving = function getBoundNeedMoving(value, closestBound) {
+    var _state = this.state,
+        bounds = _state.bounds,
+        recent = _state.recent;
+
+    var boundNeedMoving = closestBound;
+    var isAtTheSamePoint = bounds[closestBound + 1] === bounds[closestBound];
+
+    if (isAtTheSamePoint && bounds[recent] === bounds[closestBound]) {
+      boundNeedMoving = recent;
+    }
+
+    if (isAtTheSamePoint && value !== bounds[closestBound + 1]) {
+      boundNeedMoving = value < bounds[closestBound + 1] ? closestBound : closestBound + 1;
+    }
+    return boundNeedMoving;
+  };
+
+  Range.prototype.getLowerBound = function getLowerBound() {
+    return this.state.bounds[0];
+  };
+
+  Range.prototype.getUpperBound = function getUpperBound() {
+    var bounds = this.state.bounds;
+
+    return bounds[bounds.length - 1];
+  };
+
+  /**
+   * Returns an array of possible slider points, taking into account both
+   * `marks` and `step`. The result is cached.
+   */
+
+
+  Range.prototype.getPoints = function getPoints() {
+    var _props = this.props,
+        marks = _props.marks,
+        step = _props.step,
+        min = _props.min,
+        max = _props.max;
+
+    var cache = this._getPointsCache;
+    if (!cache || cache.marks !== marks || cache.step !== step) {
+      var pointsObject = (0, _extends3['default'])({}, marks);
+      if (step !== null) {
+        for (var point = min; point <= max; point += step) {
+          pointsObject[point] = point;
+        }
+      }
+      var points = Object.keys(pointsObject).map(parseFloat);
+      points.sort(function (a, b) {
+        return a - b;
+      });
+      this._getPointsCache = { marks: marks, step: step, points: points };
+    }
+    return this._getPointsCache.points;
+  };
+
+  Range.prototype.pushSurroundingHandles = function pushSurroundingHandles(bounds, handle) {
+    var value = bounds[handle];
+    var threshold = this.props.pushable;
+
+    threshold = Number(threshold);
+
+    var direction = 0;
+    if (bounds[handle + 1] - value < threshold) {
+      direction = +1; // push to right
+    }
+    if (value - bounds[handle - 1] < threshold) {
+      direction = -1; // push to left
+    }
+
+    if (direction === 0) {
+      return;
+    }
+
+    var nextHandle = handle + direction;
+    var diffToNext = direction * (bounds[nextHandle] - value);
+    if (!this.pushHandle(bounds, nextHandle, direction, threshold - diffToNext)) {
+      // revert to original value if pushing is impossible
+      bounds[handle] = bounds[nextHandle] - direction * threshold;
+    }
+  };
+
+  Range.prototype.pushHandle = function pushHandle(bounds, handle, direction, amount) {
+    var originalValue = bounds[handle];
+    var currentValue = bounds[handle];
+    while (direction * (currentValue - originalValue) < amount) {
+      if (!this.pushHandleOnePoint(bounds, handle, direction)) {
+        // can't push handle enough to create the needed `amount` gap, so we
+        // revert its position to the original value
+        bounds[handle] = originalValue;
+        return false;
+      }
+      currentValue = bounds[handle];
+    }
+    // the handle was pushed enough to create the needed `amount` gap
+    return true;
+  };
+
+  Range.prototype.pushHandleOnePoint = function pushHandleOnePoint(bounds, handle, direction) {
+    var points = this.getPoints();
+    var pointIndex = points.indexOf(bounds[handle]);
+    var nextPointIndex = pointIndex + direction;
+    if (nextPointIndex >= points.length || nextPointIndex < 0) {
+      // reached the minimum or maximum available point, can't push anymore
+      return false;
+    }
+    var nextHandle = handle + direction;
+    var nextValue = points[nextPointIndex];
+    var threshold = this.props.pushable;
+
+    var diffToNext = direction * (bounds[nextHandle] - nextValue);
+    if (!this.pushHandle(bounds, nextHandle, direction, threshold - diffToNext)) {
+      // couldn't push next handle, so we won't push this one either
+      return false;
+    }
+    // push the handle
+    bounds[handle] = nextValue;
+    return true;
+  };
+
+  Range.prototype.trimAlignValue = function trimAlignValue(v, handle) {
+    var nextProps = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+
+    var mergedProps = (0, _extends3['default'])({}, this.props, nextProps);
+    var valInRange = utils.ensureValueInRange(v, mergedProps);
+    var valNotConflict = this.ensureValueNotConflict(handle, valInRange, mergedProps);
+    return utils.ensureValuePrecision(valNotConflict, mergedProps);
+  };
+
+  Range.prototype.ensureValueNotConflict = function ensureValueNotConflict(handle, val, _ref) {
+    var allowCross = _ref.allowCross,
+        thershold = _ref.pushable;
+
+    var state = this.state || {};
+    var bounds = state.bounds;
+
+    handle = handle === undefined ? state.handle : handle;
+    thershold = Number(thershold);
+    /* eslint-disable eqeqeq */
+    if (!allowCross && handle != null && bounds !== undefined) {
+      if (handle > 0 && val <= bounds[handle - 1] + thershold) {
+        return bounds[handle - 1] + thershold;
+      }
+      if (handle < bounds.length - 1 && val >= bounds[handle + 1] - thershold) {
+        return bounds[handle + 1] - thershold;
+      }
+    }
+    /* eslint-enable eqeqeq */
+    return val;
+  };
+
+  Range.prototype.render = function render() {
+    var _this3 = this;
+
+    var _state2 = this.state,
+        handle = _state2.handle,
+        bounds = _state2.bounds;
+    var _props2 = this.props,
+        prefixCls = _props2.prefixCls,
+        vertical = _props2.vertical,
+        included = _props2.included,
+        disabled = _props2.disabled,
+        min = _props2.min,
+        max = _props2.max,
+        handleGenerator = _props2.handle,
+        trackStyle = _props2.trackStyle,
+        handleStyle = _props2.handleStyle,
+        tabIndex = _props2.tabIndex;
+
+
+    var offsets = bounds.map(function (v) {
+      return _this3.calcOffset(v);
+    });
+
+    var handleClassName = prefixCls + '-handle';
+    var handles = bounds.map(function (v, i) {
+      var _classNames;
+
+      return handleGenerator({
+        className: (0, _classnames2['default'])((_classNames = {}, _classNames[handleClassName] = true, _classNames[handleClassName + '-' + (i + 1)] = true, _classNames)),
+        vertical: vertical,
+        offset: offsets[i],
+        value: v,
+        dragging: handle === i,
+        index: i,
+        tabIndex: tabIndex[i] || 0,
+        min: min,
+        max: max,
+        disabled: disabled,
+        style: handleStyle[i],
+        ref: function ref(h) {
+          return _this3.saveHandle(i, h);
+        }
+      });
+    });
+
+    var tracks = bounds.slice(0, -1).map(function (_, index) {
+      var _classNames2;
+
+      var i = index + 1;
+      var trackClassName = (0, _classnames2['default'])((_classNames2 = {}, _classNames2[prefixCls + '-track'] = true, _classNames2[prefixCls + '-track-' + i] = true, _classNames2));
+      return _react2['default'].createElement(_Track2['default'], {
+        className: trackClassName,
+        vertical: vertical,
+        included: included,
+        offset: offsets[i - 1],
+        length: offsets[i] - offsets[i - 1],
+        style: trackStyle[index],
+        key: i
+      });
+    });
+
+    return { tracks: tracks, handles: handles };
+  };
+
+  return Range;
+}(_react2['default'].Component);
+
+Range.displayName = 'Range';
+Range.propTypes = {
+  defaultValue: _propTypes2['default'].arrayOf(_propTypes2['default'].number),
+  value: _propTypes2['default'].arrayOf(_propTypes2['default'].number),
+  count: _propTypes2['default'].number,
+  pushable: _propTypes2['default'].oneOfType([_propTypes2['default'].bool, _propTypes2['default'].number]),
+  allowCross: _propTypes2['default'].bool,
+  disabled: _propTypes2['default'].bool,
+  tabIndex: _propTypes2['default'].arrayOf(_propTypes2['default'].number)
+};
+Range.defaultProps = {
+  count: 1,
+  allowCross: true,
+  pushable: false,
+  tabIndex: []
+};
+exports['default'] = (0, _createSlider2['default'])(Range);
+module.exports = exports['default'];
+
+/***/ }),
+
+/***/ "./node_modules/_rc-slider@8.6.1@rc-slider/lib/Slider.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/_rc-slider@8.6.1@rc-slider/lib/Slider.js ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.__esModule = true;
+
+var _extends2 = __webpack_require__(/*! babel-runtime/helpers/extends */ "./node_modules/_babel-runtime@6.26.0@babel-runtime/helpers/extends.js");
+
+var _extends3 = _interopRequireDefault(_extends2);
+
+var _classCallCheck2 = __webpack_require__(/*! babel-runtime/helpers/classCallCheck */ "./node_modules/_babel-runtime@6.26.0@babel-runtime/helpers/classCallCheck.js");
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _possibleConstructorReturn2 = __webpack_require__(/*! babel-runtime/helpers/possibleConstructorReturn */ "./node_modules/_babel-runtime@6.26.0@babel-runtime/helpers/possibleConstructorReturn.js");
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = __webpack_require__(/*! babel-runtime/helpers/inherits */ "./node_modules/_babel-runtime@6.26.0@babel-runtime/helpers/inherits.js");
+
+var _inherits3 = _interopRequireDefault(_inherits2);
+
+var _react = __webpack_require__(/*! react */ "./node_modules/_react@16.4.1@react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(/*! prop-types */ "./node_modules/_prop-types@15.6.1@prop-types/index.js");
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _warning = __webpack_require__(/*! warning */ "./node_modules/_warning@3.0.0@warning/browser.js");
+
+var _warning2 = _interopRequireDefault(_warning);
+
+var _Track = __webpack_require__(/*! ./common/Track */ "./node_modules/_rc-slider@8.6.1@rc-slider/lib/common/Track.js");
+
+var _Track2 = _interopRequireDefault(_Track);
+
+var _createSlider = __webpack_require__(/*! ./common/createSlider */ "./node_modules/_rc-slider@8.6.1@rc-slider/lib/common/createSlider.js");
+
+var _createSlider2 = _interopRequireDefault(_createSlider);
+
+var _utils = __webpack_require__(/*! ./utils */ "./node_modules/_rc-slider@8.6.1@rc-slider/lib/utils.js");
+
+var utils = _interopRequireWildcard(_utils);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+/* eslint-disable react/prop-types */
+var Slider = function (_React$Component) {
+  (0, _inherits3['default'])(Slider, _React$Component);
+
+  function Slider(props) {
+    (0, _classCallCheck3['default'])(this, Slider);
+
+    var _this = (0, _possibleConstructorReturn3['default'])(this, _React$Component.call(this, props));
+
+    _this.onEnd = function () {
+      _this.setState({ dragging: false });
+      _this.removeDocumentEvents();
+      _this.props.onAfterChange(_this.getValue());
+    };
+
+    var defaultValue = props.defaultValue !== undefined ? props.defaultValue : props.min;
+    var value = props.value !== undefined ? props.value : defaultValue;
+
+    _this.state = {
+      value: _this.trimAlignValue(value),
+      dragging: false
+    };
+    if (true) {
+      (0, _warning2['default'])(!('minimumTrackStyle' in props), 'minimumTrackStyle will be deprecate, please use trackStyle instead.');
+      (0, _warning2['default'])(!('maximumTrackStyle' in props), 'maximumTrackStyle will be deprecate, please use railStyle instead.');
+    }
+    return _this;
+  }
+
+  Slider.prototype.componentDidMount = function componentDidMount() {
+    var _props = this.props,
+        autoFocus = _props.autoFocus,
+        disabled = _props.disabled;
+
+    if (autoFocus && !disabled) {
+      this.focus();
+    }
+  };
+
+  Slider.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
+    if (!('value' in nextProps || 'min' in nextProps || 'max' in nextProps)) return;
+
+    var prevValue = this.state.value;
+    var value = nextProps.value !== undefined ? nextProps.value : prevValue;
+    var nextValue = this.trimAlignValue(value, nextProps);
+    if (nextValue === prevValue) return;
+
+    this.setState({ value: nextValue });
+    if (utils.isValueOutOfRange(value, nextProps)) {
+      this.props.onChange(nextValue);
+    }
+  };
+
+  Slider.prototype.onChange = function onChange(state) {
+    var props = this.props;
+    var isNotControlled = !('value' in props);
+    if (isNotControlled) {
+      this.setState(state);
+    }
+
+    var changedValue = state.value;
+    props.onChange(changedValue);
+  };
+
+  Slider.prototype.onStart = function onStart(position) {
+    this.setState({ dragging: true });
+    var props = this.props;
+    var prevValue = this.getValue();
+    props.onBeforeChange(prevValue);
+
+    var value = this.calcValueByPos(position);
+    this.startValue = value;
+    this.startPosition = position;
+
+    if (value === prevValue) return;
+
+    this.onChange({ value: value });
+  };
+
+  Slider.prototype.onMove = function onMove(e, position) {
+    utils.pauseEvent(e);
+    var oldValue = this.state.value;
+
+    var value = this.calcValueByPos(position);
+    if (value === oldValue) return;
+
+    this.onChange({ value: value });
+  };
+
+  Slider.prototype.onKeyboard = function onKeyboard(e) {
+    var valueMutator = utils.getKeyboardValueMutator(e);
+
+    if (valueMutator) {
+      utils.pauseEvent(e);
+      var state = this.state;
+      var oldValue = state.value;
+      var mutatedValue = valueMutator(oldValue, this.props);
+      var value = this.trimAlignValue(mutatedValue);
+      if (value === oldValue) return;
+
+      this.onChange({ value: value });
+    }
+  };
+
+  Slider.prototype.getValue = function getValue() {
+    return this.state.value;
+  };
+
+  Slider.prototype.getLowerBound = function getLowerBound() {
+    return this.props.min;
+  };
+
+  Slider.prototype.getUpperBound = function getUpperBound() {
+    return this.state.value;
+  };
+
+  Slider.prototype.trimAlignValue = function trimAlignValue(v) {
+    var nextProps = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+    var mergedProps = (0, _extends3['default'])({}, this.props, nextProps);
+    var val = utils.ensureValueInRange(v, mergedProps);
+    return utils.ensureValuePrecision(val, mergedProps);
+  };
+
+  Slider.prototype.render = function render() {
+    var _this2 = this;
+
+    var _props2 = this.props,
+        prefixCls = _props2.prefixCls,
+        vertical = _props2.vertical,
+        included = _props2.included,
+        disabled = _props2.disabled,
+        minimumTrackStyle = _props2.minimumTrackStyle,
+        trackStyle = _props2.trackStyle,
+        handleStyle = _props2.handleStyle,
+        tabIndex = _props2.tabIndex,
+        min = _props2.min,
+        max = _props2.max,
+        handleGenerator = _props2.handle;
+    var _state = this.state,
+        value = _state.value,
+        dragging = _state.dragging;
+
+    var offset = this.calcOffset(value);
+    var handle = handleGenerator({
+      className: prefixCls + '-handle',
+      vertical: vertical,
+      offset: offset,
+      value: value,
+      dragging: dragging,
+      disabled: disabled,
+      min: min,
+      max: max,
+      index: 0,
+      tabIndex: tabIndex,
+      style: handleStyle[0] || handleStyle,
+      ref: function ref(h) {
+        return _this2.saveHandle(0, h);
+      }
+    });
+
+    var _trackStyle = trackStyle[0] || trackStyle;
+    var track = _react2['default'].createElement(_Track2['default'], {
+      className: prefixCls + '-track',
+      vertical: vertical,
+      included: included,
+      offset: 0,
+      length: offset,
+      style: (0, _extends3['default'])({}, minimumTrackStyle, _trackStyle)
+    });
+
+    return { tracks: track, handles: handle };
+  };
+
+  return Slider;
+}(_react2['default'].Component);
+
+Slider.propTypes = {
+  defaultValue: _propTypes2['default'].number,
+  value: _propTypes2['default'].number,
+  disabled: _propTypes2['default'].bool,
+  autoFocus: _propTypes2['default'].bool,
+  tabIndex: _propTypes2['default'].number
+};
+exports['default'] = (0, _createSlider2['default'])(Slider);
+module.exports = exports['default'];
+
+/***/ }),
+
+/***/ "./node_modules/_rc-slider@8.6.1@rc-slider/lib/common/Marks.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/_rc-slider@8.6.1@rc-slider/lib/common/Marks.js ***!
+  \*********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.__esModule = true;
+
+var _extends2 = __webpack_require__(/*! babel-runtime/helpers/extends */ "./node_modules/_babel-runtime@6.26.0@babel-runtime/helpers/extends.js");
+
+var _extends3 = _interopRequireDefault(_extends2);
+
+var _react = __webpack_require__(/*! react */ "./node_modules/_react@16.4.1@react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _classnames = __webpack_require__(/*! classnames */ "./node_modules/_classnames@2.2.6@classnames/index.js");
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var Marks = function Marks(_ref) {
+  var className = _ref.className,
+      vertical = _ref.vertical,
+      marks = _ref.marks,
+      included = _ref.included,
+      upperBound = _ref.upperBound,
+      lowerBound = _ref.lowerBound,
+      max = _ref.max,
+      min = _ref.min;
+
+  var marksKeys = Object.keys(marks);
+  var marksCount = marksKeys.length;
+  var unit = marksCount > 1 ? 100 / (marksCount - 1) : 100;
+  var markWidth = unit * 0.9;
+
+  var range = max - min;
+  var elements = marksKeys.map(parseFloat).sort(function (a, b) {
+    return a - b;
+  }).map(function (point) {
+    var _classNames;
+
+    var markPoint = marks[point];
+    var markPointIsObject = typeof markPoint === 'object' && !_react2['default'].isValidElement(markPoint);
+    var markLabel = markPointIsObject ? markPoint.label : markPoint;
+    if (!markLabel && markLabel !== 0) {
+      return null;
+    }
+
+    var isActive = !included && point === upperBound || included && point <= upperBound && point >= lowerBound;
+    var markClassName = (0, _classnames2['default'])((_classNames = {}, _classNames[className + '-text'] = true, _classNames[className + '-text-active'] = isActive, _classNames));
+
+    var bottomStyle = {
+      marginBottom: '-50%',
+      bottom: (point - min) / range * 100 + '%'
+    };
+
+    var leftStyle = {
+      width: markWidth + '%',
+      marginLeft: -markWidth / 2 + '%',
+      left: (point - min) / range * 100 + '%'
+    };
+
+    var style = vertical ? bottomStyle : leftStyle;
+    var markStyle = markPointIsObject ? (0, _extends3['default'])({}, style, markPoint.style) : style;
+    return _react2['default'].createElement(
+      'span',
+      {
+        className: markClassName,
+        style: markStyle,
+        key: point
+      },
+      markLabel
+    );
+  });
+
+  return _react2['default'].createElement(
+    'div',
+    { className: className },
+    elements
+  );
+};
+
+exports['default'] = Marks;
+module.exports = exports['default'];
+
+/***/ }),
+
+/***/ "./node_modules/_rc-slider@8.6.1@rc-slider/lib/common/Steps.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/_rc-slider@8.6.1@rc-slider/lib/common/Steps.js ***!
+  \*********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.__esModule = true;
+
+var _extends2 = __webpack_require__(/*! babel-runtime/helpers/extends */ "./node_modules/_babel-runtime@6.26.0@babel-runtime/helpers/extends.js");
+
+var _extends3 = _interopRequireDefault(_extends2);
+
+var _react = __webpack_require__(/*! react */ "./node_modules/_react@16.4.1@react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _classnames = __webpack_require__(/*! classnames */ "./node_modules/_classnames@2.2.6@classnames/index.js");
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _warning = __webpack_require__(/*! warning */ "./node_modules/_warning@3.0.0@warning/browser.js");
+
+var _warning2 = _interopRequireDefault(_warning);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var calcPoints = function calcPoints(vertical, marks, dots, step, min, max) {
+  (0, _warning2['default'])(dots ? step > 0 : true, '`Slider[step]` should be a positive number in order to make Slider[dots] work.');
+  var points = Object.keys(marks).map(parseFloat);
+  if (dots) {
+    for (var i = min; i <= max; i = i + step) {
+      if (points.indexOf(i) >= 0) continue;
+      points.push(i);
+    }
+  }
+  return points;
+};
+
+var Steps = function Steps(_ref) {
+  var prefixCls = _ref.prefixCls,
+      vertical = _ref.vertical,
+      marks = _ref.marks,
+      dots = _ref.dots,
+      step = _ref.step,
+      included = _ref.included,
+      lowerBound = _ref.lowerBound,
+      upperBound = _ref.upperBound,
+      max = _ref.max,
+      min = _ref.min,
+      dotStyle = _ref.dotStyle,
+      activeDotStyle = _ref.activeDotStyle;
+
+  var range = max - min;
+  var elements = calcPoints(vertical, marks, dots, step, min, max).map(function (point) {
+    var _classNames;
+
+    var offset = Math.abs(point - min) / range * 100 + '%';
+
+    var isActived = !included && point === upperBound || included && point <= upperBound && point >= lowerBound;
+    var style = vertical ? (0, _extends3['default'])({ bottom: offset }, dotStyle) : (0, _extends3['default'])({ left: offset }, dotStyle);
+    if (isActived) {
+      style = (0, _extends3['default'])({}, style, activeDotStyle);
+    }
+
+    var pointClassName = (0, _classnames2['default'])((_classNames = {}, _classNames[prefixCls + '-dot'] = true, _classNames[prefixCls + '-dot-active'] = isActived, _classNames));
+
+    return _react2['default'].createElement('span', { className: pointClassName, style: style, key: point });
+  });
+
+  return _react2['default'].createElement(
+    'div',
+    { className: prefixCls + '-step' },
+    elements
+  );
+};
+
+exports['default'] = Steps;
+module.exports = exports['default'];
+
+/***/ }),
+
+/***/ "./node_modules/_rc-slider@8.6.1@rc-slider/lib/common/Track.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/_rc-slider@8.6.1@rc-slider/lib/common/Track.js ***!
+  \*********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.__esModule = true;
+
+var _extends2 = __webpack_require__(/*! babel-runtime/helpers/extends */ "./node_modules/_babel-runtime@6.26.0@babel-runtime/helpers/extends.js");
+
+var _extends3 = _interopRequireDefault(_extends2);
+
+var _react = __webpack_require__(/*! react */ "./node_modules/_react@16.4.1@react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var Track = function Track(props) {
+  var className = props.className,
+      included = props.included,
+      vertical = props.vertical,
+      offset = props.offset,
+      length = props.length,
+      style = props.style;
+
+
+  var positonStyle = vertical ? {
+    bottom: offset + '%',
+    height: length + '%'
+  } : {
+    left: offset + '%',
+    width: length + '%'
+  };
+
+  var elStyle = (0, _extends3['default'])({}, style, positonStyle);
+  return included ? _react2['default'].createElement('div', { className: className, style: elStyle }) : null;
+}; /* eslint-disable react/prop-types */
+exports['default'] = Track;
+module.exports = exports['default'];
+
+/***/ }),
+
+/***/ "./node_modules/_rc-slider@8.6.1@rc-slider/lib/common/createSlider.js":
+/*!****************************************************************************!*\
+  !*** ./node_modules/_rc-slider@8.6.1@rc-slider/lib/common/createSlider.js ***!
+  \****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.__esModule = true;
+
+var _objectWithoutProperties2 = __webpack_require__(/*! babel-runtime/helpers/objectWithoutProperties */ "./node_modules/_babel-runtime@6.26.0@babel-runtime/helpers/objectWithoutProperties.js");
+
+var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
+
+var _extends2 = __webpack_require__(/*! babel-runtime/helpers/extends */ "./node_modules/_babel-runtime@6.26.0@babel-runtime/helpers/extends.js");
+
+var _extends3 = _interopRequireDefault(_extends2);
+
+var _classCallCheck2 = __webpack_require__(/*! babel-runtime/helpers/classCallCheck */ "./node_modules/_babel-runtime@6.26.0@babel-runtime/helpers/classCallCheck.js");
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _possibleConstructorReturn2 = __webpack_require__(/*! babel-runtime/helpers/possibleConstructorReturn */ "./node_modules/_babel-runtime@6.26.0@babel-runtime/helpers/possibleConstructorReturn.js");
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = __webpack_require__(/*! babel-runtime/helpers/inherits */ "./node_modules/_babel-runtime@6.26.0@babel-runtime/helpers/inherits.js");
+
+var _inherits3 = _interopRequireDefault(_inherits2);
+
+exports['default'] = createSlider;
+
+var _react = __webpack_require__(/*! react */ "./node_modules/_react@16.4.1@react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(/*! prop-types */ "./node_modules/_prop-types@15.6.1@prop-types/index.js");
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _addEventListener = __webpack_require__(/*! rc-util/lib/Dom/addEventListener */ "./node_modules/_rc-util@4.5.1@rc-util/lib/Dom/addEventListener.js");
+
+var _addEventListener2 = _interopRequireDefault(_addEventListener);
+
+var _classnames = __webpack_require__(/*! classnames */ "./node_modules/_classnames@2.2.6@classnames/index.js");
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _warning = __webpack_require__(/*! warning */ "./node_modules/_warning@3.0.0@warning/browser.js");
+
+var _warning2 = _interopRequireDefault(_warning);
+
+var _Steps = __webpack_require__(/*! ./Steps */ "./node_modules/_rc-slider@8.6.1@rc-slider/lib/common/Steps.js");
+
+var _Steps2 = _interopRequireDefault(_Steps);
+
+var _Marks = __webpack_require__(/*! ./Marks */ "./node_modules/_rc-slider@8.6.1@rc-slider/lib/common/Marks.js");
+
+var _Marks2 = _interopRequireDefault(_Marks);
+
+var _Handle = __webpack_require__(/*! ../Handle */ "./node_modules/_rc-slider@8.6.1@rc-slider/lib/Handle.js");
+
+var _Handle2 = _interopRequireDefault(_Handle);
+
+var _utils = __webpack_require__(/*! ../utils */ "./node_modules/_rc-slider@8.6.1@rc-slider/lib/utils.js");
+
+var utils = _interopRequireWildcard(_utils);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function noop() {}
+
+function createSlider(Component) {
+  var _class, _temp;
+
+  return _temp = _class = function (_Component) {
+    (0, _inherits3['default'])(ComponentEnhancer, _Component);
+
+    function ComponentEnhancer(props) {
+      (0, _classCallCheck3['default'])(this, ComponentEnhancer);
+
+      var _this = (0, _possibleConstructorReturn3['default'])(this, _Component.call(this, props));
+
+      _this.onMouseDown = function (e) {
+        if (e.button !== 0) {
+          return;
+        }
+
+        var isVertical = _this.props.vertical;
+        var position = utils.getMousePosition(isVertical, e);
+        if (!utils.isEventFromHandle(e, _this.handlesRefs)) {
+          _this.dragOffset = 0;
+        } else {
+          var handlePosition = utils.getHandleCenterPosition(isVertical, e.target);
+          _this.dragOffset = position - handlePosition;
+          position = handlePosition;
+        }
+        _this.removeDocumentEvents();
+        _this.onStart(position);
+        _this.addDocumentMouseEvents();
+        utils.pauseEvent(e);
+      };
+
+      _this.onTouchStart = function (e) {
+        if (utils.isNotTouchEvent(e)) return;
+
+        var isVertical = _this.props.vertical;
+        var position = utils.getTouchPosition(isVertical, e);
+        if (!utils.isEventFromHandle(e, _this.handlesRefs)) {
+          _this.dragOffset = 0;
+        } else {
+          var handlePosition = utils.getHandleCenterPosition(isVertical, e.target);
+          _this.dragOffset = position - handlePosition;
+          position = handlePosition;
+        }
+        _this.onStart(position);
+        _this.addDocumentTouchEvents();
+        utils.pauseEvent(e);
+      };
+
+      _this.onFocus = function (e) {
+        var _this$props = _this.props,
+            onFocus = _this$props.onFocus,
+            vertical = _this$props.vertical;
+
+        if (utils.isEventFromHandle(e, _this.handlesRefs)) {
+          var handlePosition = utils.getHandleCenterPosition(vertical, e.target);
+          _this.dragOffset = 0;
+          _this.onStart(handlePosition);
+          utils.pauseEvent(e);
+          if (onFocus) {
+            onFocus(e);
+          }
+        }
+      };
+
+      _this.onBlur = function (e) {
+        var onBlur = _this.props.onBlur;
+
+        _this.onEnd(e);
+        if (onBlur) {
+          onBlur(e);
+        }
+      };
+
+      _this.onMouseMove = function (e) {
+        if (!_this.sliderRef) {
+          _this.onEnd();
+          return;
+        }
+        var position = utils.getMousePosition(_this.props.vertical, e);
+        _this.onMove(e, position - _this.dragOffset);
+      };
+
+      _this.onTouchMove = function (e) {
+        if (utils.isNotTouchEvent(e) || !_this.sliderRef) {
+          _this.onEnd();
+          return;
+        }
+
+        var position = utils.getTouchPosition(_this.props.vertical, e);
+        _this.onMove(e, position - _this.dragOffset);
+      };
+
+      _this.onKeyDown = function (e) {
+        if (_this.sliderRef && utils.isEventFromHandle(e, _this.handlesRefs)) {
+          _this.onKeyboard(e);
+        }
+      };
+
+      _this.saveSlider = function (slider) {
+        _this.sliderRef = slider;
+      };
+
+      if (true) {
+        var step = props.step,
+            max = props.max,
+            min = props.min;
+
+        (0, _warning2['default'])(step && Math.floor(step) === step ? (max - min) % step === 0 : true, 'Slider[max] - Slider[min] (%s) should be a multiple of Slider[step] (%s)', max - min, step);
+      }
+      _this.handlesRefs = {};
+      return _this;
+    }
+
+    ComponentEnhancer.prototype.componentWillUnmount = function componentWillUnmount() {
+      if (_Component.prototype.componentWillUnmount) _Component.prototype.componentWillUnmount.call(this);
+      this.removeDocumentEvents();
+    };
+
+    ComponentEnhancer.prototype.componentDidMount = function componentDidMount() {
+      // Snapshot testing cannot handle refs, so be sure to null-check this.
+      this.document = this.sliderRef && this.sliderRef.ownerDocument;
+    };
+
+    ComponentEnhancer.prototype.addDocumentTouchEvents = function addDocumentTouchEvents() {
+      // just work for Chrome iOS Safari and Android Browser
+      this.onTouchMoveListener = (0, _addEventListener2['default'])(this.document, 'touchmove', this.onTouchMove);
+      this.onTouchUpListener = (0, _addEventListener2['default'])(this.document, 'touchend', this.onEnd);
+    };
+
+    ComponentEnhancer.prototype.addDocumentMouseEvents = function addDocumentMouseEvents() {
+      this.onMouseMoveListener = (0, _addEventListener2['default'])(this.document, 'mousemove', this.onMouseMove);
+      this.onMouseUpListener = (0, _addEventListener2['default'])(this.document, 'mouseup', this.onEnd);
+    };
+
+    ComponentEnhancer.prototype.removeDocumentEvents = function removeDocumentEvents() {
+      /* eslint-disable no-unused-expressions */
+      this.onTouchMoveListener && this.onTouchMoveListener.remove();
+      this.onTouchUpListener && this.onTouchUpListener.remove();
+
+      this.onMouseMoveListener && this.onMouseMoveListener.remove();
+      this.onMouseUpListener && this.onMouseUpListener.remove();
+      /* eslint-enable no-unused-expressions */
+    };
+
+    ComponentEnhancer.prototype.focus = function focus() {
+      if (!this.props.disabled) {
+        this.handlesRefs[0].focus();
+      }
+    };
+
+    ComponentEnhancer.prototype.blur = function blur() {
+      if (!this.props.disabled) {
+        this.handlesRefs[0].blur();
+      }
+    };
+
+    ComponentEnhancer.prototype.getSliderStart = function getSliderStart() {
+      var slider = this.sliderRef;
+      var rect = slider.getBoundingClientRect();
+
+      return this.props.vertical ? rect.top : rect.left;
+    };
+
+    ComponentEnhancer.prototype.getSliderLength = function getSliderLength() {
+      var slider = this.sliderRef;
+      if (!slider) {
+        return 0;
+      }
+
+      var coords = slider.getBoundingClientRect();
+      return this.props.vertical ? coords.height : coords.width;
+    };
+
+    ComponentEnhancer.prototype.calcValue = function calcValue(offset) {
+      var _props = this.props,
+          vertical = _props.vertical,
+          min = _props.min,
+          max = _props.max;
+
+      var ratio = Math.abs(Math.max(offset, 0) / this.getSliderLength());
+      var value = vertical ? (1 - ratio) * (max - min) + min : ratio * (max - min) + min;
+      return value;
+    };
+
+    ComponentEnhancer.prototype.calcValueByPos = function calcValueByPos(position) {
+      var pixelOffset = position - this.getSliderStart();
+      var nextValue = this.trimAlignValue(this.calcValue(pixelOffset));
+      return nextValue;
+    };
+
+    ComponentEnhancer.prototype.calcOffset = function calcOffset(value) {
+      var _props2 = this.props,
+          min = _props2.min,
+          max = _props2.max;
+
+      var ratio = (value - min) / (max - min);
+      return ratio * 100;
+    };
+
+    ComponentEnhancer.prototype.saveHandle = function saveHandle(index, handle) {
+      this.handlesRefs[index] = handle;
+    };
+
+    ComponentEnhancer.prototype.render = function render() {
+      var _classNames;
+
+      var _props3 = this.props,
+          prefixCls = _props3.prefixCls,
+          className = _props3.className,
+          marks = _props3.marks,
+          dots = _props3.dots,
+          step = _props3.step,
+          included = _props3.included,
+          disabled = _props3.disabled,
+          vertical = _props3.vertical,
+          min = _props3.min,
+          max = _props3.max,
+          children = _props3.children,
+          maximumTrackStyle = _props3.maximumTrackStyle,
+          style = _props3.style,
+          railStyle = _props3.railStyle,
+          dotStyle = _props3.dotStyle,
+          activeDotStyle = _props3.activeDotStyle;
+
+      var _Component$prototype$ = _Component.prototype.render.call(this),
+          tracks = _Component$prototype$.tracks,
+          handles = _Component$prototype$.handles;
+
+      var sliderClassName = (0, _classnames2['default'])(prefixCls, (_classNames = {}, _classNames[prefixCls + '-with-marks'] = Object.keys(marks).length, _classNames[prefixCls + '-disabled'] = disabled, _classNames[prefixCls + '-vertical'] = vertical, _classNames[className] = className, _classNames));
+      return _react2['default'].createElement(
+        'div',
+        {
+          ref: this.saveSlider,
+          className: sliderClassName,
+          onTouchStart: disabled ? noop : this.onTouchStart,
+          onMouseDown: disabled ? noop : this.onMouseDown,
+          onKeyDown: disabled ? noop : this.onKeyDown,
+          onFocus: disabled ? noop : this.onFocus,
+          onBlur: disabled ? noop : this.onBlur,
+          style: style
+        },
+        _react2['default'].createElement('div', {
+          className: prefixCls + '-rail',
+          style: (0, _extends3['default'])({}, maximumTrackStyle, railStyle)
+        }),
+        tracks,
+        _react2['default'].createElement(_Steps2['default'], {
+          prefixCls: prefixCls,
+          vertical: vertical,
+          marks: marks,
+          dots: dots,
+          step: step,
+          included: included,
+          lowerBound: this.getLowerBound(),
+          upperBound: this.getUpperBound(),
+          max: max,
+          min: min,
+          dotStyle: dotStyle,
+          activeDotStyle: activeDotStyle
+        }),
+        handles,
+        _react2['default'].createElement(_Marks2['default'], {
+          className: prefixCls + '-mark',
+          vertical: vertical,
+          marks: marks,
+          included: included,
+          lowerBound: this.getLowerBound(),
+          upperBound: this.getUpperBound(),
+          max: max,
+          min: min
+        }),
+        children
+      );
+    };
+
+    return ComponentEnhancer;
+  }(Component), _class.displayName = 'ComponentEnhancer(' + Component.displayName + ')', _class.propTypes = (0, _extends3['default'])({}, Component.propTypes, {
+    min: _propTypes2['default'].number,
+    max: _propTypes2['default'].number,
+    step: _propTypes2['default'].number,
+    marks: _propTypes2['default'].object,
+    included: _propTypes2['default'].bool,
+    className: _propTypes2['default'].string,
+    prefixCls: _propTypes2['default'].string,
+    disabled: _propTypes2['default'].bool,
+    children: _propTypes2['default'].any,
+    onBeforeChange: _propTypes2['default'].func,
+    onChange: _propTypes2['default'].func,
+    onAfterChange: _propTypes2['default'].func,
+    handle: _propTypes2['default'].func,
+    dots: _propTypes2['default'].bool,
+    vertical: _propTypes2['default'].bool,
+    style: _propTypes2['default'].object,
+    minimumTrackStyle: _propTypes2['default'].object, // just for compatibility, will be deperecate
+    maximumTrackStyle: _propTypes2['default'].object, // just for compatibility, will be deperecate
+    handleStyle: _propTypes2['default'].oneOfType([_propTypes2['default'].object, _propTypes2['default'].arrayOf(_propTypes2['default'].object)]),
+    trackStyle: _propTypes2['default'].oneOfType([_propTypes2['default'].object, _propTypes2['default'].arrayOf(_propTypes2['default'].object)]),
+    railStyle: _propTypes2['default'].object,
+    dotStyle: _propTypes2['default'].object,
+    activeDotStyle: _propTypes2['default'].object,
+    autoFocus: _propTypes2['default'].bool,
+    onFocus: _propTypes2['default'].func,
+    onBlur: _propTypes2['default'].func
+  }), _class.defaultProps = (0, _extends3['default'])({}, Component.defaultProps, {
+    prefixCls: 'rc-slider',
+    className: '',
+    min: 0,
+    max: 100,
+    step: 1,
+    marks: {},
+    handle: function handle(_ref) {
+      var index = _ref.index,
+          restProps = (0, _objectWithoutProperties3['default'])(_ref, ['index']);
+
+      delete restProps.dragging;
+      return _react2['default'].createElement(_Handle2['default'], (0, _extends3['default'])({}, restProps, { key: index }));
+    },
+
+    onBeforeChange: noop,
+    onChange: noop,
+    onAfterChange: noop,
+    included: true,
+    disabled: false,
+    dots: false,
+    vertical: false,
+    trackStyle: [{}],
+    handleStyle: [{}],
+    railStyle: {},
+    dotStyle: {},
+    activeDotStyle: {}
+  }), _temp;
+}
+module.exports = exports['default'];
+
+/***/ }),
+
+/***/ "./node_modules/_rc-slider@8.6.1@rc-slider/lib/utils.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/_rc-slider@8.6.1@rc-slider/lib/utils.js ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.__esModule = true;
+exports.isEventFromHandle = isEventFromHandle;
+exports.isValueOutOfRange = isValueOutOfRange;
+exports.isNotTouchEvent = isNotTouchEvent;
+exports.getClosestPoint = getClosestPoint;
+exports.getPrecision = getPrecision;
+exports.getMousePosition = getMousePosition;
+exports.getTouchPosition = getTouchPosition;
+exports.getHandleCenterPosition = getHandleCenterPosition;
+exports.ensureValueInRange = ensureValueInRange;
+exports.ensureValuePrecision = ensureValuePrecision;
+exports.pauseEvent = pauseEvent;
+exports.getKeyboardValueMutator = getKeyboardValueMutator;
+
+var _reactDom = __webpack_require__(/*! react-dom */ "./node_modules/_react-dom@16.4.1@react-dom/index.js");
+
+var _KeyCode = __webpack_require__(/*! rc-util/lib/KeyCode */ "./node_modules/_rc-util@4.5.1@rc-util/lib/KeyCode.js");
+
+var _KeyCode2 = _interopRequireDefault(_KeyCode);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function isEventFromHandle(e, handles) {
+  return Object.keys(handles).some(function (key) {
+    return e.target === (0, _reactDom.findDOMNode)(handles[key]);
+  });
+}
+
+function isValueOutOfRange(value, _ref) {
+  var min = _ref.min,
+      max = _ref.max;
+
+  return value < min || value > max;
+}
+
+function isNotTouchEvent(e) {
+  return e.touches.length > 1 || e.type.toLowerCase() === 'touchend' && e.touches.length > 0;
+}
+
+function getClosestPoint(val, _ref2) {
+  var marks = _ref2.marks,
+      step = _ref2.step,
+      min = _ref2.min;
+
+  var points = Object.keys(marks).map(parseFloat);
+  if (step !== null) {
+    var closestStep = Math.round((val - min) / step) * step + min;
+    points.push(closestStep);
+  }
+  var diffs = points.map(function (point) {
+    return Math.abs(val - point);
+  });
+  return points[diffs.indexOf(Math.min.apply(Math, diffs))];
+}
+
+function getPrecision(step) {
+  var stepString = step.toString();
+  var precision = 0;
+  if (stepString.indexOf('.') >= 0) {
+    precision = stepString.length - stepString.indexOf('.') - 1;
+  }
+  return precision;
+}
+
+function getMousePosition(vertical, e) {
+  return vertical ? e.clientY : e.pageX;
+}
+
+function getTouchPosition(vertical, e) {
+  return vertical ? e.touches[0].clientY : e.touches[0].pageX;
+}
+
+function getHandleCenterPosition(vertical, handle) {
+  var coords = handle.getBoundingClientRect();
+  return vertical ? coords.top + coords.height * 0.5 : coords.left + coords.width * 0.5;
+}
+
+function ensureValueInRange(val, _ref3) {
+  var max = _ref3.max,
+      min = _ref3.min;
+
+  if (val <= min) {
+    return min;
+  }
+  if (val >= max) {
+    return max;
+  }
+  return val;
+}
+
+function ensureValuePrecision(val, props) {
+  var step = props.step;
+
+  var closestPoint = getClosestPoint(val, props);
+  return step === null ? closestPoint : parseFloat(closestPoint.toFixed(getPrecision(step)));
+}
+
+function pauseEvent(e) {
+  e.stopPropagation();
+  e.preventDefault();
+}
+
+function getKeyboardValueMutator(e) {
+  switch (e.keyCode) {
+    case _KeyCode2['default'].UP:
+    case _KeyCode2['default'].RIGHT:
+      return function (value, props) {
+        return value + props.step;
+      };
+
+    case _KeyCode2['default'].DOWN:
+    case _KeyCode2['default'].LEFT:
+      return function (value, props) {
+        return value - props.step;
+      };
+
+    case _KeyCode2['default'].END:
+      return function (value, props) {
+        return props.max;
+      };
+    case _KeyCode2['default'].HOME:
+      return function (value, props) {
+        return props.min;
+      };
+    case _KeyCode2['default'].PAGE_UP:
+      return function (value, props) {
+        return value + props.step * 2;
+      };
+    case _KeyCode2['default'].PAGE_DOWN:
+      return function (value, props) {
+        return value - props.step * 2;
+      };
+
+    default:
+      return undefined;
+  }
+}
+
+/***/ }),
+
 /***/ "./node_modules/_rc-switch@1.6.0@rc-switch/es/Switch.js":
 /*!**************************************************************!*\
   !*** ./node_modules/_rc-switch@1.6.0@rc-switch/es/Switch.js ***!
@@ -16673,6 +18503,577 @@ function createChainedFunction() {
 
 /***/ }),
 
+/***/ "./node_modules/_rc-util@4.5.1@rc-util/lib/Dom/addEventListener.js":
+/*!*************************************************************************!*\
+  !*** ./node_modules/_rc-util@4.5.1@rc-util/lib/Dom/addEventListener.js ***!
+  \*************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports['default'] = addEventListenerWrap;
+
+var _addDomEventListener = __webpack_require__(/*! add-dom-event-listener */ "./node_modules/_add-dom-event-listener@1.0.2@add-dom-event-listener/lib/index.js");
+
+var _addDomEventListener2 = _interopRequireDefault(_addDomEventListener);
+
+var _reactDom = __webpack_require__(/*! react-dom */ "./node_modules/_react-dom@16.4.1@react-dom/index.js");
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function addEventListenerWrap(target, eventType, cb) {
+  /* eslint camelcase: 2 */
+  var callback = _reactDom2['default'].unstable_batchedUpdates ? function run(e) {
+    _reactDom2['default'].unstable_batchedUpdates(cb, e);
+  } : cb;
+  return (0, _addDomEventListener2['default'])(target, eventType, callback);
+}
+module.exports = exports['default'];
+
+/***/ }),
+
+/***/ "./node_modules/_rc-util@4.5.1@rc-util/lib/KeyCode.js":
+/*!************************************************************!*\
+  !*** ./node_modules/_rc-util@4.5.1@rc-util/lib/KeyCode.js ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+/**
+ * @ignore
+ * some key-codes definition and utils from closure-library
+ * @author yiminghe@gmail.com
+ */
+
+var KeyCode = {
+  /**
+   * MAC_ENTER
+   */
+  MAC_ENTER: 3,
+  /**
+   * BACKSPACE
+   */
+  BACKSPACE: 8,
+  /**
+   * TAB
+   */
+  TAB: 9,
+  /**
+   * NUMLOCK on FF/Safari Mac
+   */
+  NUM_CENTER: 12, // NUMLOCK on FF/Safari Mac
+  /**
+   * ENTER
+   */
+  ENTER: 13,
+  /**
+   * SHIFT
+   */
+  SHIFT: 16,
+  /**
+   * CTRL
+   */
+  CTRL: 17,
+  /**
+   * ALT
+   */
+  ALT: 18,
+  /**
+   * PAUSE
+   */
+  PAUSE: 19,
+  /**
+   * CAPS_LOCK
+   */
+  CAPS_LOCK: 20,
+  /**
+   * ESC
+   */
+  ESC: 27,
+  /**
+   * SPACE
+   */
+  SPACE: 32,
+  /**
+   * PAGE_UP
+   */
+  PAGE_UP: 33, // also NUM_NORTH_EAST
+  /**
+   * PAGE_DOWN
+   */
+  PAGE_DOWN: 34, // also NUM_SOUTH_EAST
+  /**
+   * END
+   */
+  END: 35, // also NUM_SOUTH_WEST
+  /**
+   * HOME
+   */
+  HOME: 36, // also NUM_NORTH_WEST
+  /**
+   * LEFT
+   */
+  LEFT: 37, // also NUM_WEST
+  /**
+   * UP
+   */
+  UP: 38, // also NUM_NORTH
+  /**
+   * RIGHT
+   */
+  RIGHT: 39, // also NUM_EAST
+  /**
+   * DOWN
+   */
+  DOWN: 40, // also NUM_SOUTH
+  /**
+   * PRINT_SCREEN
+   */
+  PRINT_SCREEN: 44,
+  /**
+   * INSERT
+   */
+  INSERT: 45, // also NUM_INSERT
+  /**
+   * DELETE
+   */
+  DELETE: 46, // also NUM_DELETE
+  /**
+   * ZERO
+   */
+  ZERO: 48,
+  /**
+   * ONE
+   */
+  ONE: 49,
+  /**
+   * TWO
+   */
+  TWO: 50,
+  /**
+   * THREE
+   */
+  THREE: 51,
+  /**
+   * FOUR
+   */
+  FOUR: 52,
+  /**
+   * FIVE
+   */
+  FIVE: 53,
+  /**
+   * SIX
+   */
+  SIX: 54,
+  /**
+   * SEVEN
+   */
+  SEVEN: 55,
+  /**
+   * EIGHT
+   */
+  EIGHT: 56,
+  /**
+   * NINE
+   */
+  NINE: 57,
+  /**
+   * QUESTION_MARK
+   */
+  QUESTION_MARK: 63, // needs localization
+  /**
+   * A
+   */
+  A: 65,
+  /**
+   * B
+   */
+  B: 66,
+  /**
+   * C
+   */
+  C: 67,
+  /**
+   * D
+   */
+  D: 68,
+  /**
+   * E
+   */
+  E: 69,
+  /**
+   * F
+   */
+  F: 70,
+  /**
+   * G
+   */
+  G: 71,
+  /**
+   * H
+   */
+  H: 72,
+  /**
+   * I
+   */
+  I: 73,
+  /**
+   * J
+   */
+  J: 74,
+  /**
+   * K
+   */
+  K: 75,
+  /**
+   * L
+   */
+  L: 76,
+  /**
+   * M
+   */
+  M: 77,
+  /**
+   * N
+   */
+  N: 78,
+  /**
+   * O
+   */
+  O: 79,
+  /**
+   * P
+   */
+  P: 80,
+  /**
+   * Q
+   */
+  Q: 81,
+  /**
+   * R
+   */
+  R: 82,
+  /**
+   * S
+   */
+  S: 83,
+  /**
+   * T
+   */
+  T: 84,
+  /**
+   * U
+   */
+  U: 85,
+  /**
+   * V
+   */
+  V: 86,
+  /**
+   * W
+   */
+  W: 87,
+  /**
+   * X
+   */
+  X: 88,
+  /**
+   * Y
+   */
+  Y: 89,
+  /**
+   * Z
+   */
+  Z: 90,
+  /**
+   * META
+   */
+  META: 91, // WIN_KEY_LEFT
+  /**
+   * WIN_KEY_RIGHT
+   */
+  WIN_KEY_RIGHT: 92,
+  /**
+   * CONTEXT_MENU
+   */
+  CONTEXT_MENU: 93,
+  /**
+   * NUM_ZERO
+   */
+  NUM_ZERO: 96,
+  /**
+   * NUM_ONE
+   */
+  NUM_ONE: 97,
+  /**
+   * NUM_TWO
+   */
+  NUM_TWO: 98,
+  /**
+   * NUM_THREE
+   */
+  NUM_THREE: 99,
+  /**
+   * NUM_FOUR
+   */
+  NUM_FOUR: 100,
+  /**
+   * NUM_FIVE
+   */
+  NUM_FIVE: 101,
+  /**
+   * NUM_SIX
+   */
+  NUM_SIX: 102,
+  /**
+   * NUM_SEVEN
+   */
+  NUM_SEVEN: 103,
+  /**
+   * NUM_EIGHT
+   */
+  NUM_EIGHT: 104,
+  /**
+   * NUM_NINE
+   */
+  NUM_NINE: 105,
+  /**
+   * NUM_MULTIPLY
+   */
+  NUM_MULTIPLY: 106,
+  /**
+   * NUM_PLUS
+   */
+  NUM_PLUS: 107,
+  /**
+   * NUM_MINUS
+   */
+  NUM_MINUS: 109,
+  /**
+   * NUM_PERIOD
+   */
+  NUM_PERIOD: 110,
+  /**
+   * NUM_DIVISION
+   */
+  NUM_DIVISION: 111,
+  /**
+   * F1
+   */
+  F1: 112,
+  /**
+   * F2
+   */
+  F2: 113,
+  /**
+   * F3
+   */
+  F3: 114,
+  /**
+   * F4
+   */
+  F4: 115,
+  /**
+   * F5
+   */
+  F5: 116,
+  /**
+   * F6
+   */
+  F6: 117,
+  /**
+   * F7
+   */
+  F7: 118,
+  /**
+   * F8
+   */
+  F8: 119,
+  /**
+   * F9
+   */
+  F9: 120,
+  /**
+   * F10
+   */
+  F10: 121,
+  /**
+   * F11
+   */
+  F11: 122,
+  /**
+   * F12
+   */
+  F12: 123,
+  /**
+   * NUMLOCK
+   */
+  NUMLOCK: 144,
+  /**
+   * SEMICOLON
+   */
+  SEMICOLON: 186, // needs localization
+  /**
+   * DASH
+   */
+  DASH: 189, // needs localization
+  /**
+   * EQUALS
+   */
+  EQUALS: 187, // needs localization
+  /**
+   * COMMA
+   */
+  COMMA: 188, // needs localization
+  /**
+   * PERIOD
+   */
+  PERIOD: 190, // needs localization
+  /**
+   * SLASH
+   */
+  SLASH: 191, // needs localization
+  /**
+   * APOSTROPHE
+   */
+  APOSTROPHE: 192, // needs localization
+  /**
+   * SINGLE_QUOTE
+   */
+  SINGLE_QUOTE: 222, // needs localization
+  /**
+   * OPEN_SQUARE_BRACKET
+   */
+  OPEN_SQUARE_BRACKET: 219, // needs localization
+  /**
+   * BACKSLASH
+   */
+  BACKSLASH: 220, // needs localization
+  /**
+   * CLOSE_SQUARE_BRACKET
+   */
+  CLOSE_SQUARE_BRACKET: 221, // needs localization
+  /**
+   * WIN_KEY
+   */
+  WIN_KEY: 224,
+  /**
+   * MAC_FF_META
+   */
+  MAC_FF_META: 224, // Firefox (Gecko) fires this for the meta key instead of 91
+  /**
+   * WIN_IME
+   */
+  WIN_IME: 229
+};
+
+/*
+ whether text and modified key is entered at the same time.
+ */
+KeyCode.isTextModifyingKeyEvent = function isTextModifyingKeyEvent(e) {
+  var keyCode = e.keyCode;
+  if (e.altKey && !e.ctrlKey || e.metaKey ||
+  // Function keys don't generate text
+  keyCode >= KeyCode.F1 && keyCode <= KeyCode.F12) {
+    return false;
+  }
+
+  // The following keys are quite harmless, even in combination with
+  // CTRL, ALT or SHIFT.
+  switch (keyCode) {
+    case KeyCode.ALT:
+    case KeyCode.CAPS_LOCK:
+    case KeyCode.CONTEXT_MENU:
+    case KeyCode.CTRL:
+    case KeyCode.DOWN:
+    case KeyCode.END:
+    case KeyCode.ESC:
+    case KeyCode.HOME:
+    case KeyCode.INSERT:
+    case KeyCode.LEFT:
+    case KeyCode.MAC_FF_META:
+    case KeyCode.META:
+    case KeyCode.NUMLOCK:
+    case KeyCode.NUM_CENTER:
+    case KeyCode.PAGE_DOWN:
+    case KeyCode.PAGE_UP:
+    case KeyCode.PAUSE:
+    case KeyCode.PRINT_SCREEN:
+    case KeyCode.RIGHT:
+    case KeyCode.SHIFT:
+    case KeyCode.UP:
+    case KeyCode.WIN_KEY:
+    case KeyCode.WIN_KEY_RIGHT:
+      return false;
+    default:
+      return true;
+  }
+};
+
+/*
+ whether character is entered.
+ */
+KeyCode.isCharacterKey = function isCharacterKey(keyCode) {
+  if (keyCode >= KeyCode.ZERO && keyCode <= KeyCode.NINE) {
+    return true;
+  }
+
+  if (keyCode >= KeyCode.NUM_ZERO && keyCode <= KeyCode.NUM_MULTIPLY) {
+    return true;
+  }
+
+  if (keyCode >= KeyCode.A && keyCode <= KeyCode.Z) {
+    return true;
+  }
+
+  // Safari sends zero key code for non-latin characters.
+  if (window.navigation.userAgent.indexOf('WebKit') !== -1 && keyCode === 0) {
+    return true;
+  }
+
+  switch (keyCode) {
+    case KeyCode.SPACE:
+    case KeyCode.QUESTION_MARK:
+    case KeyCode.NUM_PLUS:
+    case KeyCode.NUM_MINUS:
+    case KeyCode.NUM_PERIOD:
+    case KeyCode.NUM_DIVISION:
+    case KeyCode.SEMICOLON:
+    case KeyCode.DASH:
+    case KeyCode.EQUALS:
+    case KeyCode.COMMA:
+    case KeyCode.PERIOD:
+    case KeyCode.SLASH:
+    case KeyCode.APOSTROPHE:
+    case KeyCode.SINGLE_QUOTE:
+    case KeyCode.OPEN_SQUARE_BRACKET:
+    case KeyCode.BACKSLASH:
+    case KeyCode.CLOSE_SQUARE_BRACKET:
+      return true;
+    default:
+      return false;
+  }
+};
+
+exports['default'] = KeyCode;
+module.exports = exports['default'];
+
+/***/ }),
+
 /***/ "./node_modules/_react-lifecycles-compat@3.0.4@react-lifecycles-compat/react-lifecycles-compat.es.js":
 /*!***********************************************************************************************************!*\
   !*** ./node_modules/_react-lifecycles-compat@3.0.4@react-lifecycles-compat/react-lifecycles-compat.es.js ***!
@@ -16907,4 +19308,4 @@ module.exports = function shallowEqual(objA, objB, compare, compareContext) {
 /***/ })
 
 }]);
-//# sourceMappingURL=3.685a2973.js.map
+//# sourceMappingURL=3.8b1a3b7d.js.map

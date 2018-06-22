@@ -2,11 +2,11 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-05-20 14:46:14 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-13 15:36:36
+ * @Last Modified time: 2018-06-22 22:46:09
  */
 import React, { Component } from 'react'
 
-import { Button, Input, Select, notification, Switch, Tooltip } from 'antd'
+import { Button, Input, Select, notification, Switch, Tooltip, Slider } from 'antd'
 const Option = Select.Option;
 
 import * as Request from '../../util/Request'
@@ -106,6 +106,10 @@ export default class Popup extends Component {
         });
     }
 
+    handle_zoom = zoom => {
+        Request.extensions_to_content({ message: 'set_zoom', zoom });
+    }
+
     render = () => {
         const { btn_loading, address, coopraid_search_value } = this.state;
 
@@ -132,9 +136,15 @@ export default class Popup extends Component {
                     <Tooltip title='看见上面的文本框了么，填了这个你才能开启搜索'>
                         <span style={{ float: 'left', color: '#666' }}>是否开启共斗搜索</span>
                         <Switch disabled={ !coopraid_search_value } onChange={ this.handle_coopraid_switch } style={{ float: 'right', marginRight: '6%' }} />
+                        <div style={{ clear: 'both' }} ></div>
                     </Tooltip>
                 </div>
+                <div className='white-space' />
                 
+                <div style={{ margin: '0 6%', textAlign: 'left' }}>
+                    <span style={{ color: '#666' }}>调节游戏窗口大小</span>
+                    <Slider step={ 0.01 } min={ 0.3 } max={ 1.5 } defaultValue={ 1 } onChange={ this.handle_zoom } />
+                </div>
             </div>
         )
     }

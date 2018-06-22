@@ -27,11 +27,15 @@ exports.push([module.i, ".Popup {\r\n    width: 300px;\r\n    height: 400px;\r\n
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(module) {
+
 
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+
+var _slider = __webpack_require__(/*! antd/lib/slider */ "./node_modules/_antd@3.6.2@antd/lib/slider/index.js");
+
+var _slider2 = _interopRequireDefault(_slider);
 
 var _tooltip = __webpack_require__(/*! antd/lib/tooltip */ "./node_modules/_antd@3.6.2@antd/lib/tooltip/index.js");
 
@@ -57,7 +61,7 @@ var _select = __webpack_require__(/*! antd/lib/select */ "./node_modules/_antd@3
 
 var _select2 = _interopRequireDefault(_select);
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+__webpack_require__(/*! antd/lib/slider/style/css */ "./node_modules/_antd@3.6.2@antd/lib/slider/style/css.js");
 
 __webpack_require__(/*! antd/lib/tooltip/style/css */ "./node_modules/_antd@3.6.2@antd/lib/tooltip/style/css.js");
 
@@ -85,12 +89,6 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-(function () {
-    var enterModule = __webpack_require__(/*! react-hot-loader */ "./node_modules/_react-hot-loader@4.3.3@react-hot-loader/index.js").enterModule;
-
-    enterModule && enterModule(module);
-})();
-
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -101,7 +99,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 * @Author: zy9@github.com/zy410419243 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 * @Date: 2018-05-20 14:46:14 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 * @Last Modified by: zy9
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @Last Modified time: 2018-06-13 15:36:36
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @Last Modified time: 2018-06-22 22:38:18
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 */
 
 
@@ -224,6 +222,10 @@ var Popup = function (_Component) {
             });
         };
 
+        _this.handle_zoom = function (zoom) {
+            Request.extensions_to_content({ message: 'set_zoom', zoom: zoom });
+        };
+
         _this.render = function () {
             var _this$state2 = _this.state,
                 btn_loading = _this$state2.btn_loading,
@@ -275,8 +277,20 @@ var Popup = function (_Component) {
                             { style: { float: 'left', color: '#666' } },
                             '\u662F\u5426\u5F00\u542F\u5171\u6597\u641C\u7D22'
                         ),
-                        _react2.default.createElement(_switch2.default, { disabled: !coopraid_search_value, onChange: _this.handle_coopraid_switch, style: { float: 'right', marginRight: '6%' } })
+                        _react2.default.createElement(_switch2.default, { disabled: !coopraid_search_value, onChange: _this.handle_coopraid_switch, style: { float: 'right', marginRight: '6%' } }),
+                        _react2.default.createElement('div', { style: { clear: 'both' } })
                     )
+                ),
+                _react2.default.createElement('div', { className: 'white-space' }),
+                _react2.default.createElement(
+                    'div',
+                    { style: { margin: '0 6%', textAlign: 'left' } },
+                    _react2.default.createElement(
+                        'span',
+                        { style: { color: '#666' } },
+                        '\u8C03\u8282\u6E38\u620F\u7A97\u53E3\u5927\u5C0F'
+                    ),
+                    _react2.default.createElement(_slider2.default, { step: 0.01, min: 0.3, max: 1.5, defaultValue: 1, onChange: _this.handle_zoom })
                 )
             );
         };
@@ -295,43 +309,10 @@ var Popup = function (_Component) {
     // 数组扁平化
 
 
-    _createClass(Popup, [{
-        key: '__reactstandin__regenerateByEval',
-        // @ts-ignore
-        value: function __reactstandin__regenerateByEval(key, code) {
-            // @ts-ignore
-            this[key] = eval(code);
-        }
-    }]);
-
     return Popup;
 }(_react.Component);
 
-var _default = Popup;
-exports.default = _default;
-;
-
-(function () {
-    var reactHotLoader = __webpack_require__(/*! react-hot-loader */ "./node_modules/_react-hot-loader@4.3.3@react-hot-loader/index.js").default;
-
-    var leaveModule = __webpack_require__(/*! react-hot-loader */ "./node_modules/_react-hot-loader@4.3.3@react-hot-loader/index.js").leaveModule;
-
-    if (!reactHotLoader) {
-        return;
-    }
-
-    reactHotLoader.register(Option, 'Option', 'E:/Github/Liver-collection/src/modules/Popup/Popup.js');
-    reactHotLoader.register(head, 'head', 'E:/Github/Liver-collection/src/modules/Popup/Popup.js');
-    reactHotLoader.register(host, 'host', 'E:/Github/Liver-collection/src/modules/Popup/Popup.js');
-    reactHotLoader.register(article, 'article', 'E:/Github/Liver-collection/src/modules/Popup/Popup.js');
-    reactHotLoader.register(recovery, 'recovery', 'E:/Github/Liver-collection/src/modules/Popup/Popup.js');
-    reactHotLoader.register(Popup, 'Popup', 'E:/Github/Liver-collection/src/modules/Popup/Popup.js');
-    reactHotLoader.register(_default, 'default', 'E:/Github/Liver-collection/src/modules/Popup/Popup.js');
-    leaveModule(module);
-})();
-
-;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../node_modules/_webpack@4.12.0@webpack/buildin/module.js */ "./node_modules/_webpack@4.12.0@webpack/buildin/module.js")(module)))
+exports.default = Popup;
 
 /***/ }),
 
@@ -373,23 +354,16 @@ if(false) {}
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(module) {
+
 
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-
-(function () {
-    var enterModule = __webpack_require__(/*! react-hot-loader */ "./node_modules/_react-hot-loader@4.3.3@react-hot-loader/index.js").enterModule;
-
-    enterModule && enterModule(module);
-})();
-
 /*
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-08 09:13:33 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-08 10:04:52
+ * @Last Modified time: 2018-06-22 22:38:42
  */
 // 上传数据到服务器
 var upload_to_server = exports.upload_to_server = function upload_to_server(url, data, callback) {
@@ -434,31 +408,12 @@ var get_by_cookie = exports.get_by_cookie = function get_by_cookie(url, data, ca
 var extensions_to_content = exports.extensions_to_content = function extensions_to_content(messages, callback) {
     chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
         chrome.tabs.sendMessage(tabs[0].id, messages, function (response) {
-            return callback(response);
+            return callback && callback(response);
         });
     });
 };
-;
-
-(function () {
-    var reactHotLoader = __webpack_require__(/*! react-hot-loader */ "./node_modules/_react-hot-loader@4.3.3@react-hot-loader/index.js").default;
-
-    var leaveModule = __webpack_require__(/*! react-hot-loader */ "./node_modules/_react-hot-loader@4.3.3@react-hot-loader/index.js").leaveModule;
-
-    if (!reactHotLoader) {
-        return;
-    }
-
-    reactHotLoader.register(upload_to_server, 'upload_to_server', 'E:/Github/Liver-collection/src/util/Request.js');
-    reactHotLoader.register(get_by_cookie, 'get_by_cookie', 'E:/Github/Liver-collection/src/util/Request.js');
-    reactHotLoader.register(extensions_to_content, 'extensions_to_content', 'E:/Github/Liver-collection/src/util/Request.js');
-    leaveModule(module);
-})();
-
-;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../node_modules/_webpack@4.12.0@webpack/buildin/module.js */ "./node_modules/_webpack@4.12.0@webpack/buildin/module.js")(module)))
 
 /***/ })
 
 }]);
-//# sourceMappingURL=0.92c928e9.js.map
+//# sourceMappingURL=0.f6287751.js.map

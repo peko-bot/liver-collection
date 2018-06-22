@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-08 09:13:33 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-08 10:04:52
+ * @Last Modified time: 2018-06-22 22:38:42
  */
 // 上传数据到服务器
 export const upload_to_server = (url, data, callback) => {
@@ -40,6 +40,6 @@ export const get_by_cookie = (url, data, callback) => {
 // 浏览器通信
 export const extensions_to_content = (messages, callback) => {
     chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
-        chrome.tabs.sendMessage(tabs[0].id, messages, response => callback(response));
+        chrome.tabs.sendMessage(tabs[0].id, messages, response => callback && callback(response));
     });
 }
