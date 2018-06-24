@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-09 21:42:02
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-22 22:45:34
+ * @Last Modified time: 2018-06-22 22:53:03
  */
 import { setZoom, initStyles } from './style'
 import { observer, roomObserve, roomObserveBreaker } from './coopraid'
@@ -28,7 +28,6 @@ chrome.runtime.onMessage.addListener((response, sender, sendResponse) => {
         break;
 
         case 'set_zoom':
-            console.log(zoom)
             setZoom(zoom);
         break;
 

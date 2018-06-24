@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-05-20 14:46:14 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-22 22:46:09
+ * @Last Modified time: 2018-06-22 22:57:35
  */
 import React, { Component } from 'react'
 
@@ -142,7 +142,7 @@ export default class Popup extends Component {
                 <div className='white-space' />
                 
                 <div style={{ margin: '0 6%', textAlign: 'left' }}>
-                    <span style={{ color: '#666' }}>调节游戏窗口大小</span>
+                    <span style={{ color: '#666' }}>调节窗口大小</span>
                     <Slider step={ 0.01 } min={ 0.3 } max={ 1.5 } defaultValue={ 1 } onChange={ this.handle_zoom } />
                 </div>
             </div>

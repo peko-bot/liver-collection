@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-05-20 13:48:08 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-21 20:52:27
+ * @Last Modified time: 2018-06-22 22:51:36
  */
 const webpack = require('webpack');
 const fs = require('fs');
@@ -58,9 +58,9 @@ const options = {
     },
     devtool: dev ? 'source-map' : '',
     entry: {
-        popup: __dirname + '/src',
+        background: __dirname + '/background',
         contentScript: __dirname + '/contentScript',
-        background: __dirname + '/background'
+        popup: __dirname + '/src',
     },
     output: {
         path: __dirname + '/dist',
