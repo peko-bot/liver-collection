@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-08 09:13:33 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-22 22:38:42
+ * @Last Modified time: 2018-06-26 13:42:01
  */
 // 上传数据到服务器
 export const upload_to_server = (url, data, callback) => {
@@ -22,7 +22,6 @@ export const upload_to_server = (url, data, callback) => {
     });
 }
 
-// 请求游戏内接口
 export const get_by_cookie = (url, data, callback) => {
     if(!url) return;
 

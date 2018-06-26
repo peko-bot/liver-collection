@@ -2,14 +2,14 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-05-20 14:46:14 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-22 22:57:35
+ * @Last Modified time: 2018-06-26 13:36:30
  */
 import React, { Component } from 'react'
 
 import { Button, Input, Select, notification, Switch, Tooltip, Slider } from 'antd'
 const Option = Select.Option;
 
-import * as Request from '../../util/Request'
+import * as Request from '../../../util/Request'
 
 import './css/Popup.css'
 

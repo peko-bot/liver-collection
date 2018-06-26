@@ -2,11 +2,9 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-07 13:41:02 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-25 22:35:24
+ * @Last Modified time: 2018-06-26 15:10:30
  */
 import React, { Component } from 'react'
-
-import Store from '../../util/Store'
 
 import './css/Charts.css'
 
@@ -18,7 +16,6 @@ export default class Charts extends Component {
             input_value_1: '',
             input_value_2: '',
         }
-        console.log(new Store().get('test'))
     }
 
     onChange = (e, name) => {
