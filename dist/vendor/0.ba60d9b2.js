@@ -99,14 +99,14 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 * @Author: zy9@github.com/zy410419243 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 * @Date: 2018-05-20 14:46:14 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 * @Last Modified by: zy9
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @Last Modified time: 2018-06-28 17:31:57
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @Last Modified time: 2018-06-28 22:09:34
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 */
 
 
 var Option = _select2.default.Option;
 
-var head = 'http://';
-var host = 'localhost:8023';
+var STORE = window.store;
+
 var article = 'http://game.granbluefantasy.jp/item/article_list_by_filter_mode'; // item第二页，红跟豆那页
 var recovery = 'http://game.granbluefantasy.jp/item/recovery_and_evolution_list_by_filter_mode'; // item第一页，日常素材
 
@@ -118,199 +118,18 @@ var Popup = function (_Component) {
 
         var _this = _possibleConstructorReturn(this, (Popup.__proto__ || Object.getPrototypeOf(Popup)).call(this, props));
 
-        _this.componentDidMount = function () {
-            Request.extensions_to_content({ message: 'get_zoom' }, function (response) {
-                var zoom = response.zoom;
+        _initialiseProps.call(_this);
 
-
-                _this.setState({ defaultZoom: zoom });
-            });
-        };
-
-        _this.handle_upload = function () {
-            var _this$state = _this.state,
-                head_address = _this$state.head_address,
-                address = _this$state.address;
-
-
-            _this.setState({ btn_loading: true });
-
-            Request.get_by_cookie(article, {}, function (result) {
-                Request.get_by_cookie(recovery, {}, function (recovery) {
-                    recovery = _this.steam_roller(recovery);
-
-                    result = [].concat(_toConsumableArray(result), _toConsumableArray(recovery));
-
-                    Request.upload_to_server('' + head_address + address + '/Memo/gbf/i_item.do', { body: 'user_id=6964955&data=' + JSON.stringify(result) }, function (result) {
-                        if (result == 'success') {
-                            _notification3.default.open({
-                                message: '上传成功',
-                                description: '',
-                                duration: 3
-                            });
-                        }
-
-                        _this.setState({ btn_loading: false });
-                    });
-                });
-            });
-        };
-
-        _this.steam_roller = function (arr) {
-            var newArr = [];
-
-            var _iteratorNormalCompletion = true;
-            var _didIteratorError = false;
-            var _iteratorError = undefined;
-
-            try {
-                for (var _iterator = arr[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                    var item = _step.value;
-
-                    Array.isArray(item) ? newArr.push.apply(newArr, _this.steam_roller(item)) : newArr.push(item);
-                }
-            } catch (err) {
-                _didIteratorError = true;
-                _iteratorError = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion && _iterator.return) {
-                        _iterator.return();
-                    }
-                } finally {
-                    if (_didIteratorError) {
-                        throw _iteratorError;
-                    }
-                }
-            }
-
-            return newArr;
-        };
-
-        _this.handle_address = function (event) {
-            return _this.setState({ address: event.target.value });
-        };
-
-        _this.handle_head_address = function (head_address) {
-            return _this.setState({ head_address: head_address });
-        };
-
-        _this.handle_coopraid_search = function (event) {
-            return _this.setState({ coopraid_search_value: event.target.value });
-        };
-
-        _this.handle_coopraid_switch = function (checked) {
-            var coopraid_search_value = _this.state.coopraid_search_value;
-
-
-            checked && Request.extensions_to_content({ message: 'init_coopraid_listener', search: coopraid_search_value }, function (response) {
-                var tasks = response.tasks;
-
-
-                switch (tasks.message) {
-                    case 'success':
-
-                        break;
-
-                    case 'failed':
-                        _notification3.default.open({
-                            message: '开启失败',
-                            description: '',
-                            duration: 3
-                        });
-
-                        console.log(tasks.error);
-                        break;
-
-                    default:
-
-                        break;
-                }
-            });
-        };
-
-        _this.handle_zoom = function (zoom) {
-            Request.extensions_to_content({ message: 'set_zoom', zoom: zoom });
-        };
-
-        _this.render = function () {
-            var _this$state2 = _this.state,
-                btn_loading = _this$state2.btn_loading,
-                address = _this$state2.address,
-                coopraid_search_value = _this$state2.coopraid_search_value,
-                defaultZoom = _this$state2.defaultZoom;
-
-
-            var selectBefore = _react2.default.createElement(
-                _select2.default,
-                { defaultValue: 'http://', style: { width: 90 }, onChange: _this.handle_head_address },
-                _react2.default.createElement(
-                    Option,
-                    { value: 'http://' },
-                    'http://'
-                ),
-                _react2.default.createElement(
-                    Option,
-                    { value: 'https://' },
-                    'https://'
-                ),
-                _react2.default.createElement(
-                    Option,
-                    { value: 'ftp://' },
-                    'ftp://'
-                )
-            );
-
-            return _react2.default.createElement(
-                'div',
-                { className: 'Popup' },
-                _react2.default.createElement(_input2.default, { addonBefore: selectBefore, style: { width: '90%' }, onChange: _this.handle_address, value: address }),
-                _react2.default.createElement('div', { className: 'white-space' }),
-                _react2.default.createElement(
-                    _button2.default,
-                    { type: 'primary', loading: btn_loading, onClick: _this.handle_upload, style: { width: '90%' } },
-                    '\u4E0A\u4F20\u7D20\u6750'
-                ),
-                _react2.default.createElement('div', { className: 'white-space' }),
-                _react2.default.createElement(_input2.default, { style: { width: '90%' }, onChange: _this.handle_coopraid_search, value: coopraid_search_value, placeholder: '\u8FD9\u91CC\u586B\u623F\u95F4\u63CF\u8FF0\uFF0C\u4E5F\u5C31\u662F\u641C\u7D22\u9879' }),
-                _react2.default.createElement('div', { className: 'white-space' }),
-                _react2.default.createElement(
-                    'div',
-                    { style: { marginLeft: '6%' } },
-                    _react2.default.createElement(
-                        _tooltip2.default,
-                        { title: '\u770B\u89C1\u4E0A\u9762\u7684\u6587\u672C\u6846\u4E86\u4E48\uFF0C\u586B\u4E86\u8FD9\u4E2A\u4F60\u624D\u80FD\u5F00\u542F\u641C\u7D22' },
-                        _react2.default.createElement(
-                            'span',
-                            { style: { float: 'left', color: '#666' } },
-                            '\u662F\u5426\u5F00\u542F\u5171\u6597\u641C\u7D22'
-                        ),
-                        _react2.default.createElement(_switch2.default, { disabled: !coopraid_search_value, onChange: _this.handle_coopraid_switch, style: { float: 'right', marginRight: '6%' } }),
-                        _react2.default.createElement('div', { style: { clear: 'both' } })
-                    )
-                ),
-                _react2.default.createElement('div', { className: 'white-space' }),
-                _react2.default.createElement(
-                    'div',
-                    { style: { margin: '0 6%', textAlign: 'left' } },
-                    _react2.default.createElement(
-                        'span',
-                        { style: { color: '#666' } },
-                        '\u8C03\u8282\u7A97\u53E3\u5927\u5C0F'
-                    ),
-                    _react2.default.createElement(_slider2.default, { step: 0.01, min: 0.3, max: 1.5, defaultValue: defaultZoom, onChange: _this.handle_zoom })
-                )
-            );
-        };
+        var defaultZoom = STORE.get('zoom');
 
         _this.state = {
             btn_loading: false,
             btn_type: 'primary',
-            address: host,
-            head_address: head,
+            address: 'localhost:8023',
+            head_address: 'http://',
             tooltip_text: '',
             coopraid_search_value: '',
-            defaultZoom: 1
+            defaultZoom: defaultZoom
         };
         return _this;
     }
@@ -320,6 +139,192 @@ var Popup = function (_Component) {
 
     return Popup;
 }(_react.Component);
+
+var _initialiseProps = function _initialiseProps() {
+    var _this2 = this;
+
+    this.componentWillMount = function () {};
+
+    this.handle_upload = function () {
+        var _state = _this2.state,
+            head_address = _state.head_address,
+            address = _state.address;
+
+
+        _this2.setState({ btn_loading: true });
+
+        Request.get_by_cookie(article, {}, function (result) {
+            Request.get_by_cookie(recovery, {}, function (recovery) {
+                recovery = _this2.steam_roller(recovery);
+
+                result = [].concat(_toConsumableArray(result), _toConsumableArray(recovery));
+
+                Request.upload_to_server('' + head_address + address + '/Memo/gbf/i_item.do', { body: 'user_id=6964955&data=' + JSON.stringify(result) }, function (result) {
+                    if (result == 'success') {
+                        _notification3.default.open({
+                            message: '上传成功',
+                            description: '',
+                            duration: 3
+                        });
+                    }
+
+                    _this2.setState({ btn_loading: false });
+                });
+            });
+        });
+    };
+
+    this.steam_roller = function (arr) {
+        var newArr = [];
+
+        var _iteratorNormalCompletion = true;
+        var _didIteratorError = false;
+        var _iteratorError = undefined;
+
+        try {
+            for (var _iterator = arr[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                var item = _step.value;
+
+                Array.isArray(item) ? newArr.push.apply(newArr, _this2.steam_roller(item)) : newArr.push(item);
+            }
+        } catch (err) {
+            _didIteratorError = true;
+            _iteratorError = err;
+        } finally {
+            try {
+                if (!_iteratorNormalCompletion && _iterator.return) {
+                    _iterator.return();
+                }
+            } finally {
+                if (_didIteratorError) {
+                    throw _iteratorError;
+                }
+            }
+        }
+
+        return newArr;
+    };
+
+    this.handle_address = function (event) {
+        return _this2.setState({ address: event.target.value });
+    };
+
+    this.handle_head_address = function (head_address) {
+        return _this2.setState({ head_address: head_address });
+    };
+
+    this.handle_coopraid_search = function (event) {
+        return _this2.setState({ coopraid_search_value: event.target.value });
+    };
+
+    this.handle_coopraid_switch = function (checked) {
+        // const { coopraid_search_value } = this.state;
+
+        // checked && Request.extensions_to_content({ message: 'init_coopraid_listener', search: coopraid_search_value }, response => {
+        //     const { tasks } = response;
+
+        //     switch(tasks.message) {
+        //         case 'success':
+
+        //         break;
+
+        //         case 'failed':
+        //             notification.open({
+        //                 message: '开启失败',
+        //                 description: '',
+        //                 duration: 3
+        //             });
+
+        //             console.log(tasks.error);
+        //         break;
+
+        //         default:
+
+        //         break;
+        //     }
+        // });
+    };
+
+    this.handle_zoom = function (zoom) {
+        STORE.set('zoom', zoom);
+
+        chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+            var port = chrome.tabs.connect(tabs[0].id, { name: 'zoom_connect' });
+
+            port.postMessage({ zoom: zoom });
+        });
+    };
+
+    this.render = function () {
+        var _state2 = _this2.state,
+            btn_loading = _state2.btn_loading,
+            address = _state2.address,
+            coopraid_search_value = _state2.coopraid_search_value,
+            defaultZoom = _state2.defaultZoom;
+
+
+        var selectBefore = _react2.default.createElement(
+            _select2.default,
+            { defaultValue: 'http://', style: { width: 90 }, onChange: _this2.handle_head_address },
+            _react2.default.createElement(
+                Option,
+                { value: 'http://' },
+                'http://'
+            ),
+            _react2.default.createElement(
+                Option,
+                { value: 'https://' },
+                'https://'
+            ),
+            _react2.default.createElement(
+                Option,
+                { value: 'ftp://' },
+                'ftp://'
+            )
+        );
+
+        return _react2.default.createElement(
+            'div',
+            { className: 'Popup' },
+            _react2.default.createElement(_input2.default, { addonBefore: selectBefore, style: { width: '90%' }, onChange: _this2.handle_address, value: address }),
+            _react2.default.createElement('div', { className: 'white-space' }),
+            _react2.default.createElement(
+                _button2.default,
+                { type: 'primary', loading: btn_loading, onClick: _this2.handle_upload, style: { width: '90%' } },
+                '\u4E0A\u4F20\u7D20\u6750'
+            ),
+            _react2.default.createElement('div', { className: 'white-space' }),
+            _react2.default.createElement(_input2.default, { style: { width: '90%' }, onChange: _this2.handle_coopraid_search, value: coopraid_search_value, placeholder: '\u8FD9\u91CC\u586B\u623F\u95F4\u63CF\u8FF0' }),
+            _react2.default.createElement('div', { className: 'white-space' }),
+            _react2.default.createElement(
+                'div',
+                { style: { marginLeft: '6%' } },
+                _react2.default.createElement(
+                    _tooltip2.default,
+                    { title: '\u770B\u89C1\u4E0A\u9762\u7684\u6587\u672C\u6846\u4E86\u4E48\uFF0C\u586B\u4E86\u8FD9\u4E2A\u4F60\u624D\u80FD\u5F00\u542F\u641C\u7D22' },
+                    _react2.default.createElement(
+                        'span',
+                        { style: { float: 'left', color: '#666' } },
+                        '\u662F\u5426\u5F00\u542F\u5171\u6597\u641C\u7D22'
+                    ),
+                    _react2.default.createElement(_switch2.default, { disabled: !coopraid_search_value, onChange: _this2.handle_coopraid_switch, style: { float: 'right', marginRight: '6%' } }),
+                    _react2.default.createElement('div', { style: { clear: 'both' } })
+                )
+            ),
+            _react2.default.createElement('div', { className: 'white-space' }),
+            _react2.default.createElement(
+                'div',
+                { style: { margin: '0 6%', textAlign: 'left' } },
+                _react2.default.createElement(
+                    'span',
+                    { style: { color: '#666' } },
+                    '\u8C03\u8282\u7A97\u53E3\u5927\u5C0F'
+                ),
+                _react2.default.createElement(_slider2.default, { step: 0.01, min: 0.3, max: 1.5, defaultValue: defaultZoom, onChange: _this2.handle_zoom })
+            )
+        );
+    };
+};
 
 exports.default = Popup;
 
@@ -372,7 +377,7 @@ Object.defineProperty(exports, "__esModule", {
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-08 09:13:33 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-26 13:42:01
+ * @Last Modified time: 2018-06-28 21:53:30
  */
 // 上传数据到服务器
 var upload_to_server = exports.upload_to_server = function upload_to_server(url, data, callback) {
@@ -413,10 +418,10 @@ var get_by_cookie = exports.get_by_cookie = function get_by_cookie(url, data, ca
 };
 
 // 浏览器通信
-var extensions_to_content = exports.extensions_to_content = function extensions_to_content(messages, callback) {
+var extension_to_content = exports.extension_to_content = function extension_to_content(messages, callback) {
     chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
         chrome.tabs.sendMessage(tabs[0].id, messages, function (response) {
-            return callback && callback(response);
+            callback && callback(response);
         });
     });
 };
@@ -424,4 +429,4 @@ var extensions_to_content = exports.extensions_to_content = function extensions_
 /***/ })
 
 }]);
-//# sourceMappingURL=0.f1fac8f2.js.map
+//# sourceMappingURL=0.ba60d9b2.js.map

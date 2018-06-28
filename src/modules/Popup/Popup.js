@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-05-20 14:46:14 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-28 17:31:57
+ * @Last Modified time: 2018-06-28 22:09:34
  */
 import React, { Component } from 'react'
 
@@ -11,10 +11,10 @@ const Option = Select.Option;
 
 import * as Request from '../../../util/Request'
 
+const STORE = window.store;
+
 import './css/Popup.css'
 
-const head = 'http://';
-const host = 'localhost:8023';
 const article = 'http://game.granbluefantasy.jp/item/article_list_by_filter_mode'; // item第二页，红跟豆那页
 const recovery = 'http://game.granbluefantasy.jp/item/recovery_and_evolution_list_by_filter_mode'; // item第一页，日常素材
 
@@ -22,23 +22,21 @@ export default class Popup extends Component {
     constructor(props) {
         super(props);
 
+        const defaultZoom = STORE.get('zoom');
+
         this.state = {
             btn_loading: false,
             btn_type: 'primary',
-            address: host,
-            head_address: head,
+            address: 'localhost:8023',
+            head_address: 'http://',
             tooltip_text: '',
             coopraid_search_value: '',
-            defaultZoom: 1,
+            defaultZoom,
         }
     }
 
-    componentDidMount = () => {
-        Request.extensions_to_content({ message: 'get_zoom' }, response => {
-            const { zoom } = response;
+    componentWillMount = () => {
 
-            this.setState({ defaultZoom: zoom });
-        });
     }
 
     handle_upload = () => {
@@ -85,35 +83,42 @@ export default class Popup extends Component {
     handle_coopraid_search = event => this.setState({ coopraid_search_value: event.target.value });
 
     handle_coopraid_switch = checked => {
-        const { coopraid_search_value } = this.state;
+        // const { coopraid_search_value } = this.state;
 
-        checked && Request.extensions_to_content({ message: 'init_coopraid_listener', search: coopraid_search_value }, response => {
-            const { tasks } = response;
+        // checked && Request.extensions_to_content({ message: 'init_coopraid_listener', search: coopraid_search_value }, response => {
+        //     const { tasks } = response;
     
-            switch(tasks.message) {
-                case 'success':
+        //     switch(tasks.message) {
+        //         case 'success':
     
-                break;
+        //         break;
     
-                case 'failed':
-                    notification.open({
-                        message: '开启失败',
-                        description: '',
-                        duration: 3
-                    });
+        //         case 'failed':
+        //             notification.open({
+        //                 message: '开启失败',
+        //                 description: '',
+        //                 duration: 3
+        //             });
 
-                    console.log(tasks.error);
-                break;
+        //             console.log(tasks.error);
+        //         break;
     
-                default:
+        //         default:
     
-                break;
-            }
-        });
+        //         break;
+        //     }
+        // });
     }
 
     handle_zoom = zoom => {
-        Request.extensions_to_content({ message: 'set_zoom', zoom });
+        STORE.set('zoom', zoom);
+
+        chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
+            const port = chrome.tabs.connect(tabs[0].id, { name: 'zoom_connect' });
+            
+            port.postMessage({ zoom });
+        });
+
     }
 
     render = () => {
@@ -135,7 +140,7 @@ export default class Popup extends Component {
                 <Button type='primary' loading={ btn_loading } onClick={ this.handle_upload } style={{ width: '90%' }}>上传素材</Button>
                 <div className='white-space' />
 
-                <Input style={{ width: '90%' }} onChange={ this.handle_coopraid_search } value={ coopraid_search_value } placeholder='这里填房间描述，也就是搜索项' />
+                <Input style={{ width: '90%' }} onChange={ this.handle_coopraid_search } value={ coopraid_search_value } placeholder='这里填房间描述' />
                 <div className='white-space' />
                 
                 <div style={{ marginLeft: '6%' }}>
