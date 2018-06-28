@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-05-20 14:46:14 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-26 13:36:30
+ * @Last Modified time: 2018-06-28 17:31:57
  */
 import React, { Component } from 'react'
 
@@ -21,6 +21,7 @@ const recovery = 'http://game.granbluefantasy.jp/item/recovery_and_evolution_lis
 export default class Popup extends Component {
     constructor(props) {
         super(props);
+
         this.state = {
             btn_loading: false,
             btn_type: 'primary',
@@ -28,11 +29,16 @@ export default class Popup extends Component {
             head_address: head,
             tooltip_text: '',
             coopraid_search_value: '',
+            defaultZoom: 1,
         }
     }
 
     componentDidMount = () => {
-        
+        Request.extensions_to_content({ message: 'get_zoom' }, response => {
+            const { zoom } = response;
+
+            this.setState({ defaultZoom: zoom });
+        });
     }
 
     handle_upload = () => {
@@ -111,7 +117,7 @@ export default class Popup extends Component {
     }
 
     render = () => {
-        const { btn_loading, address, coopraid_search_value } = this.state;
+        const { btn_loading, address, coopraid_search_value, defaultZoom } = this.state;
 
         const selectBefore = (
             <Select defaultValue='http://' style={{ width: 90 }} onChange={ this.handle_head_address }>
@@ -143,7 +149,7 @@ export default class Popup extends Component {
                 
                 <div style={{ margin: '0 6%', textAlign: 'left' }}>
                     <span style={{ color: '#666' }}>调节窗口大小</span>
-                    <Slider step={ 0.01 } min={ 0.3 } max={ 1.5 } defaultValue={ 1 } onChange={ this.handle_zoom } />
+                    <Slider step={ 0.01 } min={ 0.3 } max={ 1.5 } defaultValue={ defaultZoom } onChange={ this.handle_zoom } />
                 </div>
             </div>
         )

@@ -4,7 +4,6 @@
     "description": "肝脑涂地",
     "version": "1.0.0",
     "permissions": [
-        "background",
         "contextMenus"
     ],
     "background": {

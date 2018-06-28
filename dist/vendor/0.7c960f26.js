@@ -1,0 +1,420 @@
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[0],{
+
+/***/ "./node_modules/_css-loader@0.28.11@css-loader/index.js!./src/modules/Popup/css/Popup.css":
+/*!***************************************************************************************!*\
+  !*** ./node_modules/_css-loader@0.28.11@css-loader!./src/modules/Popup/css/Popup.css ***!
+  \***************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../node_modules/_css-loader@0.28.11@css-loader/lib/css-base.js */ "./node_modules/_css-loader@0.28.11@css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".Popup {\r\n    width: 300px;\r\n    height: 400px;\r\n    text-align: center;\r\n    padding: 8px;\r\n    background: #B0E0E6;\r\n    font-size: 14px;\r\n}\r\n\r\n.Popup .white-space {\r\n    margin-top: 8px;\r\n}", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./src/modules/Popup/Popup.js":
+/*!************************************!*\
+  !*** ./src/modules/Popup/Popup.js ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _slider = __webpack_require__(/*! antd/lib/slider */ "./node_modules/_antd@3.6.4@antd/lib/slider/index.js");
+
+var _slider2 = _interopRequireDefault(_slider);
+
+var _tooltip = __webpack_require__(/*! antd/lib/tooltip */ "./node_modules/_antd@3.6.4@antd/lib/tooltip/index.js");
+
+var _tooltip2 = _interopRequireDefault(_tooltip);
+
+var _switch = __webpack_require__(/*! antd/lib/switch */ "./node_modules/_antd@3.6.4@antd/lib/switch/index.js");
+
+var _switch2 = _interopRequireDefault(_switch);
+
+var _button = __webpack_require__(/*! antd/lib/button */ "./node_modules/_antd@3.6.4@antd/lib/button/index.js");
+
+var _button2 = _interopRequireDefault(_button);
+
+var _input = __webpack_require__(/*! antd/lib/input */ "./node_modules/_antd@3.6.4@antd/lib/input/index.js");
+
+var _input2 = _interopRequireDefault(_input);
+
+var _notification2 = __webpack_require__(/*! antd/lib/notification */ "./node_modules/_antd@3.6.4@antd/lib/notification/index.js");
+
+var _notification3 = _interopRequireDefault(_notification2);
+
+var _select = __webpack_require__(/*! antd/lib/select */ "./node_modules/_antd@3.6.4@antd/lib/select/index.js");
+
+var _select2 = _interopRequireDefault(_select);
+
+__webpack_require__(/*! antd/lib/slider/style/css */ "./node_modules/_antd@3.6.4@antd/lib/slider/style/css.js");
+
+__webpack_require__(/*! antd/lib/tooltip/style/css */ "./node_modules/_antd@3.6.4@antd/lib/tooltip/style/css.js");
+
+__webpack_require__(/*! antd/lib/switch/style/css */ "./node_modules/_antd@3.6.4@antd/lib/switch/style/css.js");
+
+__webpack_require__(/*! antd/lib/button/style/css */ "./node_modules/_antd@3.6.4@antd/lib/button/style/css.js");
+
+__webpack_require__(/*! antd/lib/input/style/css */ "./node_modules/_antd@3.6.4@antd/lib/input/style/css.js");
+
+__webpack_require__(/*! antd/lib/notification/style/css */ "./node_modules/_antd@3.6.4@antd/lib/notification/style/css.js");
+
+__webpack_require__(/*! antd/lib/select/style/css */ "./node_modules/_antd@3.6.4@antd/lib/select/style/css.js");
+
+var _react = __webpack_require__(/*! react */ "./node_modules/_react@16.4.1@react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Request = __webpack_require__(/*! ../../../util/Request */ "./util/Request.js");
+
+var Request = _interopRequireWildcard(_Request);
+
+__webpack_require__(/*! ./css/Popup.css */ "./src/modules/Popup/css/Popup.css");
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /*
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @Author: zy9@github.com/zy410419243 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @Date: 2018-05-20 14:46:14 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @Last Modified by: zy9
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @Last Modified time: 2018-06-28 17:20:36
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+
+
+var Option = _select2.default.Option;
+
+var head = 'http://';
+var host = 'localhost:8023';
+var article = 'http://game.granbluefantasy.jp/item/article_list_by_filter_mode'; // item第二页，红跟豆那页
+var recovery = 'http://game.granbluefantasy.jp/item/recovery_and_evolution_list_by_filter_mode'; // item第一页，日常素材
+
+var Popup = function (_Component) {
+    _inherits(Popup, _Component);
+
+    function Popup(props) {
+        _classCallCheck(this, Popup);
+
+        var _this = _possibleConstructorReturn(this, (Popup.__proto__ || Object.getPrototypeOf(Popup)).call(this, props));
+
+        _this.componentDidMount = function () {};
+
+        _this.handle_upload = function () {
+            var _this$state = _this.state,
+                head_address = _this$state.head_address,
+                address = _this$state.address;
+
+
+            _this.setState({ btn_loading: true });
+
+            Request.get_by_cookie(article, {}, function (result) {
+                Request.get_by_cookie(recovery, {}, function (recovery) {
+                    recovery = _this.steam_roller(recovery);
+
+                    result = [].concat(_toConsumableArray(result), _toConsumableArray(recovery));
+
+                    Request.upload_to_server('' + head_address + address + '/Memo/gbf/i_item.do', { body: 'user_id=6964955&data=' + JSON.stringify(result) }, function (result) {
+                        if (result == 'success') {
+                            _notification3.default.open({
+                                message: '上传成功',
+                                description: '',
+                                duration: 3
+                            });
+                        }
+
+                        _this.setState({ btn_loading: false });
+                    });
+                });
+            });
+        };
+
+        _this.steam_roller = function (arr) {
+            var newArr = [];
+
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+
+            try {
+                for (var _iterator = arr[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var item = _step.value;
+
+                    Array.isArray(item) ? newArr.push.apply(newArr, _this.steam_roller(item)) : newArr.push(item);
+                }
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                        _iterator.return();
+                    }
+                } finally {
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
+            }
+
+            return newArr;
+        };
+
+        _this.handle_address = function (event) {
+            return _this.setState({ address: event.target.value });
+        };
+
+        _this.handle_head_address = function (head_address) {
+            return _this.setState({ head_address: head_address });
+        };
+
+        _this.handle_coopraid_search = function (event) {
+            return _this.setState({ coopraid_search_value: event.target.value });
+        };
+
+        _this.handle_coopraid_switch = function (checked) {
+            var coopraid_search_value = _this.state.coopraid_search_value;
+
+
+            checked && Request.extensions_to_content({ message: 'init_coopraid_listener', search: coopraid_search_value }, function (response) {
+                var tasks = response.tasks;
+
+
+                switch (tasks.message) {
+                    case 'success':
+
+                        break;
+
+                    case 'failed':
+                        _notification3.default.open({
+                            message: '开启失败',
+                            description: '',
+                            duration: 3
+                        });
+
+                        console.log(tasks.error);
+                        break;
+
+                    default:
+
+                        break;
+                }
+            });
+        };
+
+        _this.handle_zoom = function (zoom) {
+            Request.extensions_to_content({ message: 'set_zoom', zoom: zoom });
+        };
+
+        _this.render = function () {
+            var _this$state2 = _this.state,
+                btn_loading = _this$state2.btn_loading,
+                address = _this$state2.address,
+                coopraid_search_value = _this$state2.coopraid_search_value,
+                defaultZoom = _this$state2.defaultZoom;
+
+
+            var selectBefore = _react2.default.createElement(
+                _select2.default,
+                { defaultValue: 'http://', style: { width: 90 }, onChange: _this.handle_head_address },
+                _react2.default.createElement(
+                    Option,
+                    { value: 'http://' },
+                    'http://'
+                ),
+                _react2.default.createElement(
+                    Option,
+                    { value: 'https://' },
+                    'https://'
+                ),
+                _react2.default.createElement(
+                    Option,
+                    { value: 'ftp://' },
+                    'ftp://'
+                )
+            );
+
+            return _react2.default.createElement(
+                'div',
+                { className: 'Popup' },
+                _react2.default.createElement(_input2.default, { addonBefore: selectBefore, style: { width: '90%' }, onChange: _this.handle_address, value: address }),
+                _react2.default.createElement('div', { className: 'white-space' }),
+                _react2.default.createElement(
+                    _button2.default,
+                    { type: 'primary', loading: btn_loading, onClick: _this.handle_upload, style: { width: '90%' } },
+                    '\u4E0A\u4F20\u7D20\u6750'
+                ),
+                _react2.default.createElement('div', { className: 'white-space' }),
+                _react2.default.createElement(_input2.default, { style: { width: '90%' }, onChange: _this.handle_coopraid_search, value: coopraid_search_value, placeholder: '\u8FD9\u91CC\u586B\u623F\u95F4\u63CF\u8FF0\uFF0C\u4E5F\u5C31\u662F\u641C\u7D22\u9879' }),
+                _react2.default.createElement('div', { className: 'white-space' }),
+                _react2.default.createElement(
+                    'div',
+                    { style: { marginLeft: '6%' } },
+                    _react2.default.createElement(
+                        _tooltip2.default,
+                        { title: '\u770B\u89C1\u4E0A\u9762\u7684\u6587\u672C\u6846\u4E86\u4E48\uFF0C\u586B\u4E86\u8FD9\u4E2A\u4F60\u624D\u80FD\u5F00\u542F\u641C\u7D22' },
+                        _react2.default.createElement(
+                            'span',
+                            { style: { float: 'left', color: '#666' } },
+                            '\u662F\u5426\u5F00\u542F\u5171\u6597\u641C\u7D22'
+                        ),
+                        _react2.default.createElement(_switch2.default, { disabled: !coopraid_search_value, onChange: _this.handle_coopraid_switch, style: { float: 'right', marginRight: '6%' } }),
+                        _react2.default.createElement('div', { style: { clear: 'both' } })
+                    )
+                ),
+                _react2.default.createElement('div', { className: 'white-space' }),
+                _react2.default.createElement(
+                    'div',
+                    { style: { margin: '0 6%', textAlign: 'left' } },
+                    _react2.default.createElement(
+                        'span',
+                        { style: { color: '#666' } },
+                        '\u8C03\u8282\u7A97\u53E3\u5927\u5C0F'
+                    ),
+                    _react2.default.createElement(_slider2.default, { step: 0.01, min: 0.3, max: 1.5, defaultValue: defaultZoom, onChange: _this.handle_zoom })
+                )
+            );
+        };
+
+        _this.state = {
+            btn_loading: false,
+            btn_type: 'primary',
+            address: host,
+            head_address: head,
+            tooltip_text: '',
+            coopraid_search_value: '',
+            defaultZoom: 1
+        };
+        return _this;
+    }
+
+    // 数组扁平化
+
+
+    return Popup;
+}(_react.Component);
+
+exports.default = Popup;
+
+/***/ }),
+
+/***/ "./src/modules/Popup/css/Popup.css":
+/*!*****************************************!*\
+  !*** ./src/modules/Popup/css/Popup.css ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../node_modules/_css-loader@0.28.11@css-loader!./Popup.css */ "./node_modules/_css-loader@0.28.11@css-loader/index.js!./src/modules/Popup/css/Popup.css");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../node_modules/_style-loader@0.21.0@style-loader/lib/addStyles.js */ "./node_modules/_style-loader@0.21.0@style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./util/Request.js":
+/*!*************************!*\
+  !*** ./util/Request.js ***!
+  \*************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+/*
+ * @Author: zy9@github.com/zy410419243 
+ * @Date: 2018-06-08 09:13:33 
+ * @Last Modified by: zy9
+ * @Last Modified time: 2018-06-26 13:42:01
+ */
+// 上传数据到服务器
+var upload_to_server = exports.upload_to_server = function upload_to_server(url, data, callback) {
+    if (!url) return;
+
+    var params = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+        }
+    };
+    params = Object.assign(params, data);
+
+    fetch(url, params).then(function (result) {
+        return result.text();
+    }).then(function (result) {
+        return callback(result);
+    }).catch(function (error) {
+        // console.log(error)
+    });
+};
+
+var get_by_cookie = exports.get_by_cookie = function get_by_cookie(url, data, callback) {
+    if (!url) return;
+
+    var params = {
+        credentials: 'include' // 加入cookie
+    };
+    params = Object.assign(params, data);
+
+    fetch(url, params).then(function (result) {
+        return result.json();
+    }).then(function (result) {
+        return callback(result);
+    }).catch(function (error) {
+        // console.log(error);
+    });
+};
+
+// 浏览器通信
+var extensions_to_content = exports.extensions_to_content = function extensions_to_content(messages, callback) {
+    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+        chrome.tabs.sendMessage(tabs[0].id, messages, function (response) {
+            return callback && callback(response);
+        });
+    });
+};
+
+/***/ })
+
+}]);
+//# sourceMappingURL=0.7c960f26.js.map

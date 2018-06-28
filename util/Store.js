@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-25 22:28:14 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-25 22:40:12
+ * @Last Modified time: 2018-06-26 16:28:00
  */
 export default class Store {
     constructor(name, defaults) {
@@ -17,7 +17,9 @@ export default class Store {
         }
     }
 
-    get = (name = 'store.' + this.name + '.' + name) => {
+    get = (propsName) => {
+        name = 'store.' + this.name + '.' + propsName;
+
         if (localStorage.getItem(name) === null) { return undefined; }
 
         try {
