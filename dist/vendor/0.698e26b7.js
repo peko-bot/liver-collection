@@ -99,13 +99,14 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 * @Author: zy9@github.com/zy410419243 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 * @Date: 2018-05-20 14:46:14 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 * @Last Modified by: zy9
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @Last Modified time: 2018-06-29 15:57:35
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @Last Modified time: 2018-06-29 16:57:31
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 */
 
 
 var Option = _select2.default.Option;
 
-var STORE = window.store;
+var _chrome$extension$get = chrome.extension.getBackgroundPage(),
+    STORE = _chrome$extension$get.store;
 
 var article = 'http://game.granbluefantasy.jp/item/article_list_by_filter_mode'; // item第二页，红跟豆那页
 var recovery = 'http://game.granbluefantasy.jp/item/recovery_and_evolution_list_by_filter_mode'; // item第一页，日常素材
@@ -120,17 +121,18 @@ var Popup = function (_Component) {
 
         _initialiseProps.call(_this);
 
-        var defaultZoom = STORE.get('zoom');
+        var coopraid_search_value = STORE.get('search') || '';
 
         _this.state = {
             btn_loading: false,
             btn_type: 'primary',
             address: 'localhost:8023',
             head_address: 'http://',
-            tooltip_text: '',
-            coopraid_search_value: '',
-            defaultZoom: defaultZoom
+            coopraid_search_value: coopraid_search_value,
+            defaultZoom: STORE.get('zoom')
         };
+
+        !!coopraid_search_value && _this.handle_search();
         return _this;
     }
 
@@ -175,7 +177,7 @@ var _initialiseProps = function _initialiseProps() {
     };
 
     this.steam_roller = function (arr) {
-        var newArr = [];
+        var new_arr = [];
 
         var _iteratorNormalCompletion = true;
         var _didIteratorError = false;
@@ -185,7 +187,7 @@ var _initialiseProps = function _initialiseProps() {
             for (var _iterator = arr[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
                 var item = _step.value;
 
-                Array.isArray(item) ? newArr.push.apply(newArr, _this2.steam_roller(item)) : newArr.push(item);
+                Array.isArray(item) ? new_arr.push.apply(new_arr, _this2.steam_roller(item)) : new_arr.push(item);
             }
         } catch (err) {
             _didIteratorError = true;
@@ -202,7 +204,7 @@ var _initialiseProps = function _initialiseProps() {
             }
         }
 
-        return newArr;
+        return new_arr;
     };
 
     this.handle_address = function (event) {
@@ -218,38 +220,27 @@ var _initialiseProps = function _initialiseProps() {
     };
 
     this.handle_coopraid_switch = function (checked) {
-        // const { coopraid_search_value } = this.state;
+        return checked && _this2.handle_search();
+    };
 
-        // checked && Request.extensions_to_content({ message: 'init_coopraid_listener', search: coopraid_search_value }, response => {
-        //     const { tasks } = response;
+    this.handle_search = function () {
+        var coopraid_search_value = _this2.state.coopraid_search_value;
 
-        //     switch(tasks.message) {
-        //         case 'success':
 
-        //         break;
+        chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+            var port = chrome.tabs.connect(tabs[0].id, { name: 'popup_to_content' });
 
-        //         case 'failed':
-        //             notification.open({
-        //                 message: '开启失败',
-        //                 description: '',
-        //                 duration: 3
-        //             });
+            STORE.set('search', coopraid_search_value);
 
-        //             console.log(tasks.error);
-        //         break;
-
-        //         default:
-
-        //         break;
-        //     }
-        // });
+            port.postMessage({ message: 'open_coopraid_search', search: coopraid_search_value });
+        });
     };
 
     this.handle_zoom = function (zoom) {
         STORE.set('zoom', zoom);
 
         chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-            var port = chrome.tabs.connect(tabs[0].id, { name: 'zoom_connect' });
+            var port = chrome.tabs.connect(tabs[0].id, { name: 'popup_to_content' });
 
             port.postMessage({ zoom: zoom, message: 'set_zoom' });
         });
@@ -307,7 +298,7 @@ var _initialiseProps = function _initialiseProps() {
                         { style: { float: 'left', color: '#666' } },
                         '\u662F\u5426\u5F00\u542F\u5171\u6597\u641C\u7D22'
                     ),
-                    _react2.default.createElement(_switch2.default, { disabled: !coopraid_search_value, onChange: _this2.handle_coopraid_switch, style: { float: 'right', marginRight: '6%' } }),
+                    _react2.default.createElement(_switch2.default, { disabled: !coopraid_search_value, onChange: _this2.handle_coopraid_switch, checked: !!coopraid_search_value, style: { float: 'right', marginRight: '6%' } }),
                     _react2.default.createElement('div', { style: { clear: 'both' } })
                 )
             ),
@@ -420,4 +411,4 @@ var get_by_cookie = exports.get_by_cookie = function get_by_cookie(url, data, ca
 /***/ })
 
 }]);
-//# sourceMappingURL=0.129c8db1.js.map
+//# sourceMappingURL=0.698e26b7.js.map

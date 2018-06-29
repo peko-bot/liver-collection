@@ -99,13 +99,14 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 * @Author: zy9@github.com/zy410419243 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 * @Date: 2018-05-20 14:46:14 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 * @Last Modified by: zy9
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @Last Modified time: 2018-06-29 15:57:35
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @Last Modified time: 2018-06-29 16:47:57
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 */
 
 
 var Option = _select2.default.Option;
 
 var STORE = window.store;
+console.log(chrome.extension.getBackgroundPage());
 
 var article = 'http://game.granbluefantasy.jp/item/article_list_by_filter_mode'; // item第二页，红跟豆那页
 var recovery = 'http://game.granbluefantasy.jp/item/recovery_and_evolution_list_by_filter_mode'; // item第一页，日常素材
@@ -127,8 +128,7 @@ var Popup = function (_Component) {
             btn_type: 'primary',
             address: 'localhost:8023',
             head_address: 'http://',
-            tooltip_text: '',
-            coopraid_search_value: '',
+            coopraid_search_value: STORE.get('search') || '',
             defaultZoom: defaultZoom
         };
         return _this;
@@ -175,7 +175,7 @@ var _initialiseProps = function _initialiseProps() {
     };
 
     this.steam_roller = function (arr) {
-        var newArr = [];
+        var new_arr = [];
 
         var _iteratorNormalCompletion = true;
         var _didIteratorError = false;
@@ -185,7 +185,7 @@ var _initialiseProps = function _initialiseProps() {
             for (var _iterator = arr[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
                 var item = _step.value;
 
-                Array.isArray(item) ? newArr.push.apply(newArr, _this2.steam_roller(item)) : newArr.push(item);
+                Array.isArray(item) ? new_arr.push.apply(new_arr, _this2.steam_roller(item)) : new_arr.push(item);
             }
         } catch (err) {
             _didIteratorError = true;
@@ -202,7 +202,7 @@ var _initialiseProps = function _initialiseProps() {
             }
         }
 
-        return newArr;
+        return new_arr;
     };
 
     this.handle_address = function (event) {
@@ -218,43 +218,23 @@ var _initialiseProps = function _initialiseProps() {
     };
 
     this.handle_coopraid_switch = function (checked) {
-        // const { coopraid_search_value } = this.state;
+        var coopraid_search_value = _this2.state.coopraid_search_value;
+
 
         checked && chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-            var port = chrome.tabs.connect(tabs[0].id, { name: 'zoom_connect' });
+            var port = chrome.tabs.connect(tabs[0].id, { name: 'popup_to_content' });
 
-            port.postMessage({ message: 'init_coopraid_listener', search: coopraid_search_value });
+            STORE.set('search', coopraid_search_value);
+
+            port.postMessage({ message: 'open_coopraid_search', search: coopraid_search_value });
         });
-        // checked && Request.extensions_to_content({ message: 'init_coopraid_listener', search: coopraid_search_value }, response => {
-        //     const { tasks } = response;
-
-        //     switch(tasks.message) {
-        //         case 'success':
-
-        //         break;
-
-        //         case 'failed':
-        //             notification.open({
-        //                 message: '开启失败',
-        //                 description: '',
-        //                 duration: 3
-        //             });
-
-        //             console.log(tasks.error);
-        //         break;
-
-        //         default:
-
-        //         break;
-        //     }
-        // });
     };
 
     this.handle_zoom = function (zoom) {
         STORE.set('zoom', zoom);
 
         chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-            var port = chrome.tabs.connect(tabs[0].id, { name: 'zoom_connect' });
+            var port = chrome.tabs.connect(tabs[0].id, { name: 'popup_to_content' });
 
             port.postMessage({ zoom: zoom, message: 'set_zoom' });
         });
@@ -425,4 +405,4 @@ var get_by_cookie = exports.get_by_cookie = function get_by_cookie(url, data, ca
 /***/ })
 
 }]);
-//# sourceMappingURL=0.4a5a39ee.js.map
+//# sourceMappingURL=0.88de8867.js.map

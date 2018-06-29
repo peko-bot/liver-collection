@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-05-20 14:46:14 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-29 16:24:37
+ * @Last Modified time: 2018-06-29 16:57:31
  */
 import React, { Component } from 'react'
 
@@ -11,7 +11,7 @@ const Option = Select.Option;
 
 import * as Request from '../../../util/Request'
 
-const STORE = window.store;
+const { store: STORE } = chrome.extension.getBackgroundPage();
 
 import './css/Popup.css'
 
@@ -22,17 +22,18 @@ export default class Popup extends Component {
     constructor(props) {
         super(props);
 
-        const defaultZoom = STORE.get('zoom');
+        const coopraid_search_value = STORE.get('search') || '';
 
         this.state = {
             btn_loading: false,
             btn_type: 'primary',
             address: 'localhost:8023',
             head_address: 'http://',
-            tooltip_text: '',
-            coopraid_search_value: '',
-            defaultZoom,
+            coopraid_search_value,
+            defaultZoom: STORE.get('zoom'),
         }
+
+        !!coopraid_search_value && this.handle_search();
     }
 
     componentWillMount = () => {
@@ -67,13 +68,13 @@ export default class Popup extends Component {
 
     // 数组扁平化
     steam_roller = arr => {
-        let newArr = [];
+        let new_arr = [];
 
         for(let item of arr) {
-            Array.isArray(item) ? newArr.push.apply(newArr, this.steam_roller(item)) : newArr.push(item);
+            Array.isArray(item) ? new_arr.push.apply(new_arr, this.steam_roller(item)) : new_arr.push(item);
         }
 
-        return newArr;
+        return new_arr;
     }
 
     handle_address = event => this.setState({ address: event.target.value });
@@ -82,44 +83,25 @@ export default class Popup extends Component {
 
     handle_coopraid_search = event => this.setState({ coopraid_search_value: event.target.value });
 
-    handle_coopraid_switch = checked => {
+    handle_coopraid_switch = checked => checked && this.handle_search();
+
+    handle_search = () => {
         const { coopraid_search_value } = this.state;
+        
+        chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
+            const port = chrome.tabs.connect(tabs[0].id, { name: 'popup_to_content' });
 
-        checked && chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
-            const port = chrome.tabs.connect(tabs[0].id, { name: 'zoom_connect' });
+            STORE.set('search', coopraid_search_value);
             
-            port.postMessage({ message: 'init_coopraid_listener', search: coopraid_search_value });
+            port.postMessage({ message: 'open_coopraid_search', search: coopraid_search_value });
         });
-        // checked && Request.extensions_to_content({ message: 'init_coopraid_listener', search: coopraid_search_value }, response => {
-        //     const { tasks } = response;
-    
-        //     switch(tasks.message) {
-        //         case 'success':
-    
-        //         break;
-    
-        //         case 'failed':
-        //             notification.open({
-        //                 message: '开启失败',
-        //                 description: '',
-        //                 duration: 3
-        //             });
-
-        //             console.log(tasks.error);
-        //         break;
-    
-        //         default:
-    
-        //         break;
-        //     }
-        // });
     }
 
     handle_zoom = zoom => {
         STORE.set('zoom', zoom);
 
         chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
-            const port = chrome.tabs.connect(tabs[0].id, { name: 'zoom_connect' });
+            const port = chrome.tabs.connect(tabs[0].id, { name: 'popup_to_content' });
             
             port.postMessage({ zoom, message: 'set_zoom' });
         });
@@ -150,7 +132,7 @@ export default class Popup extends Component {
                 <div style={{ marginLeft: '6%' }}>
                     <Tooltip title='看见上面的文本框了么，填了这个你才能开启搜索'>
                         <span style={{ float: 'left', color: '#666' }}>是否开启共斗搜索</span>
-                        <Switch disabled={ !coopraid_search_value } onChange={ this.handle_coopraid_switch } style={{ float: 'right', marginRight: '6%' }} />
+                        <Switch disabled={ !coopraid_search_value } onChange={ this.handle_coopraid_switch } checked={ !!coopraid_search_value } style={{ float: 'right', marginRight: '6%' }} />
                         <div style={{ clear: 'both' }} ></div>
                     </Tooltip>
                 </div>

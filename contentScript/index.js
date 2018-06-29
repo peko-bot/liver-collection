@@ -2,21 +2,24 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-08 11:15:23 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-29 16:27:20
+ * @Last Modified time: 2018-06-29 17:08:49
  */
 import { initStyles, initZoom, setZoom } from './style'
-import { observer, roomObserve, roomObserveBreaker } from './coopraid'
+import { roomObserve, roomObserveBreaker, initRoomSearch } from './coopraid'
 
 // 修改全局样式
 initStyles();
 initZoom();
+
+// 如果搜索过，自动应用搜索内容
+initRoomSearch();
 
 // 长连接监听统一写在这
 chrome.runtime.onConnect.addListener(port => {
     const { name } = port;
 
     switch(name) {
-        case 'zoom_connect':
+        case 'popup_to_content':
             port.onMessage.addListener(response => {
                 const { zoom, message, search } = response;
         
@@ -25,11 +28,11 @@ chrome.runtime.onConnect.addListener(port => {
                         setZoom(zoom);
                     break;
 
-                    case 'init_coopraid_listener': // 开启共斗搜索
+                    case 'open_coopraid_search':
                         roomObserve(search);
                     break;
 
-                    case 'close_coopraid_listener':
+                    case 'close_coopraid_search':
 
                     break;
                 }
