@@ -99,7 +99,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 * @Author: zy9@github.com/zy410419243 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 * @Date: 2018-05-20 14:46:14 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 * @Last Modified by: zy9
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @Last Modified time: 2018-06-28 22:09:34
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @Last Modified time: 2018-06-29 15:55:53
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 */
 
 
@@ -251,7 +251,13 @@ var _initialiseProps = function _initialiseProps() {
         chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
             var port = chrome.tabs.connect(tabs[0].id, { name: 'zoom_connect' });
 
-            port.postMessage({ zoom: zoom });
+            port.postMessage({ zoom: zoom, message: 'set_zoom' });
+        });
+
+        chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+            var port = chrome.tabs.connect(tabs[0].id, { name: 'zoom_connect1' });
+
+            port.postMessage({ zoom: zoom, message: 'set_zoom' });
         });
     };
 
@@ -429,4 +435,4 @@ var extension_to_content = exports.extension_to_content = function extension_to_
 /***/ })
 
 }]);
-//# sourceMappingURL=0.ba60d9b2.js.map
+//# sourceMappingURL=0.408d827d.js.map

@@ -105,10 +105,33 @@ var _style = __webpack_require__(/*! ./style */ "./contentScript/style.js");
                            * @Author: zy9@github.com/zy410419243 
                            * @Date: 2018-06-08 11:15:23 
                            * @Last Modified by: zy9
-                           * @Last Modified time: 2018-06-28 21:32:56
+                           * @Last Modified time: 2018-06-29 16:04:13
                            */
 
 (0, _style.initZoom)();
+
+// 长连接监听统一写在这
+chrome.runtime.onConnect.addListener(function (port) {
+    var name = port.name;
+
+
+    switch (name) {
+        case 'zoom_connect':
+            port.onMessage.addListener(function (response) {
+                var zoom = response.zoom,
+                    message = response.message;
+
+
+                switch (message) {
+                    case 'set_zoom':
+                        // 用作Popup中拖动Slider时，实时改变窗口大小
+                        (0, _style.setZoom)(zoom);
+                        break;
+                }
+            });
+            break;
+    }
+});
 
 /***/ }),
 
@@ -126,7 +149,7 @@ var _style = __webpack_require__(/*! ./style */ "./contentScript/style.js");
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-08 11:13:09 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-28 22:12:01
+ * @Last Modified time: 2018-06-29 16:02:17
  * @Description 全局样式设置
  */
 /* 修改滚动条样式
@@ -158,26 +181,15 @@ var setZoom = function setZoom(zoom) {
 };
 
 var initZoom = function initZoom() {
-    // 用作初始化
     chrome.extension.sendMessage({ message: 'get_zoom' }, function (response) {
         var zoom = response.zoom;
 
 
         setZoom(zoom);
     });
-
-    // 用作Popup中拖动Slider时，实时改变窗口大小
-    chrome.runtime.onConnect.addListener(function (port) {
-        port.onMessage.addListener(function (message) {
-            var zoom = message.zoom;
-
-
-            setZoom(zoom);
-        });
-    });
 };
 
-module.exports = { initStyles: initStyles, initZoom: initZoom };
+module.exports = { initStyles: initStyles, initZoom: initZoom, setZoom: setZoom };
 
 /***/ })
 

@@ -193,7 +193,7 @@ Object.defineProperty(exports, "__esModule", {
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-08 09:13:33 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-28 21:53:30
+ * @Last Modified time: 2018-06-29 16:09:30
  */
 // 上传数据到服务器
 var upload_to_server = exports.upload_to_server = function upload_to_server(url, data, callback) {
@@ -230,15 +230,6 @@ var get_by_cookie = exports.get_by_cookie = function get_by_cookie(url, data, ca
         return callback(result);
     }).catch(function (error) {
         // console.log(error);
-    });
-};
-
-// 浏览器通信
-var extension_to_content = exports.extension_to_content = function extension_to_content(messages, callback) {
-    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-        chrome.tabs.sendMessage(tabs[0].id, messages, function (response) {
-            callback && callback(response);
-        });
     });
 };
 

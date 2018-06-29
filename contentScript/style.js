@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-08 11:13:09 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-28 22:12:01
+ * @Last Modified time: 2018-06-29 16:02:17
  * @Description 全局样式设置
  */
 /* 修改滚动条样式
@@ -34,21 +34,11 @@ const setZoom = zoom => {
 }
 
 const initZoom = () => {
-    // 用作初始化
     chrome.extension.sendMessage({ message: 'get_zoom'}, response => {
         const { zoom } = response;
     
         setZoom(zoom);
     });
-
-    // 用作Popup中拖动Slider时，实时改变窗口大小
-    chrome.runtime.onConnect.addListener(port => {
-        port.onMessage.addListener(message => {
-            const { zoom } = message;
-
-            setZoom(zoom);
-        });
-    });
 }
 
-module.exports = { initStyles, initZoom, }
+module.exports = { initStyles, initZoom, setZoom };

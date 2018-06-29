@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-05-20 14:46:14 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-28 22:09:34
+ * @Last Modified time: 2018-06-29 15:57:35
  */
 import React, { Component } from 'react'
 
@@ -116,9 +116,8 @@ export default class Popup extends Component {
         chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
             const port = chrome.tabs.connect(tabs[0].id, { name: 'zoom_connect' });
             
-            port.postMessage({ zoom });
+            port.postMessage({ zoom, message: 'set_zoom' });
         });
-
     }
 
     render = () => {
