@@ -99,7 +99,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 * @Author: zy9@github.com/zy410419243 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 * @Date: 2018-05-20 14:46:14 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 * @Last Modified by: zy9
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @Last Modified time: 2018-06-29 15:55:53
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @Last Modified time: 2018-06-29 16:21:17
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 */
 
 
@@ -218,8 +218,14 @@ var _initialiseProps = function _initialiseProps() {
     };
 
     this.handle_coopraid_switch = function (checked) {
-        // const { coopraid_search_value } = this.state;
+        var coopraid_search_value = _this2.state.coopraid_search_value;
 
+
+        checked && chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+            var port = chrome.tabs.connect(tabs[0].id, { name: 'zoom_connect' });
+
+            port.postMessage({ message: 'init_coopraid_listener', search: coopraid_search_value });
+        });
         // checked && Request.extensions_to_content({ message: 'init_coopraid_listener', search: coopraid_search_value }, response => {
         //     const { tasks } = response;
 
@@ -250,12 +256,6 @@ var _initialiseProps = function _initialiseProps() {
 
         chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
             var port = chrome.tabs.connect(tabs[0].id, { name: 'zoom_connect' });
-
-            port.postMessage({ zoom: zoom, message: 'set_zoom' });
-        });
-
-        chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-            var port = chrome.tabs.connect(tabs[0].id, { name: 'zoom_connect1' });
 
             port.postMessage({ zoom: zoom, message: 'set_zoom' });
         });
@@ -383,7 +383,7 @@ Object.defineProperty(exports, "__esModule", {
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-08 09:13:33 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-28 21:53:30
+ * @Last Modified time: 2018-06-29 16:09:30
  */
 // 上传数据到服务器
 var upload_to_server = exports.upload_to_server = function upload_to_server(url, data, callback) {
@@ -423,16 +423,7 @@ var get_by_cookie = exports.get_by_cookie = function get_by_cookie(url, data, ca
     });
 };
 
-// 浏览器通信
-var extension_to_content = exports.extension_to_content = function extension_to_content(messages, callback) {
-    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-        chrome.tabs.sendMessage(tabs[0].id, messages, function (response) {
-            callback && callback(response);
-        });
-    });
-};
-
 /***/ })
 
 }]);
-//# sourceMappingURL=0.408d827d.js.map
+//# sourceMappingURL=0.46cb8b46.js.map

@@ -120,7 +120,7 @@ var local = new _Store2.default('options');
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-09 21:42:02
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-28 22:12:11
+ * @Last Modified time: 2018-06-29 16:21:49
  */
 var oldStorage = local.toObject();
 local.fromObject(Object.assign({}, _options2.default, oldStorage));
@@ -137,15 +137,6 @@ chrome.runtime.onMessage.addListener(function (response, sender, sendResponse) {
     var tasks = { error: '', tasks: '' };
 
     switch (message) {
-        case 'init_coopraid_listener':
-            // 开启共斗搜索
-            roomObserve(search);
-            break;
-
-        case 'close_coopraid_listener':
-
-            break;
-
         case 'get_zoom':
             tasks = Object.assign(tasks, { zoom: local.get('zoom') });
             break;

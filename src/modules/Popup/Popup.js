@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-05-20 14:46:14 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-29 15:57:35
+ * @Last Modified time: 2018-06-29 16:24:37
  */
 import React, { Component } from 'react'
 
@@ -83,8 +83,13 @@ export default class Popup extends Component {
     handle_coopraid_search = event => this.setState({ coopraid_search_value: event.target.value });
 
     handle_coopraid_switch = checked => {
-        // const { coopraid_search_value } = this.state;
+        const { coopraid_search_value } = this.state;
 
+        checked && chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
+            const port = chrome.tabs.connect(tabs[0].id, { name: 'zoom_connect' });
+            
+            port.postMessage({ message: 'init_coopraid_listener', search: coopraid_search_value });
+        });
         // checked && Request.extensions_to_content({ message: 'init_coopraid_listener', search: coopraid_search_value }, response => {
         //     const { tasks } = response;
     

@@ -86,6 +86,82 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./contentScript/coopraid.js":
+/*!***********************************!*\
+  !*** ./contentScript/coopraid.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/*
+ * @Author: zy9@github.com/zy410419243 
+ * @Date: 2018-05-30 21:58:12 
+ * @Last Modified by: zy9
+ * @Last Modified time: 2018-06-22 22:25:56
+ * @Description 共斗时的设置
+ */
+var observer = null;
+
+module.exports = {
+    observer: observer,
+    roomObserve: function roomObserve(search) {
+        var rooms = document.getElementsByClassName('prt-wanted-list')[0];
+
+        if (!observer) {
+            var _observer = new MutationObserver(function (mutations) {
+                var texts = document.getElementsByClassName('txt-room-comment');
+                var selectTexts = [];
+
+                for (var i = 0, roomLen = texts.length; i < roomLen; i++) {
+                    var room = texts[i];
+                    var innerText = room.innerText;
+
+                    // アル;↑
+                    // 获得房名含有文本框内容项的索引
+                    var flag = true,
+                        searchs = search.split(';');
+                    for (var j = 0, searchsLen = searchs.length; j < searchsLen; j++) {
+                        var jtem = searchs[j];
+                        var isIncludes = innerText.includes(jtem);
+
+                        if (flag && isIncludes && j == searchsLen - 1) {
+                            selectTexts.push(i);
+                        }
+                    }
+                }
+
+                // 隐藏不符合搜索项的房间
+                for (var _i = 0, _roomLen = rooms.children.length; _i < _roomLen; _i++) {
+                    var _room = rooms.children[_i];
+                    _room.style.display = 'none';
+
+                    for (var _j = 0, selectTextsLen = selectTexts.length; _j < selectTextsLen; _j++) {
+                        if (_i == selectTexts[_j]) {
+                            _room.style.display = '';
+                        }
+                    }
+                }
+            });
+
+            _observer.observe(rooms, {
+                attributes: true,
+                childList: true,
+                characterData: true
+            });
+            console.log('observer start');
+        }
+    },
+    roomObserveBreaker: function roomObserveBreaker(observer) {
+        observer.disconnect();
+        console.log('observer end');
+    }
+};
+
+/***/ }),
+
 /***/ "./contentScript/index.js":
 /*!********************************!*\
   !*** ./contentScript/index.js ***!
@@ -98,16 +174,16 @@
 
 var _style = __webpack_require__(/*! ./style */ "./contentScript/style.js");
 
-// import { observer, roomObserve, roomObserveBreaker } from './coopraid'
+var _coopraid = __webpack_require__(/*! ./coopraid */ "./contentScript/coopraid.js");
 
 // 修改全局样式
-(0, _style.initStyles)(); /*
-                           * @Author: zy9@github.com/zy410419243 
-                           * @Date: 2018-06-08 11:15:23 
-                           * @Last Modified by: zy9
-                           * @Last Modified time: 2018-06-29 16:04:13
-                           */
-
+/*
+ * @Author: zy9@github.com/zy410419243 
+ * @Date: 2018-06-08 11:15:23 
+ * @Last Modified by: zy9
+ * @Last Modified time: 2018-06-29 16:27:20
+ */
+(0, _style.initStyles)();
 (0, _style.initZoom)();
 
 // 长连接监听统一写在这
@@ -119,13 +195,23 @@ chrome.runtime.onConnect.addListener(function (port) {
         case 'zoom_connect':
             port.onMessage.addListener(function (response) {
                 var zoom = response.zoom,
-                    message = response.message;
+                    message = response.message,
+                    search = response.search;
 
 
                 switch (message) {
                     case 'set_zoom':
                         // 用作Popup中拖动Slider时，实时改变窗口大小
                         (0, _style.setZoom)(zoom);
+                        break;
+
+                    case 'init_coopraid_listener':
+                        // 开启共斗搜索
+                        (0, _coopraid.roomObserve)(search);
+                        break;
+
+                    case 'close_coopraid_listener':
+
                         break;
                 }
             });
