@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-05-30 21:58:12 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-30 15:14:28
+ * @Last Modified time: 2018-06-30 16:57:56
  * @Description 共斗时的设置
  */
 let observer = null;
@@ -99,6 +99,11 @@ const initRoomSearch = () => {
     });
 }
 
+// 检查是否人员页面
+const is_character_page = () => {
+    return !!(document.getElementsByClassName('btn-lis-user').length);
+}
+
 // 检查超巴房队友天人情况
 const check_characters = () => {
     let characters = [];
@@ -115,5 +120,5 @@ const check_characters = () => {
 
 module.exports = {
     roomObserve, roomObserveBreaker, initRoomSearch, // 搜索相关
-    check_characters, // 超巴房相关
+    is_character_page, check_characters, // 超巴房相关
 }

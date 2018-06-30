@@ -2,10 +2,10 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-08 11:15:23 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-30 15:14:46
+ * @Last Modified time: 2018-06-30 16:58:16
  */
 import { initStyles, initZoom, setZoom } from './style'
-import { roomObserve, roomObserveBreaker, initRoomSearch, check_characters } from './coopraid'
+import { roomObserve, roomObserveBreaker, initRoomSearch, check_characters, is_character_page } from './coopraid'
 
 // 修改全局样式
 initStyles();
@@ -34,6 +34,10 @@ chrome.runtime.onConnect.addListener(port => {
 
                     case 'close_coopraid_search': // 关闭共斗搜索
 
+                    break;
+
+                    case 'is_character_page': // 检查是否人员页面
+                        port.postMessage({ flag: is_character_page() });
                     break;
 
                     case 'check_ub_characters': // 检查超巴房队友天人情况
