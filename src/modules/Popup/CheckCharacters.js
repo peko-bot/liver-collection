@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-30 15:03:11 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-30 18:56:52
+ * @Last Modified time: 2018-06-30 19:37:54
  */
 import React, { Component } from 'react'
 
@@ -62,16 +62,21 @@ export default class CheckCharacters extends Component {
                     for(let item of result) {
                         const { data } = item;
                         const splitStr = 'http%3A%2F%2Fgame-a.granbluefantasy.jp%2Fassets%2Fimg_light%2Fsp%2Fassets%2Fnpc%2Fquest';
+                        let char_list = [];
                         
                         for(let jtem of data.split(splitStr)) {
+
                             for(let ktem of character_imgs) {
                                 const { key, url } = ktem;
 
                                 if(jtem.includes(url)) {
-                                    item.hasCharacter += `${ key },`;
+                                    char_list.push(key);
                                 }
                             }
                         }
+                        
+                        // 去重
+                        item.hasCharacter = Array.from(new Set(char_list)).toString();
                     }
 
                     // 生成气泡节点
