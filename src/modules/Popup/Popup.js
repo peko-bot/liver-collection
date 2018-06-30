@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-05-20 14:46:14 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-30 13:07:50
+ * @Last Modified time: 2018-06-30 13:44:15
  */
 import React, { Component } from 'react'
 
@@ -10,13 +10,27 @@ import { Button, Input, Select, notification, Switch, Tooltip, Slider } from 'an
 const Option = Select.Option;
 
 import * as Request from '../../../util/Request'
+import store from '../../../util/Store'
 
-const { store: STORE } = chrome.extension.getBackgroundPage();
+/**
+ * start时是没有chrome的api的，用到localStorage的地方都会报错，
+ * 这会让我感觉很多无关紧要的代码白写了，很气，
+ * 于是有了以下容错
+*/
+let environment;
+if(chrome.extension) {
+    environment = chrome.extension.getBackgroundPage();
+} else {
+    environment = { store: new store() };
+}
+const { store: STORE } = environment;
 
 import './css/Popup.css'
 
-const article = 'http://game.granbluefantasy.jp/item/article_list_by_filter_mode'; // item第二页，红跟豆那页
-const recovery = 'http://game.granbluefantasy.jp/item/recovery_and_evolution_list_by_filter_mode'; // item第一页，日常素材
+// item第二页，红跟豆那页
+const article = 'http://game.granbluefantasy.jp/item/article_list_by_filter_mode';
+// item第一页，日常素材
+const recovery = 'http://game.granbluefantasy.jp/item/recovery_and_evolution_list_by_filter_mode';
 
 export default class Popup extends Component {
     constructor(props) {

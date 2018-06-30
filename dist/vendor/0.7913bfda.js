@@ -83,6 +83,10 @@ var _Request = __webpack_require__(/*! ../../../util/Request */ "./util/Request.
 
 var Request = _interopRequireWildcard(_Request);
 
+var _Store = __webpack_require__(/*! ../../../util/Store */ "./util/Store.js");
+
+var _Store2 = _interopRequireDefault(_Store);
+
 __webpack_require__(/*! ./css/Popup.css */ "./src/modules/Popup/css/Popup.css");
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
@@ -99,17 +103,31 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 * @Author: zy9@github.com/zy410419243 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 * @Date: 2018-05-20 14:46:14 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 * @Last Modified by: zy9
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @Last Modified time: 2018-06-29 16:57:31
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @Last Modified time: 2018-06-30 13:44:15
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 */
 
 
 var Option = _select2.default.Option;
 
-var _chrome$extension$get = chrome.extension.getBackgroundPage(),
-    STORE = _chrome$extension$get.store;
+/**
+ * start时是没有chrome的api的，用到localStorage的地方都会报错，
+ * 这会让我感觉很多无关紧要的代码白写了，很气，
+ * 于是有了以下容错
+*/
+var environment = void 0;
+if (chrome.extension) {
+    environment = chrome.extension.getBackgroundPage();
+} else {
+    environment = { store: new _Store2.default() };
+}
+var _environment = environment,
+    STORE = _environment.store;
 
-var article = 'http://game.granbluefantasy.jp/item/article_list_by_filter_mode'; // item第二页，红跟豆那页
-var recovery = 'http://game.granbluefantasy.jp/item/recovery_and_evolution_list_by_filter_mode'; // item第一页，日常素材
+
+// item第二页，红跟豆那页
+var article = 'http://game.granbluefantasy.jp/item/article_list_by_filter_mode';
+// item第一页，日常素材
+var recovery = 'http://game.granbluefantasy.jp/item/recovery_and_evolution_list_by_filter_mode';
 
 var Popup = function (_Component) {
     _inherits(Popup, _Component);
@@ -129,6 +147,7 @@ var Popup = function (_Component) {
             address: 'localhost:8023',
             head_address: 'http://',
             coopraid_search_value: coopraid_search_value,
+            coopraid_switch_checked: !!coopraid_search_value,
             defaultZoom: STORE.get('zoom')
         };
 
@@ -220,7 +239,14 @@ var _initialiseProps = function _initialiseProps() {
     };
 
     this.handle_coopraid_switch = function (checked) {
-        return checked && _this2.handle_search();
+        if (checked) {
+            _this2.handle_search();
+        } else {
+            STORE.remove('search');
+            _this2.setState({ coopraid_search_value: '' });
+        }
+
+        _this2.setState({ coopraid_switch_checked: checked });
     };
 
     this.handle_search = function () {
@@ -251,7 +277,8 @@ var _initialiseProps = function _initialiseProps() {
             btn_loading = _state2.btn_loading,
             address = _state2.address,
             coopraid_search_value = _state2.coopraid_search_value,
-            defaultZoom = _state2.defaultZoom;
+            defaultZoom = _state2.defaultZoom,
+            coopraid_switch_checked = _state2.coopraid_switch_checked;
 
 
         var selectBefore = _react2.default.createElement(
@@ -298,7 +325,7 @@ var _initialiseProps = function _initialiseProps() {
                         { style: { float: 'left', color: '#666' } },
                         '\u662F\u5426\u5F00\u542F\u5171\u6597\u641C\u7D22'
                     ),
-                    _react2.default.createElement(_switch2.default, { disabled: !coopraid_search_value, onChange: _this2.handle_coopraid_switch, checked: !!coopraid_search_value, style: { float: 'right', marginRight: '6%' } }),
+                    _react2.default.createElement(_switch2.default, { disabled: !coopraid_search_value, onChange: _this2.handle_coopraid_switch, checked: coopraid_switch_checked, style: { float: 'right', marginRight: '6%' } }),
                     _react2.default.createElement('div', { style: { clear: 'both' } })
                 )
             ),
@@ -408,7 +435,136 @@ var get_by_cookie = exports.get_by_cookie = function get_by_cookie(url, data, ca
     });
 };
 
+/***/ }),
+
+/***/ "./util/Store.js":
+/*!***********************!*\
+  !*** ./util/Store.js ***!
+  \***********************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/*
+ * @Author: zy9@github.com/zy410419243 
+ * @Date: 2018-06-25 22:28:14 
+ * @Last Modified by: zy9
+ * @Last Modified time: 2018-06-26 16:28:00
+ */
+var Store = function Store(name, defaults) {
+    _classCallCheck(this, Store);
+
+    _initialiseProps.call(this);
+
+    this.name = name;
+
+    if (defaults !== undefined) {
+        for (var key in defaults) {
+            if (defaults.hasOwnProperty(key) && this.get(key) === undefined) {
+                this.set(key, defaults[key]);
+            }
+        }
+    }
+};
+
+var _initialiseProps = function _initialiseProps() {
+    var _this = this;
+
+    this.get = function (propsName) {
+        name = 'store.' + _this.name + '.' + propsName;
+
+        if (localStorage.getItem(name) === null) {
+            return undefined;
+        }
+
+        try {
+            return JSON.parse(localStorage.getItem(name));
+        } catch (e) {
+            return null;
+        }
+    };
+
+    this.set = function (name, value) {
+        if (value === undefined) {
+            _this.remove(name);
+        } else {
+            if (typeof value === 'function') {
+                value = null;
+            } else {
+                try {
+                    value = JSON.stringify(value);
+                } catch (e) {
+                    value = null;
+                }
+            }
+
+            localStorage.setItem('store.' + _this.name + '.' + name, value);
+        }
+
+        return _this;
+    };
+
+    this.remove = function (name) {
+        localStorage.removeItem('store.' + _this.name + '.' + name);
+
+        return _this;
+    };
+
+    this.removeAll = function () {
+        var name = 'store.' + _this.name + '.';
+        for (var i = localStorage.length - 1; i >= 0; i--) {
+            if (localStorage.key(i).substring(0, name.length) === name) {
+                localStorage.removeItem(localStorage.key(i));
+            }
+        }
+
+        return _this;
+    };
+
+    this.toObject = function () {
+        var values = {},
+            key = void 0,
+            value = void 0;
+
+        var name = 'store.' + _this.name + '.';
+        for (var i = localStorage.length - 1; i >= 0; i--) {
+            if (localStorage.key(i).substring(0, name.length) === name) {
+                key = localStorage.key(i).substring(name.length);
+                value = _this.get(key);
+                if (value !== undefined) {
+                    values[key] = value;
+                }
+            }
+        }
+
+        return values;
+    };
+
+    this.fromObject = function (values, merge) {
+        if (merge !== true) {
+            _this.removeAll();
+        }
+        for (var key in values) {
+            if (values.hasOwnProperty(key)) {
+                _this.set(key, values[key]);
+            }
+        }
+
+        return _this;
+    };
+};
+
+exports.default = Store;
+
 /***/ })
 
 }]);
-//# sourceMappingURL=0.698e26b7.js.map
+//# sourceMappingURL=0.7913bfda.js.map

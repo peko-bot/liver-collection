@@ -108,26 +108,30 @@ var _options = __webpack_require__(/*! ./options */ "./background/options/index.
 
 var _options2 = _interopRequireDefault(_options);
 
+var _user = __webpack_require__(/*! ./user */ "./background/user.js");
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // 初始化默认配置
-var local = new _Store2.default('options');
-
-// 如果localStorage已经有了配置，那合并
 /*
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-09 21:42:02
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-29 17:06:32
+ * @Last Modified time: 2018-06-30 13:53:17
  */
+var local = new _Store2.default('options');
+
+// 如果localStorage已经有了配置，那合并
 var oldStorage = local.toObject();
 local.fromObject(Object.assign({}, _options2.default, oldStorage));
 
 var zoom = local.get('zoom');
 
 window.store = local;
+
+(0, _user.init_user_id)(local);
 
 chrome.runtime.onMessage.addListener(function (response, sender, sendResponse) {
     var message = response.message,
@@ -167,6 +171,34 @@ chrome.runtime.onMessage.addListener(function (response, sender, sendResponse) {
 
 module.exports = {
     zoom: 0.9 // 默认缩放,
+};
+
+/***/ }),
+
+/***/ "./background/user.js":
+/*!****************************!*\
+  !*** ./background/user.js ***!
+  \****************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _Request = __webpack_require__(/*! ../util/Request */ "./util/Request.js");
+
+// 获得user_id
+var getUserId = 'http://game.granbluefantasy.jp/user/user_id';
+
+module.exports = {
+    init_user_id: function init_user_id(STORE) {
+        (0, _Request.get_by_cookie)(getUserId, {}, function (result) {
+            var user_id = result.user_id;
+
+
+            STORE.set('userId', user_id);
+        });
+    }
 };
 
 /***/ }),

@@ -2,11 +2,13 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-09 21:42:02
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-29 17:06:32
+ * @Last Modified time: 2018-06-30 13:53:17
  */
 import Store from '../util/Store'
 import * as Request from '../util/Request'
 import options from './options'
+
+import { init_user_id } from './user'
 
 // 初始化默认配置
 const local = new Store('options');
@@ -18,6 +20,8 @@ local.fromObject(Object.assign({}, options, oldStorage));
 const zoom = local.get('zoom');
 
 window.store = local;
+
+init_user_id(local);
 
 chrome.runtime.onMessage.addListener((response, sender, sendResponse) => {
     const { message, zoom, search } = response;
