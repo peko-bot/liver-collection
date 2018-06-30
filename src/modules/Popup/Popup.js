@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-05-20 14:46:14 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-30 13:44:15
+ * @Last Modified time: 2018-06-30 14:03:09
  */
 import React, { Component } from 'react'
 
@@ -59,6 +59,19 @@ export default class Popup extends Component {
         const { head_address, address } = this.state;
 
         this.setState({ btn_loading: true });
+
+        const user_id = STORE.get('userId');
+        if(!user_id) {
+            notification.open({
+                message: '非法操作',
+                description: '没获得到userId',
+                duration: 3
+            });
+
+            this.setState({ btn_loading: false });
+            
+            return;
+        }
         
         Request.get_by_cookie(article, {}, result => {
             Request.get_by_cookie(recovery, {}, recovery => {
@@ -66,7 +79,8 @@ export default class Popup extends Component {
     
                 result = [...result, ...recovery];
     
-                Request.upload_to_server(`${head_address}${address}/Memo/gbf/i_item.do`, { body: 'user_id=6964955&data=' + JSON.stringify(result) }, result => {
+                const body = `user_id=${ user_id }&data=${JSON.stringify(result)}`;
+                Request.upload_to_server(`${head_address}${address}/Memo/gbf/i_item.do`, { body }, result => {
                     if(result == 'success') {
                         notification.open({
                             message: '上传成功',

@@ -192,7 +192,7 @@ var getUserId = 'http://game.granbluefantasy.jp/user/user_id';
 
 module.exports = {
     init_user_id: function init_user_id(STORE) {
-        (0, _Request.get_by_cookie)(getUserId, {}, function (result) {
+        !STORE.get('userId') && (0, _Request.get_by_cookie)(getUserId, {}, function (result) {
             var user_id = result.user_id;
 
 
