@@ -2,9 +2,9 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-08 11:15:23 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-30 16:58:16
+ * @Last Modified time: 2018-06-30 23:33:58
  */
-import { initStyles, initZoom, setZoom } from './style'
+import { initStyles, initZoom, setZoom, controlLeftSider, controlRightSider } from './style'
 import { roomObserve, roomObserveBreaker, initRoomSearch, check_characters, is_character_page } from './coopraid'
 
 // 修改全局样式
@@ -21,7 +21,7 @@ chrome.runtime.onConnect.addListener(port => {
     switch(name) {
         case 'popup_to_content':
             port.onMessage.addListener(response => {
-                const { zoom, message, search } = response;
+                const { zoom, message, search, type, status } = response;
         
                 switch(message) {
                     case 'set_zoom': // 用作Popup中拖动Slider时，实时改变窗口大小
@@ -42,6 +42,10 @@ chrome.runtime.onConnect.addListener(port => {
 
                     case 'check_ub_characters': // 检查超巴房队友天人情况
                         port.postMessage({ datas: check_characters() });
+                    break;
+
+                    case 'sider_status': // 控制左右面板显示
+                        type == 'is_left_sider_show' ? controlLeftSider(status): controlRightSider(status);
                     break;
                 }
             });

@@ -2,11 +2,13 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-30 15:03:11 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-30 19:37:54
+ * @Last Modified time: 2018-06-30 23:25:44
  */
 import React, { Component } from 'react'
 
 import { Button, notification, Table } from 'antd'
+
+import WhiteSpace from '../../component/white-space'
 
 import { get_by_cookie } from '../../../util/Request'
 
@@ -26,7 +28,7 @@ export default class CheckCharacters extends Component {
 
     componentDidMount = () => {
         // 不在人员页面时，检查功能禁用
-        chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
+        chrome.extension && chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
             const port = chrome.tabs.connect(tabs[0].id, { name: 'popup_to_content' });
 
             port.postMessage({ message: 'is_character_page' });
@@ -40,6 +42,11 @@ export default class CheckCharacters extends Component {
     }
 
     handle_check_ub_characters = () => {
+        const { disabled } = this.state;
+
+        if(disabled) {
+            return;
+        }
         chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
             const port = chrome.tabs.connect(tabs[0].id, { name: 'popup_to_content' });
 
@@ -119,7 +126,9 @@ export default class CheckCharacters extends Component {
 
         return (
             <div className='CheckCharacters'>
-                <Button type='primary' loading={ check_ub_characters_btn_loading } disabled={ disabled } onClick={ !disabled && this.handle_check_ub_characters } style={{ width: '90%' }}>严格检查骑空士队友是否失格</Button>
+                <Button type='primary' loading={ check_ub_characters_btn_loading } disabled={ disabled } onClick={ this.handle_check_ub_characters } style={{ width: '90%' }}>严格检查骑空士队友是否失格</Button>
+
+                <WhiteSpace />
             </div>
         )
     }

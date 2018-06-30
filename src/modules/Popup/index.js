@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-05-20 14:46:14 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-30 16:01:44
+ * @Last Modified time: 2018-06-30 22:53:39
  */
 import React, { Component } from 'react'
 
@@ -10,6 +10,7 @@ import UploadItems from './UploadItems'
 import CoopraidSearch from './CoopraidSearch'
 import SetZoom from './SetZoom'
 import CheckCharacters from './CheckCharacters'
+import SiderOptions from './SiderOptions'
 
 import './css/index.css'
 
@@ -28,6 +29,9 @@ export default class Popup extends Component {
                 
                 {/* ub房检查队友天人 */}
                 <CheckCharacters />
+
+                {/* 左右面板显示开关 */}
+                <SiderOptions />
             </div>
         )
     }

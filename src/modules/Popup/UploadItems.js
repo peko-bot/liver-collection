@@ -1,8 +1,8 @@
 /*
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-30 15:34:22 
- * @Last Modified by:   zy9 
- * @Last Modified time: 2018-06-30 16:04:16 
+ * @Last Modified by: zy9
+ * @Last Modified time: 2018-06-30 22:55:19
  */
 import React, { Component } from 'react'
 
@@ -20,6 +20,7 @@ import './css/UploadItems.css'
  * start时是没有chrome的api的，用到localStorage的地方都会报错，
  * 这会让我感觉很多无关紧要的代码白写了，很气，
  * 于是有了以下容错
+ * TODO: 这些初始化到background中
 */
 let environment;
 if(chrome.extension) {
