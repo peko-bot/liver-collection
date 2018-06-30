@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-12 09:43:22 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-26 14:18:11
+ * @Last Modified time: 2018-06-30 15:27:08
  */
 import React, { Component } from 'react'
 import { Route, NavLink, HashRouter } from 'react-router-dom'
@@ -10,13 +10,13 @@ import { Route, NavLink, HashRouter } from 'react-router-dom'
 import Bundle from '../../util/Bundle'
 
 const Popup = props => (
-    <Bundle load={ () => import('../modules/Popup/Popup') }>
+    <Bundle load={ () => import('../modules/Popup') }>
         { Popup => <Popup {...props}/> }
     </Bundle>
 )
 
 const Charts = props => (
-    <Bundle load={ () => import('../modules/Charts/Charts') }>
+    <Bundle load={ () => import('../modules/Charts') }>
         { Charts => <Charts {...props}/> }
     </Bundle>
 )

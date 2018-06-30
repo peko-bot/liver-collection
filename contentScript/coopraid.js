@@ -2,11 +2,12 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-05-30 21:58:12 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-29 17:32:54
+ * @Last Modified time: 2018-06-30 15:14:28
  * @Description 共斗时的设置
  */
 let observer = null;
 
+// 根据搜索项筛选房间
 const roomObserve = search => {
     let rooms = document.getElementsByClassName('prt-wanted-list')[0];
 
@@ -67,37 +68,52 @@ const roomObserveBreaker = observer => {
     console.log('observer end')
 }
 
-module.exports = {
-    roomObserve,
-    roomObserveBreaker,
-    initRoomSearch: () => {
-        if(!location.href.includes('coopraid')) {
-            return;
-        }
-        
-        chrome.extension.sendMessage({ message: 'get_search'}, response => {
-            const { search } = response;
-
-            /**
-             * 因为页面加载是异步的，在content_script加载完成后，页面仍在loading状态
-             * 所以要观察下，在房间刷出来以后才有筛选的价值
-             */
-            let loadingObserver = new MutationObserver(mutations => {
-                let rooms = document.getElementsByClassName('prt-wanted-list')[0];
-
-                if(rooms) {
-                    // 开始观察房间
-                    roomObserve(search);
-                    // 结束观察loading的observer
-                    roomObserveBreaker(loadingObserver);
-                }
-            });
-
-            loadingObserver.observe(document.getElementsByTagName('body')[0], {
-                attributes: true,
-                childList: true,
-                characterData: true
-            });
-        });
+const initRoomSearch = () => {
+    if(!location.href.includes('coopraid')) {
+        return;
     }
+    
+    chrome.extension.sendMessage({ message: 'get_search'}, response => {
+        const { search } = response;
+
+        /**
+         * 因为页面加载是异步的，在content_script加载完成后，页面仍在loading状态
+         * 所以要观察下，在房间刷出来以后才有筛选的价值
+         */
+        let loadingObserver = new MutationObserver(mutations => {
+            let rooms = document.getElementsByClassName('prt-wanted-list')[0];
+
+            if(rooms) {
+                // 开始观察房间
+                roomObserve(search);
+                // 结束观察loading的observer
+                roomObserveBreaker(loadingObserver);
+            }
+        });
+
+        loadingObserver.observe(document.getElementsByTagName('body')[0], {
+            attributes: true,
+            childList: true,
+            characterData: true
+        });
+    });
+}
+
+// 检查超巴房队友天人情况
+const check_characters = () => {
+    let characters = [];
+
+    for(let item of document.getElementsByClassName('btn-lis-user')) {
+        const { dataset } = item;
+        const { nickName, userId, userRank } = dataset;
+
+        characters.push({ nickName, userId, userRank });
+    }
+
+    return characters;
+}
+
+module.exports = {
+    roomObserve, roomObserveBreaker, initRoomSearch, // 搜索相关
+    check_characters, // 超巴房相关
 }
