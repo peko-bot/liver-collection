@@ -43,7 +43,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "vendor/" + ({}[chunkId]||chunkId) + "." + {"0":"698e26b7","1":"a3a11318","3":"b0d6d734","4":"938b797c"}[chunkId] + ".js"
+/******/ 		return __webpack_require__.p + "vendor/" + ({}[chunkId]||chunkId) + "." + {"0":"040c5a33","1":"a3a11318","2":"90900539","3":"b0d6d734"}[chunkId] + ".js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -24496,7 +24496,7 @@ var Popup = function Popup(props) {
     return _react2.default.createElement(
         _Bundle2.default,
         { load: function load() {
-                return Promise.all(/*! import() */[__webpack_require__.e(4), __webpack_require__.e(3), __webpack_require__.e(0)]).then(__webpack_require__.t.bind(null, /*! ../modules/Popup/Popup */ "./src/modules/Popup/Popup.js", 7));
+                return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(3), __webpack_require__.e(0)]).then(__webpack_require__.t.bind(null, /*! ../modules/Popup/Popup */ "./src/modules/Popup/Popup.js", 7));
             } },
         function (Popup) {
             return _react2.default.createElement(Popup, props);
@@ -24508,7 +24508,7 @@ var Charts = function Charts(props) {
     return _react2.default.createElement(
         _Bundle2.default,
         { load: function load() {
-                return Promise.all(/*! import() */[__webpack_require__.e(4), __webpack_require__.e(1)]).then(__webpack_require__.t.bind(null, /*! ../modules/Charts/Charts */ "./src/modules/Charts/Charts.js", 7));
+                return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(1)]).then(__webpack_require__.t.bind(null, /*! ../modules/Charts/Charts */ "./src/modules/Charts/Charts.js", 7));
             } },
         function (Charts) {
             return _react2.default.createElement(Charts, props);

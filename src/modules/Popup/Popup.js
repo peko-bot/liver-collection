@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-05-20 14:46:14 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-29 16:57:31
+ * @Last Modified time: 2018-06-30 13:07:50
  */
 import React, { Component } from 'react'
 
@@ -30,6 +30,7 @@ export default class Popup extends Component {
             address: 'localhost:8023',
             head_address: 'http://',
             coopraid_search_value,
+            coopraid_switch_checked: !!coopraid_search_value,
             defaultZoom: STORE.get('zoom'),
         }
 
@@ -83,7 +84,16 @@ export default class Popup extends Component {
 
     handle_coopraid_search = event => this.setState({ coopraid_search_value: event.target.value });
 
-    handle_coopraid_switch = checked => checked && this.handle_search();
+    handle_coopraid_switch = checked => {
+        if(checked) {
+            this.handle_search();
+        } else {
+            STORE.remove('search');
+            this.setState({ coopraid_search_value: '' });
+        }
+
+        this.setState({ coopraid_switch_checked: checked });
+    }
 
     handle_search = () => {
         const { coopraid_search_value } = this.state;
@@ -108,7 +118,7 @@ export default class Popup extends Component {
     }
 
     render = () => {
-        const { btn_loading, address, coopraid_search_value, defaultZoom } = this.state;
+        const { btn_loading, address, coopraid_search_value, defaultZoom, coopraid_switch_checked } = this.state;
 
         const selectBefore = (
             <Select defaultValue='http://' style={{ width: 90 }} onChange={ this.handle_head_address }>
@@ -132,7 +142,7 @@ export default class Popup extends Component {
                 <div style={{ marginLeft: '6%' }}>
                     <Tooltip title='看见上面的文本框了么，填了这个你才能开启搜索'>
                         <span style={{ float: 'left', color: '#666' }}>是否开启共斗搜索</span>
-                        <Switch disabled={ !coopraid_search_value } onChange={ this.handle_coopraid_switch } checked={ !!coopraid_search_value } style={{ float: 'right', marginRight: '6%' }} />
+                        <Switch disabled={ !coopraid_search_value } onChange={ this.handle_coopraid_switch } checked={ coopraid_switch_checked } style={{ float: 'right', marginRight: '6%' }} />
                         <div style={{ clear: 'both' }} ></div>
                     </Tooltip>
                 </div>
