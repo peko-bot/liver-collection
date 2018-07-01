@@ -24,8 +24,8 @@
   
   这样可以获得最新的扩展  
 
-## 如果你要改代码
-* 首先，不要直接pr到master分支，这样是不会给过的。正确姿势应该是切到merge分支，然后再pr
+## 如果你要改代码，这些是必须得知道的一些东西
+* 首先，不要直接pr到master分支，这样是不会过的。正确姿势应该是切到merge分支，然后再pr
 
 * 你得先学会一点react.js、es6、chrome-extension。Popup使用antd的组件，操作dom直接用的js原生方法 ~~当然也不算纯原生，es6语法糖随处可见~~
   
@@ -41,7 +41,18 @@
   
   ~~我才不会想着会有人会来pr呢~~
   
-* 以上命令中，黄色输出代表warns，红色代表errors，绿色代表正常，可以不管。
+* 以上命令中，黄色输出代表warns，红色代表errors，绿色代表正常，可以不管。  
+
+## 代码从哪开始看？  
+
+* 这里假设上面提到的那些东西你都懂  
+
+* 当content_script加载完成时，为了初始化localStorage中的数据，会先跟background交互一下  
+  短连接是各自请求各自的，可以在contentScript的index中看看分别执行了哪些方法，所有接收都写在background.js里  
+  长连接contentScript是接收端，建立连接在popup里  
+  默认配置在background/options中  
+  注释中标着TODO的是当时图快写的很江硬，后续需要改的地方  
+* 编译时的输出是有插件的，有兴趣可以去package.json里看看 ~~欢迎来编故事~~  
 
 ## 演示效果
 

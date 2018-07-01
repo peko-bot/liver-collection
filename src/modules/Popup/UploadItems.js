@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-30 15:34:22 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-30 22:55:19
+ * @Last Modified time: 2018-07-01 10:04:37
  */
 import React, { Component } from 'react'
 
@@ -40,8 +40,8 @@ export default class UploadItems extends Component {
         super(props);
 
         this.state = {
-            address: 'localhost:8023',
-            head_address: 'http://',
+            address: STORE.get('address'),
+            head_address: STORE.get('head_address'),
             btn_loading: false,
         }
     }
@@ -56,6 +56,9 @@ export default class UploadItems extends Component {
 
     handle_upload = () => {
         const { head_address, address } = this.state;
+
+        STORE.set('address', address);
+        STORE.set('head_address', head_address);
 
         this.setState({ btn_loading: true });
 
@@ -109,7 +112,7 @@ export default class UploadItems extends Component {
         const { address, head_address, btn_loading } = this.state;
 
         const selectBefore = (
-            <Select defaultValue='http://' style={{ width: 90 }} onChange={ this.handle_head_address }>
+            <Select defaultValue={ head_address } style={{ width: 90 }} onChange={ this.handle_head_address }>
                 <Option value='http://'>http://</Option>
                 <Option value='https://'>https://</Option>
                 <Option value='ftp://'>ftp://</Option>
