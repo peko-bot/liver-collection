@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-30 15:03:11 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-30 23:25:44
+ * @Last Modified time: 2018-07-01 13:07:02
  */
 import React, { Component } from 'react'
 
@@ -87,7 +87,7 @@ export default class CheckCharacters extends Component {
                     }
 
                     // 生成气泡节点
-                    const popup = <Table columns={ columns } dataSource={ result } pagination={ false } key='table' />;
+                    const popup = <Table columns={ columns } dataSource={ result } pagination={ false } rowKey='id' />;
 
                     notification.open({
                         message: '红茶已泡好，跟谁喝自便，但请注意卫生',

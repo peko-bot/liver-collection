@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-05-30 21:58:12 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-30 16:57:56
+ * @Last Modified time: 2018-07-01 12:58:33
  * @Description 共斗时的设置
  */
 let observer = null;
@@ -104,7 +104,9 @@ const is_character_page = () => {
     return !!(document.getElementsByClassName('btn-lis-user').length);
 }
 
-// 检查超巴房队友天人情况
+/**
+ * 返回房间内队友信息
+ */
 const check_characters = () => {
     let characters = [];
 

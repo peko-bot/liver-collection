@@ -2,10 +2,10 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-08 11:15:23 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-30 23:33:58
+ * @Last Modified time: 2018-07-01 12:23:10
  */
 import { initStyles, initZoom, setZoom, controlLeftSider, controlRightSider } from './style'
-import { roomObserve, roomObserveBreaker, initRoomSearch, check_characters, is_character_page } from './coopraid'
+import { roomObserve, roomObserveBreaker, initRoomSearch, check_characters, is_character_page, check_black_list } from './coopraid'
 
 // 修改全局样式
 initStyles();
@@ -46,6 +46,10 @@ chrome.runtime.onConnect.addListener(port => {
 
                     case 'sider_status': // 控制左右面板显示
                         type == 'is_left_sider_show' ? controlLeftSider(status): controlRightSider(status);
+                    break;
+
+                    case 'check_black_list': // 检查黑名单
+                        port.postMessage({ datas: check_characters() });
                     break;
                 }
             });
