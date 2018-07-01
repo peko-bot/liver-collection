@@ -17,9 +17,8 @@
 # 用法
 ## 如果你只是单纯要用
 * 
-  去[这里](https://github.com/zy410419243/Liver-collection/releases)下最新的版本，然后把dist文件夹拖到浏览器的扩展程序里，或者点“加载已解压的扩展程序”，选dist作为路径，release里放的是稳定版，但这种方式不排除会有调试用的map文件  
+  去[这里](https://github.com/zy410419243/Liver-collection/releases)下最新的版本，然后把文件夹拖到浏览器的扩展程序里，或者点“加载已解压的扩展程序”，选解压文件夹为路径  
 
-  ~~因为我有时候懒得重新打包~~
 * 或者clone下来（需要先装好git及学会它几条命令），装好依赖包，执行npm run build
   
   这样可以获得最新的扩展  
