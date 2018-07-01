@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-07-01 10:39:37 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-01 13:09:48
+ * @Last Modified time: 2018-07-01 13:39:31
  */
 import React, { Component } from 'react'
 
@@ -53,7 +53,7 @@ export default class CheckBlackList extends Component {
     }
 
     handle_export_black_list = () => {
-        const data = JSON.stringify([{ test1: '11', test2: '22' }]);
+        const data = JSON.stringify(STORE.get('black_list'));
 
         // 下载json文件
         let vLink = document.createElement('a'),
