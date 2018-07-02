@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-30 15:20:01 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-30 22:56:49
+ * @Last Modified time: 2018-07-02 22:29:00
  */
 import React, { Component } from 'react'
 
@@ -58,7 +58,7 @@ export default class SetZoom extends Component {
             <div className='SetZoom'>
                 <div style={{ margin: '0 6%', textAlign: 'left' }}>
                     <span style={{ color: '#666' }}>调节窗口大小</span>
-                    <Slider step={ 0.01 } min={ 0.3 } max={ 1.5 } defaultValue={ defaultZoom } onChange={ this.handle_zoom } />
+                    <Slider step={ 0.01 } min={ 0.7 } max={ 2 } defaultValue={ defaultZoom } onChange={ this.handle_zoom } />
                 </div>
                 <WhiteSpace />
             </div>
