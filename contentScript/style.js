@@ -2,22 +2,23 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-08 11:13:09 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-30 23:40:54
+ * @Last Modified time: 2018-07-02 16:23:07
  * @Description 全局样式设置
- */
-/**
- * 修改滚动条样式
- * 因为容器className不知道是从哪来的，反正是无规律可循的字符串，
- * 又因为它的子节点名称固定，于是从子节点给容器加上个id，再用css修改容器滚动条属性
  */
 const initStyles = () => {
     if(!document.getElementById('mobage-game-container')) {
         return;
     }
 
-    // 修改滚动条样式
+    /**
+     * 修改滚动条样式
+     * 因为容器className不知道是从哪来的，反正是无规律可循的字符串，
+     * 又因为它的子节点名称固定，于是从子节点给容器加上个id，再用css修改容器滚动条属性
+     */
     let scroll = document.getElementById('mobage-game-container').parentNode;
     scroll.id = 'liver-collection-container';
+
+    initScrollHoverContainer();
 
     chrome.extension.sendMessage({ message: 'get_sider_options'}, response => {
         const { left, right } = response;
@@ -26,6 +27,36 @@ const initStyles = () => {
 
         !right && controlRightSider(right);
     });
+}
+
+// 用作控制滚动条样式
+const initScrollHoverContainer = () => {
+    let scroll = document.getElementById('liver-collection-container');
+
+    let scrollHoverContainer = document.createElement('div');
+    scrollHoverContainer.id = 'scrollHoverContainer';
+    scrollHoverContainer.style.cssText = 'position:fixed;right:0px;top:0px;width:30px;height:100%;';
+    scroll.appendChild(scrollHoverContainer);
+
+    scrollHoverContainer.addEventListener('mouseover', scrollEvent, false);
+
+    // setTimeout(() => {
+    //     scrollHoverContainer.removeEventListener('mouseover', scrollEvent, false);
+    //     console.log('remove')
+    // }, 5000);
+}
+
+// 绑定滚动条移入事件，单独写出来是为了移除事件
+const scrollEvent = e => {
+    let scroll = document.getElementById('liver-collection-container');
+
+    scroll.id = 'liver-collection-container-hover';
+    scrollHoverContainer.style.display = 'none';
+
+    setTimeout(() => {
+        scroll.id = 'liver-collection-container';
+        scrollHoverContainer.style.display = 'block';
+    }, 3000);
 }
 
 // 隐藏左侧侧边栏
