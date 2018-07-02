@@ -4,5 +4,6 @@ module.exports = {
     is_right_sider_show: false, // 是否显示右侧面板
     head_address: 'http://', // 协议
     address: 'localhost:8023', // 服务所在地址
-    black_list: [{ id: '123', description: '测试1' }], // 黑名单
+    black_list: [], // 黑名单
+    is_scroll_style_show: false, // 是否显示滚动条样式变化
 }

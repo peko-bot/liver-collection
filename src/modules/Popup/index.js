@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-05-20 14:46:14 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-01 10:39:45
+ * @Last Modified time: 2018-07-02 16:28:41
  */
 import React, { Component } from 'react'
 
@@ -12,6 +12,7 @@ import SetZoom from './SetZoom'
 import CheckCharacters from './CheckCharacters'
 import SiderOptions from './SiderOptions'
 import CheckBlackList from './CheckBlackList'
+import ScrollOptions from './ScrollOptions'
 
 import './css/index.css'
 
@@ -36,6 +37,9 @@ export default class Popup extends Component {
 
                 {/* 左右面板显示开关 */}
                 <SiderOptions />
+
+                {/* 是否开启滚动条样式 */}
+                <ScrollOptions />
             </div>
         )
     }

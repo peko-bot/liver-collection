@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-08 11:13:09 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-02 16:23:07
+ * @Last Modified time: 2018-07-02 17:32:38
  * @Description 全局样式设置
  */
 const initStyles = () => {
@@ -18,8 +18,14 @@ const initStyles = () => {
     let scroll = document.getElementById('mobage-game-container').parentNode;
     scroll.id = 'liver-collection-container';
 
-    initScrollHoverContainer();
+    // 加载滚动条配置
+    chrome.extension.sendMessage({ message: 'get_scroll_options'}, response => {
+        const { status } = response;
 
+        status && initScrollHoverContainer();
+    });
+
+    // 加载侧边栏配置
     chrome.extension.sendMessage({ message: 'get_sider_options'}, response => {
         const { left, right } = response;
 
@@ -38,23 +44,34 @@ const initScrollHoverContainer = () => {
     scrollHoverContainer.style.cssText = 'position:fixed;right:0px;top:0px;width:30px;height:100%;';
     scroll.appendChild(scrollHoverContainer);
 
-    scrollHoverContainer.addEventListener('mouseover', scrollEvent, false);
-
-    // setTimeout(() => {
-    //     scrollHoverContainer.removeEventListener('mouseover', scrollEvent, false);
-    //     console.log('remove')
-    // }, 5000);
+    scrollHoverContainer.addEventListener('mouseover', scrollEvent.bind(this), false);
 }
 
-// 绑定滚动条移入事件，单独写出来是为了移除事件
-const scrollEvent = e => {
-    let scroll = document.getElementById('liver-collection-container');
+// 移除触发滚动条样式改变的元素
+const removeEvent = () => {
+    let scrollHoverContainer = document.getElementById('scrollHoverContainer');
 
-    scroll.id = 'liver-collection-container-hover';
+    // scrollHoverContainer.removeEventListener('mouseover', scrollEvent.bind(this), false);
+    scrollHoverContainer.parentNode.removeChild(scrollHoverContainer);
+}
+
+/**
+ * 因为滚动条没有hover事件，或者说我不知道怎么写，这里用了个hack
+ * 
+ * css里写了两种样式，一种是鼠标未移入样式#liver-collection-container
+ * 另一种是移入的#liver-collection-container-hover
+ * 创建一个额外的div，当鼠标移入时显示#liver-collection-container-hover的样式，移除这个额外的div
+ * 时间间隔后把id改回来
+ */
+const scrollEvent = e => {
+    let scrollHoverContainer = document.getElementById('scrollHoverContainer');
+    let container = document.getElementById('liver-collection-container') || document.getElementById('liver-collection-container-hover');
+
+    container.id = 'liver-collection-container-hover';
     scrollHoverContainer.style.display = 'none';
 
     setTimeout(() => {
-        scroll.id = 'liver-collection-container';
+        container.id = 'liver-collection-container';
         scrollHoverContainer.style.display = 'block';
     }, 3000);
 }
@@ -93,4 +110,8 @@ const initZoom = () => {
     });
 }
 
-module.exports = { initStyles, initZoom, setZoom, controlLeftSider, controlRightSider };
+module.exports = { 
+    initStyles, initZoom, setZoom, // 控制全局样式
+    controlLeftSider, controlRightSider, // 控制侧边栏
+    initScrollHoverContainer, removeEvent, // 控制滚动条样式
+};

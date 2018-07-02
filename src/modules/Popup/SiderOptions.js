@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-30 22:56:38 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-30 23:28:00
+ * @Last Modified time: 2018-07-02 16:29:18
  */
 import React, { Component } from 'react'
 
@@ -11,7 +11,6 @@ import { Switch } from 'antd'
 import WhiteSpace from '../../component/white-space'
 
 import store from '../../../util/Store'
-import { WSAEINVALIDPROVIDER } from 'constants';
 
 /**
  * start时是没有chrome的api的，用到localStorage的地方都会报错，

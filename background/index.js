@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-09 21:42:02
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-01 11:37:10
+ * @Last Modified time: 2018-07-02 16:49:52
  */
 import { local } from './initLocalStorage'
 import { init_user_id } from './user'
@@ -26,6 +26,10 @@ chrome.runtime.onMessage.addListener((response, sender, sendResponse) => {
 
         case 'get_sider_options':
             tasks = Object.assign(tasks, { left: local.get('is_left_sider_show'), right: local.get('is_right_sider_show') });
+        break;
+
+        case 'get_scroll_options':
+            tasks = Object.assign(tasks, { status: local.get('is_scroll_style_show') });
         break;
 
         default:

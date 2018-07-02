@@ -2,9 +2,9 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-08 11:15:23 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-01 12:23:10
+ * @Last Modified time: 2018-07-02 16:55:11
  */
-import { initStyles, initZoom, setZoom, controlLeftSider, controlRightSider } from './style'
+import { initStyles, initZoom, setZoom, controlLeftSider, controlRightSider, removeEvent, initScrollHoverContainer } from './style'
 import { roomObserve, roomObserveBreaker, initRoomSearch, check_characters, is_character_page, check_black_list } from './coopraid'
 
 // 修改全局样式
@@ -50,6 +50,10 @@ chrome.runtime.onConnect.addListener(port => {
 
                     case 'check_black_list': // 检查黑名单
                         port.postMessage({ datas: check_characters() });
+                    break;
+
+                    case 'scroll_style_status': // 设置是否开启滚动条样式
+                        status ? initScrollHoverContainer() : removeEvent();
                     break;
                 }
             });
