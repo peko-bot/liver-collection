@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-07-03 17:20:19 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-03 21:40:31
+ * @Last Modified time: 2018-07-03 22:34:01
  */
 import React, { Component } from 'react'
 
@@ -45,6 +45,9 @@ export default class MultiBattle extends Component {
 
     handle_switch_onchange = (name, checked) => {
         STORE.set(name, checked);
+
+        // 舔婊模式开启时，令popup失效
+        name == 'is_multil' && chrome.browserAction.setPopup({ popup: checked ? '' : 'index.html' });
 
         this.setState({ [name]: checked });
     }

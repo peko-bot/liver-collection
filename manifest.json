@@ -29,7 +29,6 @@
     "options_page": "index.html#option",
     "browser_action": {
         "default_icon": "assets/img/54878633_p0.png",
-        "default_title": "寻找失去的肝脏",
-        "default_popup": "index.html"
+        "default_title": "寻找失去的肝脏"
     }
 }
