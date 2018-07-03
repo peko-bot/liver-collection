@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-30 15:11:32 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-30 22:55:01
+ * @Last Modified time: 2018-07-03 21:18:49
  */
 import React, { Component } from 'react'
 
@@ -82,9 +82,9 @@ export default class CoopraidSearch extends Component {
                 <div style={{ marginLeft: '6%' }}>
                     <Tooltip title='看见上面的文本框了么，填了这个你才能开启搜索'>
                         <span style={{ float: 'left', color: '#666' }}>是否开启共斗搜索</span>
-                        <Switch disabled={ !coopraid_search_value } onChange={ this.handle_coopraid_switch } checked={ coopraid_switch_checked } style={{ float: 'right', marginRight: '6%' }} />
-                        <div style={{ clear: 'both' }} ></div>
                     </Tooltip>
+                    <Switch disabled={ !coopraid_search_value } onChange={ this.handle_coopraid_switch } checked={ coopraid_switch_checked } style={{ float: 'right', marginRight: '6%' }} />
+                    <div style={{ clear: 'both' }} ></div>
                 </div>
                 <WhiteSpace />
             </div>

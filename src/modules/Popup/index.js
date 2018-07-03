@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-05-20 14:46:14 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-02 16:28:41
+ * @Last Modified time: 2018-07-03 21:26:02
  */
 import React, { Component } from 'react'
 
@@ -21,7 +21,7 @@ export default class Popup extends Component {
         return (
             <div className='Popup'>
                 {/* 上传素材，需要本地数据库 */}
-                <UploadItems />
+                {/* <UploadItems /> */}
 
                 {/* 共斗房间筛选 */}
                 <CoopraidSearch />
@@ -36,10 +36,10 @@ export default class Popup extends Component {
                 <CheckCharacters />
 
                 {/* 左右面板显示开关 */}
-                <SiderOptions />
+                {/* <SiderOptions /> */}
 
                 {/* 是否开启滚动条样式 */}
-                <ScrollOptions />
+                {/* <ScrollOptions /> */}
             </div>
         )
     }

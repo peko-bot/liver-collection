@@ -6,4 +6,8 @@ module.exports = {
     address: 'localhost:8023', // 服务所在地址
     black_list: [], // 黑名单
     is_scroll_style_show: false, // 是否显示滚动条样式变化
+    is_multil: false, // 是否开启舔婊模式
+    is_listen_board: false, // 是否监视剪切板
+    is_listen_bp: false, // 是否监视bp
+    is_rape: false, // 是否强行进入
 }

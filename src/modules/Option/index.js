@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-07-02 21:36:02 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-03 17:39:11
+ * @Last Modified time: 2018-07-03 21:46:10
  */
 import React, { Component } from 'react'
 
@@ -102,8 +102,8 @@ export default class Option extends Component {
                     { key == 2 && upload_items }
                     
                     <Footer style={{ textAlign: 'center' }}>
-                        <div>贫穷使我们相遇，但后来，只有你发出了母猪的声音</div>
-                        <div>Poverty makes us meet, but later, only you come out of the closet.</div>
+                        <div>贫穷使我们相遇，但后来，你却发出了母猪的声音。而我，只想为你豹跳一曲，如花净土...</div>
+                        <div>Poverty makes us meet, but later, only you come out of the closet. But for me, I just want to marry to you...</div>
                     </Footer>
                 </Layout>
             </Layout>
