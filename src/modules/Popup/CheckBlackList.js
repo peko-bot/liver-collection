@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-07-01 10:39:37 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-01 13:39:31
+ * @Last Modified time: 2018-07-03 09:15:05
  */
 import React, { Component } from 'react'
 
@@ -90,7 +90,7 @@ export default class CheckBlackList extends Component {
                     }
                 }
 
-                const haveTarget = <Table columns={ columns } dataSource={ targetUsers } pagination={ false } rowKey='id' />;
+                const haveTarget = <Table scroll={{ y: 280 }} columns={ columns } dataSource={ targetUsers } pagination={ false } rowKey='id' />;
 
                 notification.open({
                     message: targetUsers.length ? '有目标人物' : '无目标人物',
