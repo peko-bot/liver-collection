@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-08 11:13:09 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-03 09:10:37
+ * @Last Modified time: 2018-07-03 12:36:01
  * @Description 全局样式设置
  */
 const initStyles = () => {
@@ -99,7 +99,6 @@ const controlRightSider = flag => {
 const setZoom = zoom => {
     // let htmlBody = document.getElementsByTagName('html')[0];
     let htmlBody = document.getElementById('mobage-game-container');
-    console.dir(htmlBody)
     
     if(!htmlBody) {
         return;
