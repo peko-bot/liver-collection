@@ -2,10 +2,11 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-08 11:15:23 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-02 16:55:11
+ * @Last Modified time: 2018-07-04 22:17:05
  */
 import { initStyles, initZoom, setZoom, controlLeftSider, controlRightSider, removeEvent, initScrollHoverContainer } from './style'
 import { roomObserve, roomObserveBreaker, initRoomSearch, check_characters, is_character_page, check_black_list } from './coopraid'
+import { get_battle_room_href } from './battleCheck'
 
 // 修改全局样式
 initStyles();
@@ -21,7 +22,7 @@ chrome.runtime.onConnect.addListener(port => {
     switch(name) {
         case 'popup_to_content':
             port.onMessage.addListener(response => {
-                const { zoom, message, search, type, status } = response;
+                const { zoom, message, search, type, status, battleId, userId } = response;
         
                 switch(message) {
                     case 'set_zoom': // 用作Popup中拖动Slider时，实时改变窗口大小
@@ -54,6 +55,10 @@ chrome.runtime.onConnect.addListener(port => {
 
                     case 'scroll_style_status': // 设置是否开启滚动条样式
                         status ? initScrollHoverContainer() : removeEvent();
+                    break;
+
+                    case 'battle_key_check': // 根据battle id获得房间地址
+                        get_battle_room_href(battleId, userId);
                     break;
                 }
             });

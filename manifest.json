@@ -4,7 +4,8 @@
     "description": "肝脑涂地",
     "version": "1.0.5",
     "permissions": [
-        "contextMenus"
+        "contextMenus",
+        "clipboardRead"
     ],
     "background": {
         "scripts": [

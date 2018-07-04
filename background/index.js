@@ -2,10 +2,11 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-09 21:42:02
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-03 22:53:02
+ * @Last Modified time: 2018-07-04 22:16:37
  */
 import { local } from './initLocalStorage'
 import { init_user_id } from './user'
+import { init_input_for_battle, get_battle_room_href } from './battleCheck'
 
 window.store = local;
 
@@ -14,9 +15,8 @@ init_user_id(local);
 // 舔婊模式开启时，令popup失效
 chrome.browserAction.setPopup({ popup: local.get('is_multil') ? '' : 'index.html' });
 
-chrome.browserAction.onClicked.addListener(() => {
-    alert('少女祈祷中...')
-});
+init_input_for_battle();
+get_battle_room_href(local.get('userId'));
 
 chrome.runtime.onMessage.addListener((response, sender, sendResponse) => {
     const { message, zoom, search } = response;
