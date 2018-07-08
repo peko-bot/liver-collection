@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-07-04 20:31:22 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-04 22:17:19
+ * @Last Modified time: 2018-07-06 10:40:56
  */
 // 创建一个用于粘贴battle id的文本框
 const init_input_for_battle = () => {

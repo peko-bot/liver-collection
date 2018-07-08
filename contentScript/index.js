@@ -2,11 +2,26 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-08 11:15:23 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-04 22:17:05
+ * @Last Modified time: 2018-07-08 21:19:35
  */
 import { initStyles, initZoom, setZoom, controlLeftSider, controlRightSider, removeEvent, initScrollHoverContainer } from './style'
 import { roomObserve, roomObserveBreaker, initRoomSearch, check_characters, is_character_page, check_black_list } from './coopraid'
 import { get_battle_room_href } from './battleCheck'
+
+const injectScript = file => {
+    var th = document.getElementsByTagName('body')[0];
+
+    var s = document.createElement('script');
+    s.setAttribute('type', 'text/javascript');
+    s.setAttribute('src', file);
+
+    let windowWraper = document.createElement('script');
+    windowWraper.id = 'init_window';
+
+    th.appendChild(s);
+    th.appendChild(windowWraper)
+}
+injectScript(chrome.extension.getURL('/inject.js'));
 
 // 修改全局样式
 initStyles();
@@ -22,7 +37,7 @@ chrome.runtime.onConnect.addListener(port => {
     switch(name) {
         case 'popup_to_content':
             port.onMessage.addListener(response => {
-                const { zoom, message, search, type, status, battleId, userId } = response;
+                const { zoom, message, search, type, status, battleId, userId, event } = response;
         
                 switch(message) {
                     case 'set_zoom': // 用作Popup中拖动Slider时，实时改变窗口大小

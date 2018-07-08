@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-09 21:42:02
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-04 22:16:37
+ * @Last Modified time: 2018-07-08 10:20:49
  */
 import { local } from './initLocalStorage'
 import { init_user_id } from './user'
@@ -12,7 +12,7 @@ window.store = local;
 
 init_user_id(local);
 
-// 舔婊模式开启时，令popup失效
+// 舔婊模式开启时，令popup点击失效
 chrome.browserAction.setPopup({ popup: local.get('is_multil') ? '' : 'index.html' });
 
 init_input_for_battle();
