@@ -2,11 +2,11 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-08 11:15:23 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-08 21:19:35
+ * @Last Modified time: 2018-07-11 16:03:26
  */
 import { initStyles, initZoom, setZoom, controlLeftSider, controlRightSider, removeEvent, initScrollHoverContainer } from './style'
 import { roomObserve, roomObserveBreaker, initRoomSearch, check_characters, is_character_page, check_black_list } from './coopraid'
-import { get_battle_room_href } from './battleCheck'
+import { get_battle_room_href, use_bp } from './battleCheck'
 
 const injectScript = file => {
     var th = document.getElementsByTagName('body')[0];
@@ -29,6 +29,25 @@ initZoom();
 
 // 如果搜索过，自动应用搜索内容
 initRoomSearch();
+
+// 用作接收inject返回的值
+document.getElementById('init_window').addEventListener('inject_to_content_script', e => {
+    const { message, data, url, count } = e.detail;
+
+    switch(message) {
+        case 'get_battle_room_href': // 跳转地址的转发
+            chrome.extension.sendMessage({ message: 'battle_room_href', url })
+        break;
+
+        case 'to_use_bp': // 获得吃药参数
+            use_bp(count);
+        break;
+
+        case 'do_use_bp': // 吃完药了
+            chrome.extension.sendMessage({ message: 'redo_battle_room_href_check' });
+        break;
+    }
+});
 
 // 长连接监听统一写在这
 chrome.runtime.onConnect.addListener(port => {

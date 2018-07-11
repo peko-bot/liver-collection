@@ -2,11 +2,11 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-09 21:42:02
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-08 10:20:49
+ * @Last Modified time: 2018-07-11 16:24:11
  */
 import { local } from './initLocalStorage'
 import { init_user_id } from './user'
-import { init_input_for_battle, get_battle_room_href } from './battleCheck'
+import { init_input_for_battle, get_battle_room_href, handle_board_post } from './battleCheck'
 
 window.store = local;
 
@@ -19,7 +19,7 @@ init_input_for_battle();
 get_battle_room_href(local.get('userId'));
 
 chrome.runtime.onMessage.addListener((response, sender, sendResponse) => {
-    const { message, zoom, search } = response;
+    const { message, zoom, search, url } = response;
     let tasks = { error: '', tasks: '' };
 
     switch(message) {
@@ -37,6 +37,18 @@ chrome.runtime.onMessage.addListener((response, sender, sendResponse) => {
 
         case 'get_scroll_options':
             tasks = Object.assign(tasks, { status: local.get('is_scroll_style_show') });
+        break;
+
+        case 'battle_room_href': // 用于跳转地址
+            chrome.tabs.update(sender.tab.id, { url: 'http://game.granbluefantasy.jp' + url });
+        break;
+
+        case 'get_user_id':
+            tasks = Object.assign(tasks, { user_id: local.get('userId') });
+        break;
+
+        case 'redo_battle_room_href_check': // 吃药成功后，重新执行进入房间的方法
+            handle_board_post(local.get('userId'));
         break;
 
         default:

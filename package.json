@@ -1,6 +1,6 @@
 {
   "name": "liver-collection",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "用于日常记录，比如你今天刷了多少星本，掉了多少记忆，以及滚了多少光剑",
   "main": "main.js",
   "scripts": {

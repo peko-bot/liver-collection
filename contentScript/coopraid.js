@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-05-30 21:58:12 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-01 12:58:33
+ * @Last Modified time: 2018-07-11 15:23:33
  * @Description 共斗时的设置
  */
 let observer = null;
@@ -73,7 +73,7 @@ const initRoomSearch = () => {
         return;
     }
     
-    chrome.extension.sendMessage({ message: 'get_search'}, response => {
+    chrome.extension.sendMessage({ message: 'get_search' }, response => {
         const { search } = response;
 
         /**
