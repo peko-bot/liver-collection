@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-07-08 09:26:10 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-11 15:58:30
+ * @Last Modified time: 2018-07-11 17:16:58
  */
 document.getElementById('init_window').addEventListener('content_script_to_inject', e => {
     const { message, data, url } = e.detail;

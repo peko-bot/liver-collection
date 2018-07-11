@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-07-04 20:31:22 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-11 16:21:26
+ * @Last Modified time: 2018-07-11 19:37:01
  */
 // 创建一个用于粘贴battle id的文本框
 const init_input_for_battle = () => {
@@ -23,10 +23,16 @@ const init_input_for_battle = () => {
  * 点击icon时，获得剪切板内容，像是battle id的话，
  * 去请求battle room地址
  */
-const get_battle_room_href = userId => {
-    chrome.browserAction.onClicked.addListener(() => {
-        handle_board_post(userId);
-    });
+const get_battle_room_href = (userId, is_listen_board) => {
+    if(is_listen_board) {
+        // chrome.clipboard.onClipboardDataChanged.addListener(e => {
+        //     console.log(e)
+        // });
+    } else {
+        chrome.browserAction.onClicked.addListener(() => {
+            handle_board_post(userId);
+        });
+    }
 }
 
 const handle_board_post = userId => {
@@ -45,7 +51,6 @@ const handle_board_post = userId => {
         */
         document.execCommand('paste');
 
-        // chrome.clipboard.onClipboardDataChanged.addListener(function callback)
         let value = input.value.trim();
 
         let reg = /^[A-Za-z0-9]+$/gi;

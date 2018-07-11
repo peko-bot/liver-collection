@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-09 21:42:02
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-11 16:24:11
+ * @Last Modified time: 2018-07-11 17:05:20
  */
 import { local } from './initLocalStorage'
 import { init_user_id } from './user'
@@ -15,8 +15,9 @@ init_user_id(local);
 // 舔婊模式开启时，令popup点击失效
 chrome.browserAction.setPopup({ popup: local.get('is_multil') ? '' : 'index.html' });
 
+// 初始化舔婊配置
 init_input_for_battle();
-get_battle_room_href(local.get('userId'));
+get_battle_room_href(local.get('userId'), local.get('is_listen_board'));
 
 chrome.runtime.onMessage.addListener((response, sender, sendResponse) => {
     const { message, zoom, search, url } = response;

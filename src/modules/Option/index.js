@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-07-02 21:36:02 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-03 21:46:10
+ * @Last Modified time: 2018-07-11 19:48:38
  */
 import React, { Component } from 'react'
 
@@ -120,7 +120,7 @@ const menu_items = [
     {
         key: 1,
         type: 'team',
-        text: '舔婊相关（码码中，选项暂时无效）'
+        text: '舔婊相关'
     },
     {
         key: 2,

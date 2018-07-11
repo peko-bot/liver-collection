@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-07-03 17:20:19 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-11 16:16:39
+ * @Last Modified time: 2018-07-11 19:37:58
  */
 import React, { Component } from 'react'
 
@@ -64,13 +64,14 @@ export default class MultiBattle extends Component {
                 <Switch onChange={ checked => this.handle_switch_onchange('is_multil', checked) } checked={ is_multil } style={{ float: 'right', marginRight: '85%' }} />
                 <WhiteSpace clear />
 
-                <Tooltip title='开启该选项时，当你的剪切板内容发生变化且内容像battle id时，会直接进房，而不用点icon'>
+                {/* <Tooltip title='开启该选项时，当你的剪切板内容发生变化且内容像battle id时，会直接进房，而不用点icon'> */}
+                <Tooltip title='（因为没法监听系统剪切板，卒）开启该选项时，当你的剪切板内容发生变化且内容像battle id时，会直接进房，而不用点icon'>
                     <span style={{ float: 'left', color: '#666' }}>是否监视剪切板</span>
                 </Tooltip>
-                <Switch onChange={ checked => this.handle_switch_onchange('is_listen_board', checked) } checked={ is_listen_board } disabled={ !is_multil } style={{ float: 'right', marginRight: '85%' }} />
+                <Switch onChange={ checked => this.handle_switch_onchange('is_listen_board', checked) } checked={ is_listen_board } disabled={ true } style={{ float: 'right', marginRight: '85%' }} />
                 <WhiteSpace clear />
 
-                <Tooltip title='开启该选项且监视剪切板时，每次进房前将不会额外判断bp是否能进房间'>
+                {/* <Tooltip title='开启该选项且监视剪切板时，每次进房前将不会额外判断bp是否能进房间'>
                     <span style={{ float: 'left', color: '#666' }}>是否监视bp</span>
                 </Tooltip>
                 <Switch onChange={ checked => this.handle_switch_onchange('is_listen_bp', checked) } checked={ is_listen_bp } disabled={ !is_listen_board } style={{ float: 'right', marginRight: '85%' }} />
@@ -80,7 +81,7 @@ export default class MultiBattle extends Component {
                     <span style={{ float: 'left', color: '#666' }}>是否强行进入</span>
                 </Tooltip>
                 <Switch onChange={ checked => this.handle_switch_onchange('is_rape', checked) } checked={ is_rape } disabled={ !is_listen_bp } style={{ float: 'right', marginRight: '85%' }} />
-                <WhiteSpace clear />
+                <WhiteSpace clear /> */}
             </div>
         )
     }

@@ -13,7 +13,7 @@
 * 一键查看所有队友天人情况  [操作及效果](#查看天人)  
 * 增加左右侧面板开关，喜欢维拉侧面板的不用强行关了  
 * 共斗房黑名单，下载黑名单的这个文件是用来共享的，但目前只能手动合并，更新时需要手动替换json文件，/assets/black_list.json  [操作及效果](#黑名单)  
-* ~~舔婊时简化吃药~~
+* 舔婊时简化吃药  [操作及效果](#简化舔婊)  
 # 用法
 ## 如果你只是单纯要用
 * 
@@ -71,4 +71,7 @@
 ![img](./img/checkCharacters.gif) 
 
 ### 黑名单
-![img](./img/checkBlackList.gif) 
+![img](./img/checkBlackList.gif)  
+
+### 简化舔婊
+![img](./img/simpleBattle.gif)  
