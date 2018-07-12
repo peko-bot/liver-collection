@@ -2,17 +2,17 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-05-20 14:46:14 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-03 21:26:02
+ * @Last Modified time: 2018-07-12 08:21:40
  */
 import React, { Component } from 'react'
 
-import UploadItems from './UploadItems'
+// import UploadItems from './UploadItems'
 import CoopraidSearch from './CoopraidSearch'
 import SetZoom from './SetZoom'
 import CheckCharacters from './CheckCharacters'
-import SiderOptions from './SiderOptions'
+// import SiderOptions from './SiderOptions'
 import CheckBlackList from './CheckBlackList'
-import ScrollOptions from './ScrollOptions'
+// import ScrollOptions from './ScrollOptions'
 
 import './css/index.css'
 

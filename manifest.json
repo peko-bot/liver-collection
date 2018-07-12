@@ -5,7 +5,8 @@
     "version": "1.0.6",
     "permissions": [
         "contextMenus",
-        "clipboardRead"
+        "clipboardRead",
+        "notifications"
     ],
     "background": {
         "scripts": [

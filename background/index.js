@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-09 21:42:02
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-11 17:05:20
+ * @Last Modified time: 2018-07-12 15:53:32
  */
 import { local } from './initLocalStorage'
 import { init_user_id } from './user'
@@ -20,7 +20,7 @@ init_input_for_battle();
 get_battle_room_href(local.get('userId'), local.get('is_listen_board'));
 
 chrome.runtime.onMessage.addListener((response, sender, sendResponse) => {
-    const { message, zoom, search, url } = response;
+    const { message, zoom, search, url, data } = response;
     let tasks = { error: '', tasks: '' };
 
     switch(message) {
@@ -50,6 +50,15 @@ chrome.runtime.onMessage.addListener((response, sender, sendResponse) => {
 
         case 'redo_battle_room_href_check': // 吃药成功后，重新执行进入房间的方法
             handle_board_post(local.get('userId'));
+        break;
+
+        case 'notify_error':
+            chrome.notifications.create({
+                type: 'basic',
+                iconUrl: "./assets/img/54878633_p0.png",
+                title: '进房异常',
+                message: data
+            });
         break;
 
         default:
