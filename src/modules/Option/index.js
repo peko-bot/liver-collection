@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-07-02 21:36:02 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-11 19:48:38
+ * @Last Modified time: 2018-07-13 20:03:26
  */
 import React, { Component } from 'react'
 
@@ -24,7 +24,7 @@ export default class Option extends Component {
         super(props);
 
         this.state = {
-            key: '1',
+            key: '0',
         }
     }
 
@@ -44,7 +44,7 @@ export default class Option extends Component {
         const global_style = (
             <Content style={{ margin: '0 16px' }}>
                 <Breadcrumb style={{ margin: '16px 0' }}>
-                    <Breadcrumb.Item>全局样式</Breadcrumb.Item>
+                    <Breadcrumb.Item>通用设置</Breadcrumb.Item>
                 </Breadcrumb>
                 <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
                     <SiderOptions />
@@ -115,7 +115,7 @@ const menu_items = [
     {
         key: 0,
         type: 'desktop',
-        text: '全局样式'
+        text: '通用设置'
     },
     {
         key: 1,

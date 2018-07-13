@@ -2,18 +2,25 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-09 21:42:02
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-12 15:53:32
+ * @Last Modified time: 2018-07-13 20:45:27
  */
 import { local } from './initLocalStorage'
 import { init_user_id } from './user'
 import { init_input_for_battle, get_battle_room_href, handle_board_post } from './battleCheck'
+import { init_gacha } from './gachaBanner'
 
 window.store = local;
 
 init_user_id(local);
 
+// local.set('is_eunuch', false);
+
 // 舔婊模式开启时，令popup点击失效
 chrome.browserAction.setPopup({ popup: local.get('is_multil') ? '' : 'index.html' });
+
+chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+    init_gacha(tab.url, local.get('is_eunuch'));
+});
 
 // 初始化舔婊配置
 init_input_for_battle();
@@ -59,6 +66,10 @@ chrome.runtime.onMessage.addListener((response, sender, sendResponse) => {
                 title: '进房异常',
                 message: data
             });
+        break;
+
+        case 'is_eunuch':
+            tasks = Object.assign(tasks, { status: local.get('is_eunuch') });
         break;
 
         default:

@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-07-02 16:28:55 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-03 17:17:47
+ * @Last Modified time: 2018-07-13 19:40:08
  */
 import React, { Component } from 'react'
 
@@ -58,11 +58,11 @@ export default class ScrollOptions extends Component {
                 <div style={{ marginLeft: '1%' }}>
                     <Tooltip title='开启该选项时，你鼠标移到滚动条附近，滚动条会变粗三秒'>
                         <span style={{ float: 'left', color: '#666' }}>滚动条样式变化</span>
-                        <Switch onChange={ this.handle_switch_onchange } defaultChecked={ checked } style={{ float: 'right', marginRight: '85%' }} />
-                        <div style={{ clear: 'both' }} ></div>
                     </Tooltip>
+                    <Switch onChange={ this.handle_switch_onchange } defaultChecked={ checked } style={{ float: 'right', marginRight: '85%' }} />
+                    <WhiteSpace clear />
                 </div>
-                <WhiteSpace />
+                <WhiteSpace clear />
             </div>
         )
     }

@@ -6,7 +6,8 @@
     "permissions": [
         "contextMenus",
         "clipboardRead",
-        "notifications"
+        "notifications",
+        "tabs"
     ],
     "background": {
         "scripts": [

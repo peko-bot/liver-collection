@@ -2,11 +2,12 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-08 11:15:23 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-12 15:49:54
+ * @Last Modified time: 2018-07-13 20:39:46
  */
 import { initStyles, initZoom, setZoom, controlLeftSider, controlRightSider, removeEvent, initScrollHoverContainer } from './style'
 import { roomObserve, roomObserveBreaker, initRoomSearch, check_characters, is_character_page, check_black_list } from './coopraid'
 import { get_battle_room_href, use_bp } from './battleCheck'
+import { control_gacha, init_gacha } from './gachaBanner'
 
 const injectScript = file => {
     var th = document.getElementsByTagName('body')[0];
@@ -29,6 +30,9 @@ initZoom();
 
 // 如果搜索过，自动应用搜索内容
 initRoomSearch();
+
+// 初始化抽卡页面
+init_gacha();
 
 // 用作接收inject返回的值
 document.getElementById('init_window').addEventListener('inject_to_content_script', e => {
@@ -97,6 +101,14 @@ chrome.runtime.onConnect.addListener(port => {
 
                     case 'battle_key_check': // 根据battle id获得房间地址
                         get_battle_room_href(battleId, userId);
+                    break;
+
+                    case 'to_be_a_eunuch': // 禁用抽卡
+                        control_gacha(status);
+                    break;
+
+                    case 'init_eunuch':
+                        init_gacha();
                     break;
                 }
             });
