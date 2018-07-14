@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-05-20 13:48:08 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-06-22 21:59:11
+ * @Last Modified time: 2018-07-14 15:29:31
  */
 const webpack = require('webpack');
 const webpackDevServer = require('webpack-dev-server');
@@ -22,7 +22,8 @@ const devServerOptions = {
     hot: true,
     host: 'localhost',
     noInfo: true,
-    clientLogLevel: 'error'
+    clientLogLevel: 'error',
+    contentBase: path.join(__dirname, 'src'),
 };
 
 const webpackConfig = {

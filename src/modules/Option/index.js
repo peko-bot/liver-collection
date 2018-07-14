@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-07-02 21:36:02 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-13 20:03:26
+ * @Last Modified time: 2018-07-14 21:50:19
  */
 import React, { Component } from 'react'
 
@@ -14,10 +14,9 @@ import UploadItems from './UploadItems'
 import SiderOptions from './SiderOptions'
 import ScrollOptions from './ScrollOptions'
 import MultiBattle from './MultiBattle'
+import GachaOptions from './GachaOptions'
 
 import './css/Option.css'
-
-import store from '../../../util/Store'
 
 export default class Option extends Component {
     constructor(props) {
@@ -49,6 +48,7 @@ export default class Option extends Component {
                 <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
                     <SiderOptions />
                     <ScrollOptions />
+                    {/* <GachaOptions /> */}
                 </div>
             </Content>
         );
@@ -59,7 +59,6 @@ export default class Option extends Component {
                     <Breadcrumb.Item>舔婊相关</Breadcrumb.Item>
                 </Breadcrumb>
                 <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
-                    {/* 少女祈祷中... */}
                     <MultiBattle />
                 </div>
             </Content>
