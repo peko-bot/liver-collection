@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-07-04 20:31:22 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-11 19:37:01
+ * @Last Modified time: 2018-07-15 11:28:30
  */
 // 创建一个用于粘贴battle id的文本框
 const init_input_for_battle = () => {
@@ -25,9 +25,7 @@ const init_input_for_battle = () => {
  */
 const get_battle_room_href = (userId, is_listen_board) => {
     if(is_listen_board) {
-        // chrome.clipboard.onClipboardDataChanged.addListener(e => {
-        //     console.log(e)
-        // });
+        handle_board_post(userId);
     } else {
         chrome.browserAction.onClicked.addListener(() => {
             handle_board_post(userId);
@@ -36,8 +34,20 @@ const get_battle_room_href = (userId, is_listen_board) => {
 }
 
 const handle_board_post = userId => {
-    chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
-        const port = chrome.tabs.connect(tabs[0].id, { name: 'popup_to_content' });
+    chrome.tabs.query({ active: true }, tabs => {
+        // 只有打开的gbf窗口才能进房
+        let tab_id;
+        for(let tab of tabs) {
+            const { id, url } = tab;
+
+            if(tab.url.includes('game')) {
+                tab_id = id;
+
+                break;
+            }
+        }
+
+        const port = chrome.tabs.connect(tab_id, { name: 'popup_to_content' });
 
         let input = document.getElementById('battle_input');
 

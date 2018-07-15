@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-07-04 21:49:54 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-12 16:04:21
+ * @Last Modified time: 2018-07-15 10:51:59
  */
 import { dispatch_content_script_to_inject } from '../util/Request'
 // http://game.granbluefantasy.jp
@@ -24,4 +24,23 @@ const use_bp = count => {
     });
 }
 
-module.exports = { get_battle_room_href, use_bp }
+const listen_clip_board_battle_check = () => {
+    let timer = null;
+    
+    timer = setInterval(() => {
+        let list = document.getElementsByClassName('gbfrf-tweets');
+        
+        if(list.length > 0 ) {
+            for(let item of list) {
+                item.addEventListener('click', e => {
+                    chrome.extension.sendMessage({ message: 'listen_clip_board_battle_check' })
+                })
+            }
+            
+            clearInterval(timer);
+        }
+
+    }, 800)
+}
+
+module.exports = { get_battle_room_href, use_bp, listen_clip_board_battle_check }

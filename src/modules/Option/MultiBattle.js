@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-07-03 17:20:19 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-11 19:37:58
+ * @Last Modified time: 2018-07-15 11:26:19
  */
 import React, { Component } from 'react'
 
@@ -68,7 +68,7 @@ export default class MultiBattle extends Component {
                 <Tooltip title='（因为没法监听系统剪切板，卒）开启该选项时，当你的剪切板内容发生变化且内容像battle id时，会直接进房，而不用点icon'>
                     <span style={{ float: 'left', color: '#666' }}>是否监视剪切板</span>
                 </Tooltip>
-                <Switch onChange={ checked => this.handle_switch_onchange('is_listen_board', checked) } checked={ is_listen_board } disabled={ true } style={{ float: 'right', marginRight: '85%' }} />
+                <Switch onChange={ checked => this.handle_switch_onchange('is_listen_board', checked) } checked={ is_listen_board } disabled={ !is_multil } style={{ float: 'right', marginRight: '85%' }} />
                 <WhiteSpace clear />
 
                 {/* <Tooltip title='开启该选项且监视剪切板时，每次进房前将不会额外判断bp是否能进房间'>

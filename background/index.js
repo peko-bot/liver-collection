@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-09 21:42:02
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-13 20:45:27
+ * @Last Modified time: 2018-07-15 11:28:43
  */
 import { local } from './initLocalStorage'
 import { init_user_id } from './user'
@@ -19,7 +19,13 @@ init_user_id(local);
 chrome.browserAction.setPopup({ popup: local.get('is_multil') ? '' : 'index.html' });
 
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-    init_gacha(tab.url, local.get('is_eunuch'));
+    const { url } = tab;
+
+    if(url.includes('gacha')) { // 禁用抽卡
+        init_gacha(tab.url, local.get('is_eunuch'));
+    } else if(url.includes('raidfinder')) {
+        
+    }
 });
 
 // 初始化舔婊配置
@@ -70,6 +76,10 @@ chrome.runtime.onMessage.addListener((response, sender, sendResponse) => {
 
         case 'is_eunuch':
             tasks = Object.assign(tasks, { status: local.get('is_eunuch') });
+        break;
+
+        case 'listen_clip_board_battle_check':
+            get_battle_room_href(local.get('userId'), local.get('is_listen_board'));
         break;
 
         default:

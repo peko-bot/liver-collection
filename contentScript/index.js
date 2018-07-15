@@ -2,11 +2,11 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-08 11:15:23 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-13 20:39:46
+ * @Last Modified time: 2018-07-15 10:52:28
  */
 import { initStyles, initZoom, setZoom, controlLeftSider, controlRightSider, removeEvent, initScrollHoverContainer } from './style'
 import { roomObserve, roomObserveBreaker, initRoomSearch, check_characters, is_character_page, check_black_list } from './coopraid'
-import { get_battle_room_href, use_bp } from './battleCheck'
+import { get_battle_room_href, use_bp, listen_clip_board_battle_check } from './battleCheck'
 import { control_gacha, init_gacha } from './gachaBanner'
 
 const injectScript = file => {
@@ -33,6 +33,11 @@ initRoomSearch();
 
 // 初始化抽卡页面
 init_gacha();
+
+// 初始化一键舔婊
+if(location.href.includes('raidfinder')) {
+    listen_clip_board_battle_check();
+}
 
 // 用作接收inject返回的值
 document.getElementById('init_window').addEventListener('inject_to_content_script', e => {
@@ -110,6 +115,16 @@ chrome.runtime.onConnect.addListener(port => {
                     case 'init_eunuch':
                         init_gacha();
                     break;
+
+                    // case 'listen_clip_board': // 监听舔婊网
+                    //     let list = document.getElementsByClassName('gbfrf-container');
+
+                    //     if(list.length > 0 ) {
+                    //         document.getElementsByClassName('gbfrf-columns')[0].addEventListener('copy', e => {
+                    //             console.log(e)
+                    //         })
+                    //     }
+                    // break;
                 }
             });
         break;
