@@ -2,12 +2,13 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-08 11:15:23 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-15 10:52:28
+ * @Last Modified time: 2018-07-17 22:54:43
  */
 import { initStyles, initZoom, setZoom, controlLeftSider, controlRightSider, removeEvent, initScrollHoverContainer } from './style'
 import { roomObserve, roomObserveBreaker, initRoomSearch, check_characters, is_character_page, check_black_list } from './coopraid'
 import { get_battle_room_href, use_bp, listen_clip_board_battle_check } from './battleCheck'
 import { control_gacha, init_gacha } from './gachaBanner'
+import { get_member_id } from './checkHomework'
 
 const injectScript = file => {
     var th = document.getElementsByTagName('body')[0];
@@ -58,6 +59,10 @@ document.getElementById('init_window').addEventListener('inject_to_content_scrip
 
         case 'notify_error': // 进房异常处理
             chrome.extension.sendMessage({ message: 'notify_error', data });
+        break;
+
+        case 'do_get_member_id': // 获得团员id
+            chrome.extension.sendMessage({ message: 'do_get_member_id', data });
         break;
     }
 });
@@ -116,15 +121,9 @@ chrome.runtime.onConnect.addListener(port => {
                         init_gacha();
                     break;
 
-                    // case 'listen_clip_board': // 监听舔婊网
-                    //     let list = document.getElementsByClassName('gbfrf-container');
-
-                    //     if(list.length > 0 ) {
-                    //         document.getElementsByClassName('gbfrf-columns')[0].addEventListener('copy', e => {
-                    //             console.log(e)
-                    //         })
-                    //     }
-                    // break;
+                    case 'check_homework':
+                        get_member_id();
+                    break;
                 }
             });
         break;

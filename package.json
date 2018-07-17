@@ -1,6 +1,6 @@
 {
   "name": "liver-collection",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "用于日常记录，比如你今天刷了多少星本，掉了多少记忆，以及滚了多少光剑",
   "main": "main.js",
   "scripts": {
@@ -23,6 +23,7 @@
     "clean-webpack-plugin": "^0.1.19",
     "copy-webpack-plugin": "^4.5.1",
     "css-loader": "^0.28.11",
+    "eslint": "^5.1.0",
     "html-webpack-plugin": "^3.2.0",
     "mini-css-extract-plugin": "^0.4.0",
     "postcss-loader": "^2.1.4",

@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-07-02 21:36:02 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-14 22:46:08
+ * @Last Modified time: 2018-07-17 21:32:38
  */
 import React, { Component } from 'react'
 
@@ -14,7 +14,8 @@ import UploadItems from './UploadItems'
 import SiderOptions from './SiderOptions'
 import ScrollOptions from './ScrollOptions'
 import MultiBattle from './MultiBattle'
-import GachaOptions from './GachaOptions'
+// import GachaOptions from './GachaOptions'
+import CheckHomework from './CheckHomework'
 
 import './css/Option.css'
 
@@ -49,6 +50,7 @@ export default class Option extends Component {
                     <SiderOptions />
                     <ScrollOptions />
                     {/* <GachaOptions /> */}
+                    <CheckHomework />
                 </div>
             </Content>
         );

@@ -2,12 +2,13 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-09 21:42:02
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-15 11:28:43
+ * @Last Modified time: 2018-07-17 22:33:37
  */
 import { local } from './initLocalStorage'
 import { init_user_id } from './user'
 import { init_input_for_battle, get_battle_room_href, handle_board_post } from './battleCheck'
 import { init_gacha } from './gachaBanner'
+import { send_to_option } from './checkHomework'
 
 window.store = local;
 
@@ -82,8 +83,8 @@ chrome.runtime.onMessage.addListener((response, sender, sendResponse) => {
             get_battle_room_href(local.get('userId'), local.get('is_listen_board'));
         break;
 
-        default:
-        
+        case 'do_get_member_id':
+            send_to_option(data);
         break;
     }
 
