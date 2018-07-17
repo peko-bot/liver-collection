@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-07-17 21:31:53 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-17 23:44:18
+ * @Last Modified time: 2018-07-18 00:04:01
  */
 import React, { Component } from 'react'
 
@@ -86,6 +86,11 @@ export default class CheckHomework extends Component {
 
     columns = [
         {
+            title: '名字',
+            dataIndex: 'name',
+            key: 'name',
+        },
+        {
             title: 'id',
             dataIndex: 'id',
             key: 'id',
@@ -96,14 +101,19 @@ export default class CheckHomework extends Component {
             key: 'level',
         },
         {
-            title: '名字',
-            dataIndex: 'name',
-            key: 'name',
+            title: '当日贡献',
+            dataIndex: 'singleDayPoint',
+            key: 'singleDayPoint',
         },
         {
-            title: '作业',
-            dataIndex: 'homework',
-            key: 'homework',
+            title: '累计贡献',
+            dataIndex: 'totalPoint',
+            key: 'totalPoint',
+        },
+        {
+            title: '排名',
+            dataIndex: 'rank',
+            key: 'rank',
         },
         {
             title: '上次登录时间',

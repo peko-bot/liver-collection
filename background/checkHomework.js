@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-07-17 22:32:26 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-17 23:53:02
+ * @Last Modified time: 2018-07-18 00:03:21
  */
 const send_to_option = datas => {
     ajax(datas, 0, result => {
@@ -37,9 +37,13 @@ const ajax = (datas, index, callback) => {
             max = data[max];
             min = data[min];
             
-            item.homework = max.point - min.point;
+            item.singleDayPoint = max.point - min.point;
+            item.rank = max.rank;
+            item.totalPoint = max.point;
         } else {
-            item.homework = '此人未进排名查无可查';
+            item.singleDayPoint = '此人未进排名查无可查';
+            item.rank = '-';
+            item.totalPoint = '-';
         }
 
         if(index < datas.length - 1) {
