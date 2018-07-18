@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-30 15:34:22 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-18 11:21:47
+ * @Last Modified time: 2018-07-18 23:17:34
  */
 import React, { Component } from 'react';
 
@@ -79,7 +79,7 @@ export default class UploadItems extends Component {
     
     			result = [...result, ...recovery];
     
-    			const body = `userId=${ userId }&data=${JSON.stringify(result)}`;
+    			const body = `user_id=${ userId }&data=${JSON.stringify(result)}`;
     			Request.uploadToServer(`${headAddress}${address}/Memo/gbf/i_item.do`, { body }, result => {
     				if(result == 'success') {
     					notification.open({
