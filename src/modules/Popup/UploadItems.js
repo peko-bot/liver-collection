@@ -41,8 +41,8 @@ export default class UploadItems extends Component {
 
 		this.state = {
 			address: STORE.get('address'),
-			head_address: STORE.get('head_address'),
-			btn_loading: false,
+			headAddress: STORE.get('headAddress'),
+			btnLoading: false,
 		};
 	}
 
@@ -50,39 +50,39 @@ export default class UploadItems extends Component {
     
     }
 
-    handle_address = event => this.setState({ address: event.target.value });
+    handleAddress = event => this.setState({ address: event.target.value });
 
-    handle_head_address = head_address => this.setState({ head_address });
+    handleHeadAddress = headAddress => this.setState({ headAddress });
 
-    handle_upload = () => {
-    	const { head_address, address } = this.state;
+    handleUpload = () => {
+    	const { headAddress, address } = this.state;
 
     	STORE.set('address', address);
-    	STORE.set('head_address', head_address);
+    	STORE.set('headAddress', headAddress);
 
-    	this.setState({ btn_loading: true });
+    	this.setState({ btnLoading: true });
 
-    	const user_id = STORE.get('userId');
-    	if(!user_id) {
+    	const userId = STORE.get('userId');
+    	if(!userId) {
     		notification.open({
     			message: '非法操作',
     			description: '没获得到userId',
     			duration: 3
     		});
 
-    		this.setState({ btn_loading: false });
+    		this.setState({ btnLoading: false });
             
     		return;
     	}
         
-    	Request.get_by_cookie(article, {}, result => {
-    		Request.get_by_cookie(recovery, {}, recovery => {
-    			recovery = this.steam_roller(recovery);
+    	Request.getByCookie(article, {}, result => {
+    		Request.getByCookie(recovery, {}, recovery => {
+    			recovery = this.steamRoller(recovery);
     
     			result = [...result, ...recovery];
     
-    			const body = `user_id=${ user_id }&data=${JSON.stringify(result)}`;
-    			Request.upload_to_server(`${head_address}${address}/Memo/gbf/i_item.do`, { body }, result => {
+    			const body = `userId=${ userId }&data=${JSON.stringify(result)}`;
+    			Request.uploadToServer(`${headAddress}${address}/Memo/gbf/i_item.do`, { body }, result => {
     				if(result == 'success') {
     					notification.open({
     						message: '上传成功',
@@ -91,28 +91,28 @@ export default class UploadItems extends Component {
     					});
     				}
                     
-    				this.setState({ btn_loading: false });
+    				this.setState({ btnLoading: false });
     			});
     		});
     	});
     }
 
     // 数组扁平化
-    steam_roller = arr => {
-    	let new_arr = [];
+    steamRoller = arr => {
+    	let newArr = [];
 
     	for(let item of arr) {
-    		Array.isArray(item) ? new_arr.push.apply(new_arr, this.steam_roller(item)) : new_arr.push(item);
+    		Array.isArray(item) ? newArr.push.apply(newArr, this.steamRoller(item)) : newArr.push(item);
     	}
 
-    	return new_arr;
+    	return newArr;
     }
 
     render = () => {
-    	const { address, head_address, btn_loading } = this.state;
+    	const { address, headAddress, btnLoading } = this.state;
 
     	const selectBefore = (
-    		<Select defaultValue={ head_address } style={{ width: 90 }} onChange={ this.handle_head_address }>
+    		<Select defaultValue={ headAddress } style={{ width: 90 }} onChange={ this.handleHeadAddress }>
     			<Option value='http://'>http://</Option>
     			<Option value='https://'>https://</Option>
     			<Option value='ftp://'>ftp://</Option>
@@ -121,10 +121,10 @@ export default class UploadItems extends Component {
 
     	return (
     		<div className='UploadItems'>
-    			<Input addonBefore={ selectBefore } style={{ width: '90%' }} onChange={ this.handle_address } value={ address } />
+    			<Input addonBefore={ selectBefore } style={{ width: '90%' }} onChange={ this.handleAddress } value={ address } />
     			<WhiteSpace />
 
-    			<Button type='primary' loading={ btn_loading } onClick={ this.handle_upload } style={{ width: '90%' }}>上传素材</Button>
+    			<Button type='primary' loading={ btnLoading } onClick={ this.handleUpload } style={{ width: '90%' }}>上传素材</Button>
     			<WhiteSpace />
     		</div>
     	);

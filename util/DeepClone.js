@@ -1,8 +1,8 @@
 /*
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-01 10:02:40 
- * @Last Modified by:   zy9 
- * @Last Modified time: 2018-06-08 10:02:40 
+ * @Last Modified by: zy9
+ * @Last Modified time: 2018-07-18 11:46:58
  */
 define([], function () {
 	var copyIsArray,
@@ -44,7 +44,6 @@ define([], function () {
 			}
 
 			var key;
-			for (key in obj) {}
 
 			return key === undefined || hasOwn.call(obj, key);
 		},
@@ -59,14 +58,16 @@ define([], function () {
 				}
 
 				if (copy && (isPlainObject(copy) || (copyIsArray = isArray(copy)))) {
+					var clone;
+
 					if (copyIsArray) {
 						copyIsArray = false;
-						var clone = src && isArray(src)
+						clone = src && isArray(src)
 							? src
 							: [];
 
 					} else {
-						var clone = src && isPlainObject(src)
+						clone = src && isPlainObject(src)
 							? src
 							: {};
 					}

@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-30 15:03:11 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-18 09:30:47
+ * @Last Modified time: 2018-07-18 11:30:02
  */
 import React, { Component } from 'react';
 
@@ -10,7 +10,7 @@ import { Button, notification, Table } from 'antd';
 
 import WhiteSpace from '../../component/white-space';
 
-import { get_by_cookie } from '../../../util/Request';
+import { getByCookie } from '../../../util/Request';
 
 import './css/CheckCharacters.css';
 
@@ -21,7 +21,7 @@ export default class CheckCharacters extends Component {
 		super(props);
 
 		this.state = {
-			check_ub_characters_btn_loading: false,
+			checkUbCharactersBtnLoading: false,
 			disabled: false, 
 		};
 	}
@@ -31,7 +31,7 @@ export default class CheckCharacters extends Component {
     	chrome.extension && chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
     		const port = chrome.tabs.connect(tabs[0].id, { name: 'popup_to_content' });
 
-    		port.postMessage({ message: 'is_character_page' });
+    		port.postMessage({ message: 'isCharacterPage' });
 
     		port.onMessage.addListener(response => {
     			const { flag } = response;
@@ -41,7 +41,7 @@ export default class CheckCharacters extends Component {
     	});
     }
 
-    handle_check_ub_characters = () => {
+    handleCheckUbCharacters = () => {
     	const { disabled } = this.state;
 
     	if(disabled) {
@@ -50,7 +50,7 @@ export default class CheckCharacters extends Component {
     	chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
     		const port = chrome.tabs.connect(tabs[0].id, { name: 'popup_to_content' });
 
-    		this.setState({ check_ub_characters_btn_loading: true });
+    		this.setState({ checkUbCharactersBtnLoading: true });
             
     		port.postMessage({ message: 'check_ub_characters' });
 
@@ -64,26 +64,26 @@ export default class CheckCharacters extends Component {
     				item.hasCharacter = '';
     			}
                 
-    			this.recursion_request(datas, 0, result => {
+    			this.recursionRequest(datas, 0, result => {
     				// 这段判断天人图片太僵硬了，得用正则
     				for(let item of result) {
     					const { data } = item;
     					const splitStr = 'http%3A%2F%2Fgame-a.granbluefantasy.jp%2Fassets%2Fimg_light%2Fsp%2Fassets%2Fnpc%2Fquest';
-    					let char_list = [];
+    					let characterList = [];
                         
     					for(let jtem of data.split(splitStr)) {
 
-    						for(let ktem of character_imgs) {
+    						for(let ktem of characterImgs) {
     							const { key, url } = ktem;
 
     							if(jtem.includes(url)) {
-    								char_list.push(key);
+    								characterList.push(key);
     							}
     						}
     					}
                         
     					// 去重
-    					item.hasCharacter = Array.from(new Set(char_list)).toString();
+    					item.hasCharacter = Array.from(new Set(characterList)).toString();
     				}
 
     				// 生成气泡节点
@@ -95,14 +95,14 @@ export default class CheckCharacters extends Component {
     					duration: null
     				});
 
-    				this.setState({ check_ub_characters_btn_loading: false });
+    				this.setState({ checkUbCharactersBtnLoading: false });
     			});
     		});
     	});
     }
 
     // 递归请求队友人物页数据
-    recursion_request = (datas, index, callback) => {
+    recursionRequest = (datas, index, callback) => {
     	if(index >= datas.length) {
     		callback(datas);
 
@@ -112,21 +112,21 @@ export default class CheckCharacters extends Component {
     	const item = datas[index];
     	const { url } = item;
 
-    	get_by_cookie(url, {}, result => {
+    	getByCookie(url, {}, result => {
     		const { data = '' } = result;
 
     		item.data = decodeURI(data);
 
-    		this.recursion_request(datas, ++index, callback);
+    		this.recursionRequest(datas, ++index, callback);
     	});
     }
 
     render = () => {
-    	const { check_ub_characters_btn_loading, disabled } = this.state;
+    	const { checkUbCharactersBtnLoading, disabled } = this.state;
 
     	return (
     		<div className='CheckCharacters'>
-    			<Button type='primary' loading={ check_ub_characters_btn_loading } disabled={ disabled } onClick={ this.handle_check_ub_characters } style={{ width: '90%' }}>严格检查骑空士队友是否失格</Button>
+    			<Button type='primary' loading={ checkUbCharactersBtnLoading } disabled={ disabled } onClick={ this.handleCheckUbCharacters } style={{ width: '90%' }}>严格检查骑空士队友是否失格</Button>
 
     			<WhiteSpace />
     		</div>
@@ -135,7 +135,7 @@ export default class CheckCharacters extends Component {
 }
 
 // 天人图片
-const character_imgs = [
+const characterImgs = [
 	{ key: 1, name: '', url: '3040030000' },
 	{ key: 2, name: '', url: '3040031000' },
 	{ key: 3, name: '', url: '3040032000' },

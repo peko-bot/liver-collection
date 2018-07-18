@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-07-02 21:36:02 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-18 09:26:33
+ * @Last Modified time: 2018-07-18 11:42:38
  */
 import React, { Component } from 'react';
 
@@ -32,7 +32,7 @@ export default class Option extends Component {
 
     }
 
-    handle_menu_item = menu => {
+    handleMenuItem = menu => {
     	const { item, key, keyPath } = menu;
 
     	this.setState({ key });
@@ -41,7 +41,7 @@ export default class Option extends Component {
     render = () => {
     	const { collapsed, key } = this.state;
 
-    	const global_style = (
+    	const globalStyle = (
     		<Content style={{ margin: '0 16px' }}>
     			<Breadcrumb style={{ margin: '16px 0' }}>
     				<Breadcrumb.Item>通用设置</Breadcrumb.Item>
@@ -55,7 +55,7 @@ export default class Option extends Component {
     		</Content>
     	);
 
-    	const multi_battle = (
+    	const multiBattle = (
     		<Content style={{ margin: '0 16px' }}>
     			<Breadcrumb style={{ margin: '16px 0' }}>
     				<Breadcrumb.Item>舔婊相关</Breadcrumb.Item>
@@ -66,7 +66,7 @@ export default class Option extends Component {
     		</Content>
     	);
 
-    	const upload_items = (
+    	const uploadItems = (
     		<Content style={{ margin: '0 16px' }}>
     			<Breadcrumb style={{ margin: '16px 0' }}>
     				<Breadcrumb.Item>记录上传</Breadcrumb.Item>
@@ -83,11 +83,11 @@ export default class Option extends Component {
     				<div className='logo' />
     				<Menu theme='dark' defaultSelectedKeys={ [key] } mode='inline'>
     					{
-    						menu_items.map(item => {
+    						menuItems.map(item => {
     							const { key, type, text } = item;
 
     							return (
-    								<Menu.Item key={ key } onClick={ this.handle_menu_item }>
+    								<Menu.Item key={ key } onClick={ this.handleMenuItem }>
     									<Icon type={ type } />
     									<span>{ text }</span>
     								</Menu.Item>
@@ -98,9 +98,9 @@ export default class Option extends Component {
     			</Sider>
 
     			<Layout>
-    				{ key == 0 && global_style }
-    				{ key == 1 && multi_battle }
-    				{ key == 2 && upload_items }
+    				{ key == 0 && globalStyle }
+    				{ key == 1 && multiBattle }
+    				{ key == 2 && uploadItems }
                     
     				<Footer style={{ textAlign: 'center' }}>
     					<div>贫穷使我们相遇，但后来，你却发出了母猪的声音。而我，只想为你豹跳一曲，如花净土...</div>
@@ -112,7 +112,7 @@ export default class Option extends Component {
     }
 }
 
-const menu_items = [
+const menuItems = [
 	{
 		key: 0,
 		type: 'desktop',

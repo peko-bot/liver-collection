@@ -2,11 +2,11 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-07-17 21:31:53 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-18 09:30:22
+ * @Last Modified time: 2018-07-18 14:25:03
  */
 import React, { Component } from 'react';
 
-import { Button, Table } from 'antd';
+import { Button, Table, Tooltip } from 'antd';
 
 import WhiteSpace from '../../component/white-space';
 
@@ -37,22 +37,22 @@ export default class CheckHomework extends Component {
 		};
 	}
 
-    handle_homework = () => {
+    handleHomework = () => {
     	this.setState({ loading: true });
 
     	chrome.tabs.query({ active: false }, tabs => {
-    		let tab_id;
+    		let tabId;
     		for(let tab of tabs) {
     			const { id, url } = tab;
     
     			if(tab.url.includes('game')) {
-    				tab_id = id;
+    				tabId = id;
     
     				break;
     			}
     		}
     
-    		const port = chrome.tabs.connect(tab_id, { name: 'popup_to_content' });
+    		const port = chrome.tabs.connect(tabId, { name: 'popup_to_content' });
     
     		port.postMessage({ message: 'check_homework' });
     	});
@@ -76,7 +76,9 @@ export default class CheckHomework extends Component {
 
     	return (
     		<div className='CheckHomework' style={{ marginLeft: '1%' }}>
-    			<Button loading={ loading } type='primary' onClick={ this.handle_homework }>检查当天本战作业</Button>
+    			<Tooltip title='本战未开始时，数据会有误差。因为时间是从当天早上五点开始计算贡献的，预选期间因为当日贡献度清零不在五点，所以会产生误差，也就是当日贡献这列可以不看，但总贡献始终都是准的'>
+    				<Button loading={ loading } type='primary' onClick={ this.handleHomework }>检查当天本战作业</Button>
+    			</Tooltip>
     			<WhiteSpace />
 
     			{  dataSource && dataSource.length != 0 && table }
@@ -119,6 +121,11 @@ export default class CheckHomework extends Component {
     		title: '上次登录时间',
     		dataIndex: 'last_login',
     		key: 'last_login'
+    	},
+    	{
+    		title: '最后更新时间',
+    		dataIndex: 'timeStamp',
+    		key: 'timeStamp'
     	},
     ]
 }

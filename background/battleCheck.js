@@ -2,10 +2,10 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-07-04 20:31:22 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-15 11:28:30
+ * @Last Modified time: 2018-07-18 11:16:32
  */
 // 创建一个用于粘贴battle id的文本框
-const init_input_for_battle = () => {
+const initInputForBattle = () => {
 	let input = document.getElementById('battle_input');
 
 	if(!input) {
@@ -23,31 +23,31 @@ const init_input_for_battle = () => {
  * 点击icon时，获得剪切板内容，像是battle id的话，
  * 去请求battle room地址
  */
-const get_battle_room_href = (userId, is_listen_board) => {
-	if(is_listen_board) {
-		handle_board_post(userId);
+const getBattleRoomHref = (userId, isListenBoard) => {
+	if(isListenBoard) {
+		handleBoardPost(userId);
 	} else {
 		chrome.browserAction.onClicked.addListener(() => {
-			handle_board_post(userId);
+			handleBoardPost(userId);
 		});
 	}
 };
 
-const handle_board_post = userId => {
+const handleBoardPost = userId => {
 	chrome.tabs.query({ active: true }, tabs => {
 		// 只有打开的gbf窗口才能进房
-		let tab_id;
+		let tabId;
 		for(let tab of tabs) {
 			const { id, url } = tab;
 
 			if(tab.url.includes('game')) {
-				tab_id = id;
+				tabId = id;
 
 				break;
 			}
 		}
 
-		const port = chrome.tabs.connect(tab_id, { name: 'popup_to_content' });
+		const port = chrome.tabs.connect(tabId, { name: 'popup_to_content' });
 
 		let input = document.getElementById('battle_input');
 
@@ -72,4 +72,4 @@ const handle_board_post = userId => {
 	});
 };
 
-module.exports = { init_input_for_battle, get_battle_room_href, handle_board_post };
+module.exports = { initInputForBattle, getBattleRoomHref, handleBoardPost };

@@ -2,10 +2,10 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-08 09:13:33 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-12 15:44:45
+ * @Last Modified time: 2018-07-18 11:32:01
  */
 // 上传数据到服务器
-export const upload_to_server = (url, data, callback) => {
+export const uploadToServer = (url, data, callback) => {
 	if(!url) return;
 
 	let params = {
@@ -22,7 +22,7 @@ export const upload_to_server = (url, data, callback) => {
 		});
 };
 
-export const get_by_cookie = (url, data, callback) => {
+export const getByCookie = (url, data, callback) => {
 	if(!url) return;
 
 	let params = {
@@ -36,7 +36,7 @@ export const get_by_cookie = (url, data, callback) => {
 		});
 };
 
-export const post_by_cookie = (url, data, callback) => {
+export const postByCookie = (url, data, callback) => {
 	if(!url) return;
 
 	let params = {
@@ -62,6 +62,6 @@ export const post_by_cookie = (url, data, callback) => {
 		});
 };
 
-export const dispatch_inject_to_content_script = detail => document.getElementById('init_window').dispatchEvent(new CustomEvent('inject_to_content_script', { detail }));
+export const dispatchInjectToContentScript = detail => document.getElementById('init_window').dispatchEvent(new CustomEvent('inject_to_content_script', { detail }));
 
-export const dispatch_content_script_to_inject = detail => document.getElementById('init_window').dispatchEvent(new CustomEvent('content_script_to_inject', { detail }));
+export const dispatchContentScriptToInject = detail => document.getElementById('init_window').dispatchEvent(new CustomEvent('content_script_to_inject', { detail }));

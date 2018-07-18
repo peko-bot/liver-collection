@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-30 15:11:32 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-18 09:30:49
+ * @Last Modified time: 2018-07-18 11:30:59
  */
 import React, { Component } from 'react';
 
@@ -32,58 +32,58 @@ export default class CoopraidSearch extends Component {
 	constructor(props) {
 		super(props);
 
-		const coopraid_search_value = STORE.get('search') || '';
+		const coopraidSearchValue = STORE.get('search') || '';
 
 		this.state = {
-			coopraid_search_value,
-			coopraid_switch_checked: !!coopraid_search_value,
+			coopraidSearchValue,
+			coopraidSwitchChecked: !!coopraidSearchValue,
 		};
 
-		!!coopraid_search_value && this.handle_search();
+		!!coopraidSearchValue && this.handleSearch();
 	}
 
     componentDidMount = () => {
     
     }
 
-    handle_search = () => {
-    	const { coopraid_search_value } = this.state;
+    handleSearch = () => {
+    	const { coopraidSearchValue } = this.state;
         
     	chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
     		const port = chrome.tabs.connect(tabs[0].id, { name: 'popup_to_content' });
 
-    		STORE.set('search', coopraid_search_value);
+    		STORE.set('search', coopraidSearchValue);
             
-    		port.postMessage({ message: 'open_coopraid_search', search: coopraid_search_value });
+    		port.postMessage({ message: 'open_coopraid_search', search: coopraidSearchValue });
     	});
     }
 
-    handle_coopraid_search = event => this.setState({ coopraid_search_value: event.target.value });
+    handleCoopraidSearch = event => this.setState({ coopraidSearchValue: event.target.value });
 
-    handle_coopraid_switch = checked => {
+    handleCoopraidSwitch = checked => {
     	if(checked) {
-    		this.handle_search();
+    		this.handleSearch();
     	} else {
     		STORE.remove('search');
-    		this.setState({ coopraid_search_value: '' });
+    		this.setState({ coopraidSearchValue: '' });
     	}
 
-    	this.setState({ coopraid_switch_checked: checked });
+    	this.setState({ coopraidSwitchChecked: checked });
     }
 
     render = () => {
-    	const { coopraid_search_value, coopraid_switch_checked } = this.state;
+    	const { coopraidSearchValue, coopraidSwitchChecked } = this.state;
 
     	return (
     		<div className='CoopraidSearch'>
-    			<Input style={{ width: '90%' }} onChange={ this.handle_coopraid_search } value={ coopraid_search_value } placeholder='这里填房间描述' />
+    			<Input style={{ width: '90%' }} onChange={ this.handleCoopraidSearch } value={ coopraidSearchValue } placeholder='这里填房间描述' />
     			<WhiteSpace />
                 
     			<div style={{ marginLeft: '6%' }}>
     				<Tooltip title='看见上面的文本框了么，填了这个你才能开启搜索'>
     					<span style={{ float: 'left', color: '#666' }}>是否开启共斗搜索</span>
     				</Tooltip>
-    				<Switch disabled={ !coopraid_search_value } onChange={ this.handle_coopraid_switch } checked={ coopraid_switch_checked } style={{ float: 'right', marginRight: '6%' }} />
+    				<Switch disabled={ !coopraidSearchValue } onChange={ this.handleCoopraidSwitch } checked={ coopraidSwitchChecked } style={{ float: 'right', marginRight: '6%' }} />
     				<div style={{ clear: 'both' }} ></div>
     			</div>
     			<WhiteSpace />

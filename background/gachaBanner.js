@@ -4,7 +4,7 @@
  * @Last Modified by: zy9
  * @Last Modified time: 2018-07-14 22:22:32
  */
-const init_gacha = (url, checked) => {
+const initGacha = (url, checked) => {
 	chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
 		const port = chrome.tabs.connect(tabs[0].id, { name: 'popup_to_content' });
 
@@ -12,4 +12,4 @@ const init_gacha = (url, checked) => {
 	});
 };
 
-module.exports = { init_gacha };
+module.exports = { initGacha };

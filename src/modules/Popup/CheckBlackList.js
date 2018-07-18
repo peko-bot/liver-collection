@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-07-01 10:39:37 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-18 09:30:43
+ * @Last Modified time: 2018-07-18 12:07:28
  */
 import React, { Component } from 'react';
 
@@ -31,8 +31,8 @@ export default class CheckBlackList extends Component {
 		super(props);
 
 		this.state = {
-			export_loading: false,
-			check_loading: false,
+			exportLoading: false,
+			checkLoading: false,
 			disabled: false,
 		};
 	}
@@ -42,7 +42,7 @@ export default class CheckBlackList extends Component {
     	chrome.extension && chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
     		const port = chrome.tabs.connect(tabs[0].id, { name: 'popup_to_content' });
 
-    		port.postMessage({ message: 'is_character_page' });
+    		port.postMessage({ message: 'isCharacterPage' });
 
     		port.onMessage.addListener(response => {
     			const { flag } = response;
@@ -52,8 +52,8 @@ export default class CheckBlackList extends Component {
     	});
     }
 
-    handle_export_black_list = () => {
-    	const data = JSON.stringify(STORE.get('black_list'));
+    handleExportBlackList = () => {
+    	const data = JSON.stringify(STORE.get('blackList'));
 
     	// 下载json文件
     	let vLink = document.createElement('a'),
@@ -66,13 +66,13 @@ export default class CheckBlackList extends Component {
     	vLink.click();
     }
 
-    handle_check_black_list = () => {
+    handleCheckBlackList = () => {
     	chrome.extension && chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
-    		this.setState({ check_loading: true });
+    		this.setState({ checkLoading: true });
 
     		const port = chrome.tabs.connect(tabs[0].id, { name: 'popup_to_content' });
 
-    		port.postMessage({ message: 'check_black_list' });
+    		port.postMessage({ message: 'checkBlackList' });
 
     		port.onMessage.addListener(response => {
     			const { datas } = response;
@@ -81,7 +81,7 @@ export default class CheckBlackList extends Component {
     			for(let item of datas) {
     				const { nickName, userId } = item;
 
-    				for(let jtem of STORE.get('black_list')) {
+    				for(let jtem of STORE.get('blackList')) {
     					const { id, description } = jtem;
 
     					if(userId == id) {
@@ -98,19 +98,19 @@ export default class CheckBlackList extends Component {
     				duration: null
     			});
 
-    			this.setState({ check_loading: false });
+    			this.setState({ checkLoading: false });
     		});
     	});
     }
 
     render = () => {
-    	const { export_loading, check_loading, disabled } = this.state;
+    	const { exportLoading, checkLoading, disabled } = this.state;
 
     	return (
     		<div className='CheckBlackList'>
-    			<Button type='primary' loading={ export_loading } onClick={ this.handle_export_black_list } style={{ width: '90%' }}>下载黑名单</Button>
+    			<Button type='primary' loading={ exportLoading } onClick={ this.handleExportBlackList } style={{ width: '90%' }}>下载黑名单</Button>
     			<WhiteSpace />
-    			<Button type='primary' loading={ check_loading } disabled={ disabled } onClick={ this.handle_check_black_list } style={{ width: '90%' }}>检查黑名单</Button>
+    			<Button type='primary' loading={ checkLoading } disabled={ disabled } onClick={ this.handleCheckBlackList } style={{ width: '90%' }}>检查黑名单</Button>
     			<WhiteSpace />
     		</div>
     	);

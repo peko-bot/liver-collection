@@ -2,90 +2,88 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-09 21:42:02
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-17 22:33:37
+ * @Last Modified time: 2018-07-18 11:17:06
  */
 import { local } from './initLocalStorage';
-import { init_user_id } from './user';
-import { init_input_for_battle, get_battle_room_href, handle_board_post } from './battleCheck';
-import { init_gacha } from './gachaBanner';
-import { send_to_option } from './checkHomework';
+import { initUserId } from './user';
+import { initInputForBattle, getBattleRoomHref, handleBoardPost } from './battleCheck';
+import { initGacha } from './gachaBanner';
+import { sendToOption } from './checkHomework';
 
 window.store = local;
 
-init_user_id(local);
+initUserId(local);
 
-// local.set('is_eunuch', false);
+// local.set('isEunuch', false);
 
 // 舔婊模式开启时，令popup点击失效
-chrome.browserAction.setPopup({ popup: local.get('is_multil') ? '' : 'index.html' });
+chrome.browserAction.setPopup({ popup: local.get('isMultil') ? '' : 'index.html' });
 
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 	const { url } = tab;
 
 	if(url.includes('gacha')) { // 禁用抽卡
-		init_gacha(tab.url, local.get('is_eunuch'));
-	} else if(url.includes('raidfinder')) {
-        
+		initGacha(tab.url, local.get('isEunuch'));
 	}
 });
 
 // 初始化舔婊配置
-init_input_for_battle();
-get_battle_room_href(local.get('userId'), local.get('is_listen_board'));
+initInputForBattle();
+getBattleRoomHref(local.get('userId'), local.get('isListenBoard'));
 
 chrome.runtime.onMessage.addListener((response, sender, sendResponse) => {
 	const { message, zoom, search, url, data } = response;
 	let tasks = { error: '', tasks: '' };
 
 	switch(message) {
-	case 'get_zoom':
-		tasks = Object.assign(tasks, { zoom: local.get('zoom') });
-		break;
+		case 'get_zoom':
+			tasks = Object.assign(tasks, { zoom: local.get('zoom') });
+			break;
 
-	case 'get_search':
-		tasks = Object.assign(tasks, { search: local.get('search') });
-		break;
+		case 'get_search':
+			tasks = Object.assign(tasks, { search: local.get('search') });
+			break;
 
-	case 'get_sider_options':
-		tasks = Object.assign(tasks, { left: local.get('is_left_sider_show'), right: local.get('is_right_sider_show') });
-		break;
+		case 'get_sider_options':
+			tasks = Object.assign(tasks, { left: local.get('isLeftSiderShow'), right: local.get('isRightSiderShow') });
+			break;
 
-	case 'get_scroll_options':
-		tasks = Object.assign(tasks, { status: local.get('is_scroll_style_show') });
-		break;
+		case 'get_scroll_options':
+			tasks = Object.assign(tasks, { status: local.get('isScrollStyleShow') });
+			break;
 
-	case 'battle_room_href': // 用于跳转地址
-		chrome.tabs.update(sender.tab.id, { url: 'http://game.granbluefantasy.jp' + url });
-		break;
+		case 'battle_room_href': // 用于跳转地址
+			chrome.tabs.update(sender.tab.id, { url: 'http://game.granbluefantasy.jp' + url });
+			break;
 
-	case 'get_user_id':
-		tasks = Object.assign(tasks, { user_id: local.get('userId') });
-		break;
+		case 'get_userId':
+			tasks = Object.assign(tasks, { userId: local.get('userId') });
+			break;
 
-	case 'redo_battle_room_href_check': // 吃药成功后，重新执行进入房间的方法
-		handle_board_post(local.get('userId'));
-		break;
+		case 'redo_battle_room_href_check': // 吃药成功后，重新执行进入房间的方法
+			handleBoardPost(local.get('userId'));
+			break;
 
-	case 'notify_error':
-		chrome.notifications.create({
-			type: 'basic',
-			iconUrl: './assets/img/54878633_p0.png',
-			title: '进房异常',
-			message: data
-		});
-		break;
+		case 'notify_error':
+			chrome.notifications.create({
+				type: 'basic',
+				iconUrl: './assets/img/54878633_p0.png',
+				title: '进房异常',
+				message: data
+			});
+			break;
 
-	case 'is_eunuch':
-		tasks = Object.assign(tasks, { status: local.get('is_eunuch') });
-		break;
+		case 'isEunuch':
+			tasks = Object.assign(tasks, { status: local.get('isEunuch') });
+			break;
 
-	case 'listen_clip_board_battle_check':
-		get_battle_room_href(local.get('userId'), local.get('is_listen_board'));
-		break;
+		case 'listenClipBoardBattleCheck':
+			getBattleRoomHref(local.get('userId'), local.get('isListenBoard'));
+			break;
 
-	case 'do_get_member_id':
-		send_to_option(data);
-		break;
+		case 'do_getMemberId':
+			sendToOption(data);
+			break;
 	}
 
 	sendResponse(tasks);

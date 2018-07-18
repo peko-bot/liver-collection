@@ -32,7 +32,7 @@ export default class ScrollOptions extends Component {
 		super(props);
 
 		this.state = {
-			checked: STORE.get('is_scroll_style_show'),
+			checked: STORE.get('isScrollStyleShow'),
 		};
 	}
 
@@ -40,8 +40,8 @@ export default class ScrollOptions extends Component {
     
     }
 
-    handle_switch_onchange = checked => {
-    	STORE.set('is_scroll_style_show', checked);
+    handleSwitchOnChange = checked => {
+    	STORE.set('isScrollStyleShow', checked);
 
     	chrome.extension && chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
     		const port = chrome.tabs.connect(tabs[0].id, { name: 'popup_to_content' });
@@ -59,7 +59,7 @@ export default class ScrollOptions extends Component {
     				<Tooltip title='开启该选项时，你鼠标移到滚动条附近，滚动条会变粗三秒'>
     					<span style={{ float: 'left', color: '#666' }}>滚动条样式变化</span>
     				</Tooltip>
-    				<Switch onChange={ this.handle_switch_onchange } defaultChecked={ checked } style={{ float: 'right', marginRight: '85%' }} />
+    				<Switch onChange={ this.handleSwitchOnChange } defaultChecked={ checked } style={{ float: 'right', marginRight: '85%' }} />
     				<WhiteSpace clear />
     			</div>
     			<WhiteSpace clear />

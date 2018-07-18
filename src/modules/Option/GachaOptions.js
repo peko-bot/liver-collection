@@ -2,11 +2,11 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-07-13 19:35:55 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-18 09:30:19
+ * @Last Modified time: 2018-07-18 14:22:46
  */
 import React, { Component } from 'react';
 
-import { Button, Modal, Tooltip } from 'antd';
+import { Button, Modal } from 'antd';
 
 import WhiteSpace from '../../component/white-space';
 
@@ -33,16 +33,16 @@ export default class GachaOptions extends Component {
 
 		this.state = {
 			questions: [],
-			modal_visible: false,
+			modalVisible: false,
             
 		};
 	}
 
     componentDidMount = () => {
-    	this.load_questions();
+    	this.loadQuestions();
     }
 
-    load_questions = () => {
+    loadQuestions = () => {
     	fetch('/assets/questions.json')
     		.then(result => result.json())
     		.then(questions => {
@@ -50,22 +50,22 @@ export default class GachaOptions extends Component {
     		});
     }
 
-    handle_modal_visible = visible => {
-    	let { modal_visible } = this.state;
+    handleModalVisible = visible => {
+    	let { modalVisible } = this.state;
 
-    	this.setState({ modal_visible: !modal_visible });
+    	this.setState({ modalVisible: !modalVisible });
     }
 
-    // STORE.set('is_eunuch', checked);
+    // STORE.set('isEunuch', checked);
 
     render = () => {
-    	const { modal_visible, questions } = this.state;
+    	const { modalVisible, questions } = this.state;
 
     	return (
     		<div className='GachaOptions'>
-    			<Button type='danger' onClick={ this.handle_modal_visible }>成为真正的骑空士</Button>
+    			<Button type='danger' onClick={ this.handleModalVisible }>成为真正的骑空士</Button>
 
-    			<Modal visible={ modal_visible } onCancel={ this.handle_modal_visible } mask>
+    			<Modal visible={ modalVisible } onCancel={ this.handleModalVisible } mask>
     				{
     					questions.map((item, i) => {
     						const { question } = item;

@@ -1,14 +1,14 @@
-import { get_by_cookie } from '../util/Request';
+import { getByCookie } from '../util/Request';
 
-// 获得user_id
-const getUserId = 'http://game.granbluefantasy.jp/user/user_id';
+// 获得userId
+const getUserId = 'http://game.granbluefantasy.jp/user/userId';
 
 module.exports = {
-	init_user_id: STORE => {
-		!STORE.get('userId') && get_by_cookie(getUserId, {}, result => {
-			const { user_id } = result;
+	initUserId: STORE => {
+		!STORE.get('userId') && getByCookie(getUserId, {}, result => {
+			const { userId } = result;
 
-			STORE.set('userId', user_id);
+			STORE.set('userId', userId);
 		});
 	}
 };

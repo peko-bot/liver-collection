@@ -2,28 +2,28 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-07-13 19:53:01 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-13 20:27:30
+ * @Last Modified time: 2018-07-18 11:35:03
  */
-const control_gacha = status => {
-	let button_group = document.getElementsByClassName('btn-gacha');
+const controlGacha = status => {
+	let buttonGroup = document.getElementsByClassName('btn-gacha');
 
-	for(let button of button_group) {
+	for(let button of buttonGroup) {
 		button.style.visibility = status ? 'hidden' : '';
 	}
 };
 
-const init_gacha = () => {
-	chrome.extension.sendMessage({ message: 'is_eunuch' }, response => {
+const initGacha = () => {
+	chrome.extension.sendMessage({ message: 'isEunuch' }, response => {
 		const { status } = response;
     
 		let timer = null;
     
 		if(location.hash.includes('gacha')) {
 			timer = setInterval(() => {
-				let button_group = document.getElementsByClassName('btn-gacha');
+				let buttonGroup = document.getElementsByClassName('btn-gacha');
                 
-				if(button_group.length > 0) {
-					control_gacha(status);
+				if(buttonGroup.length > 0) {
+					controlGacha(status);
     
 					clearInterval(timer);
 				}
@@ -32,4 +32,4 @@ const init_gacha = () => {
 	});
 };
 
-module.exports = { init_gacha, control_gacha };
+module.exports = { initGacha, controlGacha };

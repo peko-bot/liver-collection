@@ -1,8 +1,8 @@
 /*
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-03 12:02:47 
- * @Last Modified by:   zy9 
- * @Last Modified time: 2018-06-08 10:02:47 
+ * @Last Modified by: zy9
+ * @Last Modified time: 2018-07-18 11:47:06
  */
 define([], function () {
 	var class2type = {
@@ -34,7 +34,6 @@ define([], function () {
 			}
 
 			var key;
-			for (key in obj) {}
 
 			return key === undefined || hasOwn.call(obj, key);
 		},

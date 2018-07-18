@@ -100,14 +100,14 @@ const initRoomSearch = () => {
 };
 
 // 检查是否人员页面
-const is_character_page = () => {
+const isCharacterPage = () => {
 	return !!(document.getElementsByClassName('btn-lis-user').length);
 };
 
 /**
  * 返回房间内队友信息
  */
-const check_characters = () => {
+const checkCharacters = () => {
 	let characters = [];
 
 	for(let item of document.getElementsByClassName('btn-lis-user')) {
@@ -122,5 +122,5 @@ const check_characters = () => {
 
 module.exports = {
 	roomObserve, roomObserveBreaker, initRoomSearch, // 搜索相关
-	is_character_page, check_characters, // 超巴房相关
+	isCharacterPage, checkCharacters, // 超巴房相关
 };

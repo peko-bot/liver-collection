@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-07-02 16:28:55 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-18 09:30:57
+ * @Last Modified time: 2018-07-18 11:10:21
  */
 import React, { Component } from 'react';
 
@@ -32,7 +32,7 @@ export default class ScrollOptions extends Component {
 		super(props);
 
 		this.state = {
-			checked: STORE.get('is_scroll_style_show'),
+			checked: STORE.get('isScrollStyleShow'),
 		};
 	}
 
@@ -40,8 +40,8 @@ export default class ScrollOptions extends Component {
     
     }
 
-    handle_switch_onchange = checked => {
-    	STORE.set('is_scroll_style_show', checked);
+    handleSwitchOnChange = checked => {
+    	STORE.set('isScrollStyleShow', checked);
 
     	chrome.extension && chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
     		const port = chrome.tabs.connect(tabs[0].id, { name: 'popup_to_content' });
@@ -58,7 +58,7 @@ export default class ScrollOptions extends Component {
     			<div style={{ marginLeft: '6%' }}>
     				<Tooltip title='开启该选项时，你鼠标移到滚动条附近，滚动条会变粗三秒'>
     					<span style={{ float: 'left', color: '#666' }}>滚动条样式变化</span>
-    					<Switch onChange={ this.handle_switch_onchange } defaultChecked={ checked } style={{ float: 'right', marginRight: '6%' }} />
+    					<Switch onChange={ this.handleSwitchOnChange } defaultChecked={ checked } style={{ float: 'right', marginRight: '6%' }} />
     					<div style={{ clear: 'both' }} ></div>
     				</Tooltip>
     			</div>

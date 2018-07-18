@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-07-01 11:28:56 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-03 22:17:15
+ * @Last Modified time: 2018-07-18 11:32:38
  * @Description: 初始化本地存储
  */
 import options from './options';
@@ -12,23 +12,23 @@ import Store from '../util/Store';
 const local = new Store('options');
 
 // 加载黑名单
-fetch('./assets/black_list.json', {})
+fetch('./assets/blackList.json', {})
 	.then(result => result.json())
 	.then(result => {
-		let black_list = local.get('black_list');
+		let blackList = local.get('blackList');
 
 		/**
      * 更新数据
      */
 		let list = [];
 		for(let item of result) {
-			const { id: new_id } = item; 
+			const { id: newId } = item; 
 
-			if(black_list && black_list.length > 0) {
-				for(let jtem of black_list) {
-					const { id: local_id } = jtem;
+			if(blackList && blackList.length > 0) {
+				for(let jtem of blackList) {
+					const { id: localId } = jtem;
 
-					if(local_id == new_id) {
+					if(localId == newId) {
 						list.push(Object.assign({}, jtem, item));
 					}
 				}
@@ -37,7 +37,7 @@ fetch('./assets/black_list.json', {})
 			}
 		}
 
-		local.set('black_list', list);
+		local.set('blackList', list);
 	});
 
 // 如果localStorage已经有了配置，那合并

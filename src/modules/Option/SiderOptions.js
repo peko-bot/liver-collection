@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-30 22:56:38 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-03 17:17:42
+ * @Last Modified time: 2018-07-18 11:20:42
  */
 import React, { Component } from 'react';
 
@@ -32,8 +32,8 @@ export default class SiderOptions extends Component {
 		super(props);
 
 		this.state = {
-			left_checked: STORE.get('is_left_sider_show'),
-			right_checked: STORE.get('is_right_sider_show'),
+			leftChecked: STORE.get('isLeftSiderShow'),
+			rightChecked: STORE.get('isRightSiderShow'),
 		};
 	}
 
@@ -41,7 +41,7 @@ export default class SiderOptions extends Component {
     
     }
 
-    handle_coopraid_switch = (checked, name) => {
+    handleCoopraidSwitch = (checked, name) => {
     	STORE.set(name, checked);
 
     	chrome.extension && chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
@@ -52,19 +52,19 @@ export default class SiderOptions extends Component {
     }
 
     render = () => {
-    	const { left_checked, right_checked } = this.state;
+    	const { leftChecked, rightChecked } = this.state;
 
     	return (
     		<div className='SiderOptions'>
     			<div style={{ marginLeft: '1%' }}>
     				<span style={{ float: 'left', color: '#666' }}>左侧面板</span>
-    				<Switch onChange={ checked => this.handle_coopraid_switch(checked, 'is_left_sider_show') } defaultChecked={ left_checked } style={{ float: 'right', marginRight: '85%' }} />
+    				<Switch onChange={ checked => this.handleCoopraidSwitch(checked, 'isLeftSiderShow') } defaultChecked={ leftChecked } style={{ float: 'right', marginRight: '85%' }} />
     				<div style={{ clear: 'both' }} ></div>
     			</div>
     			<WhiteSpace />
     			<div style={{ marginLeft: '1%' }}>
     				<span style={{ float: 'left', color: '#666' }}>右侧面板</span>
-    				<Switch onChange={ checked => this.handle_coopraid_switch(checked, 'is_right_sider_show') } defaultChecked={ right_checked } style={{ float: 'right', marginRight: '85%' }} />
+    				<Switch onChange={ checked => this.handleCoopraidSwitch(checked, 'isRightSiderShow') } defaultChecked={ rightChecked } style={{ float: 'right', marginRight: '85%' }} />
     				<div style={{ clear: 'both' }} ></div>
     			</div>
     			<WhiteSpace />

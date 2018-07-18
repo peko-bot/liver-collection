@@ -32,13 +32,13 @@ export default class GachaOptions extends Component {
 		super(props);
 
 		this.state = {
-			checked: STORE.get('is_eunuch'),
+			checked: STORE.get('isEunuch'),
 			title: '开启该选项时，你将成为穷空士',
 		};
 	}
 
-    handle_switch_onchange = checked => {
-    	STORE.set('is_eunuch', checked);
+    handleSwitchOnChange = checked => {
+    	STORE.set('isEunuch', checked);
 
     	if(chrome.extension && checked) {
     		chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
@@ -72,7 +72,7 @@ export default class GachaOptions extends Component {
     				<Tooltip title={ title }>
     					<span style={{ float: 'left', color: '#666' }}>是否精神阉割骑空士</span>
     				</Tooltip>
-    				<Switch onChange={ this.handle_switch_onchange } defaultChecked={ checked } disabled={ checked } style={{ float: 'right', marginRight: '6%' }} />
+    				<Switch onChange={ this.handleSwitchOnChange } defaultChecked={ checked } disabled={ checked } style={{ float: 'right', marginRight: '6%' }} />
     				<WhiteSpace clear />
     			</div>
     			<WhiteSpace clear />

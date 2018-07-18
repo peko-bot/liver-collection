@@ -1,8 +1,8 @@
 /*
- * @Author: zy9@github.com/zy410419243 
- * @Date: 2018-06-30 15:20:01 
+ * @Author: zy9@github.com/zy410419243
+ * @Date: 2018-06-30 15:20:01
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-18 09:30:59
+ * @Last Modified time: 2018-07-18 11:04:13
  */
 import React, { Component } from 'react';
 
@@ -21,7 +21,7 @@ import './css/SetZoom.css';
  * TODO: 这些初始化到background中
 */
 let environment;
-if(chrome.extension) {
+if (chrome.extension) {
 	environment = chrome.extension.getBackgroundPage();
 } else {
 	environment = { store: new store() };
@@ -33,12 +33,12 @@ export default class SetZoom extends Component {
 		super(props);
 
 		this.state = {
-			defaultZoom: STORE.get('zoom'),
+			defaultZoom: STORE.get('zoom')
 		};
 	}
 
     componentDidMount = () => {
-    
+
     }
 
     handle_zoom = zoom => {
@@ -46,7 +46,7 @@ export default class SetZoom extends Component {
 
     	chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
     		const port = chrome.tabs.connect(tabs[0].id, { name: 'popup_to_content' });
-            
+
     		port.postMessage({ zoom, message: 'set_zoom' });
     	});
     }
