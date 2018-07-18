@@ -1,4 +1,4 @@
-# liver-collection 
+# Liver-collection 
 
 * 肝collection，用作Viramate功能补全  
 
@@ -20,6 +20,7 @@
 * 共斗房黑名单，下载黑名单的这个文件是用来共享的，但目前只能手动合并，更新时需要手动替换json文件，/assets/black_list.json  [操作及效果](#黑名单)  
 * 两键舔婊  [操作及效果](#两键舔婊)  
 * 一键舔婊。需要开启 [监听剪切板] 选项  [操作及效果](#一键舔婊)  
+* 检查作业。[效果](#检查作业)  
 # 用法
 ## 如果你只是单纯要用
 * 
@@ -93,3 +94,6 @@
 
 ### 一键舔婊
 ![img](./img/oneKeyBattle.gif)  
+
+### 检查作业
+![img](./img/checkHomework.png)  
