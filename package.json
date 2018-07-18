@@ -10,7 +10,13 @@
     "push": "node webpack.prod.js && git add .&& git commit -m \"update\" && git push"
   },
   "dependencies": {
-    "antd": "^3.6.4"
+    "antd": "^3.6.4",
+    "babel-eslint": "^8.2.6",
+    "eslint": "^5.1.0",
+    "eslint-config-elemefe": "^0.3.0",
+    "eslint-plugin-import": "^2.13.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.10.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -23,7 +29,6 @@
     "clean-webpack-plugin": "^0.1.19",
     "copy-webpack-plugin": "^4.5.1",
     "css-loader": "^0.28.11",
-    "eslint": "^5.1.0",
     "html-webpack-plugin": "^3.2.0",
     "mini-css-extract-plugin": "^0.4.0",
     "postcss-loader": "^2.1.4",

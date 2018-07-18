@@ -6,5 +6,5 @@
  */
 /* 右键菜单  */
 module.exports = () => {
-    console.log('contextMenus')
-}
+	console.log('contextMenus');
+};

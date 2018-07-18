@@ -2,15 +2,15 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-07-02 16:28:55 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-13 19:40:08
+ * @Last Modified time: 2018-07-18 09:30:28
  */
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
-import { Switch, Tooltip } from 'antd'
+import { Switch, Tooltip } from 'antd';
 
-import WhiteSpace from '../../component/white-space'
+import WhiteSpace from '../../component/white-space';
 
-import store from '../../../util/Store'
+import store from '../../../util/Store';
 
 /**
  * start时是没有chrome的api的，用到localStorage的地方都会报错，
@@ -21,49 +21,49 @@ import store from '../../../util/Store'
 let environment;
 
 if(chrome.extension) {
-    environment = chrome.extension.getBackgroundPage();
+	environment = chrome.extension.getBackgroundPage();
 } else {
-    environment = { store: new store() };
+	environment = { store: new store() };
 }
 const { store: STORE } = environment;
 
 export default class ScrollOptions extends Component {
-    constructor(props) {
-        super(props);
+	constructor(props) {
+		super(props);
 
-        this.state = {
-            checked: STORE.get('is_scroll_style_show'),
-        }
-    }
+		this.state = {
+			checked: STORE.get('is_scroll_style_show'),
+		};
+	}
 
     componentDidMount = () => {
     
     }
 
     handle_switch_onchange = checked => {
-        STORE.set('is_scroll_style_show', checked);
+    	STORE.set('is_scroll_style_show', checked);
 
-        chrome.extension && chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
-            const port = chrome.tabs.connect(tabs[0].id, { name: 'popup_to_content' });
+    	chrome.extension && chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
+    		const port = chrome.tabs.connect(tabs[0].id, { name: 'popup_to_content' });
 
-            port.postMessage({ message: 'scroll_style_status', status: checked });
-        });
+    		port.postMessage({ message: 'scroll_style_status', status: checked });
+    	});
     }
 
     render = () => {
-        const { checked } = this.state;
+    	const { checked } = this.state;
 
-        return (
-            <div className='ScrollOptions'>
-                <div style={{ marginLeft: '1%' }}>
-                    <Tooltip title='开启该选项时，你鼠标移到滚动条附近，滚动条会变粗三秒'>
-                        <span style={{ float: 'left', color: '#666' }}>滚动条样式变化</span>
-                    </Tooltip>
-                    <Switch onChange={ this.handle_switch_onchange } defaultChecked={ checked } style={{ float: 'right', marginRight: '85%' }} />
-                    <WhiteSpace clear />
-                </div>
-                <WhiteSpace clear />
-            </div>
-        )
+    	return (
+    		<div className='ScrollOptions'>
+    			<div style={{ marginLeft: '1%' }}>
+    				<Tooltip title='开启该选项时，你鼠标移到滚动条附近，滚动条会变粗三秒'>
+    					<span style={{ float: 'left', color: '#666' }}>滚动条样式变化</span>
+    				</Tooltip>
+    				<Switch onChange={ this.handle_switch_onchange } defaultChecked={ checked } style={{ float: 'right', marginRight: '85%' }} />
+    				<WhiteSpace clear />
+    			</div>
+    			<WhiteSpace clear />
+    		</div>
+    	);
     }
 }

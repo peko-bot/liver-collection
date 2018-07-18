@@ -19,58 +19,58 @@ const dev = process.argv.includes('development') ? true : false;
 let plugins = commonPlugin;
 
 plugins.push(
-    new CopyWebpackPlugin([
-        {
-            from: __dirname + '/src/assets',
-            to: __dirname + '/dist/assets'
-        },
-        {
-            from: __dirname + '/manifest.json',
-            to: __dirname + '/dist',
-            force: true
-        },
-        {
-            from: __dirname + '/contentScript/css',
-            to: __dirname + '/dist/assets/contentScript'
-        }
-    ])
+	new CopyWebpackPlugin([
+		{
+			from: __dirname + '/src/assets',
+			to: __dirname + '/dist/assets'
+		},
+		{
+			from: __dirname + '/manifest.json',
+			to: __dirname + '/dist',
+			force: true
+		},
+		{
+			from: __dirname + '/contentScript/css',
+			to: __dirname + '/dist/assets/contentScript'
+		}
+	])
 );
 
 plugins.push(new TohoLogPlugin({ dev }));
 
 dev && plugins.push(new CleanWebpackPlugin(['dist'], {
-    exclude: ['mainifest.json'], // 如果不加这个，在rebuild时，不会再复制json到dist中
-    verbose: false
+	exclude: ['mainifest.json'], // 如果不加这个，在rebuild时，不会再复制json到dist中
+	verbose: false
 }));
 
 !dev && plugins.push(new CleanWebpackPlugin(['dist'], {
-    verbose: false
+	verbose: false
 }));
 
 const options = {
-    mode: dev ? 'development' : 'production',
-    // watch: dev,
-    devServer: {
-        port: 9099
-    },
-    resolve: {
-        extensions: ['.js', '.jsx'],
-    },
-    devtool: dev ? 'source-map' : '',
-    entry: {
-        background: __dirname + '/background',
-        contentScript: __dirname + '/contentScript',
-        popup: __dirname + '/src',
-        inject: __dirname + '/contentScript/inject'
-    },
-    output: {
-        path: __dirname + '/dist',
-        filename: '[name].js',
-        chunkFilename: dev ? 'vendor/[name].[chunkHash:8].js' : 'vendor/[name].js'
-    },
-    plugins,
-    module: commonModule
-}
+	mode: dev ? 'development' : 'production',
+	// watch: dev,
+	devServer: {
+		port: 9099
+	},
+	resolve: {
+		extensions: ['.js', '.jsx'],
+	},
+	devtool: dev ? 'source-map' : '',
+	entry: {
+		background: __dirname + '/background',
+		contentScript: __dirname + '/contentScript',
+		popup: __dirname + '/src',
+		inject: __dirname + '/contentScript/inject'
+	},
+	output: {
+		path: __dirname + '/dist',
+		filename: '[name].js',
+		chunkFilename: dev ? 'vendor/[name].[chunkHash:8].js' : 'vendor/[name].js'
+	},
+	plugins,
+	module: commonModule
+};
 
 dev && webpack(options).watch({}, () => {});
 

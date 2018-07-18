@@ -4,11 +4,11 @@
  * @Last Modified by: zy9
  * @Last Modified time: 2018-06-22 21:59:27
  */
-import React from 'react'
-import ReactDOM from 'react-dom'
+import React from 'react';
+import ReactDOM from 'react-dom';
 // import { AppContainer } from 'react-hot-loader'
 
-import Router from './router'
+import Router from './router';
 
 const MOUNT_NODE = document.getElementById('root');
 
@@ -22,8 +22,8 @@ ReactDOM.render(<Router />, MOUNT_NODE);
 // render(Router);
 
 if (module.hot) {
-    // module.hot.accept('./router', () => {
-    //     render(require('./router').default);
-    // });
-    module.hot.accept();
+	// module.hot.accept('./router', () => {
+	//     render(require('./router').default);
+	// });
+	module.hot.accept();
 }

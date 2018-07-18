@@ -4,22 +4,22 @@
  * @Last Modified by: zy9
  * @Last Modified time: 2018-07-03 21:34:37
  */
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
-import './css/index.css'
+import './css/index.css';
 
 export default class index extends Component {
-    constructor(props) {
-        super(props);
+	constructor(props) {
+		super(props);
 
-        this.state = {
+		this.state = {
 
-        }
-    }
+		};
+	}
 
     render = () => {
-        const { clear } = this.props;
+    	const { clear } = this.props;
         
-        return <div className='white-space' style={{ clear: clear ? 'both' : 'none' }} />;
+    	return <div className='white-space' style={{ clear: clear ? 'both' : 'none' }} />;
     };
 }
