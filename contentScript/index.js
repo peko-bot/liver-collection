@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-08 11:15:23 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-19 09:05:27
+ * @Last Modified time: 2018-07-19 21:53:17
  */
 import { initStyles, initZoom, setZoom, controlLeftSider, controlRightSider, removeEvent, initScrollHoverContainer } from './style';
 import { roomObserve, roomObserveBreaker, initRoomSearch, checkCharacters, isCharacterPage, checkBlackList } from './coopraid';
@@ -36,7 +36,7 @@ initRoomSearch();
 initGacha();
 
 // 初始化一键舔婊
-if(location.href.includes('raidfinder')) {
+if(location.href.includes('raidfinder') || location.href.includes('tbw')) {
 	listenClipBoardBattleCheck();
 }
 
