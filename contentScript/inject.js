@@ -2,8 +2,9 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-07-08 09:26:10 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-18 12:33:23
+ * @Last Modified time: 2018-07-19 09:13:29
  */
+// TODO: 文件需要单独一个文件夹分离功能
 import { dispatchInjectToContentScript } from '../util/Request';
 
 document.getElementById('init_window').addEventListener('content_script_to_inject', e => {
@@ -72,7 +73,7 @@ document.getElementById('init_window').addEventListener('content_script_to_injec
 
 const ajax = (url, index, result) => {
 	$.ajax({
-		url: url + index,
+		url: url.replace('@', index),
 		cache: false,
 		global: false,
 		dataType: 'json',

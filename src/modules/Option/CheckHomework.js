@@ -2,11 +2,11 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-07-17 21:31:53 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-18 14:25:03
+ * @Last Modified time: 2018-07-19 09:17:21
  */
 import React, { Component } from 'react';
 
-import { Button, Table, Tooltip } from 'antd';
+import { Button, Table, Tooltip, InputNumber } from 'antd';
 
 import WhiteSpace from '../../component/white-space';
 
@@ -34,10 +34,13 @@ export default class CheckHomework extends Component {
 		this.state = {
 			dataSource: [],
 			loading: false,
+			groupId: '',
 		};
 	}
 
     handleHomework = () => {
+    	const { groupId } = this.state;
+
     	this.setState({ loading: true });
 
     	chrome.tabs.query({ active: false }, tabs => {
@@ -54,7 +57,7 @@ export default class CheckHomework extends Component {
     
     		const port = chrome.tabs.connect(tabId, { name: 'popup_to_content' });
     
-    		port.postMessage({ message: 'check_homework' });
+    		port.postMessage({ message: 'check_homework', groupId });
     	});
 
     	// 轮询获得团员id
@@ -68,6 +71,8 @@ export default class CheckHomework extends Component {
     		}
     	}, 800);
     }
+	
+	handleGroupId = groupId => this.setState({ groupId });
 
     render = () => {
     	const { dataSource, loading } = this.state;
@@ -76,6 +81,11 @@ export default class CheckHomework extends Component {
 
     	return (
     		<div className='CheckHomework' style={{ marginLeft: '1%' }}>
+    			<div style={{ marginRight: 10, display: 'inline' }}>
+    				<Tooltip title='这里输入团id，不填默认看自己团的'>
+    					<InputNumber onChange={ this.handleGroupId } />
+    				</Tooltip>
+    			</div>
     			<Tooltip title='本战未开始时，数据会有误差。因为时间是从当天早上五点开始计算贡献的，预选期间因为当日贡献度清零不在五点，所以会产生误差，也就是当日贡献这列可以不看，但总贡献始终都是准的'>
     				<Button loading={ loading } type='primary' onClick={ this.handleHomework }>检查当天本战作业</Button>
     			</Tooltip>
