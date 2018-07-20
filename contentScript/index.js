@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-08 11:15:23 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-19 21:53:17
+ * @Last Modified time: 2018-07-20 08:34:47
  */
 import { initStyles, initZoom, setZoom, controlLeftSider, controlRightSider, removeEvent, initScrollHoverContainer } from './style';
 import { roomObserve, roomObserveBreaker, initRoomSearch, checkCharacters, isCharacterPage, checkBlackList } from './coopraid';
@@ -27,7 +27,7 @@ injectScript(chrome.extension.getURL('/inject.js'));
 
 // 修改全局样式
 initStyles();
-initZoom();
+// initZoom();
 
 // 如果搜索过，自动应用搜索内容
 initRoomSearch();

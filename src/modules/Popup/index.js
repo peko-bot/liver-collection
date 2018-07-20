@@ -2,13 +2,13 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-05-20 14:46:14 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-18 09:30:55
+ * @Last Modified time: 2018-07-20 08:35:05
  */
 import React, { Component } from 'react';
 
 // import UploadItems from './UploadItems'
 import CoopraidSearch from './CoopraidSearch';
-import SetZoom from './SetZoom';
+// import SetZoom from './SetZoom';
 import CheckCharacters from './CheckCharacters';
 // import SiderOptions from './SiderOptions'
 import CheckBlackList from './CheckBlackList';
@@ -28,7 +28,7 @@ export default class Popup extends Component {
     			<CoopraidSearch />
 
     			{/* 设置游戏窗口大小 */}
-    			<SetZoom />
+    			{/* <SetZoom /> */}
 
     			{/* 检查黑名单 */}
     			<CheckBlackList />
