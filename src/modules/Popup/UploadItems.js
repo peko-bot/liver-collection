@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-30 15:34:22 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-18 23:17:38
+ * @Last Modified time: 2018-07-20 23:55:29
  */
 import React, { Component } from 'react';
 
@@ -31,9 +31,9 @@ if(chrome.extension) {
 const { store: STORE } = environment;
 
 // item第二页，红跟豆那页
-const article = 'http://game.granbluefantasy.jp/item/article_list_by_filter_mode';
+const article = '/item/article_list_by_filter_mode';
 // item第一页，日常素材
-const recovery = 'http://game.granbluefantasy.jp/item/recovery_and_evolution_list_by_filter_mode';
+const recovery = '/item/recovery_and_evolution_list_by_filter_mode';
 
 export default class UploadItems extends Component {
 	constructor(props) {

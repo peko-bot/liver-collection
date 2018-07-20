@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-07-01 11:28:56 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-18 11:32:38
+ * @Last Modified time: 2018-07-20 23:59:37
  * @Description: 初始化本地存储
  */
 import options from './options';
@@ -18,8 +18,8 @@ fetch('./assets/blackList.json', {})
 		let blackList = local.get('blackList');
 
 		/**
-     * 更新数据
-     */
+		 * 更新数据
+		 */
 		let list = [];
 		for(let item of result) {
 			const { id: newId } = item; 

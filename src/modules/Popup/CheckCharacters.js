@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-30 15:03:11 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-18 11:30:02
+ * @Last Modified time: 2018-07-20 23:55:22
  */
 import React, { Component } from 'react';
 
@@ -14,7 +14,7 @@ import { getByCookie } from '../../../util/Request';
 
 import './css/CheckCharacters.css';
 
-const profile = 'http://game.granbluefantasy.jp/profile/content/index/';
+const profile = '/profile/content/index/';
 
 export default class CheckCharacters extends Component {
 	constructor(props) {
