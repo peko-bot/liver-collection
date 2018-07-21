@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-07-04 21:49:54 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-21 22:14:04
+ * @Last Modified time: 2018-07-21 22:16:56
  */
 import { dispatchContentScriptToInject } from '../util/Request';
 // http://game.granbluefantasy.jp
@@ -33,4 +33,4 @@ const listenClipBoardBattleCheck = () => {
 	}, 800);
 };
 
-module.exports = { getBattleRoomHref, useBp, listenClipBoardBattleCheck };
+module.exports = { getBattleRoomHref, listenClipBoardBattleCheck };
