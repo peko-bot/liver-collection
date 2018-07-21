@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-09 21:42:02
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-21 10:21:54
+ * @Last Modified time: 2018-07-21 20:17:20
  */
 import { local } from './initLocalStorage';
 import { initUserId } from './user';
@@ -32,7 +32,7 @@ initInputForBattle();
 getBattleRoomHref(local.get('userId'), local.get('isListenBoard'));
 
 chrome.runtime.onMessage.addListener((response, sender, sendResponse) => {
-	const { message, zoom, search, url, data } = response;
+	const { message, zoom, search, url, data, error } = response;
 	let tasks = { error: '', tasks: '' };
 
 	switch(message) {
@@ -91,6 +91,15 @@ chrome.runtime.onMessage.addListener((response, sender, sendResponse) => {
 
 		case 'get_scene_href':
 			tasks = Object.assign(tasks, { href: local.get('sceneHref') });
+			break;
+
+		case 'inject_ajax_error':
+			chrome.notifications.create({
+				type: 'basic',
+				iconUrl: './assets/img/54878633_p0.png',
+				title: 'ajax未知异常',
+				message: error
+			});
 			break;
 	}
 
