@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-08 11:15:23 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-21 09:50:02
+ * @Last Modified time: 2018-07-21 21:41:13
  */
 import { initStyles, initZoom, setZoom, controlLeftSider, controlRightSider, removeEvent, initScrollHoverContainer } from './style';
 import { roomObserve, roomObserveBreaker, initRoomSearch, checkCharacters, isCharacterPage, checkBlackList } from './coopraid';
@@ -57,7 +57,7 @@ window.onkeydown = e => {
 
 // 用作接收inject返回的值
 document.getElementById('init_window').addEventListener('inject_to_content_script', e => {
-	const { message, data, url, count } = e.detail;
+	const { message, data, url, count, error } = e.detail;
 
 	switch(message) {
 		case 'getBattleRoomHref': // 跳转地址的转发
@@ -83,6 +83,10 @@ document.getElementById('init_window').addEventListener('inject_to_content_scrip
 		case 'do_getMemberId': // 获得团员id
 			chrome.extension.sendMessage({ message: 'do_getMemberId', data });
 			break;
+
+		case 'inject_ajax_error': // inject中ajax错误需要提示
+			chrome.extension.sendMessage({ message: 'inject_ajax_error', error });
+			break;
 	}
 });
 
@@ -93,7 +97,7 @@ chrome.runtime.onConnect.addListener(port => {
 	switch(name) {
 		case 'popup_to_content':
 			port.onMessage.addListener(response => {
-				const { zoom, message, search, type, status, battleId, userId, groupId } = response;
+				const { zoom, message, search, type, status, battleId, groupId } = response;
         
 				switch(message) {
 					case 'set_zoom': // 用作Popup中拖动Slider时，实时改变窗口大小
@@ -129,7 +133,7 @@ chrome.runtime.onConnect.addListener(port => {
 						break;
 
 					case 'battle_key_check': // 根据battle id获得房间地址
-						getBattleRoomHref(battleId, userId);
+						getBattleRoomHref(battleId);
 						break;
 
 					case 'to_be_a_eunuch': // 禁用抽卡
