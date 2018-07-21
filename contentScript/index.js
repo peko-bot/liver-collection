@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-08 11:15:23 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-21 20:16:12
+ * @Last Modified time: 2018-07-21 21:41:13
  */
 import { initStyles, initZoom, setZoom, controlLeftSider, controlRightSider, removeEvent, initScrollHoverContainer } from './style';
 import { roomObserve, roomObserveBreaker, initRoomSearch, checkCharacters, isCharacterPage, checkBlackList } from './coopraid';
@@ -97,7 +97,7 @@ chrome.runtime.onConnect.addListener(port => {
 	switch(name) {
 		case 'popup_to_content':
 			port.onMessage.addListener(response => {
-				const { zoom, message, search, type, status, battleId, userId, groupId } = response;
+				const { zoom, message, search, type, status, battleId, groupId } = response;
         
 				switch(message) {
 					case 'set_zoom': // 用作Popup中拖动Slider时，实时改变窗口大小
@@ -133,7 +133,7 @@ chrome.runtime.onConnect.addListener(port => {
 						break;
 
 					case 'battle_key_check': // 根据battle id获得房间地址
-						getBattleRoomHref(battleId, userId);
+						getBattleRoomHref(battleId);
 						break;
 
 					case 'to_be_a_eunuch': // 禁用抽卡

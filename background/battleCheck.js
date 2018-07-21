@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-07-04 20:31:22 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-18 11:16:32
+ * @Last Modified time: 2018-07-21 21:35:41
  */
 // 创建一个用于粘贴battle id的文本框
 const initInputForBattle = () => {
@@ -23,17 +23,17 @@ const initInputForBattle = () => {
  * 点击icon时，获得剪切板内容，像是battle id的话，
  * 去请求battle room地址
  */
-const getBattleRoomHref = (userId, isListenBoard) => {
+const getBattleRoomHref = (isListenBoard) => {
 	if(isListenBoard) {
-		handleBoardPost(userId);
+		handleBoardPost();
 	} else {
 		chrome.browserAction.onClicked.addListener(() => {
-			handleBoardPost(userId);
+			handleBoardPost();
 		});
 	}
 };
 
-const handleBoardPost = userId => {
+const handleBoardPost = () => {
 	chrome.tabs.query({ active: true }, tabs => {
 		// 只有打开的gbf窗口才能进房
 		let tabId;
@@ -65,7 +65,7 @@ const handleBoardPost = userId => {
 
 		let reg = /^[A-Za-z0-9]+$/gi;
 		if(reg.test(value) && value.length == 8) {
-			port.postMessage({ message: 'battle_key_check', battleId: value, userId });
+			port.postMessage({ message: 'battle_key_check', battleId: value });
 		} else {
 			console.log('check failed');
 		}
