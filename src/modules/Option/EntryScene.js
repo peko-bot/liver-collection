@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-07-21 09:53:59 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-21 11:08:50
+ * @Last Modified time: 2018-07-21 13:21:41
  */
 import React, { Component } from 'react';
 
@@ -30,7 +30,7 @@ const { store: STORE } = environment;
 export default class EntryScene extends Component {
     handleApLimit = value => STORE.set('entrySceneApLowerLimit', value);
 
-    handleHref = value => STORE.set('sceneHref', value);
+    handleHref = e => STORE.set('sceneHref', e.target.value);
 
     render = () => {
     	return (
