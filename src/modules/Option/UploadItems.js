@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-30 15:34:22 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-20 23:57:35
+ * @Last Modified time: 2018-07-21 11:02:37
  */
 import React, { Component } from 'react';
 
@@ -118,7 +118,7 @@ export default class UploadItems extends Component {
     	);
 
     	return (
-    		<div className='UploadItems'>
+    		<div className='UploadItems' style={{ marginLeft: '1%' }}>
     			<span>上传地址：</span>
     			<Input addonBefore={ selectBefore } style={{ width: '20%' }} onChange={ this.handleAddress } value={ address } />
     			<Button type='primary' loading={ btnLoading } onClick={ this.handleUpload } style={{ marginLeft: '2%', width: '15%' }}>上传素材</Button>

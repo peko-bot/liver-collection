@@ -11,4 +11,6 @@ module.exports = {
 	isListenBp: false, // 是否监视bp
 	isRape: false, // 是否强行进入房间
 	isEunuch: false, // 是否禁用抽卡
+	entrySceneApLowerLimit: 40, // 进入单人本，ap低于该值才会吃药
+	sceneHref: 'http://game.granbluefantasy.jp/#quest/supporter/730571/1', // 默认进入房间地址
 };

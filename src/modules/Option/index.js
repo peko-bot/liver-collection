@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-07-02 21:36:02 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-18 11:42:38
+ * @Last Modified time: 2018-07-21 10:37:46
  */
 import React, { Component } from 'react';
 
@@ -16,6 +16,7 @@ import ScrollOptions from './ScrollOptions';
 import MultiBattle from './MultiBattle';
 // import GachaOptions from './GachaOptions'
 import CheckHomework from './CheckHomework';
+import EntryScene from './EntryScene';
 
 import './css/Option.css';
 
@@ -58,10 +59,11 @@ export default class Option extends Component {
     	const multiBattle = (
     		<Content style={{ margin: '0 16px' }}>
     			<Breadcrumb style={{ margin: '16px 0' }}>
-    				<Breadcrumb.Item>舔婊相关</Breadcrumb.Item>
+    				<Breadcrumb.Item>战斗相关</Breadcrumb.Item>
     			</Breadcrumb>
     			<div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
     				<MultiBattle />
+    				<EntryScene />
     			</div>
     		</Content>
     	);
@@ -121,7 +123,7 @@ const menuItems = [
 	{
 		key: 1,
 		type: 'team',
-		text: '舔婊相关'
+		text: '战斗相关'
 	},
 	{
 		key: 2,

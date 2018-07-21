@@ -2,13 +2,14 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-06-08 11:15:23 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-20 08:34:47
+ * @Last Modified time: 2018-07-21 09:50:02
  */
 import { initStyles, initZoom, setZoom, controlLeftSider, controlRightSider, removeEvent, initScrollHoverContainer } from './style';
 import { roomObserve, roomObserveBreaker, initRoomSearch, checkCharacters, isCharacterPage, checkBlackList } from './coopraid';
 import { getBattleRoomHref, useBp, listenClipBoardBattleCheck } from './battleCheck';
 import { controlGacha, initGacha } from './gachaBanner';
 import { getMemberId } from './checkHomework';
+import { entryScene, beforeEntryScene } from './keyBoardBind';
 
 const injectScript = file => {
 	var th = document.getElementsByTagName('body')[0];
@@ -40,6 +41,20 @@ if(location.href.includes('raidfinder') || location.href.includes('tbw')) {
 	listenClipBoardBattleCheck();
 }
 
+window.onkeydown = e => {
+	const { keyCode } = e;
+
+	switch(keyCode) {
+		case 70: // f键刷新页面
+			location.reload();
+			break;
+
+		case 68: // d键进标签房顺带检查状态及吃药
+			beforeEntryScene();
+			break;
+	}
+};
+
 // 用作接收inject返回的值
 document.getElementById('init_window').addEventListener('inject_to_content_script', e => {
 	const { message, data, url, count } = e.detail;
@@ -55,6 +70,10 @@ document.getElementById('init_window').addEventListener('inject_to_content_scrip
 
 		case 'do_useBp': // 吃完药了
 			chrome.extension.sendMessage({ message: 'redo_battle_room_href_check' });
+			break;
+
+		case 'do_useAp':
+			entryScene();
 			break;
 
 		case 'notify_error': // 进房异常处理

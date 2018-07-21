@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-07-08 09:26:10 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-19 09:13:29
+ * @Last Modified time: 2018-07-21 10:19:08
  */
 // TODO: 文件需要单独一个文件夹分离功能
 import { dispatchInjectToContentScript } from '../util/Request';
@@ -63,10 +63,44 @@ document.getElementById('init_window').addEventListener('content_script_to_injec
 			});
 			break;
 
-		case 'getMemberId':
-			let result = [];
+		case 'getMemberId': // 获得团友id
+			ajax(url, 1, []);
+			break;
 
-			ajax(url, 1, result);
+		case 'get_status': // 获得状态
+			$.ajax({
+				url,
+				cache: false,
+				global: false,
+				dataType: 'json',
+				method: 'GET',
+				success: result => {
+					const { ap } = result.status;
+
+					// 判断是否吃药
+					if(ap < data.limit) {
+						$.ajax({
+							url: '/item/use_normal_item',
+							data: JSON.stringify({ special_token: null, item_id: 2, num: 1 }),
+							cache: false,
+							global: false,
+							dataType: 'json',
+							method: 'POST',
+							success: result => {
+								const { useFlag } = result;
+			
+								dispatchInjectToContentScript({ message: 'do_useAp' });
+							},
+							error: error => {
+								console.error(error);
+							}
+						});
+					} else {
+						dispatchInjectToContentScript({ message: 'do_useAp' });
+					}
+				
+				}
+			});
 			break;
 	}
 });
