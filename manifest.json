@@ -18,7 +18,11 @@
     "content_scripts": [
         {
             "matches": [
-                "*://*/*"
+                "*://game.granbluefantasy.jp/*",
+                "*://gbf.game.mbga.jp/*",
+                "*://gbf-tbw.tk/*",
+                "*://tbw.346lab.org/*",
+                "*://gbf-raidfinder.aikats.us/*"
             ],
             "css": [
                 "assets/contentScript/main.css"
