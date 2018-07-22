@@ -2,9 +2,10 @@
  * @Author: zy9@github.com/zy410419243 
  * @Date: 2018-07-04 21:49:54 
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-21 22:16:56
+ * @Last Modified time: 2018-07-22 08:31:24
  */
 import { dispatchContentScriptToInject } from '../util/Request';
+
 // http://game.granbluefantasy.jp
 const getBattleRoomHref = (battleId) => {
 	// const body = { 'special_token': null, 'battle_key': battleId };
