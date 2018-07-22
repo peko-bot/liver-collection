@@ -1,6 +1,6 @@
 /*
- * @Author: zy9@github.com/zy410419243 
- * @Date: 2018-05-20 14:46:14 
+ * @Author: zy9@github.com/zy410419243
+ * @Date: 2018-05-20 14:46:14
  * @Last Modified by: zy9
  * @Last Modified time: 2018-07-20 08:35:05
  */
@@ -32,7 +32,7 @@ export default class Popup extends Component {
 
     			{/* 检查黑名单 */}
     			<CheckBlackList />
-                
+
     			{/* ub房检查队友天人 */}
     			<CheckCharacters />
 

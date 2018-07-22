@@ -1,11 +1,11 @@
 /*
- * @Author: zy9@github.com/zy410419243 
- * @Date: 2018-06-25 22:28:14 
+ * @Author: zy9@github.com/zy410419243
+ * @Date: 2018-06-25 22:28:14
  * @Last Modified by: zy9
  * @Last Modified time: 2018-07-18 11:47:28
  */
 export default class Store {
-	constructor(name, defaults) {
+	constructor (name, defaults) {
 		this.name = name;
 
 		if (defaults !== undefined) {
@@ -20,7 +20,9 @@ export default class Store {
     get = (propsName) => {
     	let name = 'store.' + this.name + '.' + propsName;
 
-    	if (localStorage.getItem(name) === null) { return undefined; }
+    	if (localStorage.getItem(name) === null) {
+    		return undefined;
+    	}
 
     	try {
     		return JSON.parse(localStorage.getItem(name));
@@ -57,6 +59,7 @@ export default class Store {
 
     removeAll = () => {
     	let name = 'store.' + this.name + '.';
+
     	for (let i = (localStorage.length - 1); i >= 0; i--) {
     		if (localStorage.key(i).substring(0, name.length) === name) {
     			localStorage.removeItem(localStorage.key(i));
@@ -70,11 +73,14 @@ export default class Store {
     	let values = {}, key, value;
 
     	let name = 'store.' + this.name + '.';
+
     	for (let i = (localStorage.length - 1); i >= 0; i--) {
     		if (localStorage.key(i).substring(0, name.length) === name) {
     			key = localStorage.key(i).substring(name.length);
     			value = this.get(key);
-    			if (value !== undefined) { values[key] = value; }
+    			if (value !== undefined) {
+    				values[key] = value;
+    			}
     		}
     	}
 
@@ -82,7 +88,9 @@ export default class Store {
     }
 
     fromObject = (values, merge) => {
-    	if (merge !== true) { this.removeAll(); }
+    	if (merge !== true) {
+    		this.removeAll();
+    	}
     	for (let key in values) {
     		if (values.hasOwnProperty(key)) {
     			this.set(key, values[key]);

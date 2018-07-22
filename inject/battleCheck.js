@@ -1,6 +1,6 @@
 /*
- * @Author: zy9@github.com/zy410419243 
- * @Date: 2018-07-21 21:29:04 
+ * @Author: zy9@github.com/zy410419243
+ * @Date: 2018-07-21 21:29:04
  * @Last Modified by: zy9
  * @Last Modified time: 2018-07-21 21:54:16
  */
@@ -33,7 +33,7 @@ const getBattleRoomHref = battleId => {
 				if(count <= 0) {
 					count = 5;
 				}
-                
+
 				// 吃豆
 				useBp(result => {
 					dispatchInjectToContentScript({ message: 'do_useBp' });

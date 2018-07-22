@@ -1,6 +1,6 @@
 /*
- * @Author: zy9@github.com/zy410419243 
- * @Date: 2018-07-03 17:20:19 
+ * @Author: zy9@github.com/zy410419243
+ * @Date: 2018-07-03 17:20:19
  * @Last Modified by: zy9
  * @Last Modified time: 2018-07-21 11:05:51
  */
@@ -28,7 +28,7 @@ if(chrome.extension) {
 const { store: STORE } = environment;
 
 export default class MultiBattle extends Component {
-	constructor(props) {
+	constructor (props) {
 		super(props);
 
 		this.state = {
@@ -40,7 +40,7 @@ export default class MultiBattle extends Component {
 	}
 
     componentDidMount = () => {
-    
+
     }
 
     handleSwitchOnChange = (name, checked) => {

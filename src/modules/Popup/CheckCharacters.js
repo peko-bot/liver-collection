@@ -1,8 +1,8 @@
 /*
- * @Author: zy9@github.com/zy410419243 
- * @Date: 2018-06-30 15:03:11 
+ * @Author: zy9@github.com/zy410419243
+ * @Date: 2018-06-30 15:03:11
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-20 23:55:22
+ * @Last Modified time: 2018-07-22 11:05:44
  */
 import React, { Component } from 'react';
 
@@ -17,12 +17,12 @@ import './css/CheckCharacters.css';
 const profile = '/profile/content/index/';
 
 export default class CheckCharacters extends Component {
-	constructor(props) {
+	constructor (props) {
 		super(props);
 
 		this.state = {
 			checkUbCharactersBtnLoading: false,
-			disabled: false, 
+			disabled: false,
 		};
 	}
 
@@ -51,7 +51,7 @@ export default class CheckCharacters extends Component {
     		const port = chrome.tabs.connect(tabs[0].id, { name: 'popup_to_content' });
 
     		this.setState({ checkUbCharactersBtnLoading: true });
-            
+
     		port.postMessage({ message: 'check_ub_characters' });
 
     		port.onMessage.addListener(response => {
@@ -63,14 +63,14 @@ export default class CheckCharacters extends Component {
     				item.url = profile + userId;
     				item.hasCharacter = '';
     			}
-                
+
     			this.recursionRequest(datas, 0, result => {
     				// 这段判断天人图片太僵硬了，得用正则
     				for(let item of result) {
     					const { data } = item;
     					const splitStr = 'http%3A%2F%2Fgame-a.granbluefantasy.jp%2Fassets%2Fimg_light%2Fsp%2Fassets%2Fnpc%2Fquest';
     					let characterList = [];
-                        
+
     					for(let jtem of data.split(splitStr)) {
 
     						for(let ktem of characterImgs) {
@@ -81,7 +81,7 @@ export default class CheckCharacters extends Component {
     							}
     						}
     					}
-                        
+
     					// 去重
     					item.hasCharacter = Array.from(new Set(characterList)).toString();
     				}

@@ -1,6 +1,6 @@
 /*
- * @Author: zy9@github.com/zy410419243 
- * @Date: 2018-07-17 21:31:53 
+ * @Author: zy9@github.com/zy410419243
+ * @Date: 2018-07-17 21:31:53
  * @Last Modified by: zy9
  * @Last Modified time: 2018-07-19 09:17:21
  */
@@ -28,7 +28,7 @@ if(chrome.extension) {
 const { store: STORE } = environment;
 
 export default class CheckHomework extends Component {
-	constructor(props) {
+	constructor (props) {
 		super(props);
 
 		this.state = {
@@ -45,18 +45,19 @@ export default class CheckHomework extends Component {
 
     	chrome.tabs.query({ active: false }, tabs => {
     		let tabId;
+
     		for(let tab of tabs) {
     			const { id, url } = tab;
-    
+
     			if(tab.url.includes('game')) {
     				tabId = id;
-    
+
     				break;
     			}
     		}
-    
+
     		const port = chrome.tabs.connect(tabId, { name: 'popup_to_content' });
-    
+
     		port.postMessage({ message: 'check_homework', groupId });
     	});
 
@@ -71,12 +72,12 @@ export default class CheckHomework extends Component {
     		}
     	}, 800);
     }
-	
+
 	handleGroupId = groupId => this.setState({ groupId });
 
     render = () => {
     	const { dataSource, loading } = this.state;
-          
+
     	const table = <Table dataSource={ dataSource } columns={ this.columns } rowKey='id' />;
 
     	return (

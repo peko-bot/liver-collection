@@ -1,6 +1,6 @@
 /*
- * @Author: zy9@github.com/zy410419243 
- * @Date: 2018-06-08 09:13:33 
+ * @Author: zy9@github.com/zy410419243
+ * @Date: 2018-06-08 09:13:33
  * @Last Modified by: zy9
  * @Last Modified time: 2018-07-18 11:32:01
  */
@@ -14,6 +14,7 @@ export const uploadToServer = (url, data, callback) => {
 			'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
 		},
 	};
+
 	params = Object.assign(params, data);
 
 	fetch(url, params).then(result => result.text()).then(result => callback(result))
@@ -28,6 +29,7 @@ export const getByCookie = (url, data, callback) => {
 	let params = {
 		credentials: 'include', // 加入cookie
 	};
+
 	params = Object.assign(params, data);
 
 	fetch(url, params).then(result => result.json()).then(result => callback(result))
@@ -47,6 +49,7 @@ export const postByCookie = (url, data, callback) => {
 			'Content-Type': 'application/json; charset=UTF-8'
 		},
 	};
+
 	params = Object.assign(params, data);
 
 	fetch(url, params).then(result => {

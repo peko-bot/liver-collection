@@ -1,8 +1,8 @@
 /*
- * @Author: zy9@github.com/zy410419243 
+ * @Author: zy9@github.com/zy410419243
  * @Date: 2018-06-09 21:42:02
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-21 22:11:34
+ * @Last Modified time: 2018-07-22 10:16:13
  */
 import { local } from './initLocalStorage';
 import { initUserId } from './user';
@@ -100,6 +100,10 @@ chrome.runtime.onMessage.addListener((response, sender, sendResponse) => {
 				title: 'ajax未知异常',
 				message: error
 			});
+			break;
+
+		default:
+
 			break;
 	}
 

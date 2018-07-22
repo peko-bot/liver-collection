@@ -1,6 +1,6 @@
 /*
- * @Author: zy9@github.com/zy410419243 
- * @Date: 2018-07-13 19:35:55 
+ * @Author: zy9@github.com/zy410419243
+ * @Date: 2018-07-13 19:35:55
  * @Last Modified by: zy9
  * @Last Modified time: 2018-07-18 14:22:46
  */
@@ -28,13 +28,13 @@ if(chrome.extension) {
 const { store: STORE } = environment;
 
 export default class GachaOptions extends Component {
-	constructor(props) {
+	constructor (props) {
 		super(props);
 
 		this.state = {
 			questions: [],
 			modalVisible: false,
-            
+
 		};
 	}
 

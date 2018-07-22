@@ -1,6 +1,6 @@
 /*
- * @Author: zy9@github.com/zy410419243 
- * @Date: 2018-07-21 09:53:59 
+ * @Author: zy9@github.com/zy410419243
+ * @Date: 2018-07-21 09:53:59
  * @Last Modified by: zy9
  * @Last Modified time: 2018-07-21 13:21:41
  */
@@ -20,6 +20,7 @@ import store from '../../../util/Store';
  * TODO: 这些初始化到background中
 */
 let environment;
+
 if(chrome.extension) {
 	environment = chrome.extension.getBackgroundPage();
 } else {

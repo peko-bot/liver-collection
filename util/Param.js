@@ -1,6 +1,6 @@
 /*
- * @Author: zy9@github.com/zy410419243 
- * @Date: 2018-06-03 12:02:47 
+ * @Author: zy9@github.com/zy410419243
+ * @Date: 2018-06-03 12:02:47
  * @Last Modified by: zy9
  * @Last Modified time: 2018-07-18 11:47:06
  */
@@ -18,13 +18,13 @@ define([], function () {
 
 	var rbracket = /\[\]$/;
 
-	var isFunction = function(obj) {
+	var isFunction = function (obj) {
 			return typeof obj === 'function' && typeof obj.nodeType !== 'number';
 		},
-		isWindow = function(obj) {
+		isWindow = function (obj) {
 			return obj != null && obj === obj.window;
 		},
-		isPlainObject = function(obj) {
+		isPlainObject = function (obj) {
 			if (!obj || type(obj) !== 'object' || obj.nodeType || isWindow(obj)) {
 				return false;
 			}
@@ -37,68 +37,68 @@ define([], function () {
 
 			return key === undefined || hasOwn.call(obj, key);
 		},
-		buildParams = function(prefix, obj, traditional, add) {
+		buildParams = function (prefix, obj, traditional, add) {
 			var name;
-    
-			if ( Array.isArray( obj ) ) {
-				each( obj, function( i, v ) {
-					if ( traditional || rbracket.test( prefix ) ) {
-						add( prefix, v );
-    
+
+			if (Array.isArray(obj)) {
+				each(obj, function (i, v) {
+					if (traditional || rbracket.test(prefix)) {
+						add(prefix, v);
+
 					} else {
 						buildParams(
-							prefix + '[' + ( typeof v === 'object' && v != null ? i : '' ) + ']',
+							prefix + '[' + (typeof v === 'object' && v != null ? i : '') + ']',
 							v,
 							traditional,
 							add
 						);
 					}
-				} );
-    
-			} else if ( !traditional && toType( obj ) === 'object' ) {
-    
-				for ( name in obj ) {
-					buildParams( prefix + '[' + name + ']', obj[ name ], traditional, add );
+				});
+
+			} else if (!traditional && toType(obj) === 'object') {
+
+				for (name in obj) {
+					buildParams(prefix + '[' + name + ']', obj[ name ], traditional, add);
 				}
-    
+
 			} else {
-    
-				add( prefix, obj );
+
+				add(prefix, obj);
 			}
 		},
-		isArrayLike = function(obj) {
+		isArrayLike = function (obj) {
 			var length = !!obj && 'length' in obj && obj.length,
-				type = toType( obj );
-    
-			if ( isFunction( obj ) || isWindow( obj ) ) {
+				type = toType(obj);
+
+			if (isFunction(obj) || isWindow(obj)) {
 				return false;
 			}
-    
+
 			return type === 'array' || length === 0 ||
-            typeof length === 'number' && length > 0 && ( length - 1 ) in obj;
+            typeof length === 'number' && length > 0 && (length - 1) in obj;
 		},
-		toType = function(obj) {
-			if ( obj == null ) {
+		toType = function (obj) {
+			if (obj == null) {
 				return obj + '';
 			}
-    
+
 			return typeof obj === 'object' || typeof obj === 'function' ?
-				class2type[ toString.call( obj ) ] || 'object' :
+				class2type[ toString.call(obj) ] || 'object' :
 				typeof obj;
 		},
-		each = function(obj, callback) {
+		each = function (obj, callback) {
 			var length, i = 0;
 
-			if ( isArrayLike( obj ) ) {
+			if (isArrayLike(obj)) {
 				length = obj.length;
-				for ( ; i < length; i++ ) {
-					if ( callback.call( obj[ i ], i, obj[ i ] ) === false ) {
+				for (; i < length; i++) {
+					if (callback.call(obj[ i ], i, obj[ i ]) === false) {
 						break;
 					}
 				}
 			} else {
-				for ( i in obj ) {
-					if ( callback.call( obj[ i ], i, obj[ i ] ) === false ) {
+				for (i in obj) {
+					if (callback.call(obj[ i ], i, obj[ i ]) === false) {
 						break;
 					}
 				}
@@ -106,29 +106,29 @@ define([], function () {
 
 			return obj;
 		},
-		param = function(a, traditional) {
+		param = function (a, traditional) {
 			var prefix, s = [],
-				add = function(key, valueOrFunction) {
-					var value = isFunction( valueOrFunction ) ?
+				add = function (key, valueOrFunction) {
+					var value = isFunction(valueOrFunction) ?
 						valueOrFunction() :
 						valueOrFunction;
 
-					s[ s.length ] = encodeURIComponent( key ) + '=' +
-				encodeURIComponent( value == null ? '' : value );
+					s[ s.length ] = encodeURIComponent(key) + '=' +
+				encodeURIComponent(value == null ? '' : value);
 				};
 
-			if (Array.isArray( a ) || (a.jquery && !isPlainObject( a ))) {
-				each( a, function() {
-					add( this.name, this.value );
-				} );
+			if (Array.isArray(a) || (a.jquery && !isPlainObject(a))) {
+				each(a, function () {
+					add(this.name, this.value);
+				});
 
 			} else {
-				for ( prefix in a ) {
-					buildParams( prefix, a[ prefix ], traditional, add );
+				for (prefix in a) {
+					buildParams(prefix, a[ prefix ], traditional, add);
 				}
 			}
 
-			return s.join( '&' );
+			return s.join('&');
 		};
 
 	return param;

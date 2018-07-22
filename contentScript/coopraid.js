@@ -1,6 +1,6 @@
 /*
- * @Author: zy9@github.com/zy410419243 
- * @Date: 2018-05-30 21:58:12 
+ * @Author: zy9@github.com/zy410419243
+ * @Date: 2018-05-30 21:58:12
  * @Last Modified by: zy9
  * @Last Modified time: 2018-07-11 15:23:33
  * @Description 共斗时的设置
@@ -27,6 +27,7 @@ const roomObserve = search => {
 				// アル;↑
 				// 获得房名含有文本框内容项的索引
 				let flag = true, searchs = search.split(';');
+
 				for(let j = 0, searchsLen = searchs.length; j < searchsLen; j++) {
 					let jtem = searchs[j];
 					let isIncludes = innerText.includes(jtem);
@@ -44,8 +45,9 @@ const roomObserve = search => {
             */
 			for(let i = 0, roomLen = rooms.children.length; i < roomLen; i++) {
 				let room = rooms.children[i];
+
 				room.style.display = 'none';
-                
+
 				for(let j = 0, selectTextsLen = selectTexts.length; j < selectTextsLen; j++) {
 					if(i == selectTexts[j]) {
 						room.style.display = '';
@@ -72,7 +74,7 @@ const initRoomSearch = () => {
 	if(!location.href.includes('coopraid')) {
 		return;
 	}
-    
+
 	chrome.extension.sendMessage({ message: 'get_search' }, response => {
 		const { search } = response;
 

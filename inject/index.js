@@ -1,8 +1,8 @@
 /*
- * @Author: zy9@github.com/zy410419243 
- * @Date: 2018-07-08 09:26:10 
+ * @Author: zy9@github.com/zy410419243
+ * @Date: 2018-07-08 09:26:10
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-21 21:55:56
+ * @Last Modified time: 2018-07-22 11:27:43
  */
 // TODO: 文件需要单独一个文件夹分离功能
 import { dispatchInjectToContentScript } from '../util/Request';
@@ -33,6 +33,10 @@ document.getElementById('init_window').addEventListener('content_script_to_injec
 					dispatchInjectToContentScript({ message: 'do_useAp' });
 				}
 			});
+			break;
+
+		default:
+
 			break;
 	}
 });

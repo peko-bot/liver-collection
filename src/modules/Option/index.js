@@ -1,8 +1,8 @@
 /*
- * @Author: zy9@github.com/zy410419243 
- * @Date: 2018-07-02 21:36:02 
+ * @Author: zy9@github.com/zy410419243
+ * @Date: 2018-07-02 21:36:02
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-21 10:37:46
+ * @Last Modified time: 2018-07-22 11:32:15
  */
 import React, { Component } from 'react';
 
@@ -21,7 +21,7 @@ import EntryScene from './EntryScene';
 import './css/Option.css';
 
 export default class Option extends Component {
-	constructor(props) {
+	constructor (props) {
 		super(props);
 
 		this.state = {
@@ -103,7 +103,7 @@ export default class Option extends Component {
     				{ key == 0 && globalStyle }
     				{ key == 1 && multiBattle }
     				{ key == 2 && uploadItems }
-                    
+
     				<Footer style={{ textAlign: 'center' }}>
     					<div>贫穷使我们相遇，但后来，你却发出了母猪的声音。而我，只想为你豹跳一曲，如花净土...</div>
     					<div>Poverty makes us meet, but later, only you come out of the closet. But for me, I just want to marry to you...</div>

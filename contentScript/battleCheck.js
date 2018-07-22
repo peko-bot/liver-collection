@@ -1,8 +1,8 @@
 /*
- * @Author: zy9@github.com/zy410419243 
- * @Date: 2018-07-04 21:49:54 
+ * @Author: zy9@github.com/zy410419243
+ * @Date: 2018-07-04 21:49:54
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-22 08:31:24
+ * @Last Modified time: 2018-07-22 11:01:49
  */
 import { dispatchContentScriptToInject } from '../util/Request';
 
@@ -16,18 +16,18 @@ const getBattleRoomHref = (battleId) => {
 
 const listenClipBoardBattleCheck = () => {
 	let timer = null;
-    
+
 	timer = setInterval(() => {
 		let list = document.getElementsByClassName('gbfrf-tweets');
-		
+
 		// TODO: 改成容器的事件委托
-		if(list.length > 0 ) {
+		if(list.length > 0) {
 			for(let item of list) {
 				item.addEventListener('click', e => {
 					chrome.extension.sendMessage({ message: 'listenClipBoardBattleCheck' });
 				});
 			}
-            
+
 			clearInterval(timer);
 		}
 

@@ -1,6 +1,6 @@
 /*
- * @Author: zy9@github.com/zy410419243 
- * @Date: 2018-07-01 10:39:37 
+ * @Author: zy9@github.com/zy410419243
+ * @Date: 2018-07-01 10:39:37
  * @Last Modified by: zy9
  * @Last Modified time: 2018-07-18 12:07:28
  */
@@ -19,6 +19,7 @@ import store from '../../../util/Store';
  * TODO: 这些初始化到background中
 */
 let environment;
+
 if(chrome.extension) {
 	environment = chrome.extension.getBackgroundPage();
 } else {
@@ -27,7 +28,7 @@ if(chrome.extension) {
 const { store: STORE } = environment;
 
 export default class CheckBlackList extends Component {
-	constructor(props) {
+	constructor (props) {
 		super(props);
 
 		this.state = {
@@ -60,6 +61,7 @@ export default class CheckBlackList extends Component {
     		vBlob = new Blob([data], { type: 'octet/stream' }),
     		vName = 'black_list.json',
     		vUrl = window.URL.createObjectURL(vBlob);
+
     	vLink.setAttribute('href', vUrl);
     	vLink.setAttribute('download', vName);
 
@@ -78,6 +80,7 @@ export default class CheckBlackList extends Component {
     			const { datas } = response;
 
     			let targetUsers = [];
+
     			for(let item of datas) {
     				const { nickName, userId } = item;
 

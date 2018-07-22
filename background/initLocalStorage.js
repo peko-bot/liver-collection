@@ -1,6 +1,6 @@
 /*
- * @Author: zy9@github.com/zy410419243 
- * @Date: 2018-07-01 11:28:56 
+ * @Author: zy9@github.com/zy410419243
+ * @Date: 2018-07-01 11:28:56
  * @Last Modified by: zy9
  * @Last Modified time: 2018-07-20 23:59:37
  * @Description: 初始化本地存储
@@ -21,8 +21,9 @@ fetch('./assets/blackList.json', {})
 		 * 更新数据
 		 */
 		let list = [];
+
 		for(let item of result) {
-			const { id: newId } = item; 
+			const { id: newId } = item;
 
 			if(blackList && blackList.length > 0) {
 				for(let jtem of blackList) {

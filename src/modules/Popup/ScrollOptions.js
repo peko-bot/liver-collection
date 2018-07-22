@@ -1,6 +1,6 @@
 /*
- * @Author: zy9@github.com/zy410419243 
- * @Date: 2018-07-02 16:28:55 
+ * @Author: zy9@github.com/zy410419243
+ * @Date: 2018-07-02 16:28:55
  * @Last Modified by: zy9
  * @Last Modified time: 2018-07-18 11:10:21
  */
@@ -28,7 +28,7 @@ if(chrome.extension) {
 const { store: STORE } = environment;
 
 export default class ScrollOptions extends Component {
-	constructor(props) {
+	constructor (props) {
 		super(props);
 
 		this.state = {
@@ -37,7 +37,7 @@ export default class ScrollOptions extends Component {
 	}
 
     componentDidMount = () => {
-    
+
     }
 
     handleSwitchOnChange = checked => {

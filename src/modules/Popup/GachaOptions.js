@@ -1,6 +1,6 @@
 /*
- * @Author: zy9@github.com/zy410419243 
- * @Date: 2018-07-13 19:35:55 
+ * @Author: zy9@github.com/zy410419243
+ * @Date: 2018-07-13 19:35:55
  * @Last Modified by: zy9
  * @Last Modified time: 2018-07-18 09:30:50
  */
@@ -28,7 +28,7 @@ if(chrome.extension) {
 const { store: STORE } = environment;
 
 export default class GachaOptions extends Component {
-	constructor(props) {
+	constructor (props) {
 		super(props);
 
 		this.state = {
@@ -43,7 +43,7 @@ export default class GachaOptions extends Component {
     	if(chrome.extension && checked) {
     		chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
     			const port = chrome.tabs.connect(tabs[0].id, { name: 'popup_to_content' });
-    
+
     			port.postMessage({ message: 'to_be_a_eunuch', status: checked });
     		});
 
@@ -53,7 +53,7 @@ export default class GachaOptions extends Component {
     	if(chrome.extension && !checked) {
     		chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
     			const port = chrome.tabs.connect(tabs[0].id, { name: 'popup_to_content' });
-    
+
     			port.postMessage({ message: 'to_be_a_gbfer', status: checked });
     		});
 

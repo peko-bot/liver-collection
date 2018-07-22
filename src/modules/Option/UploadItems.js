@@ -1,6 +1,6 @@
 /*
- * @Author: zy9@github.com/zy410419243 
- * @Date: 2018-06-30 15:34:22 
+ * @Author: zy9@github.com/zy410419243
+ * @Date: 2018-06-30 15:34:22
  * @Last Modified by: zy9
  * @Last Modified time: 2018-07-21 11:02:37
  */
@@ -21,6 +21,7 @@ import store from '../../../util/Store';
  * TODO: 这些初始化到background中
 */
 let environment;
+
 if(chrome.extension) {
 	environment = chrome.extension.getBackgroundPage();
 } else {
@@ -34,7 +35,7 @@ const article = 'http://game.granbluefantasy.jp/item/article_list_by_filter_mode
 const recovery = 'http://game.granbluefantasy.jp/item/recovery_and_evolution_list_by_filter_mode';
 
 export default class UploadItems extends Component {
-	constructor(props) {
+	constructor (props) {
 		super(props);
 
 		this.state = {
@@ -45,7 +46,7 @@ export default class UploadItems extends Component {
 	}
 
     componentDidMount = () => {
-    
+
     }
 
     handleAddress = event => this.setState({ address: event.target.value });
@@ -61,6 +62,7 @@ export default class UploadItems extends Component {
     	this.setState({ btnLoading: true });
 
     	const userId = STORE.get('userId');
+
     	if(!userId) {
     		notification.open({
     			message: '非法操作',
@@ -69,17 +71,18 @@ export default class UploadItems extends Component {
     		});
 
     		this.setState({ btnLoading: false });
-            
+
     		return;
     	}
-        
+
     	Request.getByCookie(article, {}, result => {
     		Request.getByCookie(recovery, {}, recovery => {
     			recovery = this.steamRoller(recovery);
-    
+
     			result = [...result, ...recovery];
-    
+
     			const body = `user_id=${ userId }&data=${JSON.stringify(result)}`;
+
     			Request.uploadToServer(`${headAddress}${address}/Memo/gbf/i_item.do`, { body }, result => {
     				if(result == 'success') {
     					notification.open({
@@ -88,7 +91,7 @@ export default class UploadItems extends Component {
     						duration: 3
     					});
     				}
-                    
+
     				this.setState({ btnLoading: false });
     			});
     		});

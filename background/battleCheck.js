@@ -1,8 +1,8 @@
 /*
- * @Author: zy9@github.com/zy410419243 
- * @Date: 2018-07-04 20:31:22 
+ * @Author: zy9@github.com/zy410419243
+ * @Date: 2018-07-04 20:31:22
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-21 21:35:41
+ * @Last Modified time: 2018-07-22 11:02:25
  */
 // 创建一个用于粘贴battle id的文本框
 const initInputForBattle = () => {
@@ -37,6 +37,7 @@ const handleBoardPost = () => {
 	chrome.tabs.query({ active: true }, tabs => {
 		// 只有打开的gbf窗口才能进房
 		let tabId;
+
 		for(let tab of tabs) {
 			const { id, url } = tab;
 
@@ -64,6 +65,7 @@ const handleBoardPost = () => {
 		let value = input.value.trim();
 
 		let reg = /^[A-Za-z0-9]+$/gi;
+
 		if(reg.test(value) && value.length == 8) {
 			port.postMessage({ message: 'battle_key_check', battleId: value });
 		} else {

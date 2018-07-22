@@ -1,6 +1,6 @@
 /*
- * @Author: zy9@github.com/zy410419243 
- * @Date: 2018-06-30 15:11:32 
+ * @Author: zy9@github.com/zy410419243
+ * @Date: 2018-06-30 15:11:32
  * @Last Modified by: zy9
  * @Last Modified time: 2018-07-18 11:30:59
  */
@@ -19,6 +19,7 @@ import store from '../../../util/Store';
  * TODO: 这些初始化到background中
 */
 let environment;
+
 if(chrome.extension) {
 	environment = chrome.extension.getBackgroundPage();
 } else {
@@ -29,7 +30,7 @@ const { store: STORE } = environment;
 import './css/CoopraidSearch.css';
 
 export default class CoopraidSearch extends Component {
-	constructor(props) {
+	constructor (props) {
 		super(props);
 
 		const coopraidSearchValue = STORE.get('search') || '';
@@ -43,17 +44,17 @@ export default class CoopraidSearch extends Component {
 	}
 
     componentDidMount = () => {
-    
+
     }
 
     handleSearch = () => {
     	const { coopraidSearchValue } = this.state;
-        
+
     	chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
     		const port = chrome.tabs.connect(tabs[0].id, { name: 'popup_to_content' });
 
     		STORE.set('search', coopraidSearchValue);
-            
+
     		port.postMessage({ message: 'open_coopraid_search', search: coopraidSearchValue });
     	});
     }
@@ -78,7 +79,7 @@ export default class CoopraidSearch extends Component {
     		<div className='CoopraidSearch'>
     			<Input style={{ width: '90%' }} onChange={ this.handleCoopraidSearch } value={ coopraidSearchValue } placeholder='这里填房间描述' />
     			<WhiteSpace />
-                
+
     			<div style={{ marginLeft: '6%' }}>
     				<Tooltip title='看见上面的文本框了么，填了这个你才能开启搜索'>
     					<span style={{ float: 'left', color: '#666' }}>是否开启共斗搜索</span>

@@ -1,8 +1,8 @@
 /*
- * @Author: zy9@github.com/zy410419243 
- * @Date: 2018-06-08 11:15:23 
+ * @Author: zy9@github.com/zy410419243
+ * @Date: 2018-06-08 11:15:23
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-21 21:41:13
+ * @Last Modified time: 2018-07-22 10:17:24
  */
 import { initStyles, initZoom, setZoom, controlLeftSider, controlRightSider, removeEvent, initScrollHoverContainer } from './style';
 import { roomObserve, roomObserveBreaker, initRoomSearch, checkCharacters, isCharacterPage, checkBlackList } from './coopraid';
@@ -15,15 +15,18 @@ const injectScript = file => {
 	var th = document.getElementsByTagName('body')[0];
 
 	var s = document.createElement('script');
+
 	s.setAttribute('type', 'text/javascript');
 	s.setAttribute('src', file);
 
 	let windowWraper = document.createElement('script');
+
 	windowWraper.id = 'init_window';
 
 	th.appendChild(s);
 	th.appendChild(windowWraper);
 };
+
 injectScript(chrome.extension.getURL('/inject.js'));
 
 // 修改全局样式
@@ -51,6 +54,9 @@ window.onkeydown = e => {
 
 		case 68: // d键进标签房顺带检查状态及吃药
 			beforeEntryScene();
+			break;
+
+		default:
 			break;
 	}
 };
@@ -87,6 +93,10 @@ document.getElementById('init_window').addEventListener('inject_to_content_scrip
 		case 'inject_ajax_error': // inject中ajax错误需要提示
 			chrome.extension.sendMessage({ message: 'inject_ajax_error', error });
 			break;
+
+		default:
+
+			break;
 	}
 });
 
@@ -98,7 +108,7 @@ chrome.runtime.onConnect.addListener(port => {
 		case 'popup_to_content':
 			port.onMessage.addListener(response => {
 				const { zoom, message, search, type, status, battleId, groupId } = response;
-        
+
 				switch(message) {
 					case 'set_zoom': // 用作Popup中拖动Slider时，实时改变窗口大小
 						setZoom(zoom);
@@ -147,8 +157,16 @@ chrome.runtime.onConnect.addListener(port => {
 					case 'check_homework':
 						getMemberId(groupId);
 						break;
+
+					default:
+
+						break;
 				}
 			});
+			break;
+
+		default:
+
 			break;
 	}
 });

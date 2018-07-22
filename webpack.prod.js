@@ -1,8 +1,8 @@
 /*
- * @Author: zy9@github.com/zy410419243 
- * @Date: 2018-05-20 13:48:08 
+ * @Author: zy9@github.com/zy410419243
+ * @Date: 2018-05-20 13:48:08
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-21 19:52:07
+ * @Last Modified time: 2018-07-22 11:34:22
  */
 const webpack = require('webpack');
 const fs = require('fs');
@@ -14,7 +14,7 @@ const path = require('path');
 const { logInfo, commonModule, commonPlugin, log, onCompile } = require('./webpack.common');
 
 const buildPath = __dirname + '/dist/';
-const dev = process.argv.includes('development') ? true : false;
+const dev = !!process.argv.includes('development');
 
 let plugins = commonPlugin;
 

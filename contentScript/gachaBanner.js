@@ -1,6 +1,6 @@
 /*
- * @Author: zy9@github.com/zy410419243 
- * @Date: 2018-07-13 19:53:01 
+ * @Author: zy9@github.com/zy410419243
+ * @Date: 2018-07-13 19:53:01
  * @Last Modified by: zy9
  * @Last Modified time: 2018-07-18 11:35:03
  */
@@ -15,16 +15,16 @@ const controlGacha = status => {
 const initGacha = () => {
 	chrome.extension.sendMessage({ message: 'isEunuch' }, response => {
 		const { status } = response;
-    
+
 		let timer = null;
-    
+
 		if(location.hash.includes('gacha')) {
 			timer = setInterval(() => {
 				let buttonGroup = document.getElementsByClassName('btn-gacha');
-                
+
 				if(buttonGroup.length > 0) {
 					controlGacha(status);
-    
+
 					clearInterval(timer);
 				}
 			}, 800);
