@@ -9,7 +9,6 @@ module.exports = {
         'sourceType': 'module'
     },
     'parser': 'babel-eslint',
-    'plugins': ['react'],
     'rules': {
         'indent': ['error', 'tab', {
             'SwitchCase': 1,
@@ -64,11 +63,16 @@ module.exports = {
         'wrap-iife': [2, 'inside'], // 立即执行函数表达式的小括号风格
         'use-isnan': 2, // 禁止比较时使用NaN，只能用isNaN()
         'yoda': [2, 'never'], // 禁止尤达条件
-        // "no-magic-numbers": ["error", { // 禁止出现含义不明确的数字
-        //     "ignoreArrayIndexes": true,
-        //     "ignore": [0, 1]
+        // 'no-magic-numbers': ['error', { // 禁止出现含义不明确的数字
+        //     'ignoreArrayIndexes': true,
+        //     'ignore': [0, 1]
         // }]
-        "prefer-arrow-callback": 2, // 优先使用箭头函数
+        'prefer-arrow-callback': 2, // 优先使用箭头函数
+        'no-empty': 0, // 是否能写空对象{}
+        'no-duplicate-imports': 2, // import同一模块下的方法需要放到同一个花括号中，import { test1, test2 } = module
+        'no-floating-decimal': 2, // 浮点数要写全，0.5
+        // 'object-property-newline': 2, // 声明对象时，变量要么写在一行，要么一行一个
+        'space-before-blocks': 2, // 小括号和花括号之间是否写空格，if() {}
     }
 };
 
