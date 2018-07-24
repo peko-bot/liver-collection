@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243
  * @Date: 2018-07-17 22:32:26
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-22 11:33:54
+ * @Last Modified time: 2018-07-24 09:18:41
  */
 const sendToOption = datas => {
 	// 拼id
@@ -19,8 +19,10 @@ const sendToOption = datas => {
 	const month = date.getMonth() + 1;
 	const day = date.getDate();
 
-	const start = parseInt(new Date(`${ year }-${ month }-${ day } 05:00:00`).getTime() / 1000);
-	const end = parseInt(new Date().getTime() / 1000);
+	// const start = parseInt(new Date(`${ year }-${ month }-${ day } 05:00:00`).getTime() / 1000);
+	// const end = parseInt(new Date().getTime() / 1000);
+	const start = window.checkHomeworkStart;
+	const end = window.checkHomeworkEnd;
 
 	const url = 'https://granbluefantasy.trim21.cn/api/v0.1/teamraid039/group/individual';
 

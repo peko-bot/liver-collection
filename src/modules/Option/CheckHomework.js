@@ -2,11 +2,16 @@
  * @Author: zy9@github.com/zy410419243
  * @Date: 2018-07-17 21:31:53
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-19 09:17:21
+ * @Last Modified time: 2018-07-24 09:24:20
  */
 import React, { Component } from 'react';
 
-import { Button, Table, Tooltip, InputNumber } from 'antd';
+import { Button, Table, Tooltip, InputNumber, DatePicker } from 'antd';
+
+import moment from 'moment';
+import 'moment/locale/zh-cn';
+
+const { RangePicker } = DatePicker;
 
 import WhiteSpace from '../../component/white-space';
 
@@ -73,6 +78,11 @@ export default class CheckHomework extends Component {
     	}, 800);
     }
 
+	handleRangePicker = (date, dateString) => {
+		window.checkHomeworkStart = parseInt(new Date(dateString[0]).getTime() / 1000);
+		window.checkHomeworkEnd = parseInt(new Date(dateString[1]).getTime() / 1000);
+	}
+
 	handleGroupId = groupId => this.setState({ groupId });
 
     render = () => {
@@ -82,13 +92,22 @@ export default class CheckHomework extends Component {
 
     	return (
     		<div className='CheckHomework' style={{ marginLeft: '1%' }}>
+    			<div>
+    				<Tooltip title='起止时间都是当日0点'>
+    					<span style={{ marginRight: 10 }}>历史时段：</span>
+    				</Tooltip>
+    				<RangePicker onChange={ this.handleRangePicker } placeholder={ ['开始时间', '结束时间'] } style={{ width: 220 }} />
+    			</div>
+    			<WhiteSpace />
+
     			<div style={{ marginRight: 10, display: 'inline' }}>
     				<Tooltip title='这里输入团id，不填默认看自己团的'>
-    					<InputNumber onChange={ this.handleGroupId } />
+    					<span style={{ marginRight: 10 }}>非本团id：</span>
+    					<InputNumber style={{ width: 220 }} onChange={ this.handleGroupId } />
     				</Tooltip>
     			</div>
     			<Tooltip title='本战未开始时，数据会有误差。因为时间是从当天早上五点开始计算贡献的，预选期间因为当日贡献度清零不在五点，所以会产生误差，也就是当日贡献这列可以不看，但总贡献始终都是准的'>
-    				<Button loading={ loading } type='primary' onClick={ this.handleHomework }>检查当天本战作业</Button>
+    				<Button loading={ loading } type='primary' onClick={ this.handleHomework }>检查作业</Button>
     			</Tooltip>
     			<WhiteSpace />
 
