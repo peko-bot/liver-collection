@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243
  * @Date: 2018-07-17 21:31:53
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-24 09:24:20
+ * @Last Modified time: 2018-07-25 11:32:16
  */
 import React, { Component } from 'react';
 
@@ -41,6 +41,9 @@ export default class CheckHomework extends Component {
 			loading: false,
 			groupId: '',
 		};
+
+		window.checkHomeworkStart = parseInt(new Date(moment().format('YYYY/MM/DD') + ' 00:00:00').getTime() / 1000);
+		window.checkHomeworkEnd = parseInt(new Date(moment().add(1, 'days').format('YYYY/MM/DD') + '00:00:00').getTime() / 1000);
 	}
 
     handleHomework = () => {
@@ -133,7 +136,7 @@ export default class CheckHomework extends Component {
     		key: 'level',
     	},
     	{
-    		title: '当日贡献',
+    		title: '时段内贡献',
     		dataIndex: 'singleDayPoint',
     		key: 'singleDayPoint',
     	},

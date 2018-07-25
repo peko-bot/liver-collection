@@ -2,8 +2,10 @@
  * @Author: zy9@github.com/zy410419243
  * @Date: 2018-07-17 22:32:26
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-24 09:18:41
+ * @Last Modified time: 2018-07-25 11:28:32
  */
+import moment from 'moment';
+
 const sendToOption = datas => {
 	// 拼id
 	let userIds = [];
@@ -14,13 +16,6 @@ const sendToOption = datas => {
 		userIds.push(id);
 	}
 
-	const date = new Date();
-	const year = date.getFullYear();
-	const month = date.getMonth() + 1;
-	const day = date.getDate();
-
-	// const start = parseInt(new Date(`${ year }-${ month }-${ day } 05:00:00`).getTime() / 1000);
-	// const end = parseInt(new Date().getTime() / 1000);
 	const start = window.checkHomeworkStart;
 	const end = window.checkHomeworkEnd;
 
@@ -58,7 +53,8 @@ const sendToOption = datas => {
 
 					let timeStamp = new Date(maxKey * 1000);
 
-					timeStamp = `${ timeStamp.getFullYear() }-${ timeStamp.getMonth() + 1 }-${ timeStamp.getDate() } ${ timeStamp.getHours() }:${ timeStamp.getMinutes() }:${ timeStamp.getSeconds() }`;
+					// timeStamp = `${ timeStamp.getFullYear() }-${ timeStamp.getMonth() + 1 }-${ timeStamp.getDate() } ${ timeStamp.getHours() }:${ timeStamp.getMinutes() }:${ timeStamp.getSeconds() }`;
+					timeStamp = moment(timeStamp).format('YYYY-MM-DD HH:mm:ss');
 
 					points.push({
 						id: userId,
@@ -92,50 +88,5 @@ const sendToOption = datas => {
 			window.memberDatas = assignObject;
 		});
 };
-
-// const ajax = (datas, index, callback) => {
-// 	let item = datas[index];
-// 	const { id } = item;
-
-// 	fetch('https://granbluefantasy.trim21.cn/api/v0.1/teamraid039/group/individual?user_id=' + id, {
-// 		method: 'POST',
-// 		headers: {
-// 			'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-// 		},
-// 		body: JSON.stringify({ 'user_ids': [], start: '', end: '' })
-// 	})
-// 		.then(result => result.json())
-// 		.then(result => {
-// 			let { data = [] } = result;
-
-// 			let max, min, keys = Object.keys(data);
-
-// 			for(let i = 0, len = keys.length; i < len; i++) {
-// 				keys[i] = parseInt(keys[i]);
-// 			}
-
-// 			max = Math.max(...keys);
-// 			min = Math.min(...keys);
-
-// 			if(keys.length > 0) {
-// 				max = data[max];
-// 				min = data[min];
-
-// 				item.singleDayPoint = max.point - min.point;
-// 				item.rank = max.rank;
-// 				item.totalPoint = max.point;
-// 			} else {
-// 				item.singleDayPoint = '此人未进排名查无可查';
-// 				item.rank = '-';
-// 				item.totalPoint = '-';
-// 			}
-
-// 			if(index < datas.length - 1) {
-// 				ajax(datas, (index + 1), callback);
-// 			} else {
-// 				callback(datas);
-// 			}
-// 		});
-// };
 
 module.exports = { sendToOption };
