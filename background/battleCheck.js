@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243
  * @Date: 2018-07-04 20:31:22
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-22 11:02:25
+ * @Last Modified time: 2018-07-26 21:04:17
  */
 // 创建一个用于粘贴battle id的文本框
 const initInputForBattle = () => {
@@ -46,6 +46,10 @@ const handleBoardPost = () => {
 
 				break;
 			}
+		}
+
+		if(!tabId) {
+			return;
 		}
 
 		const port = chrome.tabs.connect(tabId, { name: 'popup_to_content' });
