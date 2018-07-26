@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243
  * @Date: 2018-07-17 22:32:26
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-25 11:28:32
+ * @Last Modified time: 2018-07-25 13:40:45
  */
 import moment from 'moment';
 
@@ -53,7 +53,6 @@ const sendToOption = datas => {
 
 					let timeStamp = new Date(maxKey * 1000);
 
-					// timeStamp = `${ timeStamp.getFullYear() }-${ timeStamp.getMonth() + 1 }-${ timeStamp.getDate() } ${ timeStamp.getHours() }:${ timeStamp.getMinutes() }:${ timeStamp.getSeconds() }`;
 					timeStamp = moment(timeStamp).format('YYYY-MM-DD HH:mm:ss');
 
 					points.push({

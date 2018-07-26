@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243
  * @Date: 2018-06-09 21:42:02
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-22 10:16:13
+ * @Last Modified time: 2018-07-26 17:37:56
  */
 import { local } from './initLocalStorage';
 import { initUserId } from './user';
@@ -100,6 +100,10 @@ chrome.runtime.onMessage.addListener((response, sender, sendResponse) => {
 				title: 'ajax未知异常',
 				message: error
 			});
+			break;
+
+		case 'get_key_board_listener_status':
+			tasks = Object.assign(tasks, { status: local.get('isListenToKeyBoard') });
 			break;
 
 		default:

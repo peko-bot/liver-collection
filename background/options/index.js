@@ -13,4 +13,5 @@ module.exports = {
 	isEunuch: false, // 是否禁用抽卡
 	entrySceneApLowerLimit: 40, // 进入单人本，ap低于该值才会吃药
 	sceneHref: 'http://game.granbluefantasy.jp/#quest/supporter/730571/1', // 默认进入房间地址
+	isListenToKeyBoard: false, // 是否监听键盘事件
 };

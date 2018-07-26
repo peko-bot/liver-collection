@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243
  * @Date: 2018-07-21 08:21:53
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-21 10:21:33
+ * @Last Modified time: 2018-07-26 17:38:05
  */
 import { dispatchContentScriptToInject } from '../util/Request';
 
@@ -28,4 +28,30 @@ const entryScene = () => {
 	});
 };
 
-module.exports = { beforeEntryScene, entryScene };
+const bindKeyBoardListener = () => {
+	// 获得键盘监听状态
+	chrome.extension.sendMessage({ message: 'get_key_board_listener_status' }, response => {
+		const { status } = response;
+
+		window.onkeydown = e => status ? listener(e) : null;
+	});
+};
+
+const listener = e => {
+	const { keyCode } = e;
+
+	switch(keyCode) {
+		case 70: // F键刷新页面
+			location.reload();
+			break;
+
+		case 68: // D键进标签房顺带检查状态及吃药
+			beforeEntryScene();
+			break;
+
+		default:
+			break;
+	}
+};
+
+module.exports = { beforeEntryScene, entryScene, bindKeyBoardListener };
