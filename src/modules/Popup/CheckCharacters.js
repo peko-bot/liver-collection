@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243
  * @Date: 2018-06-30 15:03:11
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-23 08:51:02
+ * @Last Modified time: 2018-07-28 07:48:42
  */
 import React, { Component } from 'react';
 
@@ -143,6 +143,7 @@ const characterImgs = [
 	{ key: 5, name: '', url: '3040034000' },
 	{ key: 6, name: '', url: '3040035000' },
 	{ key: 7, name: '', url: '3040036000' },
+	{ key: 7, name: '', url: '3710074000' },
 	{ key: 8, name: '', url: '3040037000' },
 	{ key: 9, name: '', url: '3040038000' },
 	{ key: 10, name: '', url: '3040039000' },
