@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243
  * @Date: 2018-06-09 21:42:02
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-26 17:37:56
+ * @Last Modified time: 2018-07-28 07:30:49
  */
 import { local } from './initLocalStorage';
 import { initUserId } from './user';
@@ -29,7 +29,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 
 // 初始化舔婊配置
 initInputForBattle();
-getBattleRoomHref(local.get('isListenBoard'));
+// getBattleRoomHref(local.get('isListenBoard'));
 
 chrome.runtime.onMessage.addListener((response, sender, sendResponse) => {
 	const { message, zoom, search, url, data, error } = response;
@@ -61,7 +61,7 @@ chrome.runtime.onMessage.addListener((response, sender, sendResponse) => {
 			break;
 
 		case 'redo_battle_room_href_check': // 吃药成功后，重新执行进入房间的方法
-			handleBoardPost(local.get('userId'));
+			handleBoardPost();
 			break;
 
 		case 'notify_error':
