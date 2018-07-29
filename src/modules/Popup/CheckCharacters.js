@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243
  * @Date: 2018-06-30 15:03:11
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-28 07:48:42
+ * @Last Modified time: 2018-07-28 07:57:54
  */
 import React, { Component } from 'react';
 
@@ -41,6 +41,7 @@ export default class CheckCharacters extends Component {
     	});
     }
 
+	// TODO: 需要通过/profile/npc/[data-id]/[user-id]获得角色信息而不是图片
     handleCheckUbCharacters = () => {
     	const { disabled } = this.state;
 

@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243
  * @Date: 2018-07-04 20:31:22
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-26 21:04:17
+ * @Last Modified time: 2018-07-29 09:01:32
  */
 // 创建一个用于粘贴battle id的文本框
 const initInputForBattle = () => {
@@ -25,7 +25,7 @@ const initInputForBattle = () => {
  */
 const getBattleRoomHref = (isListenBoard) => {
 	if(isListenBoard) {
-		handleBoardPost();
+		// handleBoardPost();
 	} else {
 		chrome.browserAction.onClicked.addListener(() => {
 			handleBoardPost();
