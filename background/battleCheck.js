@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243
  * @Date: 2018-07-04 20:31:22
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-29 09:01:32
+ * @Last Modified time: 2018-07-31 14:08:45
  */
 // 创建一个用于粘贴battle id的文本框
 const initInputForBattle = () => {
@@ -78,4 +78,4 @@ const handleBoardPost = () => {
 	});
 };
 
-module.exports = { initInputForBattle, getBattleRoomHref, handleBoardPost };
+export { initInputForBattle, getBattleRoomHref, handleBoardPost };

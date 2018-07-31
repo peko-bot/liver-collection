@@ -26,4 +26,4 @@ const getAllMemberIds = (url, index, result) => {
 	});
 };
 
-module.exports = { getAllMemberIds };
+export { getAllMemberIds };

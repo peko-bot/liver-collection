@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243
  * @Date: 2018-06-08 11:13:09
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-22 11:01:36
+ * @Last Modified time: 2018-07-31 14:07:50
  * @Description 全局样式设置
  */
 const initStyles = () => {
@@ -118,8 +118,13 @@ const initZoom = () => {
 	});
 };
 
-module.exports = {
+const hideMenus = () => {
+	console.log('hide');
+};
+
+export {
 	initStyles, initZoom, setZoom, // 控制全局样式
 	controlLeftSider, controlRightSider, // 控制侧边栏
 	initScrollHoverContainer, removeEvent, // 控制滚动条样式
+	hideMenus, // 空闲时隐藏菜单
 };

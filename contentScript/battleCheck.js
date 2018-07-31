@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243
  * @Date: 2018-07-04 21:49:54
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-22 11:01:49
+ * @Last Modified time: 2018-07-31 14:09:31
  */
 import { dispatchContentScriptToInject } from '../util/Request';
 
@@ -34,4 +34,4 @@ const listenClipBoardBattleCheck = () => {
 	}, 800);
 };
 
-module.exports = { getBattleRoomHref, listenClipBoardBattleCheck };
+export { getBattleRoomHref, listenClipBoardBattleCheck };

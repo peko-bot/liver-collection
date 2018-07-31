@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243
  * @Date: 2018-07-01 11:28:56
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-20 23:59:37
+ * @Last Modified time: 2018-07-31 14:09:04
  * @Description: 初始化本地存储
  */
 import options from './options';
@@ -45,4 +45,4 @@ fetch('./assets/blackList.json', {})
 const oldStorage = local.toObject();
 const newStorage = local.fromObject(Object.assign({}, options, oldStorage));
 
-module.exports = { local };
+export { local };

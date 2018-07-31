@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243
  * @Date: 2018-07-21 21:29:04
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-21 21:54:16
+ * @Last Modified time: 2018-07-31 14:09:48
  */
 import { ajax } from './ajax';
 import { dispatchInjectToContentScript } from '../util/Request';
@@ -43,4 +43,4 @@ const getBattleRoomHref = battleId => {
 	});
 };
 
-module.exports = { getBattleRoomHref };
+export { getBattleRoomHref };

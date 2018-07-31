@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243
  * @Date: 2018-07-13 19:53:01
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-18 11:35:03
+ * @Last Modified time: 2018-07-31 14:09:36
  */
 const controlGacha = status => {
 	let buttonGroup = document.getElementsByClassName('btn-gacha');
@@ -32,4 +32,4 @@ const initGacha = () => {
 	});
 };
 
-module.exports = { initGacha, controlGacha };
+export { initGacha, controlGacha };

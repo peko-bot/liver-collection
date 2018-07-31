@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243
  * @Date: 2018-07-17 22:32:26
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-25 13:40:45
+ * @Last Modified time: 2018-07-31 14:08:54
  */
 import moment from 'moment';
 
@@ -88,4 +88,4 @@ const sendToOption = datas => {
 		});
 };
 
-module.exports = { sendToOption };
+export { sendToOption };

@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243
  * @Date: 2018-07-21 08:21:53
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-26 17:38:05
+ * @Last Modified time: 2018-07-31 14:09:41
  */
 import { dispatchContentScriptToInject } from '../util/Request';
 
@@ -54,4 +54,4 @@ const listener = e => {
 	}
 };
 
-module.exports = { beforeEntryScene, entryScene, bindKeyBoardListener };
+export { beforeEntryScene, entryScene, bindKeyBoardListener };
