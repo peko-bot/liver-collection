@@ -2,9 +2,17 @@
  * @Author: zy9@github.com/zy410419243
  * @Date: 2018-06-08 11:13:09
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-31 14:07:50
+ * @Last Modified time: 2018-08-02 11:43:11
  * @Description 全局样式设置
  */
+const menusClass = [
+	// 'cnt-global-header',
+	'prt-user-menu', 'prt-user-power', 'prt-banner',
+	'btn-switch-sound btn-bgm-change', 'prt-active-support',
+	'btn-scene-control se-ok', 'prt-user-status', 'prt-link-multi assist',
+	'prt-link-quest', 'prt-link-present', 'prt-link-notification got-message'
+];
+
 const initStyles = () => {
 	if(!document.getElementById('mobage-game-container')) {
 		return;
@@ -119,7 +127,33 @@ const initZoom = () => {
 };
 
 const hideMenus = () => {
-	console.log('hide');
+	let timer;
+
+	const hide = () => {
+		for(let item of menusClass) {
+			try {
+				document.getElementsByClassName(item)[0].style.display = 'none';
+			} catch (error) {
+				if(timer) {
+					clearInterval(timer);
+					timer = null;
+				}
+
+				console.error(item, error);
+			}
+		}
+	};
+
+	// 页面加载完再隐藏
+	timer = setInterval(() => {
+		const loadBlock = document.getElementById('loading').style.display;
+
+		if(loadBlock == 'none') {
+			hide();
+
+			clearInterval(timer);
+		}
+	}, 800);
 };
 
 export {
