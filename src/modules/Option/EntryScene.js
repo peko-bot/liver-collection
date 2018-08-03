@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243
  * @Date: 2018-07-21 09:53:59
  * @Last Modified by: zy9
- * @Last Modified time: 2018-08-03 21:20:11
+ * @Last Modified time: 2018-08-03 21:23:50
  */
 import React, { Component } from 'react';
 
@@ -70,7 +70,7 @@ export default class EntryScene extends Component {
     			<Tooltip title='开启该选项时，会在结算页自动跳转到下面的地址'>
     				<span style={{ float: 'left', color: '#666' }}>是否自动跳转</span>
     			</Tooltip>
-    			<Switch onChange={ this.handleRedoSwitchOnChange } defaultChecked={ STORE.get('isListenToKeyBoard') } style={{ float: 'right', marginRight: '85%' }} disabled={ !STORE.get('isListenToKeyBoard') } />
+    			<Switch onChange={ this.handleRedoSwitchOnChange } defaultChecked={ STORE.get('isRedoEntryScene') } style={{ float: 'right', marginRight: '85%' }} disabled={ !STORE.get('isListenToKeyBoard') } />
     			<WhiteSpace clear />
 
     			<Tooltip title='当ap小于这个值时，会吃一个小红，默认为40'>
