@@ -2,37 +2,22 @@
  * @Author: zy9@github.com/zy410419243
  * @Date: 2018-06-08 11:15:23
  * @Last Modified by: zy9
- * @Last Modified time: 2018-08-02 11:44:43
+ * @Last Modified time: 2018-08-03 15:45:20
  */
-import { initStyles, initZoom, setZoom, controlLeftSider, controlRightSider, removeEvent, initScrollHoverContainer, hideMenus } from './style';
+import { initStyles, initZoom, setZoom, controlLeftSider, controlRightSider, removeEvent, initScrollHoverContainer, hideMenus, checkMenus } from './style';
 import { roomObserve, roomObserveBreaker, initRoomSearch, checkCharacters, isCharacterPage, checkBlackList } from './coopraid';
 import { getBattleRoomHref, useBp, listenClipBoardBattleCheck } from './battleCheck';
 import { controlGacha, initGacha } from './gachaBanner';
 import { getMemberId } from './checkHomework';
 import { entryScene, bindKeyBoardListener } from './keyBoardBind';
-
-const injectScript = file => {
-	var th = document.getElementsByTagName('body')[0];
-
-	var s = document.createElement('script');
-
-	s.setAttribute('type', 'text/javascript');
-	s.setAttribute('src', file);
-
-	let windowWraper = document.createElement('script');
-
-	windowWraper.id = 'init_window';
-
-	th.appendChild(s);
-	th.appendChild(windowWraper);
-};
+import { injectScript } from './inject';
 
 injectScript(chrome.extension.getURL('/inject.js'));
 
 // 修改全局样式
 initStyles();
 // initZoom();
-// hideMenus();
+checkMenus();
 
 // 如果搜索过，自动应用搜索内容
 initRoomSearch();
@@ -93,7 +78,7 @@ chrome.runtime.onConnect.addListener(port => {
 	switch(name) {
 		case 'popup_to_content':
 			port.onMessage.addListener(response => {
-				const { zoom, message, search, type, status, battleId, groupId } = response;
+				const { zoom, message, search, type, status, battleId, groupId, interval } = response;
 
 				switch(message) {
 					case 'set_zoom': // 用作Popup中拖动Slider时，实时改变窗口大小
@@ -146,6 +131,10 @@ chrome.runtime.onConnect.addListener(port => {
 
 					case 'listen_to_key_board':
 						bindKeyBoardListener();
+						break;
+
+					case 'show_your_wife':
+						hideMenus(status ? 'none' : '');
 						break;
 
 					default:

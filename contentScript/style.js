@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243
  * @Date: 2018-06-08 11:13:09
  * @Last Modified by: zy9
- * @Last Modified time: 2018-08-02 11:43:11
+ * @Last Modified time: 2018-08-03 15:44:51
  * @Description 全局样式设置
  */
 const menusClass = [
@@ -126,13 +126,21 @@ const initZoom = () => {
 	});
 };
 
-const hideMenus = () => {
+const checkMenus = () => {
+	chrome.extension.sendMessage({ message: 'is_show_wife' }, response => {
+		const { status } = response;
+
+		status && location.hash.includes('mypage') && hideMenus('none');
+	});
+};
+
+const hideMenus = display => {
 	let timer;
 
 	const hide = () => {
 		for(let item of menusClass) {
 			try {
-				document.getElementsByClassName(item)[0].style.display = 'none';
+				document.getElementsByClassName(item)[0].style.display = display;
 			} catch (error) {
 				if(timer) {
 					clearInterval(timer);
@@ -160,5 +168,5 @@ export {
 	initStyles, initZoom, setZoom, // 控制全局样式
 	controlLeftSider, controlRightSider, // 控制侧边栏
 	initScrollHoverContainer, removeEvent, // 控制滚动条样式
-	hideMenus, // 空闲时隐藏菜单
+	hideMenus, checkMenus, // 空闲时隐藏菜单
 };

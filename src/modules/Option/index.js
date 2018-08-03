@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243
  * @Date: 2018-07-02 21:36:02
  * @Last Modified by: zy9
- * @Last Modified time: 2018-08-02 11:54:38
+ * @Last Modified time: 2018-08-02 12:03:24
  */
 import React, { Component } from 'react';
 
@@ -17,6 +17,7 @@ import MultiBattle from './MultiBattle';
 // import GachaOptions from './GachaOptions'
 import CheckHomework from './CheckHomework';
 import EntryScene from './EntryScene';
+import MyPageOptions from './MyPageOptions';
 
 import './css/Option.css';
 
@@ -50,6 +51,7 @@ export default class Option extends Component {
     			<div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
     				<SiderOptions />
     				<ScrollOptions />
+    				<MyPageOptions />
     				{/* <GachaOptions /> */}
     				<CheckHomework />
     			</div>

@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243
  * @Date: 2018-06-30 22:56:38
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-18 11:20:42
+ * @Last Modified time: 2018-08-02 12:03:24
  */
 import React, { Component } from 'react';
 
@@ -59,13 +59,13 @@ export default class SiderOptions extends Component {
     			<div style={{ marginLeft: '1%' }}>
     				<span style={{ float: 'left', color: '#666' }}>左侧面板</span>
     				<Switch onChange={ checked => this.handleCoopraidSwitch(checked, 'isLeftSiderShow') } defaultChecked={ leftChecked } style={{ float: 'right', marginRight: '85%' }} />
-    				<div style={{ clear: 'both' }} ></div>
+    				<div style={{ clear: 'both' }}></div>
     			</div>
     			<WhiteSpace />
     			<div style={{ marginLeft: '1%' }}>
     				<span style={{ float: 'left', color: '#666' }}>右侧面板</span>
     				<Switch onChange={ checked => this.handleCoopraidSwitch(checked, 'isRightSiderShow') } defaultChecked={ rightChecked } style={{ float: 'right', marginRight: '85%' }} />
-    				<div style={{ clear: 'both' }} ></div>
+    				<div style={{ clear: 'both' }}></div>
     			</div>
     			<WhiteSpace />
     		</div>

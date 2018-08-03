@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243
  * @Date: 2018-07-21 09:53:59
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-26 17:42:34
+ * @Last Modified time: 2018-08-03 14:58:12
  */
 import React, { Component } from 'react';
 
@@ -35,7 +35,7 @@ export default class EntryScene extends Component {
 	handleSwitchOnChange = checked => {
 		STORE.set('isListenToKeyBoard', checked);
 
-		chrome.tabs.query({ active: false }, tabs => {
+		chrome.extension && chrome.tabs.query({ active: false }, tabs => {
     		let tabId;
 
     		for(let tab of tabs) {
