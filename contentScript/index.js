@@ -2,14 +2,14 @@
  * @Author: zy9@github.com/zy410419243
  * @Date: 2018-06-08 11:15:23
  * @Last Modified by: zy9
- * @Last Modified time: 2018-08-03 15:45:20
+ * @Last Modified time: 2018-08-03 21:05:08
  */
 import { initStyles, initZoom, setZoom, controlLeftSider, controlRightSider, removeEvent, initScrollHoverContainer, hideMenus, checkMenus } from './style';
 import { roomObserve, roomObserveBreaker, initRoomSearch, checkCharacters, isCharacterPage, checkBlackList } from './coopraid';
 import { getBattleRoomHref, useBp, listenClipBoardBattleCheck } from './battleCheck';
 import { controlGacha, initGacha } from './gachaBanner';
 import { getMemberId } from './checkHomework';
-import { entryScene, bindKeyBoardListener } from './keyBoardBind';
+import { entryScene, bindKeyBoardListener, beforeEntryScene } from './keyBoardBind';
 import { injectScript } from './inject';
 
 injectScript(chrome.extension.getURL('/inject.js'));
@@ -135,6 +135,10 @@ chrome.runtime.onConnect.addListener(port => {
 
 					case 'show_your_wife':
 						hideMenus(status ? 'none' : '');
+						break;
+
+					case 'redo_entry_scene': // 在结算完成后，重新进入默认房间
+						beforeEntryScene();
 						break;
 
 					default:

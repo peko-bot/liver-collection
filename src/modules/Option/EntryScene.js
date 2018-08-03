@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243
  * @Date: 2018-07-21 09:53:59
  * @Last Modified by: zy9
- * @Last Modified time: 2018-08-03 14:58:12
+ * @Last Modified time: 2018-08-03 21:20:11
  */
 import React, { Component } from 'react';
 
@@ -51,8 +51,12 @@ export default class EntryScene extends Component {
     		const port = chrome.tabs.connect(tabId, { name: 'popup_to_content' });
 
     		port.postMessage({ message: 'listen_to_key_board', status: checked });
-    	});
+		});
+
+		this.setState({});
 	};
+
+	handleRedoSwitchOnChange = checked => STORE.set('isRedoEntryScene', checked);
 
     render = () => {
     	return (
@@ -61,6 +65,12 @@ export default class EntryScene extends Component {
     				<span style={{ float: 'left', color: '#666' }}>是否监听键盘</span>
     			</Tooltip>
     			<Switch onChange={ this.handleSwitchOnChange } defaultChecked={ STORE.get('isListenToKeyBoard') } style={{ float: 'right', marginRight: '85%' }} />
+    			<WhiteSpace clear />
+
+    			<Tooltip title='开启该选项时，会在结算页自动跳转到下面的地址'>
+    				<span style={{ float: 'left', color: '#666' }}>是否自动跳转</span>
+    			</Tooltip>
+    			<Switch onChange={ this.handleRedoSwitchOnChange } defaultChecked={ STORE.get('isListenToKeyBoard') } style={{ float: 'right', marginRight: '85%' }} disabled={ !STORE.get('isListenToKeyBoard') } />
     			<WhiteSpace clear />
 
     			<Tooltip title='当ap小于这个值时，会吃一个小红，默认为40'>
@@ -73,6 +83,7 @@ export default class EntryScene extends Component {
     				<span>跳转地址：</span>
     			</Tooltip>
     			<Input style={{ width: 400 }} onChange={ this.handleHref } defaultValue={ STORE.get('sceneHref') } disabled={ !STORE.get('isListenToKeyBoard') } />
+    			<WhiteSpace />
     		</div>
     	);
     }

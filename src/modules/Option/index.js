@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243
  * @Date: 2018-07-02 21:36:02
  * @Last Modified by: zy9
- * @Last Modified time: 2018-08-02 12:03:24
+ * @Last Modified time: 2018-08-03 21:14:36
  */
 import React, { Component } from 'react';
 
@@ -26,7 +26,7 @@ export default class Option extends Component {
 		super(props);
 
 		this.state = {
-			key: '0',
+			key: '1',
 		};
 	}
 
