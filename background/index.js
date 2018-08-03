@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243
  * @Date: 2018-06-09 21:42:02
  * @Last Modified by: zy9
- * @Last Modified time: 2018-08-03 21:11:16
+ * @Last Modified time: 2018-08-03 21:26:23
  */
 import { local } from './initLocalStorage';
 import { initUserId } from './user';
@@ -35,7 +35,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 
 					clearTimeout(timer);
 					timer = null;
-				}, 800);
+				}, 2000);
 			}
 		}
 	}
