@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243
  * @Date: 2018-06-09 21:42:02
  * @Last Modified by: zy9
- * @Last Modified time: 2018-08-03 21:26:23
+ * @Last Modified time: 2018-08-04 23:36:45
  */
 import { local } from './initLocalStorage';
 import { initUserId } from './user';
@@ -29,6 +29,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 		if(url.includes('gacha')) { // 禁用抽卡
 			initGacha(tab.url, local.get('isEunuch'));
 		} else if(url.includes('result')) {
+			// 防止多次跳转导致的过度刷新
 			if(!timer) {
 				timer = setTimeout(() => {
 					redoEntryScene(local.get('sceneHref'), local.get('entrySceneApLowerLimit'), local.get('isRedoEntryScene'));
