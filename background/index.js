@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243
  * @Date: 2018-06-09 21:42:02
  * @Last Modified by: zy9
- * @Last Modified time: 2018-08-06 23:15:37
+ * @Last Modified time: 2018-08-06 23:30:18
  */
 import { local } from './initLocalStorage';
 import { initUserId } from './user';
@@ -54,10 +54,6 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 initInputForBattle();
 createAudio();
 getBattleRoomHref(local.get('isListenBoard'));
-
-setTimeout(() => {
-	document.getElementById('playPoi').play();
-}, 2000);
 
 chrome.runtime.onMessage.addListener((response, sender, sendResponse) => {
 	const { message, zoom, search, url, data, error, status } = response;
@@ -141,6 +137,7 @@ chrome.runtime.onMessage.addListener((response, sender, sendResponse) => {
 
 		case 'is_has_hl':
 			if(status) {
+				document.getElementById('playPoi').play();
 				chrome.notifications.create({
 					type: 'basic',
 					iconUrl: './assets/img/54878633_p0.png',
