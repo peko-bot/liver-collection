@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243
  * @Date: 2018-07-21 09:53:59
  * @Last Modified by: zy9
- * @Last Modified time: 2018-08-06 22:07:22
+ * @Last Modified time: 2018-08-06 22:40:48
  */
 import React, { Component } from 'react';
 
@@ -75,7 +75,7 @@ export default class EntryScene extends Component {
     			<Switch onChange={ this.handleRedoSwitchOnChange } defaultChecked={ STORE.get('isRedoEntryScene') } style={{ float: 'right', marginRight: '85%' }} disabled={ !STORE.get('isListenToKeyBoard') } />
     			<WhiteSpace clear style={{ height: 8 }} />
 
-    			<Tooltip title='开启该选项时，在结算页会判断是否出现HL，如果有，则停止并弹框提示；否则继续周回'>
+    			<Tooltip title='（周回无HL本时，不建议开启该选项）开启该选项时，在结算页会判断是否出现HL，如果有，则停止并弹框提示；否则继续周回'>
     				<span>是否检查HL：</span>
     			</Tooltip>
     			<Switch onChange={ this.handleHasHL } defaultChecked={ STORE.get('checkHL') } style={{ float: 'right', marginRight: '85%' }} disabled={ !STORE.get('isListenToKeyBoard') } />
