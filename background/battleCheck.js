@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243
  * @Date: 2018-07-04 20:31:22
  * @Last Modified by: zy9
- * @Last Modified time: 2018-08-06 21:50:23
+ * @Last Modified time: 2018-08-06 23:21:54
  */
 // 创建一个用于粘贴battle id的文本框
 const initInputForBattle = () => {
@@ -78,6 +78,24 @@ const handleBoardPost = () => {
 	});
 };
 
+const createAudio = () => {
+	let audio = document.getElementById('playPoi');
+
+	if(!audio) {
+		let audio = document.createElement('audio');
+
+		audio.id = 'playPoi';
+		audio.style.width = '0px';
+		audio.style.height = '0px';
+		audio.controls = 'controls';
+		audio.loop = false;
+		audio.hidden = true;
+		audio.src = './assets/poi.wav';
+
+		document.body.appendChild(audio);
+	}
+};
+
 // 判断是否出现hl，比如刷星本的时候这个就有用了
 const handleHasHL = () => {
 	chrome.tabs.query({ active: true }, tabs => {
@@ -104,4 +122,4 @@ const handleHasHL = () => {
 	});
 };
 
-export { initInputForBattle, getBattleRoomHref, handleBoardPost, handleHasHL };
+export { initInputForBattle, getBattleRoomHref, handleBoardPost, handleHasHL, createAudio };

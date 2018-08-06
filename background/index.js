@@ -2,11 +2,11 @@
  * @Author: zy9@github.com/zy410419243
  * @Date: 2018-06-09 21:42:02
  * @Last Modified by: zy9
- * @Last Modified time: 2018-08-06 22:48:48
+ * @Last Modified time: 2018-08-06 23:15:37
  */
 import { local } from './initLocalStorage';
 import { initUserId } from './user';
-import { initInputForBattle, getBattleRoomHref, handleBoardPost, handleHasHL } from './battleCheck';
+import { initInputForBattle, getBattleRoomHref, handleBoardPost, handleHasHL, createAudio } from './battleCheck';
 import { initGacha } from './gachaBanner';
 import { sendToOption } from './checkHomework';
 import { redoEntryScene } from './redoScene';
@@ -52,7 +52,12 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 
 // 初始化舔婊配置
 initInputForBattle();
+createAudio();
 getBattleRoomHref(local.get('isListenBoard'));
+
+setTimeout(() => {
+	document.getElementById('playPoi').play();
+}, 2000);
 
 chrome.runtime.onMessage.addListener((response, sender, sendResponse) => {
 	const { message, zoom, search, url, data, error, status } = response;
