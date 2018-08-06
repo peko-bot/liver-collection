@@ -2,13 +2,13 @@
  * @Author: zy9@github.com/zy410419243
  * @Date: 2018-07-08 09:26:10
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-22 11:27:43
+ * @Last Modified time: 2018-08-06 21:38:27
  */
 // TODO: 文件需要单独一个文件夹分离功能
 import { dispatchInjectToContentScript } from '../util/Request';
 import { getStatus, useAp } from './commonAjax';
 import { getAllMemberIds } from './checkHomework';
-import { getBattleRoomHref } from './battleCheck';
+import { getBattleRoomHref, checkHasHL } from './battleCheck';
 
 document.getElementById('init_window').addEventListener('content_script_to_inject', e => {
 	const { message, data, url } = e.detail;
@@ -33,6 +33,10 @@ document.getElementById('init_window').addEventListener('content_script_to_injec
 					dispatchInjectToContentScript({ message: 'do_useAp' });
 				}
 			});
+			break;
+
+		case 'checkHasHL':
+			checkHasHL();
 			break;
 
 		default:

@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243
  * @Date: 2018-07-21 21:29:04
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-31 14:09:48
+ * @Last Modified time: 2018-08-06 21:42:28
  */
 import { ajax } from './ajax';
 import { dispatchInjectToContentScript } from '../util/Request';
@@ -43,4 +43,20 @@ const getBattleRoomHref = battleId => {
 	});
 };
 
-export { getBattleRoomHref };
+const checkHasHL = () => {
+	const resultId = location.hash.split('/')[1];
+	const url = `/result/data/${ resultId }`;
+
+	ajax({
+		url,
+		data: JSON.stringify({ 'special_token': null }),
+		method: 'POST',
+		success: result => {
+			const { appearance } = result;
+
+			dispatchInjectToContentScript({ message: 'check_has_hl', status: !!appearance });
+		}
+	});
+};
+
+export { getBattleRoomHref, checkHasHL };

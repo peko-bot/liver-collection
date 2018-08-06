@@ -2,11 +2,11 @@
  * @Author: zy9@github.com/zy410419243
  * @Date: 2018-06-08 11:15:23
  * @Last Modified by: zy9
- * @Last Modified time: 2018-08-03 21:05:08
+ * @Last Modified time: 2018-08-06 21:51:00
  */
 import { initStyles, initZoom, setZoom, controlLeftSider, controlRightSider, removeEvent, initScrollHoverContainer, hideMenus, checkMenus } from './style';
 import { roomObserve, roomObserveBreaker, initRoomSearch, checkCharacters, isCharacterPage, checkBlackList } from './coopraid';
-import { getBattleRoomHref, useBp, listenClipBoardBattleCheck } from './battleCheck';
+import { getBattleRoomHref, useBp, listenClipBoardBattleCheck, checkHasHL } from './battleCheck';
 import { controlGacha, initGacha } from './gachaBanner';
 import { getMemberId } from './checkHomework';
 import { entryScene, bindKeyBoardListener, beforeEntryScene } from './keyBoardBind';
@@ -34,7 +34,7 @@ bindKeyBoardListener();
 
 // 用作接收inject返回的值
 document.getElementById('init_window').addEventListener('inject_to_content_script', e => {
-	const { message, data, url, count, error } = e.detail;
+	const { message, data, url, count, error, status } = e.detail;
 
 	switch(message) {
 		case 'getBattleRoomHref': // 跳转地址的转发
@@ -63,6 +63,10 @@ document.getElementById('init_window').addEventListener('inject_to_content_scrip
 
 		case 'inject_ajax_error': // inject中ajax错误需要提示
 			chrome.extension.sendMessage({ message: 'inject_ajax_error', error });
+			break;
+
+		case 'check_has_hl':
+			chrome.extension.sendMessage({ message: 'is_has_hl', status });
 			break;
 
 		default:
@@ -139,6 +143,10 @@ chrome.runtime.onConnect.addListener(port => {
 
 					case 'redo_entry_scene': // 在结算完成后，重新进入默认房间
 						beforeEntryScene();
+						break;
+
+					case 'check_has_hl':
+						checkHasHL();
 						break;
 
 					default:

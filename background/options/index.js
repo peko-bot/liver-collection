@@ -17,4 +17,5 @@ module.exports = {
 	isListenToKeyBoard: false, // 是否监听键盘事件
 	isShowYourWife: false, // 是否启动定时隐藏主页无关项
 	howLongToShowYourWife: 5, // 多久隐藏主页无关项，单位为秒
+	checkHL: false, // 是否检测HL
 };

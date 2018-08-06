@@ -2,7 +2,7 @@
  * @Author: zy9@github.com/zy410419243
  * @Date: 2018-07-04 20:31:22
  * @Last Modified by: zy9
- * @Last Modified time: 2018-07-31 14:08:45
+ * @Last Modified time: 2018-08-06 21:50:23
  */
 // 创建一个用于粘贴battle id的文本框
 const initInputForBattle = () => {
@@ -78,4 +78,30 @@ const handleBoardPost = () => {
 	});
 };
 
-export { initInputForBattle, getBattleRoomHref, handleBoardPost };
+// 判断是否出现hl，比如刷星本的时候这个就有用了
+const handleHasHL = () => {
+	chrome.tabs.query({ active: true }, tabs => {
+		// 只有打开的gbf窗口才能进房
+		let tabId;
+
+		for(let tab of tabs) {
+			const { id, url } = tab;
+
+			if(tab.url.includes('game')) {
+				tabId = id;
+
+				break;
+			}
+		}
+
+		if(!tabId) {
+			return;
+		}
+
+		const port = chrome.tabs.connect(tabId, { name: 'popup_to_content' });
+
+		port.postMessage({ message: 'check_has_hl' });
+	});
+};
+
+export { initInputForBattle, getBattleRoomHref, handleBoardPost, handleHasHL };
