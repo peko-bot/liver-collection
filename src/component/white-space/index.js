@@ -18,8 +18,8 @@ export default class index extends Component {
 	}
 
     render = () => {
-    	const { clear } = this.props;
+    	const { clear, style } = this.props;
 
-    	return <div className='white-space' style={{ clear: clear ? 'both' : 'none' }} />;
+    	return <div className='white-space' style={ Object.assign({ clear: clear ? 'both' : 'none' }, style) } />;
     };
 }
