@@ -1,6 +1,6 @@
 # Liver-collection 
 
-* 肝collection，用作Viramate功能补全  
+* 用作Viramate功能补全  
 
 * 善用chrome浏览器多用户登陆功能，为你的gbf单独创建一个账号  
 
@@ -8,8 +8,9 @@
 
 * 遇到bug可以先刷新一下页面再试试  
 
-# 功能清单
-* ~~用于日常记录，比如你今天刷了多少记忆。当然，这个要本地建个数据库的，服务器是没有的，这辈子都不会有的~~  
+## 功能清单  
+
+* ~~用于日常记录，比如你今天刷了多少记忆。当然，这个要本地建个数据库的，服务器是不会有的，这辈子都不会有的~~  
 
 * 隐藏所有侧边栏，这里建议用Viramate的童鞋把左侧的侧边栏改成水平的，不然面板会浮在页面上很难看的..[操作及效果](#隐藏侧边栏)  
 * 修改滚动条样式，现在的滚动条可以用鼠标拖了  [操作及效果](#修改滚动条)  
@@ -24,19 +25,23 @@
 * 按键进房。现支持F键刷新，D键跳转自定义地址并自动判断是否需要吃药。需要自行填入跳转地址，设置在选项页-通用设置中
 * 隐藏首页无关项。 [操作及效果](#隐藏无关项)  
 * 自动进入单人场景。结算结束时会自动跳转到[按键进房]中填写的地址，并自动吃药。  
+* 刷带HL的本时，开启相关选项后，在结算页如果出现HL则提示。  
 
-# 用法
-## 如果你只是单纯要用
+## 用法
+
+### 如果你只是单纯要用
+
 * 装好git跟node.js，及学会它们几条命令。很多人只是把源码下下来，依赖也不装就来问了，这种恕我懒得回了。可以从[这里](http://bbs.ngacn.cc/read.php?tid=14415132&page=10#pid286608869Anchor)慢慢往下看，确定自己遇到的问题跟这里几十楼里的不一样再问  
 
 * clone下来，装好依赖包，执行npm run build，把dist拖进浏览器就能用了  
   
   这样可以获得最新的扩展，但不保证一定能跑起来。因为我懒得切分支也懒得写单元测试，很多功能可能在某次修改后就没法用了...这个时候就得来提issue了  
 
-## 如果你要改代码，这些是必须得知道的一些东西
+### 如果你要改代码，这些是必须得知道的一些东西
+
 * 首先，不要直接pr到master分支，这样是不会过的。正确姿势应该是切到merge分支，然后再pr。如果没分支，请一定要联系我
 
-* 你得先学会一点react、ES6、chrome-extension。Popup使用antd的组件，操作dom直接用的js原生方法 ~~当然也不算纯原生，es6语法糖随处可见~~
+* 你得先学会一点react、ES6、chrome-extension。Popup使用antd的组件，操作dom直接用的js原生方法
   
 * 当你需要只需要修改布局，比如Popup时，执行 npm start，会热刷新
 
@@ -75,31 +80,41 @@
 ## 演示效果
 
 ### 隐藏侧边栏
-![img](./img/hideSlide.gif) 
+
+![img](./img/hideSlide.gif)  
 
 ### 修改滚动条
-![img](./img/changeScroll.gif) 
+
+![img](./img/changeScroll.gif)  
 
 ### 共斗搜索
-![img](./img/coopraidSearch.gif) 
+
+![img](./img/coopraidSearch.gif)  
 
 ### 修改窗口大小
-![img](./img/changeFrameSize.gif) 
+
+![img](./img/changeFrameSize.gif)  
 
 ### 查看天人
-![img](./img/checkCharacters.gif) 
+
+![img](./img/checkCharacters.gif)  
 
 ### 黑名单
+
 ![img](./img/checkBlackList.gif)  
 
 ### 两键舔婊
+
 ![img](./img/simpleBattle.gif)  
 
 ### 一键舔婊
+
 ![img](./img/oneKeyBattle.gif)  
 
 ### 检查作业
+
 ![img](./img/checkHomework.png)  
 
 ### 隐藏无关项
+
 ![img](./img/hideMenus.gif)  
