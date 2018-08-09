@@ -1,4 +1,6 @@
-# Liver-collection 
+# Liver-collection
+
+* 作者于2018-08-09弃坑，项目不再更新
 
 * 用作Viramate功能补全  
 
