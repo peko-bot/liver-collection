@@ -6,8 +6,7 @@
   "scripts": {
     "start": "node webpack.dev.js",
     "build": "node webpack.prod.js",
-    "dev": "node webpack.prod.js development",
-    "push": "node webpack.prod.js && git add .&& git commit -m \"update\" && git push"
+    "dev": "node webpack.prod.js development"
   },
   "dependencies": {
     "antd": "^3.6.4"
@@ -33,11 +32,11 @@
     "react-hot-loader": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "style-loader": "^0.21.0",
-    "toho-log-plugin": "git+https://github.com/zy410419243/toho-log-plugin.git",
+    "toho-log-plugin": "1.0.12",
     "url-loader": "^1.0.1",
     "webpack": "^4.14.0",
     "webpack-cli": "^3.0.8",
-    "webpack-dev-server": "^3.1.4"
+    "webpack-dev-server": "^3.1.14"
   },
   "repository": {
     "type": "git",
