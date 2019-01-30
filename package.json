@@ -41,12 +41,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zy410419243/Liver-collection.git"
+    "url": "git+https://github.com/zy410419243/liver-collection.git"
   },
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/zy410419243/Liver-collection/issues"
+    "url": "https://github.com/zy410419243/liver-collection/issues"
   },
-  "homepage": "https://github.com/zy410419243/Liver-collection#readme"
+  "homepage": "https://github.com/zy410419243/liver-collection#readme"
 }
