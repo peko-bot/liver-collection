@@ -1,5 +1,7 @@
 # liver-collection
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/breathing-is-fun/liver-collection.svg)](https://greenkeeper.io/)
+
 - **作者于 2016-04-16 入坑，2018-08-09 弃坑~~回 steam 结婚了~~。望有志骑空士早日找到迷失的自己，作者累了，不能再陪你们在北极晒太阳了**
 
 - 用作 Viramate 功能补全
