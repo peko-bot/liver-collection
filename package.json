@@ -35,7 +35,7 @@
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-hot-loader": "^4.3.1",
-    "react-router-dom": "^4.3.1",
+    "react-router-dom": "^5.0.0",
     "style-loader": "^0.23.1",
     "toho-log-plugin": "1.0.12",
     "url-loader": "^1.0.1",
