@@ -37,7 +37,7 @@
     "react-hot-loader": "^4.8.3",
     "react-router-dom": "^5.0.0",
     "style-loader": "^0.23.1",
-    "toho-log-plugin": "1.0.12",
+    "toho-log-plugin": "1.0.13",
     "url-loader": "^1.1.2",
     "webpack": "^4.30.0",
     "webpack-cli": "^3.3.0",
