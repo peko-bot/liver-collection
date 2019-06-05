@@ -34,7 +34,7 @@
     "postcss-loader": "^3.0.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-hot-loader": "^4.8.8",
+    "react-hot-loader": "^4.9.0",
     "react-router-dom": "^5.0.0",
     "style-loader": "^0.23.1",
     "toho-log-plugin": "1.0.13",
