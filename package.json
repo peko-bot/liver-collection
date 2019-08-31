@@ -9,9 +9,6 @@
     "dev": "node webpack.prod.js development"
   },
   "dependencies": {
-    "antd": "^3.19.5"
-  },
-  "devDependencies": {
     "@babel/core": "^7.4.5",
     "@babel/plugin-proposal-class-properties": "^7.4.4",
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
@@ -42,16 +39,17 @@
     "webpack": "^4.34.0",
     "webpack-cli": "^3.3.4",
     "webpack-dev-server": "^3.7.2",
-    "webpackbar": "^3.2.0"
+    "webpackbar": "^3.2.0",
+    "antd": "^3.19.5"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zy410419243/liver-collection.git"
+    "url": "git+https://github.com/orzyyyy/liver-collection.git"
   },
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/zy410419243/liver-collection/issues"
+    "url": "https://github.com/orzyyyy/liver-collection/issues"
   },
-  "homepage": "https://github.com/zy410419243/liver-collection#readme"
+  "homepage": "https://github.com/orzyyyy/liver-collection#readme"
 }
