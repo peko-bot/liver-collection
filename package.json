@@ -44,12 +44,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/orzyyyy/liver-collection.git"
+    "url": "git+https://github.com/breathing-is-fun/liver-collection.git"
   },
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/orzyyyy/liver-collection/issues"
+    "url": "https://github.com/breathing-is-fun/liver-collection/issues"
   },
-  "homepage": "https://github.com/orzyyyy/liver-collection#readme"
+  "homepage": "https://github.com/breathing-is-fun/liver-collection#readme"
 }
