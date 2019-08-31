@@ -2,21 +2,30 @@
   "name": "liver-collection",
   "version": "1.1.6",
   "description": "用于日常记录，比如你今天刷了多少星本，掉了多少记忆，以及滚了多少光剑",
+  "homepage": "https://github.com/breathing-is-fun/liver-collection#readme",
+  "bugs": {
+    "url": "https://github.com/breathing-is-fun/liver-collection/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/breathing-is-fun/liver-collection.git"
+  },
+  "license": "MIT",
+  "author": "",
   "main": "main.js",
   "scripts": {
-    "start": "node webpack.dev.js",
     "build": "node webpack.prod.js",
-    "dev": "node webpack.prod.js development"
+    "dev": "node webpack.prod.js development",
+    "sort": "npx sort-package-json",
+    "start": "node webpack.dev.js"
   },
   "dependencies": {
-    "antd": "^3.19.5"
-  },
-  "devDependencies": {
     "@babel/core": "^7.4.5",
     "@babel/plugin-proposal-class-properties": "^7.4.4",
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@babel/preset-env": "^7.4.5",
     "@babel/preset-react": "^7.0.0",
+    "antd": "^3.19.5",
     "babel-core": "^6.26.3",
     "babel-eslint": "^10.0.2",
     "babel-loader": "^8.0.6",
@@ -43,15 +52,5 @@
     "webpack-cli": "^3.3.4",
     "webpack-dev-server": "^3.7.2",
     "webpackbar": "^3.2.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/zy410419243/liver-collection.git"
-  },
-  "author": "",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/zy410419243/liver-collection/issues"
-  },
-  "homepage": "https://github.com/zy410419243/liver-collection#readme"
+  }
 }
