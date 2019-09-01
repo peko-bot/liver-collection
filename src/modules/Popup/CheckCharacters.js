@@ -70,6 +70,7 @@ export default class CheckCharacters extends Component {
     				for(let item of result) {
     					const { data } = item;
     					const splitStr = 'http%3A%2F%2Fgame-a.granbluefantasy.jp%2Fassets%2Fimg_light%2Fsp%2Fassets%2Fnpc%2Fquest';
+
     					let characterList = [];
 
     					for(let jtem of data.split(splitStr)) {

@@ -18,10 +18,12 @@ const roomObserve = search => {
 	if(!observer) {
 		observer = new MutationObserver(mutations => {
 			let texts = document.getElementsByClassName('txt-room-comment');
+
 			let selectTexts = [];
 
 			for(let i = 0, roomLen = texts.length; i < roomLen; i++) {
 				let room = texts[i];
+
 				let innerText = room.innerText;
 
 				// アル;↑
@@ -30,6 +32,7 @@ const roomObserve = search => {
 
 				for(let j = 0, searchsLen = searchs.length; j < searchsLen; j++) {
 					let jtem = searchs[j];
+
 					let isIncludes = innerText.includes(jtem);
 
 					if(flag && isIncludes && j == searchsLen - 1) {

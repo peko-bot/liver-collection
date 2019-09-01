@@ -75,6 +75,7 @@ const removeEvent = () => {
  */
 const scrollEvent = e => {
 	let scrollHoverContainer = document.getElementById('scrollHoverContainer');
+
 	let container = document.getElementById('liver-collection-container') || document.getElementById('liver-collection-container-hover');
 
 	container.id = 'liver-collection-container-hover';
@@ -89,6 +90,7 @@ const scrollEvent = e => {
 // 隐藏左侧侧边栏
 const controlLeftSider = flag => {
 	let leftPanel = document.getElementById('mobage-game-container').parentNode.parentNode.firstChild;
+
 	let scroll = document.getElementById('mobage-game-container').parentNode;
 
 	if(!flag) {

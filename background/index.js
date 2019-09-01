@@ -65,6 +65,7 @@ getBattleRoomHref(local.get("isListenBoard"));
 
 chrome.runtime.onMessage.addListener((response, sender, sendResponse) => {
   const { message, zoom, search, url, data, error, status } = response;
+
   let tasks = { error: "", tasks: "" };
 
   switch (message) {
