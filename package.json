@@ -17,7 +17,8 @@
     "build": "node webpack.prod.js",
     "dev": "node webpack.prod.js development",
     "sort": "npx sort-package-json",
-    "start": "node webpack.dev.js"
+    "start": "node webpack.dev.js",
+    "lint": "eslint ."
   },
   "dependencies": {
     "@babel/core": "^7.5.5",

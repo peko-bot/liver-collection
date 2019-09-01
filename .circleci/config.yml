@@ -33,6 +33,12 @@ jobs:
       - checkout
       - *attach_workspace
       - run: npm run build
+  lint:
+    <<: *container_config
+    steps:
+      - checkout
+      - *attach_workspace
+      - run: npm run lint
 
 workflows:
   version: 2
@@ -43,5 +49,8 @@ workflows:
             branches:
               ignore: gh-pages
       - build:
+          requires:
+            - setup
+      - lint:
           requires:
             - setup
