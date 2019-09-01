@@ -18,7 +18,7 @@ English | [简体中文](./README-zh_CN.md)
 
 - Entry boss room with two steps [Demo](#两键舔婊)
 - Entry boss room with one step. Need to open option **`监听剪切板`** [demo](#一键舔婊)
-- ~~Used for daily records. Of course, if you want to build a database locally~~
+- ~~Used for daily records. Of course, need a database locally~~
 - Hide all sidebars [Demo](#隐藏侧边栏)
 - Tweak the style of scroll bar [Demo](#修改滚动条)
 - Room search in coopraid. Rooms that does not match conditions will be hidden [Demo](#共斗搜索)
