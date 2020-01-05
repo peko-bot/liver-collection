@@ -1,6 +1,8 @@
 # liver-collection
 
-![CircleCI](https://img.shields.io/circleci/project/github/breathing-is-fun/liver-collection/master.svg)
+<a href="https://github.com/orzyyyy/memo/actions">
+  <img alt="GitHub Actions status" src="https://github.com/peko-bot/liver-collection/workflows/Node%20CI/badge.svg">
+</a>
 
 English | [简体中文](./README-zh_CN.md)
 
