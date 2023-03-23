@@ -2,13 +2,13 @@
   "name": "liver-collection",
   "version": "1.1.6",
   "description": "用于日常记录，比如你今天刷了多少星本，掉了多少记忆，以及滚了多少光剑",
-  "homepage": "https://github.com/breathing-is-fun/liver-collection#readme",
+  "homepage": "https://github.com/peko-bot/liver-collection#readme",
   "bugs": {
-    "url": "https://github.com/breathing-is-fun/liver-collection/issues"
+    "url": "https://github.com/peko-bot/liver-collection/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/breathing-is-fun/liver-collection.git"
+    "url": "git+https://github.com/peko-bot/liver-collection.git"
   },
   "license": "MIT",
   "author": "",
