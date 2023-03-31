@@ -1,57 +1,7 @@
 {
   "name": "liver-collection",
-  "version": "1.1.6",
-  "description": "用于日常记录，比如你今天刷了多少星本，掉了多少记忆，以及滚了多少光剑",
-  "homepage": "https://github.com/peko-bot/liver-collection#readme",
-  "bugs": {
-    "url": "https://github.com/peko-bot/liver-collection/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/peko-bot/liver-collection.git"
-  },
+  "version": "2.0.0",
   "license": "MIT",
-  "author": "",
-  "main": "main.js",
-  "scripts": {
-    "build": "node webpack.prod.js",
-    "dev": "node webpack.prod.js development",
-    "sort": "npx sort-package-json",
-    "start": "node webpack.dev.js",
-    "lint": "eslint ."
-  },
-  "dependencies": {
-    "@babel/core": "^7.5.5",
-    "@babel/plugin-proposal-class-properties": "^7.5.5",
-    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
-    "@babel/preset-env": "^7.5.5",
-    "@babel/preset-react": "^7.0.0",
-    "antd": "^3.22.2",
-    "babel-core": "^6.26.3",
-    "babel-eslint": "^10.0.3",
-    "babel-loader": "^8.0.6",
-    "babel-plugin-import": "^1.12.1",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-react": "^6.24.1",
-    "babel-preset-stage-0": "^6.24.1",
-    "chalk": "^2.4.2",
-    "clean-webpack-plugin": "^3.0.0",
-    "copy-webpack-plugin": "^5.0.4",
-    "css-loader": "^3.2.0",
-    "eslint": "^6.3.0",
-    "html-webpack-plugin": "^3.2.0",
-    "mini-css-extract-plugin": "^0.8.0",
-    "postcss-loader": "^3.0.0",
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0",
-    "react-hot-loader": "^4.12.12",
-    "react-router-dom": "^5.0.1",
-    "style-loader": "^1.0.0",
-    "toho-log-plugin": "1.0.13",
-    "url-loader": "^2.1.0",
-    "webpack": "^4.39.3",
-    "webpack-cli": "^3.3.7",
-    "webpack-dev-server": "^3.8.0",
-    "webpackbar": "^4.0.0"
-  }
+  "scripts": {},
+  "dependencies": {}
 }
