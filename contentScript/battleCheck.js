@@ -16,3 +16,4 @@ const checkHasHL = () => {
     (0, util_1.dispatchContentScriptToInject)({ message: 'checkHasHL' });
 };
 exports.checkHasHL = checkHasHL;
+//# sourceMappingURL=battleCheck.js.map
