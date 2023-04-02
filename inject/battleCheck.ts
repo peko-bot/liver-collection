@@ -1,4 +1,4 @@
-import { dispatchInjectToContentScript } from '../util/Request';
+import { dispatchInjectToContentScript } from '../util';
 import { ajax } from '../util';
 
 const getBattleRoomHref = battleId => {
