@@ -14,7 +14,7 @@ const initInputForBattle = () => {
 };
 
 const handleBoardPost = () => {
-  chrome.tabs.query({ active: true }, (tabs) => {
+  chrome.tabs.query({ active: true }, tabs => {
     // 只有打开的 gbf 窗口才能进房
     let tabId;
     for (let tab of tabs) {
@@ -28,7 +28,7 @@ const handleBoardPost = () => {
       return;
     }
     const port = chrome.tabs.connect(tabId, { name: 'popup_to_content' });
-    let input = document.getElementById('battle_input');
+    let input = document.getElementById('battle_input') as HTMLInputElement;
     input.focus();
     input.value = '';
     /**
@@ -42,32 +42,14 @@ const handleBoardPost = () => {
     if (reg.test(value) && value.length == 8) {
       port.postMessage({ message: 'battle_key_check', battleId: value });
     } else {
-      console.log('check failed');
+      console.error('check failed');
     }
   });
 };
 
-const createAudio = () => {
-  let audio = document.getElementById('playPoi');
-
-  if (!audio) {
-    let audio = document.createElement('audio');
-
-    audio.id = 'playPoi';
-    audio.style.width = '0px';
-    audio.style.height = '0px';
-    audio.controls = 'controls';
-    audio.loop = false;
-    audio.hidden = true;
-    audio.src = './assets/poi.wav';
-
-    document.body.appendChild(audio);
-  }
-};
-
 // 判断是否出现hl，比如刷星本的时候这个就有用了
 const handleHasHL = () => {
-  chrome.tabs.query({ active: true }, (tabs) => {
+  chrome.tabs.query({ active: true }, tabs => {
     // 只有打开的gbf窗口才能进房
     let tabId;
 
@@ -91,4 +73,4 @@ const handleHasHL = () => {
   });
 };
 
-export { initInputForBattle, handleBoardPost, handleHasHL, createAudio };
+export { initInputForBattle, handleBoardPost, handleHasHL };
