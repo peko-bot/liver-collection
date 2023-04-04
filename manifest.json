@@ -1,31 +1,24 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "liver collection",
   "description": "肝脑涂地",
-  "version": "1.1.6",
+  "version": "2.0.0",
   "permissions": ["contextMenus", "clipboardRead", "notifications", "tabs"],
   "background": {
-    "scripts": ["background.js"],
-    "persistent": false
+    "service_worker": "background.js",
+    "type": "module"
   },
   "content_scripts": [
     {
-      "matches": [
-        "*://game.granbluefantasy.jp/*",
-        "*://gbf.game.mbga.jp/*",
-        "*://gbf-tbw.tk/*",
-        "*://tbw.346lab.org/*",
-        "*://gbf-raidfinder.aikats.us/*"
-      ],
-      "css": ["assets/contentScript/main.css"],
+      "matches": ["*://game.granbluefantasy.jp/*", "*://gbf.game.mbga.jp/*", "*://gbf-raidfinder.teemo.name/*"],
       "js": ["contentScript.js"],
       "run_at": "document_end"
     }
   ],
-  "options_page": "index.html#option",
-  "browser_action": {
-    "default_icon": "assets/img/54878633_p0.png",
-    "default_title": "寻找失去的肝脏"
-  },
-  "web_accessible_resources": ["inject.js"]
+  "web_accessible_resources": [
+    {
+      "resources": ["inject.js", "contentScripts.js"],
+      "matches": ["*://*/*"]
+    }
+  ]
 }
