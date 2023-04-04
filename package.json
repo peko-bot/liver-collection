@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "tsc -w",
+    "start": "rm -rf ./dist/* && cp manifest.json dist && tsc -w",
     "build": "tsc --outDir dist --sourceMap false && cp manifest.json dist"
   },
   "dependencies": {
