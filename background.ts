@@ -7,7 +7,7 @@ chrome.runtime.onMessage.addListener((response, sender, sendResponse) => {
         // 只有打开的 gbf 窗口才能进房
         let tabId;
         for (let tab of tabs) {
-          if (tab.url.includes('game')) {
+          if (tab.url?.includes('game')) {
             tabId = tab.id;
             break;
           }
@@ -21,9 +21,11 @@ chrome.runtime.onMessage.addListener((response, sender, sendResponse) => {
       break;
 
     case 'battle_room_href': // 用于跳转地址
-      chrome.tabs.update(sender.tab.id, {
-        url: 'http://game.granbluefantasy.jp' + url,
-      });
+      if (sender.tab?.id) {
+        chrome.tabs.update(sender.tab.id, {
+          url: 'http://game.granbluefantasy.jp' + url,
+        });
+      }
       break;
 
     default:

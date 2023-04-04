@@ -1,5 +1,5 @@
 const dispatchContentScriptToInject = detail =>
-  document.getElementById('inject_window').dispatchEvent(new CustomEvent('content_script_to_inject', { detail }));
+  document.getElementById('inject_window')?.dispatchEvent(new CustomEvent('content_script_to_inject', { detail }));
 
 chrome.runtime.onConnect.addListener(port => {
   switch (port.name) {
@@ -44,7 +44,7 @@ injectScript(chrome.runtime.getURL('/inject.js'));
 if (location.href.includes('raidfinder')) {
   const body = document.getElementsByTagName('body')[0];
   body.addEventListener('click', () => {
-    // chrome不能直接获得剪切板内容，只能先粘贴到input中，再获得input的值
+    // chrome 不能直接获得剪切板内容，只能先粘贴到input中，再获得input的值
     // https://stackoverflow.com/questions/25622359/clipboard-copy-paste-on-content-script-chrome-extension
     let input = document.getElementById('battle_input') as HTMLInputElement;
     input.focus();
@@ -59,7 +59,7 @@ if (location.href.includes('raidfinder')) {
 }
 
 // 用作接收 inject 返回的值
-document.getElementById('inject_window').addEventListener('inject_to_content_script', (e: any) => {
+document.getElementById('inject_window')?.addEventListener('inject_to_content_script', (e: any) => {
   const { message, url } = e.detail;
   switch (message) {
     case 'getBattleRoomHref': // 跳转地址的转发

@@ -1,5 +1,5 @@
 const dispatchInjectToContentScript = detail =>
-  document.getElementById('inject_window').dispatchEvent(new CustomEvent('inject_to_content_script', { detail }));
+  document.getElementById('inject_window')?.dispatchEvent(new CustomEvent('inject_to_content_script', { detail }));
 
 const ajax = params => {
   const defaultOptions = {
@@ -14,7 +14,7 @@ const ajax = params => {
   $.ajax(Object.assign({}, defaultOptions, params));
 };
 
-document.getElementById('inject_window').addEventListener('content_script_to_inject', (e: any) => {
+document.getElementById('inject_window')?.addEventListener('content_script_to_inject', (e: any) => {
   const { message, data: battleId } = e.detail;
   switch (message) {
     case 'getBattleRoomHref':

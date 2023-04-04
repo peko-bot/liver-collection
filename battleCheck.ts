@@ -16,11 +16,7 @@ export const handleBoardPost = () => {
     let input = document.getElementById('battle_input') as HTMLInputElement;
     input.focus();
     input.value = '';
-    /**
-     * chrome不能直接获得剪切板内容，只能先粘贴到input中，再获得input的值
-     *
-     * https://stackoverflow.com/questions/25622359/clipboard-copy-paste-on-content-script-chrome-extension
-     */
+    // https://stackoverflow.com/questions/25622359/clipboard-copy-paste-on-content-script-chrome-extension
     document.execCommand('paste');
     let value = input.value.trim();
     let reg = /^[A-Za-z0-9]+$/gi;
