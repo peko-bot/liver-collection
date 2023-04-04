@@ -1,19 +1,4 @@
-// 创建一个用于粘贴battle id的文本框
-const initInputForBattle = () => {
-  let input = document.getElementById('battle_input');
-
-  if (!input) {
-    input = document.createElement('input');
-
-    input.id = 'battle_input';
-    input.style.width = '0px';
-    input.style.height = '0px';
-
-    document.body.appendChild(input);
-  }
-};
-
-const handleBoardPost = () => {
+export const handleBoardPost = () => {
   chrome.tabs.query({ active: true }, tabs => {
     // 只有打开的 gbf 窗口才能进房
     let tabId;
@@ -47,30 +32,14 @@ const handleBoardPost = () => {
   });
 };
 
-// 判断是否出现hl，比如刷星本的时候这个就有用了
-const handleHasHL = () => {
-  chrome.tabs.query({ active: true }, tabs => {
-    // 只有打开的gbf窗口才能进房
-    let tabId;
-
-    for (let tab of tabs) {
-      const { id, url } = tab;
-
-      if (tab.url.includes('game')) {
-        tabId = id;
-
-        break;
-      }
-    }
-
-    if (!tabId) {
-      return;
-    }
-
-    const port = chrome.tabs.connect(tabId, { name: 'popup_to_content' });
-
-    port.postMessage({ message: 'check_has_hl' });
-  });
+// 创建一个用于粘贴 battle id 的文本框
+export const initInputForBattle = () => {
+  let input = document.getElementById('battle_input');
+  if (!input) {
+    input = document.createElement('input');
+    input.id = 'battle_input';
+    input.style.width = '0px';
+    input.style.height = '0px';
+    document.body.appendChild(input);
+  }
 };
-
-export { initInputForBattle, handleBoardPost, handleHasHL };

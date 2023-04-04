@@ -5,7 +5,8 @@
   "version": "2.0.0",
   "permissions": ["contextMenus", "clipboardRead", "notifications", "tabs"],
   "background": {
-    "service_worker": "background.js"
+    "service_worker": "background.js",
+    "type": "module"
   },
   "content_scripts": [
     {
@@ -16,7 +17,7 @@
   ],
   "web_accessible_resources": [
     {
-      "resources": ["inject.js"],
+      "resources": ["inject.js", "contentScripts.js"],
       "matches": ["*://*/*"]
     }
   ]
