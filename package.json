@@ -3,7 +3,8 @@
   "version": "2.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "tsc -w"
+    "start": "tsc -w",
+    "build": "tsc --outDir dist --sourceMap false && cp manifest.json dist"
   },
   "dependencies": {
     "@types/chrome": "^0.0.227",
